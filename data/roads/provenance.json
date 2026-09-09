@@ -1,0 +1,16 @@
+{
+  "retrievedAt": "2026-09-09T17:06:44.570Z",
+  "source": "https://overpass-api.de/api/interpreter",
+  "query": "[out:json][timeout:35];way[highway](13.02,77.57,13.085,77.65);out geom;",
+  "attribution": "© OpenStreetMap contributors",
+  "license": "ODbL 1.0",
+  "licenseUrl": "https://www.openstreetmap.org/copyright",
+  "bounds": {
+    "south": 13.02,
+    "west": 77.57,
+    "north": 13.085,
+    "east": 77.65
+  },
+  "elements": 13542,
+  "purpose": "Local road classification research around the supplied demonstration; not a routable map or field verification."
+}

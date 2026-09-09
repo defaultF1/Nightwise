@@ -1,0 +1,9 @@
+**
+!Dockerfile
+!package.json
+!package-lock.json
+!server/**
+!src/domain/**
+!src/providers/routes.ts
+!src/data/tutorial.ts
+!data/roads/**
