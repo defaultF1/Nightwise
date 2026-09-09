@@ -9,7 +9,7 @@ html[data-native-map=true]:has(.sheet .live-map) .app-shell>.app-header,
 html[data-native-map=true]:has(.sheet .live-map) .app-shell>.app-footer{visibility:hidden}
 html[data-native-map=true] .sheet:has(.live-map),
 html[data-native-map=true] .sheet:has(.live-map)::backdrop{background:transparent;backdrop-filter:none}
-html[data-native-map=true] .sheet:has(.live-map) .sheet-inner>*:not(.live-map):not(button){background:var(--surface)}
+html[data-native-map=true] .sheet:has(.live-map) .sheet-inner>*:not(.live-map):not(button):not(.endpoint-confirmation){background:var(--surface)}
 /* Keep native map bounds stable while Capacitor measures its host element. */
 .plan-main:has(.live-map),.journey-main:has(.live-map),.sheet:has(.live-map){animation:none}
 .map-route-options{display:flex;gap:8px;flex-wrap:wrap;background:var(--bg);padding:0 14px 12px}.map-route-options button{font:inherit;font-size:11px;min-height:44px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text)}.map-route-options button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}.score-unavailable{display:flex;flex-wrap:wrap;gap:8px;font-size:11px;margin:14px 0;color:var(--muted)}.score-unavailable small{flex-basis:100%;line-height:1.5}
@@ -18,3 +18,15 @@ html[data-native-map=true] .brand,html[data-native-map=true] .journey-heading,ht
 html[data-native-map=true] .brand,html[data-native-map=true] .journey-heading>div,html[data-native-map=true] .diagram-heading>span{background:var(--bg);isolation:isolate;contain:paint}
 html[data-native-map=true] .brand svg,html[data-native-map=true] .brand span,html[data-native-map=true] .back-link,html[data-native-map=true] .back-link svg,html[data-native-map=true] .diagram-heading svg,html[data-native-map=true] .header-actions svg{background:var(--bg);transform:translateZ(0)}
 .pin-legend{display:flex;flex-wrap:wrap;gap:10px 14px;padding:8px 18px 14px;background:var(--bg);color:var(--muted);font-size:10px;line-height:1.5}.pin-legend span{display:inline-flex;align-items:center;gap:6px}.pin-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;border:1px solid #ffffff66;flex-shrink:0}
+
+/* Give wrapped endpoint text breathing room and keep the last action above the screen edge. */
+.endpoint-confirmation{display:grid;gap:12px;min-width:0;margin:16px 0 20px;background:transparent}
+.endpoint-confirmation>div{min-width:0;padding:16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.endpoint-confirmation dt,.endpoint-confirmation dd{min-width:0;line-height:1.5;overflow-wrap:anywhere}
+.endpoint-confirmation dd{margin:8px 0 0}
+.endpoint-confirmation dd strong{display:block;line-height:1.4;overflow-wrap:anywhere}
+.endpoint-confirmation dd span{line-height:1.65}
+.sheet-inner>.primary-button{border-radius:18px;line-height:1.4;white-space:normal;overflow-wrap:anywhere;min-height:56px}
+.sheet .sheet-inner{padding-bottom:calc(32px + env(safe-area-inset-bottom));min-width:0}
+.sheet .sheet-heading h2{min-width:0;line-height:1.3;overflow-wrap:anywhere}
+@media(max-width:760px){.sheet[open]{width:calc(100% - 16px);max-height:calc(100dvh - 32px - env(safe-area-inset-top) - env(safe-area-inset-bottom));margin:16px auto;border:1px solid var(--line);border-radius:24px}.sheet .sheet-inner{padding-left:16px;padding-right:16px}}
