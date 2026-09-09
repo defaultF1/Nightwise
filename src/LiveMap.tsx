@@ -6,7 +6,7 @@ import type { ActivityAnalysis } from './domain/activity-types';
 import type { LiveJourney } from './domain/journey';
 import type { Theme } from './theme';
 import { createMap, type MapHandle, type MapLine } from './maps/adapter';
-import { samplePolyline } from './domain/geometry';
+import { slicePolyline } from './domain/geometry';
 import { gapMarkers } from './domain/gap-markers';
 import { helpPoints } from './HelpPoints';
 
@@ -48,8 +48,10 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
       const selected = routes.find(r => r.id === selectedId);
       const lines: MapLine[] = [...routes.filter(r => r.id !== selectedId), ...routes.filter(r => r.id === selectedId)].map(r => ({ id: r.id, path: r.path, color: r.id === selectedId ? theme === 'blue' ? '#30dcc6' : theme === 'light' ? '#131313' : '#eeeeee' : '#8293a0', width: r.id === selectedId ? 6 : 4, clickable: true }));
       if (selected && analysis?.source === 'live') {
-        const samples = samplePolyline(selected.path, 200, 120);
-        for (const [i, segment] of analysis.segments.entries()) if (segment.state !== 'active' && samples[i + 1]) lines.push({ id: selected.id, path: [samples[i].coordinate, samples[i + 1].coordinate], color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
+        for (const segment of analysis.segments) if (segment.state !== 'active') {
+          const path = slicePolyline(selected.path, segment.fromMeters, segment.toMeters);
+          if (path.length > 1) lines.push({ id: selected.id, path, color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
+        }
       }
       await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[], analysis?.source==='live'?helpPoints(analysis).flatMap(p=>p.coordinate?[{...p.coordinate,name:p.name??'Listed help point'}]:[]):[]);
     }).catch(() => setError(true));
