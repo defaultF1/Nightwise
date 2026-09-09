@@ -1,0 +1,37 @@
+import {afterEach,describe,it,expect,vi} from 'vitest';
+import {mkdtempSync,rmSync,writeFileSync,readFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {createRoadAnalyzer,roadClass} from '../../src/domain/roads';
+import {loadRoadAnalyzer} from '../../server/roads';
+import {searchKnownPins} from '../../src/domain/search';
+import {readConfig} from '../../server/config';
+import {createServer} from '../../server/app';
+import {Budget} from '../../server/budget';
+import {DEFAULT_JOURNEY} from '../../src/domain/journey';
+const folders:string[]=[];
+afterEach(()=>{for(const f of folders.splice(0))rmSync(f,{recursive:true,force:true});});
+function file(){const f=mkdtempSync(join(tmpdir(),'nightwise-prebilling-'));folders.push(f);return join(f,'counts.json');}
+function config(extra:NodeJS.ProcessEnv={}){return readConfig({GOOGLE_MAPS_SERVER_KEY:'test-key-not-real',ROAD_DATA_PATH:'missing-test-road-file',BUDGET_LEDGER_PATH:file(),...extra});}
+const path=[{latitude:13.05,longitude:77.6},{latitude:13.06,longitude:77.6}];
+const token='12345678-1234-4123-8123-123456789abc';
+const suggestion={method:'POST' as const,url:'/api/places/suggest',payload:{query:'Manyata',sessionToken:token}};
+const resolve={method:'POST' as const,url:'/api/places/resolve',payload:{placeId:'place_1',sessionToken:token}};
+const predictions={suggestions:[{placePrediction:{placeId:'place_1',structuredFormat:{mainText:{text:'Manyata'},secondaryText:{text:'Bengaluru'}}}}]};
+describe('road evidence',()=>{
+ it('uses explicit highway tags and never treats unclassified as internal',()=>{expect(roadClass('primary')).toBe('main');expect(roadClass('service')).toBe('internal');expect(roadClass('unclassified')).toBe('unknown');expect(roadClass('footway')).toBe('unknown');});
+ it('weights classified distance and requires at least 95 percent coverage for a scoring value',()=>{const a=createRoadAnalyzer([{id:1,highway:'primary',path}])(path);expect(a.coverage).toBeCloseTo(1);expect(a.mainRoadFraction).toBeCloseTo(1);expect(a.internalMeters).toBe(0);const partial=createRoadAnalyzer([{id:1,highway:'primary',path:[path[0],{latitude:13.055,longitude:77.6}]}])(path);expect(partial.mainRoadFraction).toBeUndefined();expect(partial.unknownMeters).toBeGreaterThan(400);});
+ it('keeps nearby parallel roads with conflicting classes unknown',()=>{const p=path.map(v=>({...v,longitude:v.longitude+.00005}));const a=createRoadAnalyzer([{id:1,highway:'primary',path},{id:2,highway:'service',path:p}])(path);expect(a.coverage).toBe(0);});
+ it('does not match crossing roads by proximity or elevated roads by guessing',()=>{const across=[{latitude:13.055,longitude:77.59},{latitude:13.055,longitude:77.61}];expect(createRoadAnalyzer([{id:1,highway:'primary',path:across}])(path).coverage).toBe(0);expect(createRoadAnalyzer([{id:1,highway:'primary',path,gradeSeparated:true}])(path).coverage).toBe(0);});
+ it('returns unknown outside coverage or when data is missing',()=>{expect(loadRoadAnalyzer('missing-road-file')(path).status).toBe('unavailable');const shifted=path.map(p=>({...p,longitude:77.7}));expect(createRoadAnalyzer([{id:1,highway:'primary',path}])(shifted).unknownMeters).toBeGreaterThan(1000);});
+ it('rejects oversized route analysis instead of unbounded work',()=>{expect(()=>createRoadAnalyzer([])([{latitude:13,longitude:77.6},{latitude:13.4,longitude:77.6}])).toThrow(/limit/);});
+});
+describe('search and pause protection',()=>{
+ it('finds supplied locations and common spelling variants without a provider',()=>{expect(searchKnownPins('manayata tech')[0].name).toBe('Manyata Tech Park');expect(searchKnownPins('AEOS')[0].name).toBe('AEOS');expect(searchKnownPins('airport')).toHaveLength(0);});
+ it('blocks routes and search before Google calls when the global switch is off',async()=>{const calls=vi.fn();const app=await createServer(config({ENABLE_PLACE_SEARCH:'true',ENABLE_ACTIVITY_ANALYSIS:'true'}),calls);try{expect((await app.inject('/api/status')).json()).toMatchObject({configured:true,paused:true,ready:false,searchEnabled:false});expect((await app.inject({method:'POST',url:'/api/compare',payload:DEFAULT_JOURNEY})).json().code).toBe('live-paused');expect((await app.inject(suggestion)).json().code).toBe('search-paused');expect((await app.inject(resolve)).json().code).toBe('search-paused');expect(calls).not.toHaveBeenCalled();}finally{await app.close();}});
+ it('checks search access codes and input before any provider call',async()=>{const calls=vi.fn();const app=await createServer(config({ENABLE_LIVE_REQUESTS:'true',ENABLE_PLACE_SEARCH:'true',PILOT_ACCESS_CODE:'test-team-code'}),calls);try{expect((await app.inject(suggestion)).statusCode).toBe(401);expect((await app.inject({...suggestion,headers:{'x-nightwise-code':'test-team-code'},payload:{query:'x',sessionToken:token}})).statusCode).toBe(400);expect(calls).not.toHaveBeenCalled();}finally{await app.close();}});
+ it('resolves only offered IDs once using the same session and minimal fields',async()=>{const calls=vi.fn(async(url:any)=>new Response(JSON.stringify(String(url).includes('autocomplete')?predictions:{id:'place_1',location:path[0]})));const conf=config({ENABLE_LIVE_REQUESTS:'true',ENABLE_PLACE_SEARCH:'true'});const app=await createServer(conf,calls);try{expect((await app.inject(resolve)).statusCode).toBe(400);expect((await app.inject(suggestion)).json().suggestions[0].title).toBe('Manyata');expect((await app.inject(resolve)).json().coordinate).toEqual(path[0]);expect((await app.inject(resolve)).statusCode).toBe(400);expect(calls).toHaveBeenCalledTimes(2);const options=(calls.mock.calls[0] as unknown as [string,RequestInit])[1];expect(JSON.parse(String(options.body))).toMatchObject({sessionToken:token,includedRegionCodes:['in']});const saved=JSON.parse(readFileSync(conf.ledgerPath,'utf8'));expect(saved).toMatchObject({autocompleteCalls:1,detailsCalls:1,routeCalls:0});expect(JSON.stringify(saved)).not.toContain('Manyata');}finally{await app.close();}});
+ it('counts a failed search once, caps spend and does not expose provider error content',async()=>{const calls=vi.fn(async()=>new Response('private-error',{status:403}));const app=await createServer(config({ENABLE_LIVE_REQUESTS:'true',ENABLE_PLACE_SEARCH:'true',PILOT_AUTOCOMPLETE_LIMIT:'1'}),calls);try{const first=await app.inject(suggestion);expect(first.statusCode).toBe(503);expect(first.body).not.toContain('private-error');expect((await app.inject(suggestion)).statusCode).toBe(429);expect(calls).toHaveBeenCalledTimes(1);}finally{await app.close();}});
+ it('refuses resolved coordinates outside Bengaluru',async()=>{const calls=vi.fn(async(url:any)=>new Response(JSON.stringify(String(url).includes('autocomplete')?predictions:{id:'place_1',location:{latitude:12,longitude:80}})));const app=await createServer(config({ENABLE_LIVE_REQUESTS:'true',ENABLE_PLACE_SEARCH:'true'}),calls);try{await app.inject(suggestion);expect((await app.inject(resolve)).statusCode).toBe(422);}finally{await app.close();}});
+ it('migrates the old ledger without resetting any spent allowance',()=>{const f=file();writeFileSync(f,JSON.stringify({routeCalls:1,nearbyCalls:0}));const b=new Budget(f,10,600,2,2);try{expect(b.snapshot()).toMatchObject({routeCalls:1,autocompleteCalls:0});b.reserve('details');expect(JSON.parse(readFileSync(f,'utf8'))).toEqual({routeCalls:1,nearbyCalls:0,autocompleteCalls:0,detailsCalls:1});}finally{b.close();}});
+});

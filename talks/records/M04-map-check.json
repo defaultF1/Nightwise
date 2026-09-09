@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-09-09T16:29:47.853Z",
+  "mapScripts": 1,
+  "rendered": true,
+  "loadedMapImages": 50,
+  "providerErrorCodes": [
+    "BillingNotEnabledMapError"
+  ],
+  "mapFailure": "",
+  "liveRoutesTested": false,
+  "placesTested": false,
+  "keysPrinted": false
+}

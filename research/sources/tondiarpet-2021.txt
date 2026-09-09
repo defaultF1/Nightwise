@@ -1,0 +1,1808 @@
+
+--- PDF PAGE 1 ---
+Prepared by Safetipin                 
+WOMEN'S SAFETY AUDIT OF TONDIARPET
+FINAL REPORT
+FOR OFFICIAL USE ONLY
+This work is for the official use only of the Direct Recipient of this report. It is not to be shared with other parties or the public through any means, 
+without the prior permission of the World Bank.
+
+
+--- PDF PAGE 2 ---
+2 3
+The grants which finance this activity were received from the World Bank through its the Mobility and 
+Logistics Trust Fund as part of the Chennai City Partnership on Urban Mobility and Spatial Development. 
+The team thanks representatives from Greater Chennai Corporation for facilitating the implementation of 
+this research. 
+The Team that implemented this activity includes:
+Safetipin:
+Rwitee Mandal, Senior Program Manager
+Shilpy Mehta, Senior Program Associate
+Coding Team: Abhinandan, Toshi, Pinky, Pragati, Rubia
+The World Bank:
+Gerald Ollivier, Team Leader
+Tatiana Peralta Quiroz, Co-Team Leader
+Sarah Natasha, Consultant, Gender Responsive Mobility
+Jaishree Jindel, Transport Specialist
+Disclaimer 
+© 2021 The World Bank Group 
+1818 H Street NW 
+Washington DC 20433 
+Telephone: 202-473-1000 
+Internet: www.worldbank.org 
+This work is a product of Safetipin with inputs of staff of The World Bank Group for the World Bank 
+Group. The findings, interpretations, and conclusions expressed in this work do not necessarily reflect the 
+views of The World Bank, its Board of Executive Directors, or the governments they represent. 
+The World Bank does not guarantee the accuracy of the data included in this work. The boundaries, colors, 
+denominations, and other information shown on any map in this work do not imply any judgment on the 
+part of The World Bank concerning the legal status of any territory or the endorsement or acceptance of 
+such boundaries. 
+Any third party should obtain prior consent of the World Bank before copying or reproducing, in whole or 
+in part, the contents of this report.
+Cover Photo: https://unsplash.com/guru_nathan_25
+ACKNOWLEDGMENTS
+
+--- PDF PAGE 3 ---
+4 5
+WOMEN'S SAFETY AUDIT 
+OF TONDIARPET
+TABLE OF CONTENTS
+ACKNOWLEDGMENT
+Project Team 3
+INTRODUCTION
+Women Safety Audit of Public Spaces  6
+METHODOLOGY
+Safety Audit Methodology 8
+DATA COLLECTION
+Using Safetipin Nite 12
+Using My Safetipin 14
+FINDINGS
+Safety Mapping                                            16
+Accessibility Mapping                                26 
+Data Analysis                                                32
+RECOMMENDATIONS
+Action Points 40
+Urban Design Strategies 54
+ 
+APPENDIX
+Examples of CSV Files 56
+
+--- PDF PAGE 4 ---
+76
+INTRODUCTION
+Safety, accessibility and inclusion in public space 
+TONDIARPET 
+WOMEN SAFETY AUDIT 
+OF PUBLIC SPACES
+Sexual harassment against women and gender-based 
+violence in public spaces and public transport affect gender 
+equality in India. In Chennai similar issues of safety and 
+accessibility adversely affects women’s mobility, especially 
+their ability to access employment, education, health care 
+services, and leisure activities. According to 2019 National 
+Crime Record Bureau (NCRB) data, Chennai has recorded 
+fewer cases of crimes against women vis-a-vis other metro 
+regions. However, there has been a slight increase in the 
+number of cases between 2017 (642) and 2019 (729). In 
+contrast to the low number of reported crimes, a study 
+conducted by AWARE in Chennai found that more than 50 
+percent of women interviewed had faced some form of 
+harassment while traveling on public transport.
+According to the State Crime Records Bureau, under 
+POSCO (The Protection of Children from Sexual Offence 
+Act), 2,358 cases were registered in 2019, followed by 
+molestation of women (803), cruelty by husbands and 
+relatives (781), kidnapping and abduction (699) and rape 
+(362). Cases booked under POSCO, molestation, cruelty 
+by husband and his relatives, kidnapping and abduction 
+together constitute 78.2% and rape accounted for 6.1% of 
+the crime against women. 
+Nevertheless, we recognise that reported crime is probably 
+only the tip of the iceberg and violence against women 
+and girls is a much more pervasive phenomenon than 
+demonstrated by crime statistics. It is only over the past 
+decade that there has been an increased focus on public 
+spaces and cities. Numerous research studies have 
+been conducted to understand women's experience and 
+participation in cities. In Delhi, Jagori has conducted several 
+research studies and safety audits to better understand 
+women’s actual experience and response to urban 
+situations. Research has also been carried out in Mumbai 
+by Akshara and cities in Kerala by Sakhi which point to 
+similar findings of fear and exclusion for women.
+Public spaces are an integral part of our cities and play 
+a pivotal role in enhancing liveability. Therefore, careful 
+design and thoughtful management of public spaces can 
+significantly impact liveability of urban areas. Well planned 
+and designed public spaces in urban settings can improve 
+social inclusion, civic participation and enhance overall 
+safety for all groups in the city. To ensure that all groups 
+can equally access and use public spaces and other public 
+services in the city, it is essential to build a safe and inclusive 
+environment with a focus on public transport.
+Presence of safe public spaces and public transport in 
+cities enable people to access various opportunities and 
+enjoy their right to the city. Lack of safety in both public 
+spaces and public transport can restrict people’s mobility. 
+These impact vulnerable groups - the poor, elderly, women, 
+children and disabled - deeply. Unsafe public spaces impede 
+women’s access to social and economic opportunities in 
+life. Research has shown that both violence and fear of 
+violence in public spaces including public transport instills 
+a sense of fear in the mind of girls and women. A recent 
+survey conducted by Observer Research Foundation in 2021, 
+shows that 57 percent of women reported public transport 
+in India to be unsafe, with a similar number - 56 percent, 
+reporting that they have been sexually harassed while using 
+public transport.  Another conducted by Safetipin and FIA 
+Foundation in 2020 says, sexual harassment in public places 
+and public transport is quite common. 44% auditors (mostly 
+girls and women in the neighbourhood) reported feeling 
+unsafe at public places including streets, markets, bus stops. 
+The issue of women's safety in the city has come to the 
+forefront primarily because of incidents of violence. 
+Beyond the actual experience of violence though, the 
+experience of the city for women and girls is often one of 
+fear and exclusion. The issue needs to be seen as a form 
+of discrimination faced by women and girls in cities which 
+prevents their free movement and ability to access the city.
+WOMEN IN PUBLIC SPACES OF CHENNAI 3. North Chennai is considered relatively unsafe compared to 
+the rest of the city. 
+4. The area has connectivity with public buses, sub-urban rail 
+and a new metro line.
+The focused study of Tondiarpet will help guide the existing 
+projects and propose recommendations for implementing 
+additional projects.
+UNESCO's definition of public space refers to an area or 
+place that is open and accessible to all people, regardless 
+of gender, race, ethnicity, age or socio-economic level. 
+These are public gathering spaces such as plazas, squares 
+and parks. Spaces connecting these, such as footpaths and 
+streets, are also public spaces. Within such reference, the 
+study collected data mainly on the streets and footpaths 
+to evaluate safety, accessibility and inclusion; conducted 
+analysis of the collected data and gave recommendations 
+to improve streets and footpaths. In addition, this project 
+intended to provide analysed data to city stakeholders for 
+decision making in order to make city spaces accessible, safe 
+and inclusive by responding to the priority issues identified 
+through the use of the Safetipin application.
+The ‘women safety audit of public spaces’ was conducted 
+using two application - Safetipin Nite and My safetipin. 
+The study mapped through images of all the main roads 
+of Tondiarpet. The app provided large scale data at the 
+street level to investigate on the challenges on safety and 
+accessibility encountered by women while using public 
+spaces in the area. Further it conducted analysis of the 
+data and highlighted the issues around safety, accessibility 
+and inclusion and provided recommendations to improve 
+women's access to and participation in public spaces, and to 
+meet the current and future demands of the area exclusively 
+for public space usability. This data could be valuable source 
+of information for both citizens and governments. The details 
+of how the applications were used and data was produced 
+to give recommendations for improvement are given in the 
+following chapters.
+Lack of safety has adverse implications on the life of girls 
+and women. These include lack of self-confidence, low 
+productivity levels and most importantly it reduces their 
+access to opportunities. To encourage girls and women to 
+use public spaces freely, it must be made safe, inclusive and 
+accessible particularly keeping the perspectives of women 
+and girls in mind.
+To address the safety concerns of women and girls in 
+Chennai and to improve access, mobility and inclusion in 
+the city, this project collected data on the quality, usage 
+and perceptions of public spaces, particularly from a safety 
+perspective of women and girls.
+A Women’s Safety Audit (WSA) was piloted in Tondiarpet, 
+Chennai, using Safetipin digital tools to provide accurate data 
+on aspects of the built environmental which are linked to 
+safety, accessibility and inclusion for women in public spaces. 
+This information can be integrated into existing government 
+GIS platforms and used to guide policies and interventions 
+by the Government of Tamil Nadu (GoTN). WSAs have been 
+used successfully globally, including in India, where data and 
+evidence collected through such audits has led to a number 
+of city-wide public infrastructure up-gradation projects which 
+subsequently has improved the usage of spaces in the city.
+Tondiarpet – George Town – Thiruvottiyur in Chennai was 
+identified as the project area (18.75 Sq Km). It is located 
+in the northern part of Chennai and is adjacent to other 
+important regions of Chennai including George Town, 
+which lies to the south. The region has its own railway 
+station, Tondiarpet Railway Station, on the Chennai Central–
+Gummidipoondi Line. Trade and commerce along with 
+manufacturing and distribution enterprises are predominant 
+activities found at Tondiarpet. 
+Tondiarpet was identified for the following reasons as the 
+project area. 
+1. It is one of the projects under the ‘mega-street’ program 
+initiated by GCC aimed at redesigning and developing streets 
+in Chennai to be future-ready and Non-Motorised Transport 
+friendly incorporating various aspects of mobility, utility and 
+liveability over 2021 to 2023. 
+2. Various areas in this location have been selected under 
+the Nirbhaya Fund for installing safety poles, aimed at 
+making areas safer for women. 
+WOMEN SAFETY AUDIT BY SAFETIPIN
+
+--- PDF PAGE 5 ---
+98
+METHODOLOGY
+Safety mapping using Safetipin applications
+  
+SAFETY AUDIT METHODOLOGY
+The ratings for each of the parameters 
+are defined on a scale of 0-3
+Image on left
+THE RATING RUBRIC
+Parameter Score 0 Score 1 Score 2 Score 3
+None Little Enough Bright
+No street or   
+other lights
+Can see lights, 
+but there is low 
+visibility in the 
+area
+Lighting is 
+enough for clear 
+visibility
+Whole area 
+brightly lit
+Not Open Partly Open Mostly Open Completely 
+Open
+No Eyes Few Eyes More Eyes Highly Visible
+No windows or 
+entrances of 
+shops or 
+residences 
+overlook the 
+point
+Less than 5 
+windows or 
+entrances 
+overlook the 
+point
+Less than 10 
+windows or 
+entrances and 
+vendors overlook 
+the point
+More than 10 
+windows or 
+entrances and 
+vendors overlook 
+this point
+Deserted Few People Some Crowd Crowded
+No one in sight Less than 10 
+people in sight
+More than 10 
+people visible
+Many people 
+within touching 
+distance
+None Minimal Moderate High 
+No guards or 
+police visible in 
+surrounding area
+Some private 
+security visible in 
+surrounding area 
+but not nearby
+Private security 
+within hailing 
+distance
+Police / reliable 
+security within 
+hailing distance
+None Poor Fair Good 
+No walking path 
+available
+Path exists but in 
+very bad 
+condition
+Can walk but    
+not run
+Easy to walk    
+fast or run
+Unavailable Distant Nearby Very Close
+No metro, bus, 
+auto/rickshaw 
+stop within 10 
+mins walk
+Metro or bus 
+auto/rickshaw 
+stop between 5-
+10 mins walk
+Metro or bus, 
+auto/rickshaw 
+stop between 2-5 
+mins walk
+Metro or bus, 
+auto/rickshaw 
+available within 2 
+mins walk
+Not Diverse Somewhat 
+Diverse Fairly Diverse Diverse
+No one in sight, 
+or only men
+Mostly men, very 
+few women or 
+children
+Some women 
+and children
+Balance of all 
+genders or more 
+women and 
+children
+Frightening Uncomfortable Acceptable Comfortable
+Not venture here 
+without sufficient 
+escort
+Will avoid this 
+place whenever 
+possible
+Feel safe enough, 
+but will be 
+careful
+Feel safe here 
+even after dark
+Can see clearly in 
+all directions
+Feeling
+Walk Path
+Public 
+Transport
+Gender 
+Usage
+Visibility
+People
+Security
+Lighting 
+(Night)
+Many blind 
+corners and no 
+clear sightlines
+Able to see a 
+little ahead and 
+around
+Able to see in 
+most directions
+Openness
+SAFETIPIN AUDIT PARAMETERS TO EVALUATE SAFETY AND ACCESSIBILITY IN PUBLIC SPACES:
+Lighting – Availability of enough light to see all around you
+Walkpath – Either a pavement or road with space to walk
+Public Transport – Availability of public transport like metro, buses, autos, rickshaws
+Visibility – Vendors, shops, building entrances, windows and balconies from where you can be seen
+Security – Presence of formal police or private guards
+People – Number of people around you
+Gender Usage – Presence of women and children near you
+Openness – Ability to see clearly and move in all directions
+Feeling – How safe do you feel
+Two Safetipin applications are used for this project - Safetipin 
+Nite and My Safetipin. 
+Safetipin Nite application generates data by clicking pictures 
+across the city via a phone camera mounted on the 
+windshield of a moving vehicle. Photos are taken to capture 
+pedestrian’s safety and accessibility conditions at regular 
+intervals of 30-50 metres. Every picture is geo-tagged and 
+uploaded on to a server and further analysed by a team 
+of expert coders using Safetipin parameters and sub-
+parameters. These eventually are translated into data sets 
+that appear as audit points on Safetipin maps. This image 
+bank of GIS data is then shared with local stakeholders, 
+government authorities and concerned organisations 
+in order to address and improve safety and accessibility 
+conditions in the city.
+IMAGE MAPPING WITH SAFETIPIN NITE
+My Safetipin application has the Women’s Safety Audit at its 
+core. Based on the global experience of 20 years on safety 
+audits, 8 important parameters namely, lighting, walk path, 
+public transport, visibility, openness, crowd, gender diversity 
+and security that define safety perceptions are fixed. Feeling 
+being the ninth parameter is exclusively on perception. 
+These together help to understand the perception of safety 
+of public spaces. A location is audited based on these nine 
+parameters. Each safety audit results in a pin on the specific 
+geo-tagged location where the audit was performed and also 
+records the time and date. Results of the safety audit are 
+aggregated to a ‘Safety Score’ for areas and neighbourhoods.  
+The information on the application specifically focuses on 
+the experience of women and girls, providing them with an 
+interactive and empowering tool around feelings of safety.
+PUBLIC SPACE AUDITS WITH MY SAFETIPIN
+
+--- PDF PAGE 6 ---
+1110
+METHODOLOGY
+Lighting Visibility Walkpath Security Public Transport
+No SL 50% Boundary 
+Wall No Pavement Private Guards Metro/Rail
+Off SL 100% Boundary 
+Wall
+Broken 
+Pavement Police Van/Bike Bus/Mini bus
+Dim SL Unused Land Unpaved 
+Pavement Police Check Auto/Shared 
+Auto
+High SL Road side 
+Vendors Car Blocking Police Booth Cycle Rickshaw
+Too Far SL Temporary 
+Stalls Vendor Blocking Police Station Taxi
+Leaves cover 
+SL Shops Houses 
+Extending Other Govt. Rental Bicycle
+Other cover SL Houses upto 4 
+Floors Trees Blocking
+One side SL Houses >4 
+Floors Other Blocking
+Walkable Road
+On-street 
+Parking
+Rubric showing all the sub-parameters for the 
+listed five parameters 
+Image on left
+SUB-PARAMETER RUBRIC
+GIS layer of street  lighting on Google Maps 
+with image links
+Image on left
+TONDIARPET'S POOR  
+WALKPATH AS GIS LAYER
+The map shows locations in the city where 
+there is no or poor street lighting
+Image on left
+TONDIARPET'S POOR 
+WALKPATH AS AUDIT MAP
+The photographs collected through Safetipin Nite are 
+uploaded onto the Safetipin server. These are then accessed 
+on the portal and analysed on a wide range of parameters 
+linked to accessibility, safety and inclusivity of public spaces. 
+For deeper analysis, a set of sub-parametres for the 
+parameters of Lighting, Walkpath, Public Transport, Visibility 
+and Security are used for recording additional information. 
+The complete list of sub-parameters is given here. Google 
+Maps are also used to identify the sub-parameters. Every 
+100 metres, an audit is generated at a point by using all the 
+photographs collected around that point.
+Based on the collected and coded data, the Safetipin team 
+analyses and produces maps and reports that can be used 
+for actual on ground responses and actions to work toward 
+improving safety and accessibility on the streets and public 
+spaces in cities. Maps are produced on each parameter with 
+geo-tagged location of audit points, supported with images. 
+These maps could be seen on Google Maps too for easier 
+assess to information. Data is also analysed in terms of 
+correlations and linkages with other possible data sets which 
+further supports or reinforce the findings. Based on these 
+analyses, a concrete set of recommendations are drawn out 
+for key stakeholders for city improvement programs.
+To gain a deeper understanding of accessibility and safety 
+in public spaces of Tondiarpet, a thorough investigation on 
+accessibility was done. Safetipin Nite was used to map the 
+area twice - during the day and after dark. An additional set 
+of accessibility parameters apart from the standard Safetipin 
+parameters explained before were applied to assess the 
+status of physical accessibility in the area especially from 
+a user’s perspective. Since walking is a basic and common 
+means of access in the city, walkpaths which facilitate 
+walking, become the crucial form of urban infrastructure 
+which provides physical access to services and resources. 
+Day and night image mapping of walkpaths were put 
+together to analyse the ease of accessibility in the area. The 
+additional accessibility parameters applied are as follows:
+ACCESSIBILITY MAPPING WITH SAFETIPIN NITE
+GENERATING MAPS, ANALYSES AND REPORTS 
+Image below
+Snapshot of the coding screen showing the parameters and sub-parameters 
+DATA CODING ON SAFETIPIN PORTAL
+Footpath Conditions:
+Non-existent footpath
+Broken, unpaved, dis-continuous footpath 
+Availability of curb ramps, median breaks and zebra crossings
+Footpath Barriers:
+Garbage, construction debris/material dumped on footpaths
+Vehicles parked on footpaths
+House and shop extensions onto footpaths
+Temporary stalls and vendors obstructing footpaths
+Light, electric, signage and advert poles obstructing footpath
+
+--- PDF PAGE 7 ---
+1312
+DATA COLLECTION
+Data collection using Safetipin Applications
+  
+DATA COLLECTION
+As soon as the lockdown and night curfew due to the 
+second wave Covid crisis in Chennai was lifted and vehicular 
+movement was allowed in the city after dark, Safetipin 
+conducted ‘Online Data Collectors' Training Program’ with 
+the verified drivers and field investigators assigned by a 
+resource agency in Chennai. The agency - Market Xcel hired 
+by Safetipin supported the Safetipin team to individually train 
+every driver and field investigators through online sessions 
+given by Safetipin team to use ‘Safetipin Nite’ application on 
+the smart phones provided by Safetipin.
+Over the app training sessions, Safetipin Nite App was 
+introduced to two field investigators and two drivers who 
+were chosen for the work. They were even trained to use 
+the app in their personal phones as backups. Alongside, 
+they were also trained on how to mount the phones on the 
+windshields of the cars to do the image collection. Pre-
+assigned data collection routes were run on their phones 
+and few rounds of test runs were done with the field 
+investigators and drivers to check the accuracy of the image 
+collection process.
+Photo collected through Safetipin Nite app - 
+an example of a good image
+Image on left
+GOOD IMAGE
+Safetipin Nite app running on volunteer's and 
+driver's smart phones 
+Image on left
+DATA COLLECTION CAR
+Photo collected through Safetipin Nite app - 
+an example of a bad image 
+Image on left
+BAD IMAGE
+A distance of 321 km were covered by the drivers and their 
+respective field investigators in Tondiarpet, collecting 20070 
+images of the area between 6:30pm to 9:00pm. Similarly, 
+the area was also mapped during the day between 3:00pm 
+to 5:30pm for mapping accessibility conditions. The quality 
+of most of the images collected were certified good after 
+an initial round of review by the Safetipin team and were 
+processed for the main visual analysis. The field investigators 
+and drivers worked efficiently in collecting data with the help 
+of Safetipin Nite app. 
+Nevertheless, we met with a couple of challenges. These are 
+as follows: 
+On certain routes because of the road width being 
+insufficient for vehicles it was difficult accessing them. 
+We received a small percentage of shaky images due to bad 
+road condition, water logging in monsoons and rain water 
+blurring the camera view.
+DATA COLLECTORS ONLINE APP TRAINING DATA COLLECTION WITH SAFETIPIN NITE
+Data collection details:
+Total area covered: 19.3 Sq Km
+Total road length covered: 321 Km
+Image collection time: 
+Day - 3:00 pm to 5:30 pm, Night - 6:30 pm to 9:00 pm
+Total images collected: 20070 nos
+Total audits points - 1098
+
+--- PDF PAGE 8 ---
+1514
+DATA COLLECTION
+Data collection using Safetipin Applications
+DATA COLLECTION
+Photo collected through My Safetipin app - an 
+example of a bad image
+Image on left
+BAD IMAGE
+My Safetipin app screen showing all the nine 
+audit parameters
+Image on left
+MY SAFETIPIN SCREEN 
+Photo collected through My Safetipin app - an 
+example of a good image
+Image on left
+GOOD IMAGE
+Two women data collectors were selected by the resource 
+agency for conducting public space safety audits. Safetipin 
+team trained both the women data collectors through 
+two online 'App Training' sessions. The first session of the 
+training initiated informal discussions with the data collectors 
+on women’s safety in public spaces and the significance of 
+safety audits. The second session was conducted on the user 
+generated audits using My Safetipin application. 
+During the second session, the women data collectors were 
+introduced with the functioning of the My Safetipin app and 
+were helped to install the app in their smart phones. After 
+installing the app each data collector did some trial audits to 
+make sure that they have understood the process correctly. 
+After trial audits were done, each volunteer was assigned 
+with areas which were convenient for them to access and 
+do the safety audits. These two sessions of the training 
+complemented each other in generating quality data at the 
+end of the audits.
+13 public places comprising of transport stations, markets, 
+schools, colleges and parks were audited. Each audit place 
+generated 10-15 audit points in and around the identified 
+locations.
+While we were able to collect good quality data but due 
+to the ongoing pandemic, Safetipin team had to re-train 
+a second batch of data collectors as the first one could 
+not perform the expected work. This duplication of work 
+extended the data collection process. Women auditors at 
+few instances were not able to audit public spaces at night. 
+PUBLIC SPACE AUDITS WITH MY SAFETIPIN
+Public spaces audited with My Safetipin app:
+Railway Station - Chennai Fort
+Metro Station - New Washermenpet Station
+Bus Stop - Broadway Bus Stop
+School - St Annes Girls' Higher Secondary School
+College 
+Ibrahim Salai Bharathi Arts College
+Kanniyaga Parameswari Women's College
+Hostel - Arts College Hostel
+Park - Thiyagaraya Park
+Market
+Tondiarpet Market
+Periya/Washermanpet Market
+Kasimedu Fish Market
+Hospital - Mint Street Apollo Hospital
+Public Building - High Court
+
+--- PDF PAGE 9 ---
+16 17
+FINDINGS
+Parameter maps and safety ratings
+WOMEN'S SAFETY AUDIT
+FINDINGS
+After analysis of the collected data by Safetipin Nite in Tondiarpet, representational maps for six key 
+parameters were prepared for data visualisation. The following parameter maps represent the data 
+as audit points generated through image analysis technique. The parameter maps also include user 
+generated audits points by My Safetipin. An overall map showing the aggregated Safety Score of all the 
+parameters combined is generated for safety rating for the audited locations in Tondiarpet. These maps 
+help to read and compare the data geographically and understand where the gap lies in making public 
+spaces safe and accessible, especially for women and others. 
+Overall, 1098 audit points were generated for Tondiarpet.
+Geo-located Safety Audit points by Safetipin Nite - 919 and by My Safetipin - 179.
+The map below shows the safety audit points mapped by Safetipin Nite application.
+User generated public space audits with My Safetipin app:
+Two women data collectors audited the selected public spaces in Tondiarpet. As an additional layer of information they 
+included comments for some of their audits. An assortment of comments with user insights are given below for analysis 
+"No lights nothing, very afraid to walk in the streets." 
+"Women feel uncomfortable because no lighting facility there." 
+"Some space is there in the road side but no proper walk path."
+"Crowded area always full of vehicles, no space to walk, may meet with an accident because of no space."
+"No vehicles, autos nearby, need walk for 10 mins."
+"Shops closed no female at all."
+"Police booth were there but no police presence." 
+Of the nine parameters used for mapping and evaluation of public space, Lighting, Walkpath, Public 
+Transport and Visibility are actionable parameters on which physical interventions are possible. People 
+(presence of people on the streets), Gender Diversity (presence of women, children and others in the 
+public domain) and Feeling (perception of safety) are used to measure the impact of the actionable 
+parameters on safety, accessibility and inclusion in public spaces. Security and Openness are parameters 
+which provide supplementary information for overall analysis. 
+Findings on the actionable parameters Lighting, Walkpath, Public Transport, Visibility are given below 
+along with People and Gender Diversity.
+The map below shows the safety audit points mapped by My Safetipin  application.
+
+--- PDF PAGE 10 ---
+18 19
+91%
+91% of the area has adequate street lighting and only 
+9% has not any or poor street lighting. When this data is 
+represented geographically (map below) it is seen that 
+areas with lower ratings on street lighting are sporadically 
+spread across at few locations. This means, either 
+there are not any or non-functional street lighting in 
+these parts of the mapped area. This geo-located data, 
+provided as a GIS layer, could be used for improving 
+street lighting in the area and making it fully functional.
+1% 8%
+51%
+40%
+OF THE AREA MAPPED HAS 
+ADEQUATE STREETLIGHTS
+On the left, percentage distribution pie of the parameter map below. 
+Tally with the legend below.
+35%
+35% of the area has walkable footpaths, rest 65% scores 
+poorly on the same. When this data is represented 
+geographically (map below) it is seen that areas with 
+lower ratings on footpaths are spread across the 
+mapped area with an exception of a small part at the 
+southern end and along few corridors leading north. 
+This means, either there are not any or very poor quality 
+footpaths in these parts of the city. A detailed footpath 
+analysis follows to understand accessibility better.
+14%
+51%
+25%
+10%
+OF THE AREA MAPPED HAS 
+WALKABLE FOOTPATHS
+On the left, percentage distribution pie of the parameter map below. 
+Tally with the legend below.
+
+--- PDF PAGE 11 ---
+20 21
+85%
+58% of the area has public transport stands/stops within 
+2-5 minutes walking distance, 27% can reach them in 
+5-10 minutes and the rest 15% does not have any formal 
+or informal transport stands/stops reachable within 10 
+minutes. When this data is represented geographically 
+(map below) it is seen that areas with lower ratings on 
+public transport are in a clusters in the south and in 
+small clusters at few more locations moving north. This 
+means, formal public transport stands/stops are either 
+unavailable or not within reach in these parts.
+2%
+13%
+27%58%
+OF THE AREA MAPPED HAS PUBLIC 
+TRANSPORT STOPS WITHIN REACH
+On the left, percentage distribution pie of the parameter map below. 
+Tally with the legend below.
+65%
+65% of the area has good visibility or has active streets, 
+i.e., these parts have less number of high boundary 
+walls or blank facades facing the streets and have more 
+people, vendors, shops on the streets. But 35% of the 
+area still scores poorly on the same. When this data is 
+represented geographically (map below) it is seen that 
+areas with lower ratings on visibility are spread across the 
+mapped area with some long stretches along a western 
+corridor by the sea in the north. This means, either there 
+are not any or very low visibility.
+11%
+24%
+34%
+31%
+OF THE AREA MAPPED HAS 
+GOOD VISIBILITY 
+On the left, percentage distribution pie of the parameter map below. 
+Tally with the legend below.
+
+--- PDF PAGE 12 ---
+22 23
+60%
+60% of the area had good number of people present 
+on the streets during the time of the audit, while 28% 
+had less than 10 people after dark and 12% were quite 
+empty. When this data is represented geographically 
+(map below) it is seen that areas with lower ratings on 
+people are spread across the mapped area at various 
+locations. The western most corridor by the sea is 
+particularly deserted in the north. This means, either 
+there were no or few people in these parts during the 
+mapping. This data could be supplemented with other 
+data sets to understand why these parts are underused.
+12%
+28%
+44%
+16%
+OF THE AREA MAPPED HAS 
+GOOD PRESENCE OF PEOPLE 
+On the left, percentage distribution pie of the parameter map below. 
+Tally with the legend below.
+20%
+Only 20% of the area had women and children present in 
+public spaces during the time of the audit, rest 80% had 
+either no or very few women and children present on 
+the streets. When this data is represented geographically 
+(map below) it is seen that areas with lower ratings on 
+gender usage are evenly present across the entire area 
+barring few locations. This means, that there were no 
+women and children present at night on most of the 
+streets in the mapped area. This data too could be 
+supplemented with other data sets to understand why 
+streets are underused by women and children.
+54%
+26%
+12%
+8%
+OF THE AREA MAPPED HAS 
+PRESENCE OF WOMEN
+On the left, percentage distribution pie of the parameter map below. 
+Tally with the legend below.
+
+--- PDF PAGE 13 ---
+24 25
+-15 00
+-10 00
+-50 0
+0
+5 00
+1 00 0
+1 50 0
+Lighting Walkpa th Pu blic Transport Visibi lity
+Tondiarpet: Pin Distribution Graph
+P oo r Below  Aver age Average G oo d
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+Lighting Walkpath P ub lic Tran s po rt Visibility
+Tondiarpet: Average Parameter Graph
+The graph shows parameter wise pin 
+distribution on a scale of three.
+Graph bottom left
+PIN DISTRIBUTION
+The graph shows average rating for each 
+parameter on a scale of three.
+Graph  top left
+PARAMETER RATING
+To further analyse, the parameters on which physical interventions are possible 
+are put together and the data is compared. The average parameter rating graph 
+indicates the average rating for each parameter on a scale of three. Each of the 
+four parameters are rated either 0,1, 2 or 3, where 0 is poor and 3 is good. As 
+seen on the graph, the Public Transport parameter has been rated the highest, 
+followed by other parameters such as Lighting and Visibility which are rated little 
+lower. Walkpath has been rated the lowest. The parameter wise pin distribution 
+graph indicates the number of points rated as 0, 1, 2 and 3. The good ratings 
+are taken as positive and poor ratings as negative. As shown on the graph, for 
+Walkpath more than half audit points are rated below average or poor. Whereas, 
+for Public Transport and Visibility most audit points are rated good or average. 
+Further, since public transport has the highest number of good ratings its average 
+rating is the highest, followed by lighting, visibility and walkpath, in that order.
+GRAPHIC INTERPRETATION OF KEY PARAMETERS
+1% 7%
+11%
+19%
+62%
+3.8/5
+Based on the collected data, a safety score of 3.8 on a 
+scale of 5 is given to Tondiarpet which evaluates its status 
+as 'above average' on safety and accessibility. The safety 
+score map below shows some areas across Tondiarpet 
+with poor physical infrastructure and poor usage of 
+public space. This means that the condition of street-
+lighting, footpath, visibility and public transport needs 
+improvement at these locations and would together 
+contribute to make Tondiarpet safe and accessible 
+for women and others. A thorough analysis follows to 
+understand which of the parameters must be prioritised 
+to improve the overall safety status of the mapped area.
+SAFETY SCORE OF TONDIARPET
+On the left, percentage distribution pie of the safety score map below. 
+Tally with the legend below.
+
+--- PDF PAGE 14 ---
+2726
+To map accessibility in public spaces of Tondiarpet, 
+especially for women users, Safetipin Nite application 
+was used to map the entire area twice - once in the 
+day and once again in the night. An additional set 
+of accessibility parameters apart from the standard 
+safety parameters mentioned in the previous chapter 
+were applied for better understanding of the status of 
+accessibility in the area, especially for the vulnerable 
+groups. Day time images revealed the actual condition 
+and usage of the footpaths when in maximum use 
+during the working hours. Night time images revealed 
+the street lighting condition clearly in the evening 
+hours apart from footpath condition and usage. Both 
+sets of day and night images were then put together 
+to analyse the ease of accessing the footpaths in the 
+area, considering walking as a primary way of access.
+To map this, two sets of factors were considered to 
+assess ease of walking on footpaths. First - to map the 
+present condition of the footpaths. Second - to see if 
+the footpaths are clear of any barriers or not. Based 
+on this, the accessibility parameters considered are as 
+given below. Composite maps are generated for each 
+parameter with geo-tagged information which helps to 
+assess the nature of the issues related to accessibility 
+and locate the same for physical intervention at site.
+Accessibility parameters used for mapping:
+Footpath Conditions:
+Non-existent footpath
+Broken, unpaved, dis-continuous footpath 
+Availability of curb ramps, median breaks and zebra crossings
+Footpath Barriers:
+Garbage, construction debris/material dumped on footpaths
+Vehicles parked on footpaths
+House and shop extensions onto footpaths
+Temporary stalls and vendors obstructing footpaths
+Light, electric, signage and advert poles obstructing footpath
+Everyone is a pedestrian. Walking is a basic and 
+common mode of transport in all societies across 
+the world. Virtually, every trip begins and ends with 
+walking. Walking comprises the sole means of travel 
+on some journeys, whether a long trip or running 
+an errand. Therefore, footpaths are a fundamental 
+form of urban infrastructure that facilitate walking, 
+socializing and interacting with the public domain. 
+In order to have a safe, barrier-free and successful 
+trip, the street systems must be accessible to all 
+pedestrians and especially to vulnerable users - 
+women, children, elderly and people with disabilities 
+using mobility devices such as wheelchairs and 
+walkers, those who have vision, speech, hearing 
+impairments or those with intellectual disabilities. 
+The ease with which pedestrians can access and use 
+streets influences their everyday life choices. A good 
+street design which enables the user to seamlessly 
+complete a trip from doorstep of origin to the 
+doorstep of the destination is critical. 
+In the absence of accessible footpaths, pedestrians 
+are forced to share the street with motorists which 
+enhances the chances of pedestrian injuries, 
+disablement and fatalities. Absence or poor condition 
+of footpaths also drastically restrict access to public 
+spaces, services and amenities especially for women. 
+It has a direct impact on their mobility patterns. It 
+influences their ability to move around, connect to 
+wider transport networks and access the opportunities 
+present in the city. Therefore, footpaths impact the 
+quality of their daily life and even their life choices.
+Because streets are an important component of public 
+space, designing them with people in mind is the key. 
+Therefore, it is important to go beyond just having a 
+footpath, it means that careful attention must be given 
+to providing a comfortable, safe, engaging experience 
+to all users of the street.
+ACCESS FOR ALL ACCESSIBILITY MAPPING OF TONDIARPET
+FINDINGS
+Accessibility maps and associated findings
+ 
+ACCESSIBILITY MAPPING
+FINDINGS
+The image shows correctly designed, located 
+and executed pedestrian crossings.
+Image on left
+ZEBRA CROSSING
+The image shows correctly designed, located 
+and executed curb ramps.
+Image on left
+CURB RAMPS
+The image shows correctly designed, located 
+and executed median breaks.
+Image on left
+MEDIAN BREAK
+
+--- PDF PAGE 15 ---
+28 29
+Safetipin identified three types of footpath conditions which mar pedestrian walking experience and 
+cause distress among pedestrians while navigating the streets, especially the vulnerable users. These 
+conditions are namely, one, having no dedicated walking space on the streets, two, having no built 
+footpath, and three, having broken, partly unpaved, discontinuous walking surface on footpaths. We 
+mapped all of the above conditions wherever found in the area and geo-located the information on GIS 
+layers. The composite map below represents all the non-functional footpaths as found on the streets and 
+highlights the intensity of the issue in a large area in the middle of Tondiarpet.
+MAPPING OF FOOTPATH CONDITIONS
+The geo-tagged photos show 
+non-functional footpaths
+Left to right
+GEO-LOCATED IMAGES
+Safetipin identified three types of physical elements which assist pedestrians to have at grade walking 
+experience, especially the vulnerable users. These are namely curb ramps, median breaks and zebra 
+crossings. We mapped all of the above wherever found in the area and geo-located the information on 
+GIS layers. The composite map below represents all the accessibility elements found on the streets and 
+highlights the intensity of the issue of having inadequate curb ramps, median cuts and pedestrian ramps 
+for a seamless, at grade walking experience. One pedestrian underpass and two foot-over bridges were 
+located. Zebra crossings were found only on few locations and mainly on a north-south arterial road. 
+MAPPING OF ACCESSIBILITY ELEMENTS
+The geo-tagged photos show 
+accessibility elements on streets
+Left to right
+GEO-LOCATED IMAGES
+
+--- PDF PAGE 16 ---
+30 31
+Safetipin identified five types of physical barriers disrupting clear walking space for pedestrians, especially 
+the vulnerable users. These are namely parked vehicles, shop/house extensions, temporary stalls/
+vendors, electricity/signage poles, and lastly dumped garbage/construction material. We mapped all of 
+the above when found on footpaths and geo-located the information on GIS layers. The composite map 
+below represents all barriers types found on footpaths and highlights the intensity of the issue. The total 
+number of locations where these obstructions are found are indicated in the legend.
+MAPPING OF FOOTPATH OBSTRUCTIONS
+The geo-tagged photos show 
+obstructions on footpaths
+Left to right
+GEO-LOCATED IMAGES
+Safetipin identified 544 locations within Tondiarpet where vehicles are parked on footpaths, disrupting 
+clear walking space for pedestrians, especially the vulnerable users. These are mainly two wheelers, four 
+wheelers, small delivery vehicles, auto rickshaws, carts and cycles. We mapped these when found parked 
+on footpaths and geo-located the information on GIS layers. The composite map below represents all 
+locations with parked vehicles and highlights the intensity of the issue. It is found that majority of the 
+footpaths were either occupied by obstructions or did not have a good, at grade, walking surface. 
+MAPPING OF FOOTPATH OBSTRUCTIONS - PARKING
+The geo-tagged photos show 
+parked vehicles on footpaths
+Left to right
+GEO-LOCATED IMAGES
+
+--- PDF PAGE 17 ---
+32
+ANALYSIS
+Data representation and correlation maps
+ 
+DATA ANALYSIS
+To further analyse the data layers generated by Safetipin and to gain a deeper understanding of the 
+spatial issues related to safety and accessibility, some data layers were overlaid onto other data layers. 
+This helped in understanding their relationship with each other and how they interacted with space. 
+Such understanding could be applied to inform decision making for spatial interventions. The following 
+correlation maps explore this understanding at a spatial level. Safetipin also looked at representation of 
+data layers by grouping and segregating them. For example the Safety Score map below illustrates Safety 
+Score at each ward level and can be used by the development authorities to prioritise on the wards 
+which appear light green on the map and have scored above average on safety and accessibility. 
+A set of recommendations on the actionable parameters for immediate improvement which will 
+positively impact the wards' safety scores is included in the next chapter. 
+  Ward-wise Safety Score map below showing good and above average safety score in various wards. 
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+ Walkpath  Visibility  Pu bli c Transp ort  Gender  People
+Comparative Analysis: Average Parameter Rating
+Ni gh t Day
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+Lighting
+Walkpath
+Visibility
+Public Transport
+Security
+People
+Gender Usage
+Openness
+The graph below indicates the correlation drawn between each of the eight parameters with respect to 
+feeling, the ninth parameter. In case of Tondiarpet, user generated 'My Safetipin' audits show Visibility, 
+Gender Usage and Public Transport to be rated the highest when correlated with feeling. This clearly 
+shows the strong relationship of these parameters to women's perception of safety. Lighting and Security 
+have been rated high as well. Walkpath however has been rated lower. The reason for this could be 
+being used to walking on shared streets with transport and others activities happening on streets in an 
+organically grown area like Tondiarpet. This analysis helps in identifying the key actionable parameters on 
+which physical intervention is possible.
+KEY PARAMETERS IMPACTING SAFETY PERCEPTIONS
+The graph shows average rating of key  
+parameters for day and night audits
+Graph on right
+COMPARATIVE RATING
+The graph shows every  parameter correlation 
+with the Feeling parameter. 
+Graph on right
+CORRELATION GRAPH
+COMPARING DAY AND NIGHT AUDITS
+Day and night audits generated using Safetipin Nite were compared for five parameters - Walkpath, 
+Visibility, Public Transport, Gender and People. Lighting was not considered as street lights are not 
+operational in the day. It is seen that Walkpath and Visibility drops at night along with Gender and People 
+but Public Transport is slightly over day ratings. It is not very clear why public transport ratings are higher.
+
+--- PDF PAGE 18 ---
+34 35
+Safetipin overlaid 'presence of gender in public spaces' data on 'walkpath' data, generated by Safetipin's 
+visual mapping analysis. This is done to geographically locate the areas where women and others are 
+seen using walkpaths with various obstructions. The heat map below clearly illustrates this correlation. 
+The dark purple areas are where walkpath is good and the light pink areas are where walkpath is non-
+existent or of poor quality. The blue dots are the audit points showing presence of gender. There are all 
+together 142 audit points identified in Tondiarpet where women can be seen accessing the streets where 
+the walkpath condition is poor. The diagram below represents this data quantitatively. Each geo-tagged 
+audit point is supported by two or more images. Such photographic evidence could be used for deeper 
+investigation into the area's walking infrastructure and improve accessibility in public spaces. A good 
+walking environment will improve women's mobility and access to resources. 
+CORRELATING GENDER USAGE WITH WALKPATH
+The diagram represents correlation between 
+gender usage and walkpath
+Diagram on right
+CORRELATION DIAGRAM
+223311 audit 
+points with 
+high rating (2,3) 
+where women 
+are seen
+772244 audit points 
+with poor rating 
+(0,1) having no or 
+poor quality 
+walkpaths
+114422  audit points 
+where women are 
+seen using poor 
+quality walkpaths
+Safetipin overlaid 'presence of gender in public spaces' data on 'visibility' data, generated by Safetipin's 
+visual mapping analysis. This is done to geographically locate the areas where women and others 
+are seen using public spaces which have very low visibility. The heat map below clearly illustrates this 
+correlation. The dark green areas are where visibility or 'eyes on the street' is good and the light green 
+areas are where there is no visibility. The blue dots are the audit points showing presence of gender. 
+There are all together 37 audit points identified in Tondiarpet where women can be seen accessing public 
+spaces after dark with no eyes on the streets. The diagram below represents this data quantitatively. Each 
+geo-tagged audit point is supported by two or more images. Such photographic evidence could be used 
+for further analysis of the area's safety aspects. Active and watched over public places encourage and 
+enable women's participation in city life and enhance women's perception of safety.
+CORRELATING GENDER USAGE WITH VISIBILITY
+The diagram represents correlation between 
+gender usage and visibility
+Diagram on right
+CORRELATION DIAGRAM
+223311 audit 
+points with 
+high rating (2,3) 
+where women 
+are seen
+339944 audit points 
+with poor rating 
+(0,1) on visibility, i.e., 
+very few active 
+frontages (windows, 
+entrances, shops) 
+overlooking streets 3377  audit points 
+where women are 
+present on the streets
+but visibility is very 
+low, making the streets 
+unsafe
+
+--- PDF PAGE 19 ---
+36 37
+Safetipin overlaid public transport data on a GIS layer of public places (markets, transport hubs, schools, 
+colleges, hostels) received from the city authorities. This helped in geographically locating the areas 
+around public places where public transport stands/stops are available or unavailable. The heat map 
+below clearly illustrates this correlation. The dark green areas are where transport stands are within 
+reach and the light yellow areas are where they are out of reach. This GIS layer is provided as a CSV file 
+and could be integrated with the city's existing GIS platform for an up-gradation program to make public 
+transport available within 2-5 mins of walking distance from the schools which fall in the light yellow zone.
+CORRELATING PUBLIC TRANSPORT WITH PUBLIC SPACES
+The geo-tagged photos show 
+public transport stands/stops.
+Left to right
+GEO-LOCATED IMAGES
+Safetipin overlaid 'presence of gender in public spaces' data on 'street lighting' data, generated by 
+Safetipin's visual mapping analysis. This is done to geographically locate the areas where women and 
+others are seen using public spaces which have very low street lighting. The heat map below clearly 
+illustrates this correlation. The dark brown areas are where street lighting is good and the light yellow 
+areas are where street lighting is non-functional or inadequate. The blue dots are the audit points 
+showing presence of gender. There are all together 16 audit points identified in Tondiarpet where women 
+can be seen accessing public spaces in the dark. The diagram below represents this data quantitatively. 
+Each geo-tagged audit point is supported by two or more images. Such photographic evidence could 
+be used for deeper investigation into the area's street lighting infrastructure and improve safe access to 
+public spaces. Women's access to public spaces would certainly improve if street lighting is prioritise.
+CORRELATING GENDER USAGE WITH STREET LIGHTING
+The diagram represents correlation between 
+gender usage and street lighting
+Diagram on right
+CORRELATION DIAGRAM
+9999 audit points 
+with poor 
+rating (0,1) 
+where lighting 
+is inadequate 
+223311 audit points 
+with high rating (2,3) 
+where women are 
+seen on the streets 
+after dark 1166  audit points 
+where women are 
+present in public 
+spaces but street 
+lighting is either poor 
+or inadequate
+
+--- PDF PAGE 20 ---
+38 39
+Proposed Safety Pole locations were shared with Safetipin by the project team at World Bank. We 
+overlaid the locations on the Safety Score heat map to see if they are positioned over areas with good or 
+poor safety score. The map below illustrates this relationship. 
+While the safety pole program has been put on hold by the authorities, the analysis provides an 
+opportunity to better understand where such intervention could be most effective.
+CORRELATING SAFETY SCORE WITH SAFETY POLES
+Safety Score and Safety Pole 
+We also overlaid the safety pole locations on 'presence of gender in public spaces' parameter to see if 
+they are positioned over areas where high presence of gender were found during mapping. The map 
+below illustrates this relationship.
+While the safety pole program has been put on hold by the authorities, the analysis provides an 
+opportunity to better understand where such intervention could be most effective.
+CORRELATING GENDER USAGE WITH SAFETY POLES
+Gender Usage and Safety Pole
+
+--- PDF PAGE 21 ---
+4140
+RECOMMENDATION
+Action points and planned interventions
+RECOMMENDATIONS
+Analysed data shows,
+• 65% of Tondiarpet, has no or poor quality footpath
+• 15% of Tondiarpet has distant or unavailable transport stops/  
+stands within 5-10 minutes of walking distance
+• 35% of Tondiarpet has no or poor visibility 
+• 40% of Tondiarpet has deserted public spaces
+Women and children using public space in the evening (6-9pm) 
+20% of Tondiarpet, have presence of women & children in streets
+Safetipin's mapping in other cities like Delhi, Gurgaon, 
+Gwalior have yielded positive results in identifying and 
+improving certain parameters for enhancing safety and 
+accessibility in public spaces. 
+In Delhi in 2014, after the first round of mapping, 7438 
+darkspots were identified in the city. The authorities made 
+dedicated efforts in making the city well lit at night to 
+improve safety and usage of public space. In 2018, another 
+round of audits were done to map the city's improved 
+condition and to identify more dark spots. 
+Similarly, in Gurgaon in 2016, mapping was done to improve 
+the quality of street lighting in order to make people feel 
+safer on the streets after dark. The Gurgaon Municipal 
+Corporation had asked to identify places where people were 
+seen at night and where street lighting was inadequate. 
+630 nos. of such spots were located in the city where street 
+lighting was improved for better visibility and safety at night.
+In Gwalior in 2019, after Safetipin's mapping of the city, 
+Gwalior Smart City launched ‘Gwalior One City One App’ to 
+provide its citizens information on administrative as well as 
+infrastructural status of the city. One section of the app was 
+developed and named ‘Veerangana’ (meaning brave woman) 
+that allows users to conduct safety reviews. This review is 
+similar to Safetipin app’s Safety Audit wherein one has to rate 
+physical and social infrastructure of a place on the basis of 
+its condition and status.
+Walkable cities have places that are easily and safely 
+navigable on foot. Walking has the capacity to promote 
+equality and reduce social exclusion. As a free means of 
+transport, walking can provide access to a range of resources 
+and opportunities. Persons with disabilities (people 
+walking with walking aid), people assisting others (pushing 
+wheelchairs and prams) and people having reduced walking 
+speed (children and elderly) - must have equal access to the 
+walking facility. This implies that people on foot are given 
+consideration first in street design by keeping the city’s most 
+vulnerable user in mind. This is the core principle of universal 
+access: every street must be accessible by people of any age 
+and ability.
+Tondiarpet has a great potential to become a pedestrian 
+priority area with good local level pedestrian connections by 
+improving the quality of footpaths, walking environments and 
+links to access public transport.
+As discussed before, the analysed data highlights the state 
+of physical infrastructure and social participation in public 
+space. Hence, in order to make streets and public spaces 
+more safe and accessible, the following parameters need 
+immediate attention. Condition of street lighting, quality of 
+footpath and access to public transport, are the physical 
+infrastructure parameters and visibility, is the social usage 
+parameter which need improvement. Specific maps for 
+each parameter with data points having lower ratings 
+are given below. Analysed maps are also included with 
+specific recommendations on wards, bus stops, markets 
+and educational institutions. A detailed recommendation 
+on walkability is given as well which looks at immediate 
+upgradation of the walking environment of Tondiarpet. 
+KEY ACTION: MAKE PUBLIC SPACES WALKABLE LEARNING FROM OTHER CITIES
+The image shows before and after photos of a 
+stretch of road where lighting was improved
+Image on left
+GURGAON AUDIT
+The image shows dark spot mapping  
+of the city of Delhi
+Image on left
+DELHI AUDIT
+The image shows Smart City Gwalior app with 
+Safety Review feature
+Image on left
+GWALIOR AUDIT
+
+--- PDF PAGE 22 ---
+42 43
+65% of the area is either without any footpath or has very poor footpath condition. Broken, discontinuous 
+and blocked footpaths could be easily fixed to achieve ease of walking in the area which is important 
+for pedestrians, especially women to feel safe while accessing the area for various daily activities. 
+Safetipin's data (geo-located images) can be used to improve pedestrian access in Tondiarpet. The map 
+below represents the locations where there are no dedicated walkpaths, no constructed footpaths 
+and footpaths with obstructions. This information can be used for footpath up-gradation such as, 
+construction, repair and removal of obstructions. More detailed recommendations on footpaths follows.
+1. IMPROVE FOOTPATH CONDITION TO ENHANCE WALKABILITY
+The geo-tagged photos show 
+very narrow footpath.
+Left to right
+GEO-LOCATED IMAGES
+35% of the area has either not any or poor visibility which means people present on the streets cannot 
+be seen by other people living by or working on the streets - the concept of 'eyes on the streets'. 
+Safetipin's data (geo-located images) can be used to improve 'eyes on the streets' - the key component 
+in making cities safe and accessible. The map below represents the locations where visibility is low. This 
+information could be used for enhancement of visibility by replacing opaque, high, boundary walls with 
+fences, adding lights to transport stops, foot-overs, underpasses and allowing/organising street hawking. 
+If public spaces are active it positively impacts women's perception of safety in the city.
+2. MAKE STREETS VISIBLE OR ADD MORE 'EYES ON THE STREETS' TO THEM SAFER
+The geo-tagged photos show 
+good visibility.
+Left to right
+GEO-LOCATED IMAGES
+
+--- PDF PAGE 23 ---
+44 45
+Only 15% of the area has either distant or out of reach public transport. Adding more public transport 
+stops/stands will improve access for all. Safe and reliable public transport is the critical link between 
+women's access to education, employment and resources in the city. Safetipin's data (geo-located 
+images) can be used to improve access to public transport Tondiarpet. The map below represents the 
+locations where there are either no public transport stops available or the stops are distant (beyond 10 
+minutes walking distance). This information can be used for planning transport linkages such as, adding 
+more bus stops, auto/rickhaw stands within 2-5 minutes walking distance on the identified locations. 
+3. MAKE PUBLIC TRANSPORT ACCESSIBLE TO ENHANCE REACH TO OPPORTUNITIES
+The geo-tagged photos show 
+public transport stands.
+Left to right
+GEO-LOCATED IMAGES
+Only 09% of the area has inadequate street lighting and could be fixed immediately to achieve 100% 
+street lighting in Tondiarpet. Street lighting is crucial for ensuring safe accessibility in public spaces and 
+plays a vital role in people's, particularly women's perception of safety in streets and public places after 
+dark. Safetipin's data (geo-located images) can be used to improve street lighting in the city. The map 
+below represents the locations where there are either absolutely no lights, inadequate lights or non-
+functional street lights. This information can be used for the ease of planning for immediate up-gradation 
+like, adding and fixing street lights in order to improve women's access to public spaces.
+4. MAKE STREET LIGHTING FULLY FUNCTIONAL TO IMPROVE SAFETY AND ACCESS
+The geo-tagged photos show 
+low street lighting.
+Left to right
+GEO-LOCATED IMAGES
+
+--- PDF PAGE 24 ---
+46 47
+PARAMETER AUDIT POINTS RECOMMENDATIONS
+Total audit points 
+with poor rating
+Among the four actionable parameters, Lighting is adequate in the wards with 'above average' rating but 
+Walkpath, Visibility & Public Transport need attention to improve overall safety and accessibility in the area.
+Walkpath 968 Footpath is inaccessible in most wards because of poor walking condition and unavailibility of clear walking 
+space. Removing footpath blockages and having safe walking surfaces will improve accessibility in this area.
+Visibility 511
+Not many windows and entrances of shops or residences overlook the streets at some locations in these 
+wards. Presence of high boundary walls, isolating the streets is another reason for low visibility. Organising 
+street vendors/informal shopping and street parking will improve visibility in these wards. Lowering opapue 
+boundary walls will also improve visibility.
+Public Transport 212
+Metro stations, bus stops or auto/rickshaw stands could not be reached within 5-10 minutes of walking 
+distance at few locations in these wards. Adding public transport stands/stops within 2-5 minutes of walking 
+distance will enhance access to public transport and improve overall accessibility in the area.
+Data generated by Safetipin's visual mapping was segregated for bus stop locations. The map below 
+shows 92 bus stop locations in Tondiarpet with their safety ratings. 4 locations were found to be below 
+average mainly due to non availability of walkpath and very poor visibility conditions. During the time of 
+mapping the locations were found to be deserted or had very few people present in them. No women 
+were seen in these locations either during mapping. A set of recommendations are given below for better 
+access and safety for these bus stops.
+1. Dedicated, unobstructed, paved pedestrian walkpaths must be provided to give people easy and safe 
+access to bus stops (see Walkpath recommendations below).
+2. Universal accessibility standards must be met for bus stops to allow people with disability better 
+access to and from the bus stops and while boarding/unboarding the bus.
+3. Pedestrian crossings must be appropriately placed near bus stops for safe and easy access to/from 
+stops.
+4. Bus stops must be avoided at intersections and should be placed at least 30 meters away from 
+them.
+5. Bus stops must have areas allocated near them for first/last mile connectivity transport options. They 
+also must provide cycle stands as a park and ride facility.
+6. Whenever possible, bus stops should be located in an area where there is enough visibility either 
+from adjacent buildings and/or from people using that area. Having better visibility enhances the 
+perception of safety among women and other users.
+6. IMPROVE SAFETY AND ACCESS AT BUS STOPS TO ENHANCE USAGE
+Lighting, Walkpath, Public Transport and Visibility are the parameters which address some of the key 
+issues of safety and accessibility. Conditions of Walkpath and Public Transport directly affects accessibility 
+and mobility in the area, especially for women. Whereas, Lighting and Visibility affects actual safety as well 
+as perception of safety on the streets by the availability of street lighting after dark and by the presence 
+of ‘eyes on the streets.’ These parameters along with Gender Diversity have the strongest correlation 
+with the overall safety score. If physical infrastructure parameters - Lighting, Walkpath, Public Transport 
+and Visibility could be improved with strategic interventions at neighbourhood and city level - collectively 
+these will have a positive impact on Gender Diversity which is a parameter which measures social usage 
+of space. Improving these parameters will impact safety and accessibility in 17 wards of Tondiarpet 
+(light green as seen on the map below) which have scored 'above average' on safety rating. These ward 
+numbers are 5, 8, 10, 12, 13, 38, 40, 41, 47, 48, 49, 50, 51, 56, 57, 59 and 60. A set of recommendations 
+on the actionable parameter are given below for these wards to improve their overall Safety Score.
+5. IMPROVE FOOTPATH, VISIBILITY, PUBLIC TRANSPORT FOR WARDS WITH AVERAGE RATING 
+
+
+--- PDF PAGE 25 ---
+Kasimedu Fish Market
+Tondiarpet Market
+Periya Market
+Tondiarpet Fish Market
+Korukkupet Vegetable Market
+48 49
+Data generated by Safetipin's visual mapping was segregated for local markets. Among five local markets 
+being audited by both applications, three markets were found to have lower safety ratings on Footpaths, 
+Visibility and Public Transport. The map below shows these market locations in Tondiarpet with their 
+safety rating points within 100m and 500m radius. The ratings on the mentioned parameters were poor, 
+below average and average at various audit points mainly due to poor walkpath quality, poor visibility 
+conditions and weak access to public transport. During the time of mapping the locations were found to 
+have very few women and children present in them. Mostly men were seen in these locations during the 
+assessment. A set of recommendations are given below for better access and safety for these markets.
+1. Dedicated, unobstructed, paved pedestrian walkpaths must be provided to give people easy and safe 
+walking environment within and around local markets (see Walkpath recommendations below).
+2. Universal accessibility standards must be met for walkpaths to allow people with disability better 
+access within and around local markets (see Walkpath recommendations below).
+3. Market places should have a parking strategy in place to organise and manage vehicular traffic.
+4. Markets should have amenities such as public toilets, police assistance booths and resting areas.
+5. Public transport stops must be with 2-5 mins reach and must have areas allocated near them for 
+first/last mile connectivity transport options. 
+6. Areas around markets must have good visibility either from adjacent buildings and/or from people 
+using that area. Having better visibility enhances the perception of safety among women and other 
+users. Reducing boundary wall heights, front setbacks of plots and encouraging 'active frontage' for 
+better visual connection between the built edge and the pedestrian on the street are some useful 
+strategies to incorporate in order to enhance safety.
+7. MAKE LOCAL MARKETS PEDESTRIAN FRIENDLY
+Kasimedu Fish Market
+Tondiarpet Market
+Periya Market
+The map below show the areas within 500m radius of all the five local markets which were audited by Safetipin applications.
+
+--- PDF PAGE 26 ---
+St Annes Girls' 
+Higher Secondary School
+Bharati
+Women's College
+KC Sankaralinga Nadar Higher 
+Secondary School
+Kanniyaga Parameswari 
+Women's College
+St Joseph Nursery & Primary School
+50 51
+Data generated by Safetipin's visual mapping was segregated for educational institutions and facilities 
+- schools, colleges and hostels. Among five such places being audited by both applications, two were 
+found to have lower safety ratings on Footpaths, Visibility and Public Transport. The map below shows 
+one school and one college location in Tondiarpet with their safety rating points within 100m and 500m 
+radius. The ratings on the mentioned parameters were poor, below average and average at various audit 
+points mainly due to poor walkpath quality, poor visibility conditions and weak access to public transport. 
+A set of recommendations are given below for better access and safety for these markets.
+1. Dedicated, unobstructed, paved pedestrian walkpaths must be provided to give people easy and safe 
+walking environment within and around local markets (see Walkpath recommendations below).
+2. Universal accessibility standards must be met for walkpaths to allow people with disability better 
+access within and around local markets (see Walkpath recommendations below).
+3. Public transport stops must be with 2-5 mins reach and must have areas allocated near them for 
+first/last mile connectivity transport options. They also must provide cycle stands as a park and ride 
+facility as a inexpensive and sustainable mode of transport for young people.
+4. Areas around schools and colleges must have good visibility either from adjacent buildings and/or 
+from people using that area. Having better visibility enhances the perception of safety among women 
+and other users. Reducing boundary wall heights, front setbacks of plots and encouraging 'active 
+frontage' for better visual connection between the built edge and the pedestrian on the street are 
+some useful strategies to incorporate in order to enhance safety.
+8. IMPROVE SAFETY AND ACCESS AROUND EDUCATIONAL INSTITUTIONS
+St Annes Girls' 
+Higher Secondary School
+Kanniyaga Parameswari 
+Women's College
+The map below show the areas within 500m radius of all the five educational institutions which were audited by Safetipin applications.
+
+--- PDF PAGE 27 ---
+52 53
+FINDINGS RECOMMENDATIONS
+ REMOVE obstructions out of the footpaths to provide clear walking space
+OBSTRUCTIONS PRESENT ON THE FOOTPATHS Images of types of obstructions present on the footpaths can be seen on Page 00
+SShhoopp  eennccrrooaacchhmmeennttss  //  hhoouussee  eexxtteennssiioonnss  ((9922))
+Remove shop and/or house extensions blocking the existing footpaths to provide clear walking space (min 
+1.8m). Some spill over from shops could be allowed on the footpaths in the 'active frontage zone' (refer 
+illustration below) depending on available space on the existing footpaths.
+TTeemmppoorraarryy  sshhooppss  //  vveennddoorrss  ((220088))
+Remove temporary shops and vendors occupying and blocking the existing footpaths to provide clear 
+walking space (min 1.8m) and organise them on the carriageway side, in the multiutility zone (refer 
+illustration below) part of the footpaths, wherever the footpath width is more than 1.8m - the minimum width 
+required for two people to move. 
+Vendors provide 'eyes on the street' and promote activity on the streets, together which make streets 
+safer. Hence keeping vendors on streets is a mutually beneficial strategy and allocating space for them 
+either on the footpaths or along the footpaths is crucial. 
+EElleeccttrriicciittyy,,  ssiiggnnaaggee  aanndd  ssiiggnnaall  ppoolleess  ((113355))
+Remove electricity, signage and signal poles out of the existing footpaths to provide clear walking space 
+(min 1.8m) and arrange/align them on the carriageway side, in the multiutility zone (refer illustration below) 
+part of the footpath, wherever the footpath width is more than 1.8m. 
+TTeelleepphhoonnee  //  ccoommmmuunniiccaattiioonn  bbooxxeess  //  ppoowweerr  ttrraannssffoorrmmeerrss
+Remove telephone/communication boxes and power transformers out of the existing footpaths to provide 
+clear walking space (min 1.8m) and arrange/align them on the carriageway side, in the multiutility zone 
+(refer illustration below) part of the footpaths, wherever the footpath width is more than 1.8m. 
+GGaarrbbaaggee  dduummppss  aanndd  ccoonnssttrruuccttiioonn  ddeebbrriiss  ((9933))
+Remove garbage dumps and construction debris from the existing footpaths to provide clear walking space 
+(min 1.8m). Plan and organise garbage collection points on the street at various locations to avoid spilling 
+of garbage on the footpaths causing serious hazard and health issues. 
+CCoonnssttrruuccttiioonn  mmaatteerriiaall  bblloocckkiinngg  tthhee  ffoooottppaatthh  ((116677))
+Remove construction materials piled on and blocking the existing footpaths to provide clear walking space 
+(min 1.8m). Allocate some space on every street for storing of construction material for all ongoing 
+construction, repair or maintenance work. 
+VVeehhiiccllee  ((ttwwoo,,  ffoouurr  wwhheeeelleerrss,,  ccyyccllee  rriicckksshhaawwss))  ppaarrkkeedd  ((554444))
+Remove two & four wheelers, autos, cycles and cycle rickshaws parked on existing footpaths to provide 
+clear walking space (min 1.8m). Organise parking for two, four wheelers, autos, cycles and cycle 
+rickshaws on shared lane (parking and driving) of the carriageway. Refer illustration below. 
+REPAIR broken footpath and add accessibility elements
+ACCESSIBILITY IMPEDEMENTS OF THE FOOTPATH Images of types of footpath accessibility elements can be seen on Page 00
+NNoonn  aavvaaiillaabbiilliittyy  ooff  CCuurrbb  RRaammppss
+Curb ramps are an essential component of footpaths for improving accessibility for all and could be only 
+found in few locations in Tondiarpet. Add curb ramps to negotiate all level drops and make it step-free to 
+reduce hazards for the vulnerable groups. Refer illustrations on Page 27. 
+NNoonn  aavvaaiillaabbiilliittyy  ooff  ZZeebbrraa  CCrroossssiinnggss
+Zebra crossings are vital elements of street design to ensure safe pedestrian crossover for all. Many 
+street intersections as well as crossover points in Tondiarpet did not have zebra crossings. Add zebra 
+crossings to all street intersections/crossovers for safe pedestrian access. Refer illustrations on Page 27. 
+NNoonn  aavvaaiillaabbiilliittyy  ooff  MMeeddiiaann  BBrreeaakkss
+Median breaks facilitate at grade street crossovers for pedestrians and are a crucial component for 
+improving accessibility for all. There was no median break available at the intersections. Add median 
+breaks to facilitate at grade crossover for all vulnerable groups. Refer illustrations on Page 27. 
+HHeeiigghhtt  ooff  tthhee  ffoooottppaatthh Footpath height should be not more than one step (150 mm) high as per international street design 
+standards. Reduce overall footpath height to ensure easy, hazard-free, pedestrian access. 
+SSuurrffaaccee  ooff  tthhee  ffoooottppaatthh
+Pedestrian, especially vulnerable groups need at grade walking surfaces. Footpath surfaces with missing, 
+broken, dis-jointed paver blocks, manhole cover protruding out, other fixed objects pose as hazards for 
+pedestrians. Ensure at grade, hazard-free walking surface. 
+PPeeddeessttrraaiinn  FFoooottoovveerr  BBrriiddggee  aanndd  PPeeddeessttrriiaann  UUnnddeerrppaassss
+Pedestrians, especially vulnerable groups need at grade walking surfaces. Footover bridges without lifts 
+are diificult to use by vulnerable groups. Women often carrying children and shopping bags find it diificult 
+to climb up and down such facilities. Pedestrian underpasses have the same issues coupled with being 
+very unsafe after dark. They are often deserted even when they are well lit at night. 
+Investing in high qaulity, at grade walking surfaces with assessibility elemnets is far more beneficial than 
+building expensive pedestrian footover bridges and underpasses in a dense neighbourhood like Tondiarpet.
+RECLAIM vehicular lanes for footpath widening
+INSUFFICIENT SPACE AVAILABLE FOR PEDESTRIANS Images of insufficient footpath space can be seen on Page 00
+VVaarryyiinngg  ffoooottppaatthh  wwiiddtthhss
+Putting pedestrian over vehicle would ensure safe accessibility for all in Tondiarpet. Currently the streets 
+function as shared streets with slower vehicular speed, as people and a range of daily activities occupy 
+the streets. Yet, only able bodied adults are able to navigate these streets and that too with great 
+difficulty. It is even more challenging for vulnerable groups to negotiate the uncertainties encountered 
+frequently on these streets. Hence, providing dedicated footpaths, with clear walking space for 
+pedestrians, on both sides of the streets must be strategized. This could be done by reclaiming parts of 
+the vehicular lanes wherever possible to widen the existing footpaths which do not have adequate clear 
+width for walking. It is important to provide minimum 1.8 meter footpath width for clear pedestrian access - 
+the minimum width required for two people to move or pass each other. Another minimum footpath width of 
+1.2 meter is needed for multi-utility space to accommodate street utility, vendors and street furniture. Any 
+extra space available after allocating the above two, could be added to ‘active frontage’ – the space 
+outside the built edge. For illustration, refer typical street section on page 50. 
+Google Map Link and CSV Files Please use the map links and the csv files shared in the project to view the collected data supported with 
+images where obstructions, incorrect assessibility elements and insufficient width are present. 
+Walkpath is the only parameter which fared very poorly on the Safetipin visual analysis. This section 
+includes some strategies which could address the current issues of the walkpath and make it safe, 
+accessible and usable for all. 
+STRATEGY: REMOVE - REPAIR - RECLAIM 
+A three tiered action plan of remove, repair and reclaim could be adopted to improve access for all, 
+especially the vulnerable groups - women, children, elderly and people with disability. The table given 
+includes recommendations against each findings to incorporate these strategies. An illustration of a 
+typical street section is given below to explain how the footpaths could be organised for safe access and 
+better utility. 
+Footpaths have three main components:
+Multi-utility Zone – Minimum 1.2 meter footpath width is required as multi-utility space for street utility, 
+vendors and street furniture.
+Pedestrian Walkway - Minimum 1.8 meter footpath width is needed for clear pedestrian access - the 
+minimum width required for two people to move or pass each other.
+Active Frontage – The area outside shops and houses where spill outs, display windows, entrances, 
+verandas, bay windows, etc. are present. The width could vary depending on space available after 
+allocating space for pedestrians and utilities.
+9. IMPROVE WALKABILITY BY ADOPTING INTERVENTION STRATEGIES 
+A typical section of an organised  footpath
+Image on right
+TYPICAL STREET SECTION
+
+--- PDF PAGE 28 ---
+54 55
+RECOMMENDATION
+Planned interventions
+URBAN DESIGN 
+STRATEGIES
+Unlike action points which are pragmatic in nature, long term public 
+space intervention strategies look at the city holistically. These 
+strategies serve the purpose of helping cities function better and 
+more effectively. They make the connection between aspects that are 
+linked but not so visible, such as the link between improved physical 
+access and opportunities for a better life for women and others. 
+Below are a few design principles as recommendations which would 
+help Tondiarpet in achieving the overarching goal of 'safe access and 
+participation in public life for women and others.' 
+To make walking easy, safe and seamless walking routes must be in good condition and 
+connected to a larger network of streets in the city. A good walking route must be well paved, well 
+lit and free from any type of obstruction. Additionally all walking routes must be well connected 
+to other routes and well designed with crossovers to have a seamless walking experience when 
+travelling from point A to point B. This particularly benefits vulnerable users.
+1. MAKE WALKING SEAMLESS
+Footpaths, curb ramps, crossings, footovers, underpasses
+To make public transport within everyone's reach, various transportation systems functional in 
+the city should be looked at. It is important to understand how one transport system interacts 
+with the other and how people use them. Only then the gaps or overlaps between systems could 
+be identified and improved to make them seamless. Such interventions to stitch different systems 
+make the overall transport network accessible and allow people to switch within transport 
+systems easily. Safety inside public transport is a very essential aspect to consider for women. 
+2. MAKE PUBLIC TRANSPORT EASILY ACCESSIBLE
+Transport stops, routes, frequency, capacity, safety within transport 
+Last mile connectivity is an important aspect of any public transportation system operating in 
+the city. Strengthening informal transport like non-motorised vehicles and light motor vehicles  
+which serve as first/last mile connectivity to one's origin and destination could be an useful way of 
+ensuring seamless and safe travelling. Often women forego opportunities available in the city due 
+to weak, unsafe or expensive first/last mile connectivity options. 
+3. FOCUS ON LAST MILE CONNECTIVITY
+Non-motorised transport, light motor vehicles, informal transport
+Active streets are safe streets. To make streets safe an optimum amount of activity on the streets 
+and by the streets is required. Just the way over crowded streets tends to be unsafe, similarly 
+under used streets are unsafe too. Streets which have enough people overlooking it from 
+buildings next to it and have enough people present on it are safer. Encouraging mixed-used 
+developments, on-street shopping, informal hawking and discouraging high, opaque boundary 
+walls and front setback for buildings are good practices to make streets active round the clock. 
+4. MAKE STREETS ACTIVE
+Mixed-use development, informal shopping, eyes on the streets
+Ensuring women are employed and represented in public services and government include their 
+perspective in planning, designing and maintaining public space. Participatory planning methods 
+are useful ways of including women and other disadvantaged group's perspective into planning. 
+5. MAKE STREETS INCLUSIVE
+Employment in public services, representation in govt, advocacy and sensitisation programs
+
+--- PDF PAGE 29 ---
+56 57
+S No  ID  Latitude  Longitude  Lighting  Walkpath  Public 
+Transport  Visibility  People  Gender 
+Usage  Security  Openness  Feeling  Safety Score  Comment  Image Link_1  Image Link_2
+1 741868 13.123944 80.2970964 2 0 1 2 1 0 1 2 1 2.6 as this market area so many males were there only very few females present.police/security  will be there from 2.00 a.m.to 11.00 a.m mentioned by one female many males were on the drunken mode.very few sellers were selling fish in the market local people were fighting in the areaspolice booth were there but no police presence  http://api-android.safetipin.com/yii/SAFETIPIN/images/016281652941.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281652941.png
+2 741869 13.123531 80.2973861 2 0 1 2 2 1 0 2 1 3 in one zone after 100mts few females sellers were thereno police /security available lights available in each of the sellers top of the head females arguing and fighting each othervery less autos available inside the market enough visibility http://api-android.safetipin.com/yii/SAFETIPIN/images/016281656291.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281656291.png
+3 741870 13.1241778 80.2968984 2 0 1 2 1 0 2 2 2 4  one zone after 100mts few male sellers were there and sitting together and discussing no police /security available but barricade was there lights available in each of the sellers top of the head very less autos available inside the market enough visibility http://api-android.safetipin.com/yii/SAFETIPIN/images/016281658811.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281658811.png
+4 741871 13.1246292 80.2967513 1 0 1 3 2 0 1 3 1 3.5 only males open can move anywhere easilyno walk path males sitting and chit chattinghttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281661401.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281661401.png
+5 741873 13.1255618 80.2969185 1 0 1 1 1 0 0 1 1 0.9 no females present here to ask about the location more males predominant CCTV present no vehicles autos nearby need move / walk for 10minshttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281663871.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281663871.png
+6 741874 13.124451 80.2969636 3 0 1 2 2 0 1 2 2 4.1 police barricade was there many.males only available many.lights were there areas open 3 space to runhttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281666251.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281666251.png
+7 741875 13.1276151 80.297645 2 0 1 3 2 0 0 1 1 2.6 I was standing for few mins unnecessarily males coming and speaking with no reason all males only availablelights enoughsmall small vendors present ice cream moving vehicle 2 autos availabletea sellers were there http://api-android.safetipin.com/yii/SAFETIPIN/images/016281668581.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281668581.png
+8 741876 13.1285925 80.2980634 3 0 1 2 1 0 0 3 2 4 autos availablemales.only therelights availableopen space in 3 areas no shops opened now but there is a vicinity http://api-android.safetipin.com/yii/SAFETIPIN/images/016281671931.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281671931.png
+9 741877 13.1284335 80.2983728 1 0 0 1 1 0 0 0 1 0.7 very few people no females at allmoving vendors and vehicle is there lights available sufficient area is interior and considering safety it's not as expected http://api-android.safetipin.com/yii/SAFETIPIN/images/016281673861.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281673861.png
+10 741878 13.1284237 80.2979028 1 0 2 2 1 0 2 2 2 4 lighting pillars there but seems not workingmales crowdedwithin 2-3mins can walk to the main stop from the entrance of fish market police booth there saw a police who crossed in bike http://api-android.safetipin.com/yii/SAFETIPIN/images/016281677041.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281677041.png
+11 741879 13.1284237 80.2979028 2 1 3 2 1 0 0 2 3 4.2 main area entrance of the kasimedu marketall daily available few females walking in the road auto stand was very near http://api-android.safetipin.com/yii/SAFETIPIN/images/016281678941.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281678941.png
+12 741880 13.1180919 80.2931607 3 3 1 2 2 2 2 1 2 4.4 main road so lights available moremoving vehicles there continuous females were thereasked about the area with female they mentioned that safe area people will be always there when it's requiredsecurity was available in opposite sidestreet lights are enough http://api-android.safetipin.com/yii/SAFETIPIN/images/016281684561.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281684561.png
+13 741881 13.1179075 80.2931089 2 1 2 3 1 1 1 1 2 4.1 pathway available but not continuous it was there for few and few damaged female availablefor shops houses vicinty is there moving autos there need to walk for main busstand http://api-android.safetipin.com/yii/SAFETIPIN/images/016281686921.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281686921.png
+14 741882 13.1110994 80.2918932 1 2 2 3 2 2 3 3 3 4.6 police station was very near 100mts females were there school was mainly located in main roadchances of accidents for students is. more there is no speed breaker neaR school http://api-android.safetipin.com/yii/SAFETIPIN/images/016281691521.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281691521.png
+15 741883 13.1104075 80.2919151 2 3 2 2 1 1 2 1 3 4.4 in the entrance gate of the school did the audit females available more kids not therevery near to the school speed breaker there it should be somewhat beyond the same vehicles available more http://api-android.safetipin.com/yii/SAFETIPIN/images/016281695171.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281695171.png
+16 741884 13.1099609 80.2918048 3 3 2 3 1 2 1 2 2 4.4 no stationary shops available more as school is very nearmany snack shop there for female students it is safe as this is in main place mentioned by roadside Walker not very conjusted lanes parking in the entrance of school not available http://api-android.safetipin.com/yii/SAFETIPIN/images/016281698261.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281698261.png
+17 741885 13.1094973 80.2917571 3 3 2 3 2 2 2 1 2 4.5 main road vehicle bus stop very near moving autos theregood lighting females more dominantopeness in 2 ways http://api-android.safetipin.com/yii/SAFETIPIN/images/016281699911.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281699911.png
+18 741886 13.1095133 80.2917435 3 3 3 3 2 2 2 3 3 4.8 open in all zones vehicle auto stand very nearsafe in all waysfemale is getting fear to speak because of covid good lanes with neatly maintained  http://api-android.safetipin.com/yii/SAFETIPIN/images/016281701541.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281701541.png
+19 741887 13.1097491 80.2917 3 3 2 2 1 2 1 1 2 4.3 females occupied equallyfairly diverselights bright bcz main roadpeople is safe all essentials available http://api-android.safetipin.com/yii/SAFETIPIN/images/016281703321.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281703321.png
+20 741888 13.1080246 80.2915283 3 3 3 3 3 3 3 3 3 5 traffic police availableopennesslights in all directions diversefemale feedback is safest area but traffic will be more always in the s lane http://api-android.safetipin.com/yii/SAFETIPIN/images/016281705361.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281705361.png
+21 741889 13.1086368 80.2883839 1 0 3 1 2 2 3 1 1 4.1 traffic police available main hospital areapark available good for entertainmentbust stop is in the exact place of audit female feels uncomfortable because no ligting facility there via only hospitals people can see http://api-android.safetipin.com/yii/SAFETIPIN/images/016281709761.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281709761.png
+22 741890 13.1089603 80.2870464 1 0 3 2 2 1 3 3 2 4.3 police booth and many police were there patrol presentlighting less moving vehicles light is more very close metros and auto stand http://api-android.safetipin.com/yii/SAFETIPIN/images/016281711931.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281711931.png
+23 741891 13.1094017 80.2854288 0 0 2 1 1 1 0 1 1 1.3 very less lights people too lessno police / security http://api-android.safetipin.com/yii/SAFETIPIN/images/016281715431.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281715431.png
+24 741892 13.1093163 80.2853883 2 0 2 3 2 1 1 3 2 4.3 moving areas lighting good females presence there heavy traffichttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281725141.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281725141.png
+25 741893 13.1257053 80.2878527 0 0 0 0 2 0 0 0 0 0.3 not safetasmac bar was theremany malesunsafe place http://api-android.safetipin.com/yii/SAFETIPIN/images/016281727351.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281727351.png
+26 741894 13.1257731 80.2879651 3 0 3 1 1 0 0 2 1 3 unsafeno people crowdedmany road work going onno pedestrian crossing available many take diversion available to reach this place extension of roads happeningfor any emergency or shops need to  Go about 5-10minshttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281730091.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281730091.png
+27 741895 13.1235824 80.2878952 3 0 3 3 3 1 3 3 2 4.6 many police are thereauto stand availablefemales walking on the roadsmain part of area  http://api-android.safetipin.com/yii/SAFETIPIN/images/016281732341.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281732341.png
+28 741896 13.12345 80.2876262 3 0 3 3 2 2 3 3 3 4.7 more people Availableareas too scatteredpolice available with patrolfemale feel safe http://api-android.safetipin.com/yii/SAFETIPIN/images/016281734241.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281734241.png
+29 741897 13.1233942 80.2879999 2 0 2 2 3 0 2 2 1 4.1 in entrance of the metro tasmac bar was there more surrounded by malesdrunken was roaming can't wait for more than. 5minsfemale feels uncomfortable to stand auto stand active http://api-android.safetipin.com/yii/SAFETIPIN/images/016281736501.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281736501.png
+30 741898 13.1232331 80.2885023 2 0 2 2 2 2 0 1 2 4.1 many shops opnedd people were roamingfew females there lighting available properly  http://api-android.safetipin.com/yii/SAFETIPIN/images/016281738121.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281738121.png
+31 741899 13.1228651 80.2887649 3 0 1 2 2 1 0 2 2 4.1 http://api-android.safetipin.com/yii/SAFETIPIN/images/016281740761.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281740761.png
+32 741900 13.1233423 80.2884864 1 0 1 2 2 2 0 2 2 4 females presence was there lighting is not that goodopeness is therein sanjeeverayan stteet it away near old people is not behaving with small kids in proper way mentioned by femalehttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281744331.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281744331.png
+33 741901 13.1228389 80.2897989 2 0 1 3 2 3 0 3 2 4.3 main Street of the roadsurrounded by many people morning people occupancy will be less evening will be more because here many were working all easily Available http://api-android.safetipin.com/yii/SAFETIPIN/images/016281746441.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281746441.png
+34 741902 13.1230698 80.2893569 3 0 1 3 2 2 0 2 2 4.2 all in one place marketgoo prices in groceries moving vehicles there safe for females to walkhttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281747811.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281747811.png
+35 741903 13.1228596 80.2901906 3 0 1 3 2 1 0 2 2 4.1 space for the road is less no proper parking available fairly diverse http://api-android.safetipin.com/yii/SAFETIPIN/images/016281748981.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281748981.png
+36 741904 13.1227596 80.2909617 1 0 1 2 1 1 0 2 1 2 visibility is thereopenness is there if there is evening fish market then it will be good in this location http://api-android.safetipin.com/yii/SAFETIPIN/images/016281751251.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281751251.png
+37 741905 13.1227404 80.2909663 2 0 3 3 2 2 0 2 2 4.3 entrance of the market four lanes opened females equally availablehttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281753071.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281753071.png
+38 741906 13.1230649 80.2890573 3 0 3 3 2 2 0 2 2 4.3 bus stop very near lights OK auto stand availablefamiliar places very near http://api-android.safetipin.com/yii/SAFETIPIN/images/016281754091.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281754091.png
+39 741907 13.1227681 80.2913782 1 0 2 1 1 1 0 1 2 2.6 very few lightsfemales present moving vehicles therehttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281755701.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281755701.png
+40 741908 13.1229842 80.2893223 1 0 2 1 1 1 0 1 2 2.6 acceptable lights were lessfemale presence was lessroads will be traffic in day time http://api-android.safetipin.com/yii/SAFETIPIN/images/016281758241.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281758241.png
+41 741909 13.1196154 80.2903986 1 0 3 2 1 1 0 2 2 4 lights was less auto stand available moving vehicles more femLes lesshttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281760921.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281760921.png
+42 741910 13.1195903 80.2903981 3 0 3 3 3 3 3 3 3 4.8 all open place main bazaarlights are OKmany females kids availablehttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281763181.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281763181.png
+43 741911 13.1159433 80.2886644 3 0 2 2 1 3 0 1 2 4.1 http://api-android.safetipin.com/yii/SAFETIPIN/images/016281764051.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281764051.png
+44 741912 13.1166174 80.2873133 1 0 2 1 1 1 0 1 1 1.6 females feels comfortable in walking roads all essential shops avaible very near to households streets are narrow no.propwr parking is available http://api-android.safetipin.com/yii/SAFETIPIN/images/016281767941.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281767941.png
+45 741913 13.1169595 80.2857347 2 0 1 1 1 1 0 1 1 1.6 narrow streets lights were in one place after that it wS less females waling in roads kids availability was not at all there http://api-android.safetipin.com/yii/SAFETIPIN/images/016281769441.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281769441.png
+46 741914 13.1169694 80.2855112 3 3 3 2 2 2 0 2 2 4.4 walk path is there because of metro station to some extent people were available vehicles are in moving shops were opened bus stop and metro is very near http://api-android.safetipin.com/yii/SAFETIPIN/images/016281770931.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281770931.png
+47 741915 13.1175677 80.284509 2 0 3 2 2 2 0 1 3 4.3 females are there in the road lights are not powerful but for each shop they have lightingvehicles moving around http://api-android.safetipin.com/yii/SAFETIPIN/images/016281772511.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281772511.png
+48 741916 13.1175677 80.284509 3 0 3 3 2 2 1 3 3 4.6 park is on closed due to.covidbest place in the area is the park neatly maintained auto stand bus stop is in front of the park http://api-android.safetipin.com/yii/SAFETIPIN/images/016281774111.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281774111.png
+49 741917 13.1176958 80.2845659 3 0 3 3 2 2 0 2 3 4.4 not bad things happened any of the timefemale own confidence is there in this area accidents is only happening http://api-android.safetipin.com/yii/SAFETIPIN/images/016281776151.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281776151.png
+50 741918 13.1187599 80.2851749 3 3 3 3 3 1 2 2 3 4.8 side space with lines were there for walk pathfemale is there but kids are not at all therevehicles moving continuously http://api-android.safetipin.com/yii/SAFETIPIN/images/016281777741.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281777741.png
+51 741919 13.1187599 80.2851749 2 0 3 1 2 1 3 1 2 4.2 http://api-android.safetipin.com/yii/SAFETIPIN/images/016281778921.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281778921.png
+52 741920 13.1187195 80.2851255 1 0 3 2 2 1 3 2 3 4.4 police female was thereauto stand and bus and was there people were walking causallyhttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281779821.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281779821.png
+53 741921 13.1185306 80.2850857 2 0 3 2 3 3 2 1 3 4.5 Females were moremain area of the roadlight were availablecrowd is there http://api-android.safetipin.com/yii/SAFETIPIN/images/016281781071.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281781071.png
+54 741922 13.1180821 80.284801 1 0 3 1 2 0 0 1 2 3 very few lights available females was not at all there http://api-android.safetipin.com/yii/SAFETIPIN/images/016281782091.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281782091.png
+55 741923 13.1175627 80.2845608 3 0 2 2 1 2 1 1 2 4.1 females present in the roadone lady told that it was safe and comfortable even if some one walk alone but accidents will happen more developments need to come in this area there is no improvement for more than 10years in this roadhttp://api-android.safetipin.com/yii/SAFETIPIN/images/016281783771.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281783771.png
+56 741924 13.116773 80.2839344 3 1 2 2 2 1 2 1 2 4.3 some space is there in the road side but not proper walk path females available very few http://api-android.safetipin.com/yii/SAFETIPIN/images/016281785061.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281785061.png
+57 741925 13.1161138 80.2835727 2 0 2 3 2 2 1 3 2 4.3 http://api-android.safetipin.com/yii/SAFETIPIN/images/016281785841.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281785841.png
+58 741926 13.1161138 80.2835727 2 0 2 2 2 1 0 2 2 4.1 all 4 places open can move anywhere bus stop is near females there police bench was there but no police http://api-android.safetipin.com/yii/SAFETIPIN/images/016281786921.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116281786921.png
+59 741940 13.1141252 80.2821959 2 1 2 2 2 2 2 2 2 4.3 female mentioned that more crowded area always full of vehicles no space to walk by everyone if walked in some extent t of road may get accident because no spacemarket area also near to main road as many jeweller y shop available so many securities were therehttp://api-android.safetipin.com/yii/SAFETIPIN/images/016283366031.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283366031.png
+60 741941 13.1138863 80.2826295 2 1 2 3 2 2 1 2 2 4.3 many female sellers available so female mentioned that it is safe to visit this market all essentials easily available mentioned by femalehttp://api-android.safetipin.com/yii/SAFETIPIN/images/016283368211.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283368211.png
+61 741942 13.11421 80.2828858 1 0 2 2 2 1 0 1 2 3.5 more famales sellers theremany seellersparking vehicle infornt of stores so no space to walk of its crowded mentioned by a female  http://api-android.safetipin.com/yii/SAFETIPIN/images/016283370131.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283370131.png
+62 741943 13.1145547 80.282843 2 0 3 3 2 2 1 2 2 4.3 many shops open always.road can be extended it is opened for repair work but it was not done mentioned by female  http://api-android.safetipin.com/yii/SAFETIPIN/images/016283372211.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283372211.png
+63 741944 13.114709 80.2827255 2 0 3 2 2 2 1 2 3 4.4 roads need to be repaired so that I people can walk without hesitant mentioned by female http://api-android.safetipin.com/yii/SAFETIPIN/images/016283374141.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283374141.png
+64 741946 13.1144308 80.2831058 2 1 3 2 2 2 1 2 3 4.4 road is the major problem mentioned dby female  some waiting area can be helpful to relax from the crowd for sometime mentioned by femalehttp://api-android.safetipin.com/yii/SAFETIPIN/images/016283379491.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283379491.png
+65 741947 13.1142906 80.2834085 2 0 2 2 2 2 1 2 2 4.2 no parking for market available mentioned by female.http://api-android.safetipin.com/yii/SAFETIPIN/images/016283381131.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283381131.png
+66 741948 13.1141924 80.2830834 1 0 2 2 3 0 0 1 2 3.5 only males available masuthi was there so workship placehttp://api-android.safetipin.com/yii/SAFETIPIN/images/016283382591.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283382591.png
+67 741949 13.1137284 80.2829251 1 0 2 2 2 2 1 1 2 4.1 if safety camera available in sense will make effective in all areas area without wine shop will be most effective http://api-android.safetipin.com/yii/SAFETIPIN/images/016283384841.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283384841.png
+68 741950 13.1141888 80.2827574 2 0 3 2 2 3 2 2 2 4.4 main road adjacent market roads and parking need to improve mentioned by the female http://api-android.safetipin.com/yii/SAFETIPIN/images/016283386461.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283386461.png
+69 741951 13.1154323 80.2827524 2 2 3 2 2 2 2 1 3 4.5 parking space need to improved many accidents happening because there is no speed breaker http://api-android.safetipin.com/yii/SAFETIPIN/images/016283389401.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283389401.png
+70 741952 13.133675 80.2925784 2 1 3 2 2 1 2 3 2 4.4 more space is there but not I organized manner walk path not designed in http://api-android.safetipin.com/yii/SAFETIPIN/images/016283401521.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283401521.png
+71 741953 13.1346297 80.2927127 2 2 2 2 2 2 1 2 2 4.3 safe people always presence because many houses were therehttp://api-android.safetipin.com/yii/SAFETIPIN/images/016283403251.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283403251.png
+72 741954 13.135827 80.2930023 1 2 2 2 1 1 1 1 2 4.1 lights were less parking area should develophttp://api-android.safetipin.com/yii/SAFETIPIN/images/016283404441.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283404441.png
+73 741955 13.1361983 80.2928531 2 1 2 2 2 3 1 3 2 4.4 more females occupied http://api-android.safetipin.com/yii/SAFETIPIN/images/016283406091.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283406091.png
+74 741956 13.1342275 80.2926216 1 1 3 2 2 1 2 2 2 4.3 safe lights  are less auto stand and metro is very nearhttp://api-android.safetipin.com/yii/SAFETIPIN/images/016283408131.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283408131.png
+75 741957 13.1333539 80.2930574 1 0 2 1 1 0 1 1 1 1.6 it's purely seems commercial area no houses available church was there people occupancy was less that too only males  availablehttp://api-android.safetipin.com/yii/SAFETIPIN/images/016283409811.pnghttp://api-android.safetipin.com/yii/SAFETIPIN/images/116283409811.png
+APPENDIX
+This section includes the CSV files generated for Tondiarpet as examples. These files have geo location for each 
+audit point along with the ratings of every parameter. Every audit point is also accompanied by the images 
+collected at that particular audit location. These files could be integrated with any GIS platform and analysed 
+further. These could be also seen on Google Maps for easier visualisation. 
+  
+APPENDIX
+MY SAFETIPIN CSV FILE
+S No  ID  Latitude  Longitude  Lighting  Walkpath  Public 
+Transport  Visibility  People  Gender 
+Usage  Security  Openness  Feeling  Safety Score  Comment  Image Link_1  Image Link_2
+1 740309 13.1579438 80.3043026 3 1 2 2 2 3 0 2 2 4.3 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155408-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155356-19408.jpg
+2 740307 13.1590721 80.3055471 3 1 3 1 2 0 0 3 2 4.2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155502-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155506-19408.jpg
+3 740173 13.1616995 80.3061801 3 2 3 2 2 0 1 3 2 4.4 D CM https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155650-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155653-19408.jpg
+4 740171 13.1626606 80.3063572 3 2 3 3 2 1 1 2 2 4.4 D ZC https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155702-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155705-19408.jpg
+5 740169 13.1634233 80.3064644 3 2 3 2 1 0 0 2 2 4.2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155716-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155714-19408.jpg
+6 740167 13.1643113 80.3066629 3 2 3 2 2 3 0 2 2 4.4 D GB CD https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155730-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155724-19408.jpg
+7 740165 13.1651209 80.3069741 3 2 2 3 2 2 0 2 2 4.4 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155738-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155745-19408.jpg
+8 740163 13.1657895 80.3073925 3 2 3 2 1 0 0 2 2 4.2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155752-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155755-19408.jpg
+9 740161 13.166432 80.3079772 3 2 3 2 2 1 0 2 2 4.3 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155806-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155809-19408.jpg
+10 740251 13.1666357 80.3083152 3 1 3 2 0 0 0 2 1 3.5 D https://safetipinimages.s3.amazonaws.com/20210701/19409/IMG_20210701_163336-19409.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19409/IMG_20210701_163331-19409.jpg
+11 740159 13.1670536 80.3085834 3 1 3 2 2 3 0 2 2 4.4 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155816-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19409/IMG_20210701_163329-19409.jpg
+12 740157 13.1677587 80.309608 3 2 3 1 1 0 1 2 2 4.2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155842-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155839-19408.jpg
+13 740155 13.1683437 80.3101498 3 2 3 1 0 0 0 2 1 3.5 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155851-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155849-19408.jpg
+14 740153 13.1689966 80.3105897 3 2 2 0 1 0 0 2 1 3 D GB https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155856-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155859-19408.jpg
+15 740151 13.1698637 80.3109598 3 2 2 0 2 0 0 2 1 3.5 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155911-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155906-19408.jpg
+16 740149 13.1707256 80.3112549 3 2 3 0 0 0 0 2 1 3 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155920-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155918-19408.jpg
+17 740147 13.1716344 80.3115284 3 2 3 0 0 0 0 2 1 3 D GB https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155930-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155928-19408.jpg
+18 740145 13.1725224 80.3118181 3 2 3 0 2 0 0 2 1 4 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155942-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155940-19408.jpg
+19 740110 13.1735723 80.3122419 3 2 3 0 1 0 0 2 1 3.5 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155953-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_155956-19408.jpg
+20 740111 13.1745438 80.3125638 3 1 2 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160008-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160005-19408.jpg
+21 740112 13.1756563 80.3129715 3 2 3 1 1 0 0 2 1 4 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160024-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160027-19408.jpg
+22 740102 13.176748 80.3135186 3 1 3 0 1 0 0 2 1 3 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160042-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160040-19408.jpg
+23 740100 13.1777613 80.3138673 3 2 3 2 2 0 0 2 2 4.3 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160056-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160052-19408.jpg
+24 740098 13.1787014 80.3141356 3 2 3 0 1 0 0 2 1 3.5 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160106-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160104-19408.jpg
+25 740096 13.1795789 80.3145164 3 1 3 0 0 0 0 2 1 2.6 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160118-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160113-19408.jpg
+26 740094 13.1804773 80.3149402 3 2 3 0 1 0 0 2 1 3.5 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160131-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19410/IMG_20210701_181131-19410.jpg
+27 740088 13.1830261 80.3161955 3 1 3 1 2 0 3 3 2 4.4 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160212-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160203-19408.jpg
+28 740113 13.1838827 80.3159326 3 1 3 1 1 0 1 2 1 4 D CD https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160229-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160226-19408.jpg
+29 740114 13.1842222 80.3149724 3 1 3 1 2 0 2 2 2 4.3 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160239-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160242-19408.jpg
+30 740115 13.1843946 80.3145379 3 1 3 0 2 0 2 2 2 4.2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160247-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160244-19408.jpg
+31 740116 13.1846296 80.3136796 3 1 3 1 2 0 3 2 2 4.3 D ZC https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160256-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160259-19408.jpg
+32 740136 13.1848124 80.3130359 3 1 3 2 1 3 3 2 2 4.5 D ZC https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160306-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160310-19408.jpg
+33 740135 13.1850213 80.3120166 3 3 2 0 0 0 2 2 1 4 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160329-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160335-19408.jpg
+34 740134 13.1852146 80.3110886 3 3 1 0 0 0 1 2 1 3 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160348-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160345-19408.jpg
+35 740133 13.1854444 80.3100318 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160404-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160359-19408.jpg
+36 740132 13.1856638 80.3090823 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160418-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160421-19408.jpg
+37 740131 13.1858257 80.3081703 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160428-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160433-19408.jpg
+38 740130 13.1860555 80.3070813 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160440-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160441-19408.jpg
+39 740129 13.1862487 80.306164 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160448-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160447-19408.jpg
+40 740128 13.1863793 80.3051662 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160458-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160455-19408.jpg
+41 740127 13.1862331 80.3042275 3 2 0 0 0 0 0 2 1 1.6 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160509-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160505-19408.jpg
+42 740126 13.1861391 80.3036803 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160525-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160530-19408.jpg
+43 740125 13.186489 80.304544 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160602-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160605-19408.jpg
+44 740124 13.1864681 80.3055686 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160612-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160614-19408.jpg
+45 740123 13.1862958 80.3064966 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160621-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160615-19408.jpg
+46 740122 13.1860764 80.307489 3 3 0 0 1 3 0 2 2 4.1 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160628-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160630-19408.jpg
+47 740121 13.1858988 80.3084654 3 3 0 0 1 3 0 2 2 4.1 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160640-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160635-19408.jpg
+48 740120 13.1856586 80.3093451 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160647-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160644-19408.jpg
+49 740119 13.1854183 80.310595 3 3 0 0 0 0 0 2 1 2 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160700-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160656-19408.jpg
+50 740118 13.1852198 80.3115606 3 3 3 2 2 1 2 2 2 4.5 D https://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160710-19408.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19408/IMG_20210701_160707-19408.jpg
+SAFETIPIN NITE (DAY) CSV FILE
+S No  ID  Latitude  Longitude  Lighting  Walkpath  Public 
+Transport  Visibility  People  Gender 
+Usage  Security  Openness  Feeling  Safety Score  Comment  Image Link_1  Image Link_2
+1 740812 13.186489 80.3054237 3 3 0 0 0 0 0 2 1 2 N https://safetipinimages.s3.amazonaws.com/20210701/19411/IMG_20210701_185034-19411.jpg
+2 740810 13.1863375 80.3060997 3 3 0 0 0 0 0 2 1 2 N https://safetipinimages.s3.amazonaws.com/20210701/19411/IMG_20210701_185039-19411.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19411/IMG_20210701_185041-19411.jpg
+3 740808 13.1861495 80.307135 2 3 0 0 0 0 0 2 1 1.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185052-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185049-19412.jpg
+4 740807 13.1859197 80.308063 3 3 0 0 0 0 0 2 1 2 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185102-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185059-19412.jpg
+5 740806 13.1856951 80.3090555 3 3 0 0 0 0 0 2 1 2 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185112-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185109-19412.jpg
+6 740805 13.1855071 80.3100747 3 3 0 0 0 0 0 2 1 2 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185122-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185117-19412.jpg
+7 740804 13.1853086 80.3110886 3 3 1 0 0 0 1 2 1 3 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185132-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185127-19412.jpg
+8 740803 13.1851101 80.3119254 3 3 2 0 1 0 2 2 2 4.2 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185140-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185137-19412.jpg
+9 740802 13.184896 80.3131807 3 1 3 0 2 0 3 2 2 4.3 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185202-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185155-19412.jpg
+10 740801 13.1846662 80.3141141 3 1 3 0 1 3 3 2 2 4.4 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185211-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185214-19412.jpg
+11 740800 13.1843476 80.3150046 3 1 3 0 0 0 2 2 1 3.5 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185227-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185222-19412.jpg
+12 740799 13.1840029 80.3159165 2 1 3 0 2 0 1 2 1 3.5 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185237-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185232-19412.jpg
+13 740787 13.1828642 80.3159863 3 0 3 0 2 2 0 2 2 4.1 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185313-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185316-19412.jpg
+14 740789 13.1819815 80.3155732 3 0 3 0 0 0 0 3 1 2.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185328-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185325-19412.jpg
+15 740790 13.1811145 80.3151387 3 0 2 0 0 0 0 2 1 1.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185341-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185345-19412.jpg
+16 740791 13.180237 80.3147042 3 0 3 0 1 0 0 2 1 2.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185353-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185356-19412.jpg
+17 740792 13.1793543 80.3142858 3 0 3 0 2 0 0 2 1 3 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185406-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185401-19412.jpg
+18 740793 13.1785238 80.31398 3 0 3 1 1 0 0 2 1 3 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185412-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185417-19412.jpg
+19 740785 13.1778344 80.3138942 3 0 3 0 1 0 0 2 1 2.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185419-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185427-19412.jpg
+20 740794 13.1767219 80.3135079 3 0 3 0 1 0 0 2 1 2.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185436-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185439-19412.jpg
+21 740873 13.1771188 80.3129447 2 1 3 2 1 3 0 3 2 4.3 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185518-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185513-19412.jpg
+22 740871 13.177286 80.3119469 2 1 3 2 1 0 0 2 1 3.5 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185541-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185536-19412.jpg
+23 740869 13.1775523 80.3110403 2 2 2 1 0 0 0 2 1 2.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185554-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185551-19412.jpg
+24 740867 13.1777978 80.310123 1 2 2 2 1 3 1 2 2 4.3 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185613-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185609-19412.jpg
+25 740865 13.1780955 80.3090823 2 3 2 2 1 0 0 2 1 4 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185628-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185624-19412.jpg
+26 740863 13.1784194 80.308063 2 3 3 1 1 0 0 2 1 4 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185649-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185643-19412.jpg
+27 740809 13.1798087 80.307532 2 1 3 3 3 2 1 2 2 4.4 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185747-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185753-19412.jpg
+28 740776 13.1799706 80.3082401 2 1 3 3 2 0 0 2 2 4.2 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185815-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185819-19412.jpg
+29 740778 13.1796729 80.3092325 2 1 2 3 2 1 0 2 2 4.2 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185834-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185838-19412.jpg
+30 740780 13.1793752 80.3102249 2 1 2 2 2 1 0 2 2 4.1 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185849-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185853-19412.jpg
+31 740782 13.1791506 80.3110564 2 1 1 2 1 0 0 2 1 2.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185903-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185908-19412.jpg
+32 740784 13.1788477 80.3120649 2 1 1 2 2 0 0 2 1 3 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185929-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185935-19412.jpg
+33 740786 13.178597 80.3128588 2 1 2 1 2 0 0 2 1 3 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185947-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_185952-19412.jpg
+34 740788 13.1783776 80.3136206 2 1 3 1 2 2 0 3 2 4.3 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190010-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190004-19412.jpg
+35 740783 13.1785656 80.3141087 2 0 3 0 0 0 0 2 1 1.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190041-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190038-19412.jpg
+36 740781 13.1793387 80.314436 2 0 3 0 0 0 0 2 1 1.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190049-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190047-19412.jpg
+37 740779 13.1805139 80.3149349 3 0 3 0 1 0 0 2 1 2.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190102-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190105-19412.jpg
+38 740777 13.181407 80.3153533 2 0 2 0 0 0 0 2 1 1.3 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190112-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190117-19412.jpg
+39 740775 13.1822584 80.3157932 2 0 3 0 0 0 0 2 1 1.6 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190124-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190122-19412.jpg
+40 740773 13.1831411 80.3162009 2 1 3 0 2 0 1 3 1 4 N https://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190132-19412.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19412/IMG_20210701_190135-19412.jpg
+41 740841 13.1678005 80.3034979 3 1 3 3 3 1 1 2 2 4.4 N https://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193655-19413.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193700-19413.jpg
+42 740829 13.1677483 80.3042758 2 1 3 2 2 2 1 2 2 4.3 N https://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193824-19413.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193802-19413.jpg
+43 740827 13.1685318 80.3044528 2 1 3 1 1 0 1 2 1 3.5 N https://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193830-19413.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193834-19413.jpg
+44 740825 13.1696548 80.3047103 3 1 3 3 3 1 1 2 2 4.4 N https://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193855-19413.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193843-19413.jpg
+45 740823 13.1704644 80.3049302 2 1 3 2 2 0 1 2 2 4.2 N https://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193908-19413.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193902-19413.jpg
+46 740821 13.1712792 80.3051287 3 1 3 2 3 1 1 2 2 4.4 N https://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193920-19413.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193917-19413.jpg
+47 740820 13.1722246 80.3054023 3 1 3 1 2 0 1 2 2 4.2 N https://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193936-19413.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193930-19413.jpg
+48 740819 13.1727574 80.3055471 2 1 3 1 1 0 0 2 1 3 N https://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_194004-19413.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_193958-19413.jpg
+49 740818 13.1736088 80.3057939 2 1 3 1 1 0 1 3 1 4 N https://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_194029-19413.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_194017-19413.jpg
+50 740817 13.1744498 80.3060353 3 2 3 0 0 0 1 2 1 3.5 N https://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_194038-19413.jpghttps://safetipinimages.s3.amazonaws.com/20210701/19413/IMG_20210701_194034-19413.jpg
+SAFETIPIN NITE (NIGHT) CSV FILE
+
+--- PDF PAGE 30 ---

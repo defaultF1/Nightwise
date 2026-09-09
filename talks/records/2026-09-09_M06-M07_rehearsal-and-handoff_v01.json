@@ -1,0 +1,82 @@
+{
+  "filename": "2026-09-09_M06-M07_rehearsal-and-handoff_v01.docx",
+  "title": "NightWise rehearsal and team handoff preparation",
+  "meta": "9 September 2026   M6 and M7 preparation checkpoint   Field rehearsal and deployment pending",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "The rehearsal materials and source handoff are prepared for the Bengaluru reel. The bundled tutorial can be reviewed without Google billing. The user chose to connect the Android phone later, so this checkpoint does not claim an installation, field rehearsal or public deployment."
+    },
+    {
+      "type": "heading",
+      "text": "Recording plan"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use the AEOS to Manyata demonstration. The prepared sequence covers the launch, destination selection, route cards, activity details, time tradeoff and Google Maps preview in approximately 45 seconds. Keep the Sample data label visible for a tutorial recording. Real route times, business counts, road coverage and recommendations must come from the later validated live run."
+    },
+    {
+      "type": "bullet",
+      "text": "Open the destination picker and demonstrate local search for Manyata. Wider Bengaluru search stays paused. Confirm the public entrances before filming an actual trip."
+    },
+    {
+      "type": "bullet",
+      "text": "Show both the time difference and uncertainty. Rehearse missing evidence, closing-soon places, similar options and substantial detours so the presenter can explain them accurately."
+    },
+    {
+      "type": "bullet",
+      "text": "In the handoff screen explain that navigation continues in Google Maps and the corridor may change. The fictional tutorial path is never sent as a real road route."
+    },
+    {
+      "type": "heading",
+      "text": "Phone and participant checks"
+    },
+    {
+      "type": "paragraph",
+      "text": "planning/M06-rehearsal-and-phone-checklist.md covers launch playback, permissions, Back, resume, themes, scrolling, map layering and the real handoff. scripts/connect-phone.ps1 now installs the latest prebilling APK when one authorized phone is connected. The ten-participant CSV starts entirely NOT TESTED and records usability outcomes without names or exact journey histories."
+    },
+    {
+      "type": "paragraph",
+      "text": "The phone check and corridor rehearsal remain blocked on the user supplying the device and confirming the real entrances. Live comparisons additionally require active billing. These are explicit remaining dependencies, not completed tests."
+    },
+    {
+      "type": "page"
+    },
+    {
+      "type": "heading",
+      "text": "Prepared delivery package"
+    },
+    {
+      "type": "paragraph",
+      "text": "The APK is output/apk/nightwise-prebilling-debug.apk. It contains the local launch and tutorial, local pin search, prepared live search and road-evidence interfaces. Its package ID is in.nightwise.demo and its version is 0.6.0-prebilling. Live embedded maps remain paused. The source ZIP is generated from an explicit file list; it excludes credentials, signing keys, dependencies, caches and compiled web assets."
+    },
+    {
+      "type": "heading",
+      "text": "Backend preparation"
+    },
+    {
+      "type": "paragraph",
+      "text": "npm run build:server creates a standalone Node backend entrypoint. A separate local startup check confirmed that this packaged entrypoint serves status while paused and makes no Google requests. The Dockerfile packages the backend with the local OSM extract and runs as a non-root user. Docker is unavailable on this computer, so the container image itself is not claimed tested."
+    },
+    {
+      "type": "paragraph",
+      "text": "Team live use needs an HTTPS host, one backend instance, a persistent writable budget disk, the actual app origins and a private team access code. The current service is only local. The deployment guide explains these settings, migration of the existing request counts, host IP restrictions and rebuilding the APK against the final HTTPS URL. No hosting subscription or public deployment was created."
+    },
+    {
+      "type": "heading",
+      "text": "Next activation sequence"
+    },
+    {
+      "type": "paragraph",
+      "text": "When the user confirms billing, validate a single Routes request first. Enable place search and nearby scans separately within their limits. Check opening-hours coverage and actual corridor matches before enabling experimental scoring. Then install on the intended phone, inspect Google Maps previews at both entrances, rehearse the reel and prepare the final live APK. Billing activation alone does not complete these checks."
+    },
+    {
+      "type": "heading",
+      "text": "Recovery references"
+    },
+    {
+      "type": "paragraph",
+      "text": "Read planning/nightwise-current-status.md, planning/M07-hosting-and-team-handoff.md, planning/M06-rehearsal-and-phone-checklist.md, research/billing-free-implementation-decisions.md and the latest talks reports. The research note links the official Google, OSM and Overpass sources and preserves the outstanding provider-use question. All project files remain under D:/Aevy TV ( Achina Mayya )/Nightwise."
+    }
+  ]
+}

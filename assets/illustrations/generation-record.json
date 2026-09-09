@@ -1,0 +1,55 @@
+{
+  "createdAt": "2026-09-09",
+  "model": "gpt_image_2_5",
+  "variant": "flare",
+  "quality": "high",
+  "resolution": "1k",
+  "estimatedTotalCredits": 14,
+  "assets": [
+    {
+      "index": 1,
+      "job_id": "af0aa9ca-7065-4f69-848f-f61840f982be",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_37WIxjcuAOSL49HFEpV3WLConfD/hf_20260908_225122_af0aa9ca-7065-4f69-848f-f61840f982be.png",
+      "name": "route-unavailable",
+      "prompt": "Create a production illustration asset for NightWise, a premium Bengaluru night route comparison app. Wide 16:9 composition, minimalist editorial 3D paper-cut style with matte surfaces, delicate depth, sophisticated restrained navy #081725, muted blue #24445e and tiny teal #3be0ce accents. Solid midnight navy background merging seamlessly into #081725 at the edges. Main subject centered with generous negative space. Crisp, visually simple silhouette readable at 280px wide. No words, letters, numbers, logos, shields, people, map labels, real road geometry, phones, UI or status bars. This is a decorative metaphor, never a real map or a claim of safety. A quiet, calm, expensive-feeling object illustration. A folded dark-blue paper map with just two very faint abstract lines, a small hollow location pin standing above it and one subtle disconnected line segment. Express that no route option is available. No red warning or dramatic mood.",
+      "path": "public/assets/illustrations/route-unavailable.png"
+    },
+    {
+      "index": 2,
+      "job_id": "758fee4e-b2e4-4886-b392-725232bd6847",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_37WIxjcuAOSL49HFEpV3WLConfD/hf_20260908_225122_758fee4e-b2e4-4886-b392-725232bd6847.png",
+      "name": "connection-retry",
+      "prompt": "Create a production illustration asset for NightWise, a premium Bengaluru night route comparison app. Wide 16:9 composition, minimalist editorial 3D paper-cut style with matte surfaces, delicate depth, sophisticated restrained navy #081725, muted blue #24445e and tiny teal #3be0ce accents. Solid midnight navy background merging seamlessly into #081725 at the edges. Main subject centered with generous negative space. Crisp, visually simple silhouette readable at 280px wide. No words, letters, numbers, logos, shields, people, map labels, real road geometry, phones, UI or status bars. This is a decorative metaphor, never a real map or a claim of safety. A quiet, calm, expensive-feeling object illustration. Two small curved network arcs separated by a delicate gap, hovering above a low rounded navy plinth. A tiny teal circular arrow beneath them suggests trying again. A gentle connection interruption metaphor. No text and no fake progress indicator.",
+      "path": "public/assets/illustrations/connection-retry.png"
+    },
+    {
+      "index": 3,
+      "job_id": "5a7f5ca4-4cde-46e8-a38f-27291b3df013",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_37WIxjcuAOSL49HFEpV3WLConfD/hf_20260908_225121_5a7f5ca4-4cde-46e8-a38f-27291b3df013.png",
+      "name": "evidence-unknown",
+      "prompt": "Create a production illustration asset for NightWise, a premium Bengaluru night route comparison app. Wide 16:9 composition, minimalist editorial 3D paper-cut style with matte surfaces, delicate depth, sophisticated restrained navy #081725, muted blue #24445e and tiny teal #3be0ce accents. Solid midnight navy background merging seamlessly into #081725 at the edges. Main subject centered with generous negative space. Crisp, visually simple silhouette readable at 280px wide. No words, letters, numbers, logos, shields, people, map labels, real road geometry, phones, UI or status bars. This is a decorative metaphor, never a real map or a claim of safety. A quiet, calm, expensive-feeling object illustration. Three small overlapping translucent dark-blue panels seen in shallow perspective; two have tiny restrained dots, the third is softly frosted with no visible content. One small open teal ring in front. Suggest partial information and a missing piece without implying darkness is danger.",
+      "path": "public/assets/illustrations/evidence-unknown.png"
+    },
+    {
+      "index": 4,
+      "job_id": "14c06819-8ef1-42c2-afcf-7778ee448de4",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_37WIxjcuAOSL49HFEpV3WLConfD/hf_20260908_225121_14c06819-8ef1-42c2-afcf-7778ee448de4.png",
+      "name": "activity-explained",
+      "prompt": "Create a production illustration asset for NightWise, a premium Bengaluru night route comparison app. Wide 16:9 composition, minimalist editorial 3D paper-cut style with matte surfaces, delicate depth, sophisticated restrained navy #081725, muted blue #24445e and tiny teal #3be0ce accents. Solid midnight navy background merging seamlessly into #081725 at the edges. Main subject centered with generous negative space. Crisp, visually simple silhouette readable at 280px wide. No words, letters, numbers, logos, shields, people, map labels, real road geometry, phones, UI or status bars. This is a decorative metaphor, never a real map or a claim of safety. A quiet, calm, expensive-feeling object illustration. A compact cluster of three generic small city storefronts and an office silhouette, some windows softly glowing muted pale teal, other windows neutral dark blue. An elegant thin abstract line curves in front without representing a real road. Illustrate comparing listed opening hours; do not include recognizable Bengaluru buildings, police, hospitals or security symbols.",
+      "path": "assets/illustrations/activity-explained-initial.png"
+    }
+  ],
+  "notes": "Decorative metaphors only; no real map data or observed activity. Existing launch video and 24-state concept pack retained."
+}

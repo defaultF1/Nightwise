@@ -1,0 +1,41 @@
+{
+  "date": "2026-09-09",
+  "unitTestsPassed": 65,
+  "fullBrowserTestsPassed": 31,
+  "additionalRoadBrowserTestPassed": 1,
+  "androidBuild": "passed",
+  "physicalPhone": "deferred by user",
+  "googleRequestsThisWork": 0,
+  "priorRejectedRouteAttempts": 1,
+  "nearbyCalls": 0,
+  "autocompleteCalls": 0,
+  "detailsCalls": 0,
+  "roadWaysDownloaded": 13542,
+  "publicDeployment": false,
+  "dockerImageTested": false,
+  "apk": {
+    "file": "nightwise-prebilling-debug.apk",
+    "sizeBytes": 9393260,
+    "sha256": "b953b014e27015dfac749938e1eb2bf8ef341f5391c9db116fdda0bf68d447e4",
+    "packageId": "in.nightwise.demo",
+    "versionName": "0.6.0-prebilling",
+    "versionCode": "6",
+    "signatureVerified": true,
+    "webAssetsMatch": true,
+    "serverKeyAbsent": true,
+    "liveMapsPaused": true,
+    "backgroundLocationPermission": false,
+    "physicalPhoneTested": false
+  },
+  "documentQa": {
+    "M04-M05": {
+      "pages": 2,
+      "allPagesVisuallyReviewed": true
+    },
+    "M06-M07": {
+      "pages": 2,
+      "allPagesVisuallyReviewed": true
+    }
+  },
+  "browserRunnersExitedSuccessfully": true
+}

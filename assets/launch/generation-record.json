@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "id": "2f83f793-965c-4e2b-8d25-342af4dabb1f",
+      "type": "video",
+      "status": "completed",
+      "model": "seedance_2_5",
+      "params": {
+        "prompt": "Create a quiet 4-second seamless animated BACKGROUND for the NightWise mobile app launch, using the supplied screenshot only as the visual style reference. Full-bleed vertical 9:16 artwork, dark midnight navy sky and restrained blue silhouettes of Bengaluru-like buildings and trees along the bottom quarter, a few warm window lights, extremely subtle ambient shimmer and slow soft light breathing, locked camera, no zoom, no panning, no moving buildings. Preserve the calm minimal night mood and empty central composition. IMPORTANT: omit every text label, logo, crescent symbol, map pin, phone frame, rounded screen bezel, status bar, battery, signal or clock visible in the reference; the app will render crisp vector branding and real system controls above this background. The center and upper two-thirds must remain plain dark navy with only an almost imperceptible teal glow. No people, traffic, flashing lights, city-map geometry, extra graphics, captions, or sound. Start and end should visually match for a smooth loop. This is subtle interface motion, not a cinematic advertisement.",
+        "aspect_ratio": "9:16",
+        "duration": 4,
+        "medias": [
+          {
+            "role": "image",
+            "data": {
+              "id": "cc95a3e1-031f-43be-b0b3-0890568db9a4",
+              "type": "media_input",
+              "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_37WIxjcuAOSL49HFEpV3WLConfD/cc95a3e1-031f-43be-b0b3-0890568db9a4.png"
+            }
+          }
+        ],
+        "width": 720,
+        "height": 1280,
+        "genre": "auto",
+        "resolution": "720p",
+        "generate_audio": false,
+        "multi_shots": false,
+        "multi_shot_mode": "custom",
+        "multi_prompt": [],
+        "speedramp": "auto",
+        "reference_elements": [],
+        "prompt_language": "en",
+        "model": "default",
+        "extension_mode": null,
+        "bitrate_mode": "standard"
+      },
+      "results": {
+        "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_37WIxjcuAOSL49HFEpV3WLConfD/hf_20260908_212319_2f83f793-965c-4e2b-8d25-342af4dabb1f.mp4",
+        "thumbnailUrl": "https://d2ol7oe51mr4n9.cloudfront.net/user_37WIxjcuAOSL49HFEpV3WLConfD/cc95a3e1-031f-43be-b0b3-0890568db9a4.png"
+      },
+      "createdAt": 1788902599.379498
+    }
+  ]
+}

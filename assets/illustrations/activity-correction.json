@@ -1,0 +1,9 @@
+{
+  "jobId": "d5b6ebd9-9af0-48cc-b511-ad6bdd418ddd",
+  "prompt": "Edit this illustration only as follows: completely remove all three floating opening-hours cards, all clocks, all numbers and all their vertical connector lines from above the buildings, replacing them with uninterrupted dark navy background. Remove the small human silhouettes visible in storefront windows and replace them with simple neutral shelving. Preserve the exact three storefronts, office silhouette, composition, navy and teal palette, soft illumination, wide aspect ratio, curved foreground line, texture, shadow and all other details. Final asset must contain absolutely no text, numbers or people.",
+  "sourceJobId": "14c06819-8ef1-42c2-afcf-7778ee448de4",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37WIxjcuAOSL49HFEpV3WLConfD/hf_20260908_225255_d5b6ebd9-9af0-48cc-b511-ad6bdd418ddd.png",
+  "path": "public/assets/illustrations/activity-explained-v2.png",
+  "reason": "Removed unwanted hour labels and people",
+  "estimatedCredits": 3.5
+}

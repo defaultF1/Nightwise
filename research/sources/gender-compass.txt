@@ -1,0 +1,724 @@
+
+--- PDF PAGE 1 ---
+THE GENDER COMPASS: 
+HOW DOES GOOGLE
+MAPS NAVIGATE
+INCLUSIVITY?
+
+--- PDF PAGE 2 ---
+STUDY TEAM
+2
+ACKNOWLEDGEMENTS
+We are grateful to Ms. Preethi Rao, Director, Partnerships and Outreach, at LEAD,
+Krea University for her efforts in reviewing and offering feedback on our study.
+We are thankful to Ms. Gayatri Nair, for providing the illustration used in the cover
+page of this report. The illustration has been done by Ms. Gauri Elisa, courtesy of
+Goethe-Institut, Chennai.
+We would also like to thank our participants for providing their time and sharing
+their perspectives and experiences for this study . 
+We sincerely hope that the study findings pave the way for for further research and
+action surrounding gender sensitivity and mobility platforms.
+Gender and Policy Lab
+
+--- PDF PAGE 3 ---
+ABOUT US
+The Gender and Policy Lab (GPL) was operationalized in February 2022 by the
+Greater Chennai Corporation (GCC) with support from the Nirbhaya Funds, as part
+of Chennai City Partnership between the Government of Tamil Nadu and World
+Bank. Chennai is the only urban local body in India with a dedicated entity such as
+this, focusing on women’s safety, mobility and gender inclusive urban infrastructure.
+GPL aims to improve women’s access to opportunities by improving safety and
+gender responsiveness in public spaces and public transport, as well as mainstream
+gender inclusivity so that it becomes an active part of all city-level planning and
+service delivery decisions.
+3
+STUDY TEAM
+Published by Gender and Policy Lab, Greater Chennai Corporation
+April 2025
+Project Lead and Concept: Vaishnavi Chidambaranathan, Policy Expert
+Researchers: 
+Triveni Sundararajan, Intern
+Haamsini Sridhar, Associate
+Sashna Chandrasekharan, Senior Associate
+Report Design: Sri Uthra Somas, Communication Expert
+
+--- PDF PAGE 4 ---
+This study assesses the Gender Sensitivity of Google Maps routes, focusing on
+safety concerns in the ‘two-wheeler’ mode. Currently, Google Maps optimizes
+routes based on factors such as real-time traffic, road conditions, route
+simplicity, and fuel efficiency,  overlooking critical aspects like safety—
+particularly for women and gender minorities. 
+1
+Prior research across multiple cities has established that gender variations
+(between men and women) exist in safety perceptions in public transport (Ouali
+et al., 2020), yet Google Maps' algorithmic choices shape mobility patterns
+without explicitly considering such disparities.  
+Given this, a key question arises: how can Google Maps move beyond efficiency
+to integrate safety and gender inclusivity in route generation? This study
+examines this question through diverse user perspectives in Chennai, India.
+INTRODUCTION
+4
+ Use eco-friendly routes on your Google Maps app. (n.d.). Google Maps Help. https://support.google.com/maps/answer/114702371
+
+--- PDF PAGE 5 ---
+94.8% of two-wheeler mode users of Google Maps
+fall within the 18-40 age group. 77.5% of users are
+either private sector employees or students.
+Men form 65.2% of the two-wheeler mode users.
+They are also frequent users, with 69.93%
+indicating that they use Google Maps often.  
+Primary reasons for using Google Maps include
+navigation to unknown places, finding the shortest
+route, and avoiding traffic congestion. 
+49.4% of respondents provided a rating of 3 and
+below on Google Maps' safety during the night.
+Night time safety was a pertinent concern among
+more women than men.
+Safety concerns showed gendered patterns, with
+men citing conditions of roads while women
+reporting isolated roads, dimly lit areas, and the
+fear of harassment, as the major concerns.
+Men tend to avoid specific roads that feel unsafe. 
+Women, in contrast, take more drastic measures,
+such as avoiding travel on unfamiliar routes at
+night, opting for alternative modes of transport, or
+traveling with company, indicating deeper mobility
+constraints as opposed to men.
+Route reporting on various safety parameters.
+Context-aware route recommendation based on
+lighting, road conditions, and safety metrics, in
+addition to the usual efficiency parameters.
+Context-based alerting on the basis of road
+conditions and safety parameters.
+Night-mode routing, where alternative safe
+routes are suggested during nighttime.
+SOS to access help. 
+Participant
+Demographics and
+Usage Patterns
+Safety
+Concerns
+Coping
+Mechanisms
+Integrated
+Suggestions &
+Study
+Recommendations
+5
+KEY FINDINGS
+
+--- PDF PAGE 6 ---
+With technology becoming an integral part of everyday life, it has become a consequential
+subject of feminist research, particularly by examining women's representation in
+technology and engineering and their roles as recipients of technological advancements
+(Faulkner, 2001). Despite incremental progress, gender disparities persist—Global Data’s
+2021 study on Big Tech companies revealed that while women's representation has slightly
+increased across all employee levels, senior management remains heavily male-dominated,
+with women making up only about 25%.  2
+INCLUSIVITY IN THE TECH INDUSTRY
+Usage Design & Devpt Workforce
+Executive Roles
+Males
+Females
+Males
+Females
+Male
+ Female
+Males
+This table presents gender representation across various categories in the tech industry, particularly
+focusing on workforce composition, executive roles, platform usage, and design/development roles.   3, 4, 5
+Workforce: 67% male and 25% female employees.
+Executive Roles: 79% of executives are male, while only 11% are female.
+Design and Development: 72% of design and development roles are male, 27% are
+women.
+Usage: 69% of men and 63% of females use navigation platforms.
+ GlobalData. (2022, August). Women representation in Big Tech companies in 2021. https://www.globaldata.com/data-insights/technology--media-and-
+telecom/women-representation-in-big-tech-companies-in-2091371/
+2
+ Robinson, C. (2024, June 18). Women in tech stats: How the industry can provide equal opportunities. Forbes.
+https://www.forbes.com/sites/cherylrobinson/2024/06/18/women-in-tech-stats-how-the-industry-can-provide-equal-opportunities/
+4
+ Ahmed, M. (2024, April 17). Women fuel India’s tech surge, yet leadership gap persists. People Matters. https://www.peoplematters.in/news/c-suite/women-fuel-indias-
+tech-surge-yet-leadership-gap-persists-40951 
+3
+ Gurumurthy, A. (2004). Gender and ICTs: Overview report. Institute of Development Studies.
+https://www.researchgate.net/publication/297737202_Gender_and_ICTs_Overview_Report
+5 
+6
+Females
+
+--- PDF PAGE 7 ---
+The underrepresentation of women and
+marginalised identities in tech
+development reinforces the exclusion of
+their lived experiences.
+This becomes apparent in the context of
+digital tools such as navigation platforms
+like Google Maps. These tools have
+significantly shaped urban mobility by
+enhancing accessibility and efficiency. 
+However, these advancements have not
+been universally inclusive, often overlooking
+gendered mobility patterns and safety
+concerns. 
+Thus, a bottom-up approach—one that
+critically assesses digital tools for gender
+inclusivity—can provide valuable insights for
+developers on existing gaps and user
+expectations. 
+This study focuses on navigation apps as a key
+category of digital tools to examine these
+dynamics.
+These figures highlight significant gender disparities across all levels, from
+workforce participation to leadership and design roles, while both males and
+females technology use is nearly equal.
+7
+
+--- PDF PAGE 8 ---
+The focus on two-wheeler mode users in this research stems from
+the fact that two-wheelers are the preferred mode of transport
+among 53% of Chennai’s population  and used by 50.7% of
+women,  on average, for education, shopping, and recreation,
+making it the second-most preferred commute mode for such
+purposes.
+6
+7
+Moreover, the routing patterns of the two-wheeler mode prioritise
+shortcuts inaccessible to larger vehicles, creating safety concerns.8
+WHY  TWO-WHEELERS?
+The two-wheeler mode was introduced in India in 2017 to improve
+the utility of Google Maps among motorbike drivers (D’Onfro, 2019;
+Singal, 2017). User research then showed that the drivers checked
+routes for their travel prior to the start of the trip, which led to the
+development of a mode with simplified routes and landmarks. 
+In the 1.5 years since its roll-out, the number of daily users rose by 5 times, with expansion to new
+markets. These insights suggest the popularity of the two-wheeler mode in India, and emphasize
+on the importance of this study. 
+Additionally, as per the platform’s routes
+application programming interface (API),
+routes generated during this mode may not
+show some bicycle paths, sidewalks, and
+pedestrian paths, increasing the potential
+risks for riders.  This makes it critical to
+understand safety perceptions within this
+user group for addressing mobility
+challenges in the city.
+9
+ Chennai Unified Metropolitan Transport Authority (CUMTA). (2024). Updation of Chennai comprehensive mobility plan.6
+ Gender and Policy Lab (GPL). (2023). Baseline study on women’s perception regarding access and safety in public spaces and public transport in
+Chennai city.
+7
+ IANS. (2017, December 5). Google Maps introduces two-wheeler mode in India. Business Standard. https://www.business-standard.com/article/news-
+ians/google-maps-introduces-two-wheeler-mode-in-india-117120500507_1.html 
+8
+ Available route matrix vehicle types. (2025, March 11). Google Maps Platform. Retrieved March 11, 2025, from9
+ https://developers.google.com/maps/documentation/routes/vehicles-rm  8
+
+--- PDF PAGE 9 ---
+Develop a localized knowledge system and narratives
+around major platforms like Google Maps, addressing their
+underrepresentation in the global discourse.
+OBJECTIVES OF THE RESEARCH
+Examine gendered patterns in the use of Google Maps and
+how they reflect disparities in access to technological
+advancements.
+Analyze gender differences in user perceptions and
+experiences of navigating routes suggested in two-wheeler
+mode, assessing the gender sensitivity of Google Maps’
+features and functionality.
+Propose recommendations for integrating safety features
+and enhancing user experiences on Google Maps.
+9
+
+--- PDF PAGE 10 ---
+Current Discourses
+The literature reveals that integrating safety features in navigation platforms is a well-
+explored yet under-optimized concept. Researchers have proposed mapping safe routes
+and hotspots by using inputs like crime data and crowdsourced reports, as seen in initiatives
+like Safecity, Free to Be, and Safe & the City, alongside studies from IIT Ropar and local
+projects in Chennai (Goel et al., 2017; “Free to be,” n.d.; Kowalchuk, 2021; Radhakrishnan et
+al., 2023; “Red Dot Foundation,” n.d.; “Safecity,” 2025).
+Google Maps, on the other hand, has incorporated safety elements such as the pandemic-
+related public safety features, the India-based ‘Stay Safe feature’, as well as signage
+provisions at hotspots in South Africa (Capazorio, 2023; Glasgow, 2020; Nagarajan, 2020;
+PTI, 2019). The application also signals narrow roads and enables users to provide reports of
+ongoing travel conditions in a particular route (Daniel & Ramani, 2024). However, the use of
+comprehensive crime-based safety data still remains limited in the context of Google Maps.
+Thus, this study aims to combine the findings
+from the research indications and two-
+wheeler riders' perceptions of safety, to
+inform inclusive and responsive navigation
+design. Safety by itself is a complex concept,
+extending beyond crime rates, and
+potentially being influenced by factors such
+as gender, geography, etc. 
+Thus, in order to account for the varied
+perceptions of safety, this study employs
+Safetipin’s multidimensional approach to
+mapping safety by incorporating its 9  
+parameters- lighting, openness, visibility,
+people, security, walk path, public transport,
+gender usage, and feeling.  10
+These parameters are also in line with those
+used by Gender and Policy Lab to conduct
+safety audits of infrastructures. The
+parameters employed in this study are
+relevant for open public spaces, in light with
+the context of the current study.
+ My Safetipin. (n.d.) Safetipin. https://safetipin.com/our-
+apps/#:~:text=My%20Safetipin%20is%20a%20personal,has%20many%20other%20features%20too.  
+10
+10
+
+--- PDF PAGE 11 ---
+This research used a mixed-methods approach to collect data, combining both survey and case
+interviews. The online survey utilised convenience and snowball sampling methods to capture
+demographic information, usage patterns, safety perceptions, and recommendations of
+Google Maps users. Descriptive statistics were used for data analysis, with a focus on gender-
+based comparative analysis. 12 survey participants were selected for the case interviewees,
+while ensuring an equitable number of respondents among all the age, gender, and occupation
+categories. The interviews involved structured conversations to gather detailed personal
+experiences and suggestions.
+Data collection was undertaken over a three-week period between mid-December 2024 and
+early January 2025. Participants were informed of the study purpose and could choose to opt
+out at any time. Personal information was kept confidential and only used for the current study.
+Insights from both methods were integrated to provide a comprehensive understanding of the
+issue.
+Quantitative - Surveys
+423 individuals of varied ages,
+genders, and occupations found
+using convenience and snowball
+sampling
+Usage patterns of Google Maps
+(specifically two-wheeler)
+Safety perceptions and experiences
+using Google Maps routes
+Recommendations for improving the
+application’s safety features
+Descriptive statistics, Gender-based
+comparative analysis
+Qualitative - Structured Interviews
+Representative sample of 12
+individuals from the larger group who
+indicated willingness to share more
+on their experiences
+Structured interviews allowing for
+narrative responses
+Detailed, personal user experiences
+regarding safety concerns
+Specific areas/routes felt unsafe
+Coping mechanisms used
+Suggestions for app improvement
+Methodology
+11
+
+--- PDF PAGE 12 ---
+Participant Demographics and Usage Patterns
+A total of 558 responses received were filtered down to 423 based on their indication of using two-
+wheeler mode on Google Maps in Chennai.
+Men65.2%
+Women34.3%
+Transgender and Non-binary0.5%
+GENDER
+Of the eligible respondents, 65.2% are male and
+34.3% are female, with 0.5% accounting for
+transgender and non-binary respondents [see Figure
+1.]. Given that the transgender and non-binary
+categories represent a very small share of the overall
+respondents, no conclusions could be drawn for
+them based on this study and hence they have been
+excluded from the reporting of overall findings.
+18-25 26-40 40-600102030405060
+35.9
+58.9
+5.2
+AGE
+In terms of age, 35.9% fell within the 18-25 age
+range, 58.9% fell in the 26 - 40 age range and
+less than 5.2% are above the age of 40 [see
+Figure 2.]
+Figure 2. Age breakdown of two-wheeler mode usersFigure 1. Gender breakdown of two-wheeler mode users
+In terms of occupation, private sector
+employees and students account for 77.5% of
+the respondents using two-wheeler mode on
+Google Maps [see Figure 3.]
+Among the case interview participants, 4 were
+students, 4 were self-employed, 2 were private
+sector employees, 1 was a government sector
+employee, and 1 was a service delivery partner.
+ 
+With respect to usage, 66.7% of the
+respondents used Google Maps ‘often’ in the
+past month (at the time of the survey). In
+particular, 69.93% of men and 60.69% of
+women indicating such frequent usage.
+Primary reasons for using Google Maps include
+navigation to unknown/new places, finding the
+shortest route, and avoiding traffic congestion.
+90.8% of respondents used Google Maps
+during both day and night.
+56.7%
+20.8%
+14.4%
+6.4%1.7%
+Service delivery partners Government Sector 
+Private sector
+Self-employed
+Student
+OCCUPATION
+Figure 3. Occupation of two-wheeler mode users
+12
+
+--- PDF PAGE 13 ---
+RESULTS
+3x
+More Women Fear
+Harassment
+49.4%
+Feel Unsafe at Night
+When asked to rate safety at night ona scale of 1 to 5 (1 being very unsafeand 5 being very safe), 49.4% rated 3and below.
+35.82% of women as opposed to13.17% of men reported fear ofharassment while travelling usingGoogle Maps.
+Figure 4. Safety ratings while using Google Maps in the night (1- very unsafe, 5- very safe)
+Users’ safety rating on Google Maps’ safety during the night showed variations in
+the degree of perceived risk [see Figure 4.].  49.4% of respondents rated safety as 3
+and below.  Nighttime safety represented a deeper concern for women, as 58.62%
+of female as opposed to 44.93% of male respondents provided ratings of 3 and
+below. These findings indicate that despite the usefulness of Google Maps, routes
+generated raised safety concerns, particularly during the nighttime. 
+1 2 3 4 50
+10
+20
+30
+40
+3.3 8.7
+37.4 33.8
+16.8
+13
+
+--- PDF PAGE 14 ---
+Women Men
+0 10 20 30 40 50 60 70
+Less lit/Dark routes
+Fear of Harassment
+Isolated Roads
+Fear of Theft
+Fear of Crime
+Narrow/Crooked Roads
+Bad/Damaged Roads
+58.95
+41.15
+35.82
+13.17
+61.19
+46.09
+28.36
+27.16
+32.09
+26.75
+41.04
+48.56
+50.75
+65.84
+Figure 5. Factors Contributing to Feeling Unsafe
+Some gendered patterns can be observed here. For men, issues such as  bad/damaged or
+narrow/crooked roads were the major concerns. In comparison, social factors such as isolated
+roads, and poor lighting were primary safety concerns among women. In particular, women were
+thrice as likely as men to report fear of harassment while travelling using Google Maps. Only a
+small fraction of respondents, 22.23% of men and 15.67% of women, always felt safe while using
+Google Maps. 
+Figure 5. provides a gendered analysis of the factors contributing to feeling unsafe.  For each
+category, the proportion of male respondents  opposed to the proportion of female respondents
+who indicated the same concern are represented in the bar graph.  11
+14
+ A total of 379 respondents answered this question. Of this, 243 respondents are male, and 134 respondents are female. 11
+
+--- PDF PAGE 15 ---
+Men Women
+0 10 20 30 40 50
+Avoided that speci c route
+Asked others for an alternate route
+Used four-wheeler mode
+Avoid unknown routes at night
+Alternative modes of travel
+Travelled with company
+44.20
+42.76
+38.04
+35.17
+28.26
+25.52
+38.04
+47.59
+7.97
+22.07
+12.32
+31.73
+Figure 6. Coping Mechanisms
+Men tend to avoid specific/unknown routes at night, or ask others for an alternative route if they face safety
+risks.  In contrast to men, women tend to opt for travelling with someone, alternative modes of travel, and
+avoiding unknown routes at night. A comparative analysis of coping mechanisms suggests that men
+generally have more flexibility in modifying their travel paths and may not feel the need to completely avoid
+certain travel conditions but rather adapt their route choices dynamically.  Women's safety concerns lead to
+restrictive coping strategies, causing significant constraints on mobility particularly during nighttime. A
+nearly equal proportion of both men and women shift to the four-wheeler mode to avoid narrow/crooked
+roads.
+Figure 6. provides a gendered analysis of the coping mechanisms used by the respondents. For each
+category, the proportion of male respondents as opposed to the proportion of female respondents who
+indicated the same mechanism are represented in the bar graph.  12
+15 A total of 423 respondents answered this question. Of this, 276 respondents are male, and 145 respondents are female. 12
+
+--- PDF PAGE 16 ---
+“It feels scary, especially when I
+go alone to open areas or less
+lit areas based on directions
+given by Google Maps. I feel
+scared even as a male and it
+would feel scarier for females.”
+-Male participant
+Lighting
+Openness
+Walk Path
+Lighting emerged as a critical factor
+influencing users’ feelings of safety while
+following Google Maps routes, particularly
+for women. Dimly lit routes were cited by
+58.95% of female and 41.15% of male
+respondents as a safety concern. 
+Poorly lit streets heightened concerns
+about personal security, with respondents
+noting that dimly lit or completely dark
+roads exacerbated fears of harassment and
+crime. 
+The absence of adequate street lighting
+was frequently associated with a sense of
+isolation, making certain routes feel
+significantly riskier, especially during
+nighttime travel. 
+Lighting
+People
+Security
+Feeling
+The Safetipin parameters highlighted in the current study are:13
+ The 9 parameters for safety outlined by Safetipin are: lighting, openness, visibility, people, security, walk path, public transport, gender usage, and feeling.13
+ANALYSIS
+16
+
+--- PDF PAGE 17 ---
+Similarly, a transwoman participant highlighted specific locations in Chennai
+where lighting deficiencies contribute to safety concerns: 
+“In places like Nesapakkam Road, Guindy Road, Chetpet, after 7 pm, the
+road will seem calm but they are unsafe. I found even railway stations are not
+very well lit.” 
+Another female participant further illustrated the impact of lighting and crowd
+presence, stating,
+“Behind Valluvar Kottam, near Child Trust Hospital, the roads are not well lit,
+and  there will be a group of men talking, making me feel unsafe.”
+Respondents emphasized the need for Google Maps to integrate lighting-
+based safety indicators, such as a "well-lit route" option or nighttime safety
+ratings for roads. Such features could provide users with informed choices,
+particularly for those navigating alone or in unfamiliar areas after dark.
+17
+
+--- PDF PAGE 18 ---
+Openness 
+The perceived openness of a route significantly shaped users' sense of security. 41.04% of female
+respondents and 48.56% of male respondents cited narrow or crooked lanes as a factor
+contributing to feeling unsafe. Along with the lighting parameter, when visibility is blocked,
+individuals are unable to perceive potential threats and remain alert to their environment. Open,
+well-surveilled streets are preferred, as they provide a sense of accessibility and ease of
+movement.
+A male participant described the unpredictability of Google Maps in routing users through unsafe
+areas: “I have felt that routes shown are unsafe at times but this is not very frequent. It does
+show routes on narrow roads, mud roads, near dams, shores where it is not quite possible to
+drive a two-wheeler.” 
+A transwoman participant similarly noted the variation in safety levels based on location, stating,
+“Regarding my experience in terms of safety, I think safety and routes are different. Safety
+depends on the place. For instance, near park areas, there is no safety.
+A male respondent recalled an unsettling experience
+where Google Maps diverted him to an isolated route
+when en route to Kalahasti Temple, “Google Maps
+didn’t show the highway route and instead cut me
+from going using the highway. I was diverted into a
+small road. It was dark and I felt like I was going
+through a forest. I wondered how I would even
+drive through this. It is unsafe to go with your family
+at night through such routes.”
+People
+The presence or absence of crowds played a
+crucial role in safety perceptions. 61.19% of female
+respondents and 46.09% of male respondents
+identified isolated roads as a safety concern.
+Among female respondents, this issue received
+the highest level of concern. Deserted streets
+were often associated with heightened
+vulnerability—especially for women.
+18
+
+--- PDF PAGE 19 ---
+Another male respondent highlighted infrastructure-related concerns, particularly
+when using cycling routes: “During the day, if I am in an isolated road, it’s scary for
+me because there are dogs. I travel a lot on cycle and use Maps to find the
+shortest roads possible. In narrow lanes, dogs will be there so it is scary.”
+Users preferred routes with a moderate presence of people, ensuring both social
+surveillance and ease of navigation. Consequently, 31.73% of women preferred
+travelling with company as a coping mechanism for feeling unsafe.
+Walk Path/Infrastructure 
+Well-maintained infrastructure emerged as a determinant of safety. While women
+were likely to cite protective infrastructural issues such as lighting, men were more
+concerned about road quality as a major deterrent to safe navigation. Poor road
+conditions, were frequently mentioned as hazards, especially for two-wheeler users.
+A male respondent explained, “In the night, the issue is it is dark. For cycle, I use
+walking mode which takes me through dark alleys, unpaved roads…. In two-
+wheeler mode, sometimes, I have these kinds of issues but I cannot recall where.
+I will just switch to car mode.”
+Damaged roads emerged as a safety concern for 50.75% of female respondents and
+65.84% of male respondents. This issue ranked the highest level of concern among
+male respondents.
+19
+
+--- PDF PAGE 20 ---
+Security 
+68.27% of women and 64.49% of men expressed that warnings/reported unsafe routes
+would have made them feel safer while uing Google Maps. SOS integration was also
+mentioned during the interviews as a recommended safety measure. Alongside the
+presence of formal security infrastructure and road infrastructure, access to
+information about unknown routes, as well as quick access to security systems, were
+cited as crucial for enhancing safety perceptions. 
+Particularly, female respondents noted that access to security measures countered
+their sense of vulnerability, especially during nighttime and while taking unknown or
+isolated routes. Incorporating security indicators, such as nearby police stations or
+patrol zones, and providing “safe routes” for nighttime travel would enable users to
+make more informed route selections. In particular 64.83% of women, and 54.35% of
+men indicated that nighttime safe route option could be an additional safety feature.
+Feeling 
+Overall feelings of safety are largely influenced by an interplay of the above-mentioned
+factors, creating distinct mobility behaviors. Areas that are well-lit, have proper roads,
+and are moderately used tend to be perceived as safer. 
+A male participant reiterated his concerns about openness,
+lighting and infrastructure, stating, “You can’t really go with
+your family to such places.” 
+As demonstrated in the sentiment expressed above, the ‘feeling’
+parameter is directly impacted by the other five parameters. Men
+primarily adjusted routes based on road conditions, while women
+employed a more cautious approach, often modifying travel
+plans to minimize risk exposure. 
+The combination of openness, moderate crowds, reliable
+infrastructure, and visible security presence was associated with
+an increased sense of safety.
+Providing information about lighting, security, infrastructure, and
+visibility could improve feelings of safety by enabling users to make
+informed choices during their commute. This improvisation would result
+in more people, especially women, accessing public places at night.
+20
+
+--- PDF PAGE 21 ---
+Recommendations
+As shown by the findings of the study, safety in terms of lighting,
+openness, walk path, people, security, and feeling, presents a deep
+concern for Google Maps users and has to be taken into
+consideration in the design and functioning of the application. 
+Thus, the following recommendations are provided to address these
+concerns and improve the user experience on Google Maps. These
+features already exist in some form on Google Maps for other
+functions and in mobility platforms like Ola and Uber, implying them
+to be viable additions to the current interface.
+These findings underscore a critical gap in Google Maps’ navigation
+system: while the platform prioritizes efficiency, it fails to address safety
+as a key parameter in route recommendations. This omission
+disproportionately affects women and other vulnerable users, whose
+mobility decisions are shaped by security concerns rather than just time
+or distance.
+CONCLUSION
+Route reporting
+Introduce a feature to report routes on various safety
+indicators as used by Safetipin and highlighted by
+participants.
+Users should be allowed to provide a comprehensive
+rating of routes/areas based on the following
+parameters: lighting, openness, walk path, people,
+security, and feeling.
+Implement as a review-style feature (similar to e-
+commerce platforms) allowing users to add text and
+images, in order to ensure that systemic inequalities are
+not reinforced
+21
+
+--- PDF PAGE 22 ---
+Context-aware route recommendation
+Introduce safety as an additional aspect in the algorithmic route generation system
+Improve route suggestion algorithms using open and crowdsourced data on lighting
+and road conditions and users’ safety reports
+Context-based alerting
+Generate real-time warnings to users using crowdsourced data on the six parameters
+and road conditions to make informed decisions 
+Flag indicators rated poorly to users travelling through a particular route
+Highlight safety provisions in the route such as presence of security cameras
+In this way, user choice is preserved as they weigh in on the subjective importance
+(which could vary by gender, time of the day, etc.) of the alert
+Night-mode routing
+Users of this mode should be prompted with alternative routes rated highly on the
+safety indicators,  during nighttime travel
+Such routes could include main roads, well-lit walkways, and broad paths
+ 
+SOS integration
+Implement an emergency SOS feature within Google Maps for immediate access to
+help
+NIGHT-MODEROUTING
+SOS INTEGRATION
+CONTEXT-BASEDALERTINGCONTEXT-AWARE ROUTERECCOMENDATION
+ROUTE REPORTING
+22
+
+--- PDF PAGE 23 ---
+Limitations
+This study focuses on Google Maps users in Chennai, and can be extended
+to other cities and urban mobility platforms. Gender analysis was largely
+limited to male-female differences due to a lack of responses from other
+genders, and the study did not differentiate between perceived and actual
+risk. Further research could employ different research methods to address
+these gaps. 
+Potential unintended consequences should also be considered. For
+example, if users consistently report routes as unsafe, Google Maps may
+stop suggesting them, potentially exacerbating safety issues rather than
+resolving them. Redirecting all users to safer routes could also lead to
+increased congestion on those paths.
+23
+
+--- PDF PAGE 24 ---
+REFERENCES
+Singal, N. (2017, December 5). Google launches two-wheeler mode in Google Maps for India. Business Today.
+https://www.businesstoday.in/technology/news/story/google-launches-two-wheeler-mode-in-google-maps-for-
+india-google-assistant-88558-2017-12-05  
+24
+Capazorio, B. (2023, November 17). Google Maps reroutes users to safety. Travel News.
+https://www.travelnews.co.za/article/google-maps-reroutes-users-safety  
+Daniel, M., & Ramani, L. (2024, July 25). Six ways we’re enabling more efficient and sustainable journeys on Google
+Maps in India, powered by AI and local partners. Google. https://blog.google/intl/en-in/products/explore-
+communicate/six-ways-were-enabling-more-efficient-and-sustainable-journeys-on-google-maps-in-india-
+powered-by-ai-and-local-partners/ 
+D’Onfro, J. (2019, May 15). How Google’s work with motorbike riders in India demonstrates its plan for emerging
+markets. Forbes. https://www.forbes.com/sites/jilliandonfro/2019/05/15/google-next-billion-users-initiative-maps-two-
+wheeler-mode/  
+Faulkner, W. (2001). The technology question in feminism: A view from feminist technology studies. Women's Studies
+International Forum, 24(1), 79-95. https://doi.org/10.1016/S0277-5395(00)00166-7 
+Free to be. (n.d.). Plan International Australia. https://www.plan.org.au/you-can-help/join-the-movement-for-girls-
+rights/free-to-be/  
+Glasgow, D. (2020, October 15). Stay informed and get around safely with Google Maps. Google.
+https://blog.google/products/maps/stay-informed-and-get-around-safely-google-maps/  
+Goel, N., Sharma, R., Nikhil, N., Mahanoor, S. D., & Saini, M. (2017). A crowd-sourced adaptive safe navigation for smart
+cities. 2017 IEEE International Symposium on Multimedia (ISM), 382-387. https://doi.org/10.1109/ISM.2017.77 
+Kowalchuk, J. (2021, July 30). One mapping app is helping keep women safe. RICS.
+https://ww3.rics.org/uk/en/journals/land-journal/one-mapping-app-is-helping-keep-women-safe.html 
+Nagarajan, R. (2020, June 8). Get around safely with these new Google Maps features. Google.
+https://blog.google/products/maps/get-around-safely-these-new-google-maps-features/  
+Ouali, L. A. B., Graham, D. J., Barron, A., & Trompet, M. (2020). Gender differences in the perception of safety in public
+transport. Journal of the Royal Statistical Society Series A: Statistics in Society, 183(3), 737-769.
+https://doi.org/10.1111/rssa.12558 
+PTI. (2019, June 27). Women safety in Ola, Uber to get a boost with this new Google Map update. The Financial
+Express. https://www.financialexpress.com/auto/car-news/women-safety-in-ola-uber-to-get-a-boost-with-this-
+new-google-map-update/1620641/ 
+Radhakrishnan, J., Saineha, S., Madhumithaa, M., & Roshini, A. (2023). WSA: A navigation app for women safety.
+Russian Social Science Review, 8(7), 185-195.
+https://www.researchgate.net/publication/372445647_WSA_A_NAVIGATION_APP_FOR_WOMEN_SAFETY 
+Safecity. (2025). Safecity. https://webapp.safecity.in/home    
+Red Dot Foundation. (n.d.). Red Dot Foundation. https://reddotfoundation.org/  

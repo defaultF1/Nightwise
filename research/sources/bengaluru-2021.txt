@@ -1,0 +1,295 @@
+
+--- PDF PAGE 1 ---
+Safety Mapping in Bengaluru
+
+--- PDF PAGE 2 ---
+What is SAFETIPIN?
+Safetipin is a technology platform that 
+works to make our communities and cities 
+safer by collecting and disseminating 
+safety-related information on a large scale 
+through a set of map-based applications. 
+Safetipin has 3 different tools for data 
+collection. For this project, 2 tools have 
+been used – ‘My Safetipin App’ and
+‘Safetipin Nite’.
+8.0
+
+--- PDF PAGE 3 ---
+13 Countries2,88,078
+Audits
+SAFETY AUDIT
+At the core of Safetipin is the 
+safety audit. Based on the global 
+experience of 20 years on safety 
+audits, parameters that define 
+safety perceptions are fixed.
+AUDIT POINTS
+Each safety audit will appear as a 
+point on the My Safetipin App. 
+Each point gets uploaded 
+immediately and is then seen 
+collectively on the screen. 
+The red signifies unsafe points, 
+orange a bit safer and green 
+would be relatively safe points.
+WALK PATH
+LIGHT
+TRANSPORT
+VISIBILITY
+PARAMETERS
+GENDER USAGE
+PEOPLE
+OPENNESS
+SECURITY
+
+--- PDF PAGE 4 ---
+SAFETIPIN MAPPING IN BENGALURU
+
+--- PDF PAGE 5 ---
+13 Countries2,88,078
+Audits
+SAFETIPIN NITE
+Phone with Safetipin Nite Application 
+is mounted on the windshield of a 
+moving vehicle for capturing night -
+time pictures. Pictures are taken at 
+every 50 metres interval and 
+uploaded to our system. These are 
+then assessed according to the safety 
+audit parameters.
+
+--- PDF PAGE 6 ---
+5%
+18%
+22%
+21%
+34%
+The Safety Score at an audit location reflects 
+the aggregated rating of all the parameters. For 
+each audit point, a numeric value between 0 
+and 5 is provided where 0 is poor and 5 is good 
+in terms of overall safety. 
+Total audits: 15,000
+Images collected- 1 Lac +
+Road length covered:1900 km
+SAFETY SCORE
+
+--- PDF PAGE 7 ---
+There are 198 wards in Bengaluru. 
+For each ward, a safety score rating is 
+shown on the map on the left.’
+Most of the wards have been rated 
+‘Above Average’.
+Some wards are rated as ‘Good’ or 
+‘Average’
+WARD WISE SAFETY SCORE
+
+--- PDF PAGE 8 ---
+KEY FINDINGS
+
+--- PDF PAGE 9 ---
+LIGHTING
+The Lighting parameter measures the amount of illumination at 
+a place and ranges from dark to bright. For the rating of the 
+Lighting parameter, the sources which are considered are 
+streetlights, light from houses, shops and street vendors. 
+Temporary sources of light like the light from cars are not 
+considered when rating this parameter.
+0- Poor Light
+1- Some Light
+2- Enough Light
+3- Bright Light
+
+--- PDF PAGE 10 ---
+Good pavement
+Functional street lights
+No street lights
+5%
+10%
+46%
+39%
+LIGHTING
+
+--- PDF PAGE 11 ---
+Good pavement
+No street lights
+Non- functional street lights
+LIGHTING ISSUES
+
+--- PDF PAGE 12 ---
+WALKPATH
+The Walkpath parameter indicates whether a person can walk 
+at a place. This includes the quality of the pavement, or the 
+space designated for walking along a road. If a pavement is 
+present, its quality is assessed. If it is a residential lane, then the 
+area for walking along with the condition of the road (broken or 
+obstructed) is assessed. 
+0- None
+1- Poor
+2- Fair
+3- Good
+
+
+--- PDF PAGE 13 ---
+Good Walk path
+2%
+30%
+49%
+19%
+WALKPATH
+Poor Walk path
+
+--- PDF PAGE 14 ---
+WALKPATH ISSUES
+No Paved walkpath
+Broken Walk path
+
+--- PDF PAGE 15 ---
+WALKPATH ISSUES
+No Paved walkpath
+Broken Walk path
+
+
+--- PDF PAGE 16 ---
+Broken pavement
+Construction debris
+Vendors
+ Signage and advertisement boards
+WALKPATH ISSUES
+Walk path in most part of the city are 
+obstructed. 
+Common obstructions include:
+• Vehicular parking
+• Construction debris, 
+• Advertisement boards, signage, etc.
+• Unorganized vendors on the footpath
+Cars obstructing the walk path
+
+--- PDF PAGE 17 ---
+The heat map on the left is a visualization of 
+the walkpath conditions around people in 
+the city.
+Broken and obstructed  walk path where people are present
+WALKPATH AND PEOPLE
+
+--- PDF PAGE 18 ---
+VISIBILITY
+The Visibility parameter refers to the number of people that can 
+see a person who is on the street. It is based on the principle of 
+“eyes on the street”, which refers to social and built 
+environment to provide natural surveillance to the pedestrians. 
+This includes street vendors, windows and doors of shops or 
+buildings that can act as natural surveillance. 
+0- No Eyes
+1- Few Eyes
+2- More Eyes
+3- Highly Visible
+
+
+--- PDF PAGE 19 ---
+Good pavement
+27%
+18%
+27%
+28%
+Good visibility
+Poor visibility
+VISIBILITY
+
+--- PDF PAGE 20 ---
+Good pavement
+The map shows the condition of walk 
+path around the mapped vendors in 
+the city.
+VISIBILITY
+Shops and vendors
+
+--- PDF PAGE 21 ---
+PUBLIC TRANSPORT
+The Public Transport parameter measures the distance from 
+the audit point to the nearest mode of public transportation. 
+Through this parameter, the accessibility to the different modes 
+of transport  is measured. Public transport includes both formal 
+and informal modes of transport such as, buses and e-
+rickshaw/autos , etc. 
+0- Unavailable
+(>10 Minutes away)
+1- Distant
+(5-10 Minutes away)
+2- Nearby
+(2-5 Minutes away)
+3- Very Close
+(2 Minutes away)
+
+
+--- PDF PAGE 22 ---
+Good pavementGood visibility
+Poor visibility
+PUBLIC TRANSPORT
+16%
+25%
+41%
+18%
+People at the bus stop
+City bus stop
+
+--- PDF PAGE 23 ---
+The map shows the location of bus 
+stops and the condition of lighting 
+around them. 
+Obstructed walk path where people are present
+BUS STOPS AND LIGHTING
+Poor lighting near bus stops
+
+--- PDF PAGE 24 ---
+The map shows the location of bus 
+stops and the condition of walk paths 
+around them. 
+Obstructed walk path where people are present
+BUS STOPS AND WALK PATH
+Broken walkpath near a bus stop
+
+--- PDF PAGE 25 ---
+Obstructed walk path where people are present
+RECOMMENDATIONS
+Parameter Findings Recommendation
+Lighting
+327 points were 
+identified with no 
+streetlights. At 3074 
+points, streetlights 
+were not working
+Installing new streetlights and fixing the non-functional streetlights will improve the lighting rating 
+in the city
+Walkpath
+340 audit points were 
+identified with no 
+existing walk path.
+1620 audit points 
+were identified with 
+unpaved walk path
+Adequately spaced, well paved universally accessible footpaths should be provided.
+Broken footpaths should be repaired for the ease of movement of the pedestrians.
+Removing obstructions from the foot path will improve the walking experience of the pedestrians.
+Visibility
+1067 vendors were 
+mapped across the 
+city
+Vendors provide natural surveillance on the streets. Designated well lit vendor zones, clear of the 
+pedestrian path should be designed for ease of movement of the users.
+Public 
+Transport
+1084 bus stops were 
+audited across the 
+city.
+Bus stops were found with poor lighting (135 ) and poor walkpath condition (247). Improving the 
+lighting and walkpath conditions  around the bus stops will improve the accessibility of these bus 
+stops for the users of the city.
+
+--- PDF PAGE 26 ---
+THANK YOU !
+www.safetipin.com
+www.facebook.com/safetipin
+@safetipinapp
+Safetipin can be downloaded FREE from:

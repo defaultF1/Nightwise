@@ -1,0 +1,84 @@
+{
+  "filename": "2026-09-09_M02_journey-and-routes_v01.docx",
+  "title": "NightWise Module 2 journey and routes",
+  "meta": "9 September 2026 IST  |  M02 revision 1  |  Prepared by Codex for the project owner",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Module 2 is complete within its credential-free tutorial scope. Both Bengaluru starting points work with the supplied AEOS destination, selectable route diagrams and route cards. Four unit tests and four browser tests passed. The geometry and journey values are illustrative; real Bengaluru streets and live alternatives remain Module 4 work."
+    },
+    {
+      "type": "heading",
+      "text": "What I built"
+    },
+    {
+      "type": "bullet",
+      "text": "A searchable list of the two prepared origins, with an explicit no-match state. Typing an unknown address never silently selects it. AEOS has a destination details sheet preserving latitude 13.0628268 and longitude 77.5940888; the entrance is still unverified."
+    },
+    {
+      "type": "bullet",
+      "text": "An abortable route-provider interface, journey validation, bounded response checks and zero, one, two or three sample route options. Durations are fixtures; diagram distances are calculated from the same synthetic polylines used for selection."
+    },
+    {
+      "type": "bullet",
+      "text": "A responsive route diagram with keyboard-operable paths, solid selected lines, dashed alternatives and text controls. Cards, diagram controls, details and the handoff preview share the selected route ID."
+    },
+    {
+      "type": "bullet",
+      "text": "Cancellation invalidates pending results. Edit and recoverable error flows preserve the selected origin. Retry loads a normal sample journey. The Google Maps preview names the selection and explains that the illustrative corridor does not transfer."
+    },
+    {
+      "type": "heading",
+      "text": "Assets and approach"
+    },
+    {
+      "type": "paragraph",
+      "text": "I completed the requested visual preparation first: four Higgsfield GPT Image 2.5 illustrations, reusing the launch video, existing concept boards and vector controls. The storefront illustration initially contained unwanted opening-hour labels; a targeted correction removed them and the human silhouettes. All final illustrations were visually inspected and saved locally. Estimated generation cost was 17.5 existing credits including the correction; no credits were purchased."
+    },
+    {
+      "type": "paragraph",
+      "text": "The old preview process had stopped. I restarted port 4173 and verified HTTP 200. This localhost serves real application code; it does not establish live data connectivity. I kept imagery decorative and implemented route interactions as actual UI so future provider data can use the same selection contract."
+    },
+    {
+      "type": "heading",
+      "text": "Verification and limits"
+    },
+    {
+      "type": "paragraph",
+      "text": "The TypeScript and production Vite build passed. Unit checks covered both origins and all route counts, malformed input/response rejection, cancellation and recoverable failure. Browser checks covered both origins, exact AEOS handoff parameters, card/diagram keyboard synchronization, monochrome selection, no-route behavior, retry and unmatched search text. The browser run completed with 4 passed in 1.6 minutes."
+    },
+    {
+      "type": "paragraph",
+      "text": "No functional defect remained in the new M2 checks. The machine reported about 356 MiB of free physical memory while build/browser work ran; avoid unnecessary concurrent heavy tasks. M2 does not claim phone installation, live search, measured route conditions or completed activity analysis. Its evidence placeholders are replaced by Module 3."
+    },
+    {
+      "type": "page"
+    },
+    {
+      "type": "heading",
+      "text": "Actual application screenshot"
+    },
+    {
+      "type": "image",
+      "path": "talks/screenshots/M02/04-desktop.png",
+      "width": 6.5,
+      "caption": "Figure 1  Module 2 desktop browser capture. Route geometry and numbers are explicitly labelled sample data. This is the implemented app, not a generated UI mockup."
+    },
+    {
+      "type": "heading",
+      "text": "Files and continuation"
+    },
+    {
+      "type": "paragraph",
+      "text": "The canonical root is D:/Aevy TV ( Achina Mayya )/Nightwise. Main files are src/providers/routes.ts, src/RouteDiagram.tsx, src/domain/geometry.ts, src/Illustration.tsx, src/App.tsx and src/styles.css. Tests are in tests/unit/routes.test.ts and tests/browser/module2.spec.ts. Actual captures are in talks/screenshots/M02."
+    },
+    {
+      "type": "paragraph",
+      "text": "Asset prompts and source jobs are in assets/illustrations/generation-record.json and activity-correction.json. Use public/assets/illustrations/activity-explained-v2.png for the approved storefront image. The original image is retained as generation history."
+    },
+    {
+      "type": "paragraph",
+      "text": "Open http://127.0.0.1:4173 while the local preview runs. From the project folder, npm run build followed by npm run preview -- --port 4173 recreates it. M3 will calculate activity evidence and comparisons from synthetic observations. Restricted API access is first needed at M4; no user keys or billing are required for this milestone."
+    }
+  ]
+}

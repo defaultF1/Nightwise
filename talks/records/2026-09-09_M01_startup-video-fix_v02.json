@@ -1,0 +1,64 @@
+{
+  "filename": "2026-09-09_M01_startup-video-fix_v02.docx",
+  "title": "NightWise startup video fix",
+  "meta": "9 September 2026 IST  |  M01 revision 2  |  Prepared by Codex for the project owner",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "The startup video is fixed in the local browser build. The generated 4.04 second Higgsfield clip can now play to completion before the journey screen opens. This is a correction to Module 1 on top of the completed M2 and M3 tutorial; no live provider work was added."
+    },
+    {
+      "type": "heading",
+      "text": "Cause and correction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The previous App component dismissed the entire launch overlay after a fixed 1.2 seconds, starting when the app mounted. That timer did not wait for media loading or playback. It could hide the clip before the useful animation appeared and always prevented a complete four second introduction."
+    },
+    {
+      "type": "paragraph",
+      "text": "I moved playback into LaunchScreen.tsx. The normal dismissal now follows the actual video ended event. Muting is set explicitly before playback. If browser policy rejects autoplay, Play intro provides a user initiated start. Skip and Escape remain available. Failed media falls back to the static brand and opens the app; loading and playback watchdogs prevent an unresolved or stalled clip from trapping the user."
+    },
+    {
+      "type": "paragraph",
+      "text": "The original generated media was reused. Its portrait composition now stays visible in wide browser windows and its opacity is no longer reduced to 60 percent. Settings includes Replay intro. Automatic playback still respects reduced motion, while an explicit replay lets the owner inspect or record the animation. The underlying app is inert during launch and focus returns to its heading afterwards."
+    },
+    {
+      "type": "heading",
+      "text": "Verification and limits"
+    },
+    {
+      "type": "paragraph",
+      "text": "The production web build passed. Eleven Microsoft Edge browser checks passed: six launch checks and five existing Module 1 regressions. The launch tests verify decoded video frames and advancing playback beyond 1.5 seconds, an actual ended event near 4.04 seconds, slow media loading, rejected autoplay with manual recovery, reduced motion with replay, failed media and a request that never resolves. The actual launch screenshot on the next page was visually inspected."
+    },
+    {
+      "type": "paragraph",
+      "text": "The in-app browser automation bridge returned a local kernel-assets path error twice, so the exact open Codex tab could not be inspected directly. Microsoft Edge automation verified the served localhost build. The original 34 logic tests and M2/M3 implementation were unchanged and were not rerun for this launch-only correction. Physical-phone playback remains untested."
+    },
+    {
+      "type": "paragraph",
+      "text": "Gradle assembled Android in 2 minutes 9 seconds. The wrapper then failed because Get-FileHash was unavailable; compilation and the APK copy had already succeeded. I changed that final helper to use .NET SHA256 and checked its hash independently. The version 0.3.1-launchfix APK passed signature, identity, current JavaScript bundle and launch-video verification. It is saved as output/apk/nightwise-module-03-launchfix-debug.apk; the prior M3 APK is preserved. No new credentials or generated media were required."
+    },
+    {
+      "type": "page"
+    },
+    {
+      "type": "heading",
+      "text": "Actual browser playback"
+    },
+    {
+      "type": "image",
+      "path": "talks/screenshots/M01-fix/01-launch-playing.png",
+      "width": 3.0,
+      "caption": "Actual 390 by 844 browser screenshot captured after the generated video had advanced beyond 1.5 seconds. The test temporarily paused playback for this capture, then resumed and verified the end of the clip."
+    },
+    {
+      "type": "paragraph",
+      "text": "Open http://localhost:4173 and refresh to see the intro. Use Settings then Replay intro to repeat it, including when reduced motion is enabled. If the preview server stops, run Preview NightWise.cmd in the project root."
+    },
+    {
+      "type": "paragraph",
+      "text": "Changed source: src/LaunchScreen.tsx, src/App.tsx and src/styles.css. Regression checks: tests/browser/launch.spec.ts and module1.spec.ts. Packaging records preserve the earlier M3 APK. Read planning/nightwise-current-status.md and talks/README.md before resuming. M4 remains the next planned module."
+    }
+  ]
+}
