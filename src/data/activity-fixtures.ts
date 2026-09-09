@@ -17,7 +17,7 @@ export function fixtureScans(plan:QueryPlan,scenario:TutorialScenario):NearbySca
     const hours=scenario==='closing'&&active?closing:active?open:closed;
     const categories=index%4===0?[index%8===0?'gas_station':'pharmacy']:index%4===1?['transit_station']:['store'];
     const primary:PlaceObservation={id:`sample:place:${index}`,coordinate:{...query.coordinate},categories,hours,observedAt:TUTORIAL_CHECKED_AT};
-    const places=[primary];
+    const places=[primary,...(active?[{...primary,id:`sample:companion:${index}`,categories:['cafe']}]:[])];
     return {queryId:query.id,observedAt:TUTORIAL_CHECKED_AT,status,places:status==='failed'?[]:places};
   });
   // Repeated query results preserve the original listing's hours and categories.
@@ -31,6 +31,8 @@ export function fixtureScans(plan:QueryPlan,scenario:TutorialScenario):NearbySca
 export function fixtureRoadEvidence(routes:Route[],scenario:TutorialScenario):Record<string,RoadEvidence>{
   return Object.fromEntries(routes.filter(r=>r.source==='sample').map((r,index)=>[r.id,{
     mainRoadFraction:scenario==='similar'?.7:index===0?.4:.8,
+    internalRoadFraction:scenario==='similar'?.3:index===0?.6:.2,
+    internalTurnsPerKm:scenario==='similar'?.6:index===0?2:.3,
     maneuversPerKm:scenario==='similar'?2:index===0?4:1.5,
   }]));
 }

@@ -1,6 +1,6 @@
 # NightWise: Android delivery in 48–72 hours
 
-> Latest 9 September update: all three keys are configured privately; billing and phone tests are deferred. Google requests and embedded maps are explicitly paused. The latest APK is output/apk/nightwise-prebilling-debug.apk (0.6.0-prebilling). Search, OSM road classification, rehearsal materials and source/deployment preparation are implemented. Read planning/nightwise-current-status.md for current acceptance status; older statements below are historical.
+> Latest 10 September update: PDF offline completion is recorded in planning/nightwise-current-status.md. Black is the default; intro Skip is removed. Version 0.6.3 adds ranking, staffing proxies, help gaps and map labels. Google calls remain paused. The previous APK passed 21 phone checks; Back and native GPS checks remain. GitHub pushes and hosting are explicitly deferred. Older statements below are historical.
 
 
 Scope locked from the latest user instructions. Android is required; iOS is optional after Android is ready. At most ten tutorial users. Full Bengaluru map, with the latest demonstration from AEOS at 13.0628268, 77.5940888 to Manyata Tech Park at the supplied 13.047697, 77.619939 pin. This supersedes the older two-origin demonstration. Driving remains the provisional mode. The user now permits app construction before API keys/billing are supplied.

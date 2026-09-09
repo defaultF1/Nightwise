@@ -3,6 +3,16 @@ import type { ActivityAnalysis, ActivitySegment, NearbyScan, PlaceObservation, Q
 import { distanceMeters, samplePolyline, validCoordinate } from './geometry';
 import { evaluateObservation, isFresh } from './hours';
 
+export const HELP_CATEGORIES = new Set(['hospital','police','pharmacy','hotel','gas_station']);
+export const STAFFED_PROXY_CATEGORIES = new Set([...HELP_CATEGORIES,'restaurant','cafe','store','convenience_store','supermarket']);
+// Provisional, disclosed threshold. Field testing must calibrate this value.
+export const MIN_OPEN_FOR_ACTIVITY = 2;
+export function longestRun(segments:ActivitySegment[],state:ActivitySegment['state']='low') {
+  let current=0,longest=0;
+  for(const segment of segments){current=segment.state===state?current+segment.toMeters-segment.fromMeters:0;longest=Math.max(longest,current);}
+  return longest;
+}
+
 export function buildQueryPlan(routes:Route[],spacing=200,maxQueries=120):QueryPlan{
   const queries=new Map<string,QueryPlan['queries'][number]>();const samplesByRoute:QueryPlan['samplesByRoute']={};let totalSamples=0;
   for(const route of routes){
@@ -59,11 +69,20 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
   const sampleState=statuses.map((status,i):ActivitySegment['state']=>{
     if(!status.usable)return 'unknown';
     const nearby=places.filter(p=>p.sampleIndexes.includes(i));
-    if(nearby.some(p=>p.hours.state==='open'))return 'active';
+    if(nearby.filter(p=>p.hours.state==='open').length>=MIN_OPEN_FOR_ACTIVITY)return 'active';
     if(nearby.some(p=>p.hours.state==='unknown'))return 'unknown';
     return 'low';
   });
   const segments:ActivitySegment[]=samples.slice(1).map((sample,i)=>({fromMeters:samples[i].distanceMeters,toMeters:sample.distanceMeters,state:sampleState[i]==='unknown'||sampleState[i+1]==='unknown'?'unknown':sampleState[i]==='active'||sampleState[i+1]==='active'?'active':'low'}));
+  const helpStates=statuses.map((status,i):ActivitySegment['state']=>{
+    if(!status.usable)return 'unknown';
+    const nearby=places.filter(p=>p.sampleIndexes.includes(i)&&p.categories.some(c=>HELP_CATEGORIES.has(c)));
+    if(nearby.some(p=>p.hours.state==='open'))return 'active';
+    if(nearby.some(p=>p.hours.state==='unknown'))return 'unknown';
+    return 'low';
+  });
+  const helpSegments:ActivitySegment[]=samples.slice(1).map((sample,i)=>({fromMeters:samples[i].distanceMeters,toMeters:sample.distanceMeters,state:helpStates[i]==='unknown'||helpStates[i+1]==='unknown'?'unknown':helpStates[i]==='active'||helpStates[i+1]==='active'?'active':'low'}));
+  const helpGap=longestRun(helpSegments);
   const length=samples.at(-1)!.distanceMeters;
   let scanned=0,assessed=0,longest=0,current=0;
   segments.forEach((segment,i)=>{const meters=segment.toMeters-segment.fromMeters;if(statuses[i].usable&&statuses[i+1].usable)scanned+=meters;if(segment.state!=='unknown')assessed+=meters;if(segment.state==='low'){current+=meters;longest=Math.max(longest,current);}else current=0;});
@@ -79,7 +98,9 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
   if(open.some(p=>p.hours.closingSoon))limitations.add('Some listed places may close before arrival; availability is not guaranteed.');
   return {routeId:route.id,source:route.source==='sample'?'sample':'live',checkedAt,distanceMeters:length,
     openPlaces:anyObserved?open.length:null,closedPlaces:anyObserved?closed.length:null,unknownHours:anyObserved?unknown:null,
-    potentialHelpPoints:anyObserved?open.filter(p=>p.categories.some(c=>['hospital','police','pharmacy','hotel','gas_station'].includes(c))).length:null,
+    potentialHelpPoints:anyObserved?open.filter(p=>p.categories.some(c=>HELP_CATEGORIES.has(c))).length:null,
+    staffedPlaceProxy:anyObserved?open.filter(p=>p.categories.some(c=>STAFFED_PROXY_CATEGORIES.has(c))).length:null,
+    longestHelpGapMeters:coreComparable?helpGap:null,longestObservedHelpGapMeters:helpGap,lowActivityOpenThreshold:MIN_OPEN_FOR_ACTIVITY,
     openTransportPoints:anyObserved?open.filter(p=>p.categories.some(c=>['transit_station','bus_station','train_station','subway_station','light_rail_station'].includes(c))).length:null,
     closingSoon:anyObserved?open.filter(p=>p.hours.closingSoon).length:null,
     scanCoverage,activityCoverage,hoursCoverage,longestLowActivityMeters:coreComparable?longest:null,longestObservedLowActivityMeters:longest,

@@ -7,7 +7,7 @@ import { ServiceError } from './errors';
 import type { Budget } from './budget';
 
 type Json = Record<string, any>;
-export const ROUTE_FIELDS = 'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline,routes.legs.steps.navigationInstruction.maneuver,routes.legs.steps.distanceMeters';
+export const ROUTE_FIELDS = 'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline,routes.legs.steps.navigationInstruction.maneuver,routes.legs.steps.distanceMeters,routes.legs.steps.polyline.encodedPolyline';
 export const PLACE_FIELDS = 'places.id,places.location,places.types,places.businessStatus,places.currentOpeningHours,places.attributions';
 export function decodePolyline(encoded: string): Coordinate[] {
   if (typeof encoded !== 'string' || encoded.length > 50000) throw new ServiceError('invalid-response', 'Route geometry could not be read.');
@@ -40,7 +40,12 @@ export function parseRoutes(data: Json): Route[] {
     const steps: Json[] = Array.isArray(r.legs) ? r.legs.flatMap((l: Json) => Array.isArray(l.steps) ? l.steps : []) : [];
     const maneuvers = steps.map(s => s.navigationInstruction?.maneuver);
     const turns = maneuvers.length && maneuvers.every(m => typeof m === 'string') ? maneuvers.filter(m => /TURN|U_TURN|ROUNDABOUT/.test(m)).length : undefined;
-    return { id: `google:${index}`, label: `Alternative ${index + 1}`, path, distanceMeters: r.distanceMeters, durationSeconds: Number(r.duration.slice(0, -1)), source: 'google', geometryKind: 'provider', turns };
+    const parsedSteps=steps.filter(s=>Number.isFinite(s.distanceMeters)&&s.distanceMeters>=0).map(s=>{
+      const path=typeof s.polyline?.encodedPolyline==='string'?decodePolyline(s.polyline.encodedPolyline):undefined;
+      if(path?.some(p=>!inBengaluru(p)))throw new ServiceError('outside-area','A route step leaves the Bengaluru pilot area.',422);
+      return {distanceMeters:s.distanceMeters,...(typeof s.navigationInstruction?.maneuver==='string'?{maneuver:s.navigationInstruction.maneuver}:{}),...(path?{path}:{})};
+    });
+    return { id: `google:${index}`, label: `Alternative ${index + 1}`, path, distanceMeters: r.distanceMeters, durationSeconds: Number(r.duration.slice(0, -1)), source: 'google', geometryKind: 'provider', turns, steps:parsedSteps };
   }).filter((r: Route) => { const key = JSON.stringify(r.path); if (paths.has(key)) return false; paths.add(key); return true; });
   routes.sort((a: Route, b: Route) => a.durationSeconds - b.durationSeconds);
   routes.forEach((r: Route, i: number) => { r.label = i ? `Alternative ${i}` : 'Fastest'; });

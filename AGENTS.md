@@ -18,7 +18,7 @@ The local report authoring helper is scripts/write-module-report.py; its inputs 
 
 Android first for a maximum of ten tutorial users, within the user's 48 to 72 hour delivery constraint. iOS is optional after Android. Use the full Bengaluru map, with the current demonstration from AEOS (13.0628268, 77.5940888) to the supplied Manyata Tech Park pin (13.047697, 77.619939). This latest user instruction supersedes the earlier Manyata/Sahakar-to-AEOS presets. Public gates and road approaches still need a local check. Driving is provisional.
 
-The user selected the original blue and navy theme with teal accents on 9 September 2026. Make this the initial default. Provide optional black and white appearances, Mono Light and Mono Dark, and remember the selection locally. Do not treat the monochrome comparison as a pending default-theme decision.
+The latest appearance decision is black (Mono Dark) by default, with optional Mono Light and original Blue. Remember the chosen appearance through relaunch. There is no Skip button on the intro. On 10 September the user resumed Word reports and status notes, prioritized PDF gaps, deferred the seven proposed enhancements, and explicitly deferred GitHub pushes and hosting.
 
 Use the prepared module plan. API keys and billing can be requested when live integration actually needs them; build credential-free components first. Do not call sample data live or imply activity ratings guarantee safety. Local source, research, designs and handoffs belong in this project folder.
 

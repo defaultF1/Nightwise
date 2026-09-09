@@ -88,7 +88,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch)
       if (activityStatus === 'complete' && analyses.some(a => !a.coreComparable)) activityStatus = 'partial';
       if (!config.enabled) notices.push('Live activity scans are switched off. Travel times are live; activity is not assessed.');
       if (!config.scoring) notices.push('Experimental live scoring awaits provider-use review and local calibration. No live Night Activity Score is published.');
-      const roadAnalyses=Object.fromEntries(routes.map(r=>[r.id,analyzeRoads(r.path)]));
+      const roadAnalyses=Object.fromEntries(routes.map(r=>[r.id,analyzeRoads(r.path,r.steps)]));
       if(routes.length)attributions.push({name:'© OpenStreetMap contributors · ODbL',uri:'https://www.openstreetmap.org/copyright'});
       notices.push('Road type is estimated from a local OpenStreetMap extract around North Bengaluru. Unmatched, ambiguous and grade-separated sections remain unknown. Actual staffing, lighting and crime are not measured.');
       const roads = Object.fromEntries(routes.map(r => [r.id, { ...roadAnalyses[r.id], ...(r.turns!==undefined?{maneuversPerKm:r.turns/(r.distanceMeters/1000)}:{}) }]));

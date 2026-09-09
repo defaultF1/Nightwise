@@ -12,7 +12,7 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Web build or Capacitor sync failed' }
     Push-Location (Join-Path $project 'android')
     try {
-        & .\gradlew.bat :app:assembleDebug --no-daemon --max-workers=2
+        & .\gradlew.bat :app:assembleDebug --no-daemon --max-workers=1
         if ($LASTEXITCODE -ne 0) { throw 'Android compilation failed' }
     } finally { Pop-Location }
     $out = Join-Path $project 'output/apk'

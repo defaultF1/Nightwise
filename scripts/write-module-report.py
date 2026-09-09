@@ -5,6 +5,7 @@ from pathlib import Path
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
@@ -52,14 +53,15 @@ def build(source):
             doc.add_heading(block['text'], level=block.get('level',1))
             lines.extend(['## '+block['text'], ''])
         elif kind == 'image_pair':
-            p = doc.add_paragraph()
-            p.paragraph_format.keep_with_next = True
-            align = OxmlElement('w:textAlignment')
-            align.set(qn('w:val'), 'top')
-            p._p.get_or_add_pPr().append(align)
+            table = doc.add_table(rows=1, cols=len(block['images']))
+            table.autofit = False
+            table.rows[0]._tr.get_or_add_trPr().append(OxmlElement('w:cantSplit'))
             for index, item in enumerate(block['images']):
-                if index:
-                    p.add_run('    ')
+                cell = table.cell(0, index)
+                cell.width = Inches(3.5)
+                cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.TOP
+                p = cell.paragraphs[0]
+                p.paragraph_format.keep_with_next = True
                 size = {'height': Inches(block['height'])} if 'height' in block else {'width': Inches(block.get('width', 3.1))}
                 p.add_run().add_picture(str(ROOT / item['path']), **size)
                 p._p.xpath('.//wp:docPr')[-1].set('descr', item['caption'])

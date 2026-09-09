@@ -1,3 +1,7 @@
+# Latest handoff
+
+10 September 2026: [PDF offline implementation report](2026-09-10_PDF_offline-completion_v01.docx) and [Markdown source](2026-09-10_PDF_offline-completion_v01.md). Read [current status](../planning/nightwise-current-status.md) and [implementation decisions](../planning/pdf-implementation-decisions.md) first. Version 0.6.3 includes the offline PDF gap fixes; live validation, phone checks and deferred hosting remain. Reports below are historical and may describe superseded themes, APKs and acceptance status.
+
 # NightWise module handoffs
 
 > Latest 9 September update: all three keys are configured privately; billing and phone tests are deferred. Google requests and embedded maps are explicitly paused. The latest APK is output/apk/nightwise-prebilling-debug.apk (0.6.0-prebilling). Search, OSM road classification, rehearsal materials and source/deployment preparation are implemented. Read planning/nightwise-current-status.md for current acceptance status; older statements below are historical.

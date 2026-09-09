@@ -1,3 +1,5 @@
+> Current handoff (10 September 2026): read [implementation status](planning/nightwise-current-status.md) and [PDF decisions](planning/pdf-implementation-decisions.md). Latest local APK: output/apk/nightwise-0.6.3-debug.apk. Black is the default, with persistent Light and Blue options; intro Skip is removed. Google calls remain paused. GitHub publishing and hosting are deferred. Older milestone details below are historical.
+
 # NightWise
 
 > Latest 9 September update: all three keys are configured privately; billing and phone tests are deferred. Google requests and embedded maps are explicitly paused. The latest APK is output/apk/nightwise-prebilling-debug.apk (0.6.0-prebilling). Search, OSM road classification, rehearsal materials and source/deployment preparation are implemented. Read planning/nightwise-current-status.md for current acceptance status; older statements below are historical.

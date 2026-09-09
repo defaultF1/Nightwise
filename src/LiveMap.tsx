@@ -7,6 +7,7 @@ import type { LiveJourney } from './domain/journey';
 import type { Theme } from './theme';
 import { createMap, type MapHandle, type MapLine } from './maps/adapter';
 import { samplePolyline } from './domain/geometry';
+import { gapMarkers } from './domain/gap-markers';
 
 export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked, analysis }: { routes: Route[]; selectedId?: string; onSelect: (id: string) => void; journey: LiveJourney; theme: Theme; blocked: boolean; analysis?: ActivityAnalysis }) {
   const element = useRef<HTMLElement>(null);
@@ -46,7 +47,7 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
         const samples = samplePolyline(selected.path, 200, 120);
         for (const [i, segment] of analysis.segments.entries()) if (segment.state !== 'active' && samples[i + 1]) lines.push({ id: selected.id, path: [samples[i].coordinate, samples[i + 1].coordinate], color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
       }
-      await map.draw(lines, [journey.origin, journey.destination]);
+      await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[]);
     }).catch(() => setError(true));
   }, [ready, routes, selectedId, journey, analysis, theme]);
   useEffect(() => {

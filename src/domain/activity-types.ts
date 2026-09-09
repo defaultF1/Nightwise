@@ -14,6 +14,9 @@ export type ActivityAnalysis = {
   routeId: string; source: 'sample' | 'live'; checkedAt: string; distanceMeters: number;
   openPlaces: number | null; closedPlaces: number | null; unknownHours: number | null;
   potentialHelpPoints: number | null; openTransportPoints: number | null; closingSoon: number | null;
+  staffedPlaceProxy: number | null;
+  longestHelpGapMeters: number | null; longestObservedHelpGapMeters: number;
+  lowActivityOpenThreshold: number;
   scanCoverage: number; activityCoverage: number; hoursCoverage: number;
   longestLowActivityMeters: number | null; longestObservedLowActivityMeters: number;
   totalLowActivityMeters: number | null; totalObservedLowActivityMeters: number;
@@ -21,10 +24,11 @@ export type ActivityAnalysis = {
   coreComparable: boolean;
 };
 export type Component = 'openDensity' | 'mainRoad' | 'helpDensity' | 'gapContinuity' | 'simplicity' | 'transport';
-export type RoadEvidence = { mainRoadFraction?: number; maneuversPerKm?: number };
+export type RoadEvidence = { mainRoadFraction?: number; internalRoadFraction?: number; maneuversPerKm?: number; internalTurnsPerKm?:number };
 export type Comparison = {
   version: string; fastestId: string | null; selectedId: string | null; recommendedId: string | null;
   outcome: 'empty' | 'single' | 'insufficient' | 'similar' | 'detour' | 'more-activity';
   message: string; commonComponents: Component[]; scores: Record<string,number>;
   componentScores: Record<string, Partial<Record<Component, number>>>;
+  rankedIds: string[];
 };

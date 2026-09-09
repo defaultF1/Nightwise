@@ -2,9 +2,10 @@ import { Capacitor } from '@capacitor/core';
 import { GoogleMap, LatLngBounds, type Polyline } from '@capacitor/google-maps';
 import type { Theme } from '../theme';
 import type { Coordinate } from '../domain/types';
+import type { GapMarker } from '../domain/gap-markers';
 
 export type MapLine = { id: string; path: Coordinate[]; color: string; width: number; clickable: boolean };
-export type MapHandle = { draw(lines: MapLine[], pins: { name: string; latitude: number; longitude: number }[]): Promise<void>; fit(points: Coordinate[]): Promise<void>; touch(enabled: boolean): Promise<void>; destroy(): Promise<void> };
+export type MapHandle = { draw(lines: MapLine[], pins: { name: string; latitude: number; longitude: number }[], gaps?:GapMarker[]): Promise<void>; fit(points: Coordinate[]): Promise<void>; touch(enabled: boolean): Promise<void>; destroy(): Promise<void> };
 const latLng = (p: Coordinate) => ({ lat: p.latitude, lng: p.longitude });
 let script: Promise<void> | undefined;
 let instance = 0;
@@ -41,12 +42,12 @@ export async function createMap(element: HTMLElement, theme: Theme, onSelect: (i
     let lines: string[] = [], markers: string[] = []; let ids = new Map<string, string>();
     await map.setOnPolylineClickListener(e => { const id = ids.get(e.polylineId); if (id) onSelect(id); });
     return {
-      async draw(next, pins) {
+      async draw(next, pins, gaps=[]) {
         if (lines.length) await map.removePolylines(lines);
         if (markers.length) await map.removeMarkers(markers);
         lines = next.length ? await map.addPolylines(next.map((l): Polyline => ({ path: l.path.map(latLng), strokeColor: l.color, strokeWeight: l.width, clickable: l.clickable, tag: l.id }))) : [];
         ids = new Map(lines.map((id, i) => [id, next[i].id]));
-        markers = await map.addMarkers(pins.map(p => ({ coordinate: latLng(p), title: p.name })));
+        markers = await map.addMarkers([...pins.map(p => ({ coordinate: latLng(p), title: p.name })),...gaps.map(p=>({coordinate:latLng(p),title:p.label,snippet:p.name}))]);
       },
       async fit(points) {
         if (!points.length) return;
@@ -60,10 +61,11 @@ export async function createMap(element: HTMLElement, theme: Theme, onSelect: (i
   const map = new google.maps.Map(element, { center: { lat: 13.055, lng: 77.607 }, zoom: 13, styles: styles(theme), mapTypeControl: false, streetViewControl: false, fullscreenControl: false, gestureHandling: 'cooperative', clickableIcons: false });
   let lines: google.maps.Polyline[] = [], pins: google.maps.Marker[] = [];
   return {
-    async draw(next, nextPins) {
+    async draw(next, nextPins, gaps=[]) {
       lines.forEach(l => { google.maps.event.clearInstanceListeners(l); l.setMap(null); }); pins.forEach(p => p.setMap(null));
       lines = next.map(l => { const line = new google.maps.Polyline({ map, path: l.path.map(latLng), strokeColor: l.color, strokeWeight: l.width, clickable: l.clickable, zIndex: l.clickable ? 1 : 2 }); if (l.clickable) line.addListener('click', () => onSelect(l.id)); return line; });
       pins = nextPins.map((p, i) => new google.maps.Marker({ map, position: latLng(p), title: p.name, label: i ? 'B' : 'A' }));
+      pins.push(...gaps.map(p=>new google.maps.Marker({map,position:latLng(p),title:p.name,label:{text:p.label,color:'#171717',fontSize:'12px',fontWeight:'600'},icon:{path:google.maps.SymbolPath.CIRCLE,scale:8,fillColor:'#f4b86a',fillOpacity:1,strokeWeight:1,labelOrigin:new google.maps.Point(0,-2.5)}})));
     },
     async fit(points) { if (points.length) { const bounds = new google.maps.LatLngBounds(); points.forEach(p => bounds.extend(latLng(p))); map.fitBounds(bounds, 45); } },
     async touch(enabled) { map.setOptions({ gestureHandling: enabled ? 'cooperative' : 'none', keyboardShortcuts: enabled }); },

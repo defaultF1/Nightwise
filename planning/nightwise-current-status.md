@@ -1,65 +1,55 @@
 # NightWise current implementation status
 
-Updated 9 September 2026 after the user authorized all work that does not require billing. Canonical folder: D:/Aevy TV ( Achina Mayya )/Nightwise. The user explicitly deferred physical-phone testing until later. Do not make Google API calls until billing is confirmed and testing resumes.
+Updated 10 September 2026. Canonical project: D:/Aevy TV ( Achina Mayya )/Nightwise. The PDF offline implementation is complete to the documented data and policy boundaries; final packaging records accompany version 0.6.3. This is not live acceptance. All Google Cloud API calls and embedded map creation remain paused.
 
-## Current milestone
+## Latest user decisions
 
-M0–M3 are implemented and tested for the tutorial scope. M4/M5 now include prepared live search, local road classification, explicit provider pause controls and an updated verified APK. Live-service and intended-phone acceptance remain incomplete. M6 rehearsal materials and M7 source/deployment preparation are ready; the real rehearsal, container-host deployment and final live team acceptance are not complete.
+Prioritize the PDF. Defer the seven proposed improvements: expanded journey selection and swap, explicit endpoint confirmation, standalone confidence indicator, interactive help-point map, extra-time preference, saved places and dedicated freshness control. Existing related behavior and the PDF-required help-gap calculation remain in scope.
 
-| Stage | Current position |
-| --- | --- |
-| M0 foundation | Complete locally; source restoration instructions included |
-| M1 shell and launch | Complete tutorial; original blue default, optional monochrome, local video |
-| M2 journey and routes | Tutorial works; local pin search plus prepared Google destination search |
-| M3 activity and scoring | Synthetic logic tested; live calibration and permitted-use question unresolved |
-| M4 providers and limits | Code tested; all Google requests deliberately paused; real Google acceptance pending |
-| M5 Android and handoff | APK verified; user deferred device connection and tests |
-| M6 rehearsal | Recording script, phone checklist and ten-person sheet prepared; no field rehearsal |
-| M7 delivery | Source ZIP and deployment recipe prepared; no HTTPS host or final live distribution |
+The user resumed local status notes and Word reports on 10 September. Do not push to GitHub or deploy hosting now. The fresh-install appearance is black, with persistent Light and Blue options. The intro has no Skip button; retain media-failure and reduced-motion recovery. Android is required, iOS optional, for no more than ten tutorial users.
 
-The PDF has 12 functional modules, grouped by our stages. Frontend, backend, route fetcher, sampler, scanner, deduplicator, activity analyzer, stretch detector, scoring, explanations and handoff are implemented to their documented sample/live boundaries. PDF module 9 now has a conservative OSM road classifier and source data; actual provider-path matching and field accuracy remain unverified. A prepared feature is not a claim of live acceptance.
+## PDF modules
 
-## Accepted journey and data behavior
+| Module | Local implementation | Remaining acceptance |
+| --- | --- | --- |
+| 1 Frontend | No-login inputs, cards, rank display, evidence, Google map adapter and grouped low-activity labels | Real web/native map rendering |
+| 2 Backend | Private credentials, pause gates, input limits, request ledger, packaged Node server | Live integration and eventual HTTPS deployment |
+| 3 Route fetcher | Alternatives, geometry, duration, distance, retained step distances/maneuvers/polylines | Actual returned alternatives and endpoint gates |
+| 4 Sampler | Approximately 200 m spacing and capped query plan | Real-path coverage |
+| 5 Places scanner | Requested listing categories, opening-hour handling, attribution and result caps | Actual hours and coverage |
+| 6 Deduplication | Per-route place IDs and shared exact-query deduplication | Verify real examples |
+| 7 Activity analyzer | Open/closed/unknown counts, density, staffed-category proxy, help points including petrol pumps, transport | Category data cannot verify actual staff |
+| 8 Gap detector | Longest and total low activity; longest help gap; unknown boundaries kept separate | Calibrate threshold of fewer than two open listings |
+| 9 Road analyzer | North Bengaluru OSM main/internal classes and estimated turns entering internal roads | Provider-step matching and local accuracy |
+| 10 Score | Six components, help/staff/gap effects, internal-turn penalty, full rank order, time/detour gates | Permitted-use review and calibration |
+| 11 Explanation | Plain-language tradeoff, deeper evidence, proxy and missing-data disclosures | Real recommendation quality |
+| 12 Handoff | Endpoint URL, up to three provider-route corridor points, Android Maps intent | Exact corridor preservation and public entrances |
 
-AEOS (13.0628268, 77.5940888) to Manyata Tech Park (13.047697, 77.619939), using the user's supplied pins. Public gates and approaches still need confirmation. Driving is provisional. The full Bengaluru Google map remains supported when enabled; the local road-evidence extract is limited to North Bengaluru and returns unknown outside coverage.
+General Places caching is deliberately not added because current provider policy restricts it. See planning/pdf-implementation-decisions.md. Place selection already resolves coordinates; standalone Geocoding remains the PDF's optional fallback. Missing signals are disclosed and rescaled over the same common components, never invented. Six wired signals do not mean six observed signals on every live route.
 
-Tutorial mode is the default and loads no Google map or provider API. Local search filters the two supplied locations and spelling aliases. Wider Bengaluru search is implemented with an explicit button, Autocomplete New and Place Details New, but disabled. A selection must resolve inside Bengaluru. Coordinate entry and optional one-time location remain available. No login, background tracking, community reporting, SOS or internal turn-by-turn navigation is added.
+## Latest verification
 
-## Paused configuration and confidentiality
+85 unit/backend tests passed. The 37 existing browser checks plus the new PDF-specific check passed; seven affected checks passed again after the final model changes. The production frontend and Node backend build successfully. The packaged backend was checked while paused. The latest APK and source verification records are under output/apk and output/handoff.
 
-The browser, Android and separate server credentials are configured locally. Never copy their values to chat, reports, recovery notes or source exports. Server status now reports configured true, ready false, paused true. ENABLE_LIVE_REQUESTS, ENABLE_PLACE_SEARCH, ENABLE_ACTIVITY_ANALYSIS, ENABLE_EXPERIMENTAL_SCORING and VITE_ENABLE_LIVE_MAPS are all false. The frontend map switch is compiled into the APK and requires a rebuild to enable.
+Version 0.6.2 previously passed 21 recorded Redmi 9 checks, including full intro playback with no Skip, black default, theme persistence, scenarios, rotation and Google Maps opening. That does not test NightWise live Google APIs. The new 0.6.3 APK has not been tested on a physical phone; no phone is currently visible. Android Back and native GPS permission grant/denial remain manual checks. Automated Android Back injection was blocked by Redmi security, so it was not bypassed.
 
-The user confirmed billing is not enabled. One earlier Routes attempt was rejected with provider-access; no diagnostic retry was made. The previous map load produced BillingNotEnabledMapError. This work made zero additional Google requests. The ledger remains routeCalls 1, nearbyCalls 0; missing autocomplete/detail counts in the old ledger mean zero and are preserved on migration. Map loads are separate from backend request counts.
+No Google Cloud calls were made during this work. The local ledger remains one earlier failed route request and zero nearby, autocomplete or details calls. Configured credentials are private and must not be printed. No billing was enabled. No GitHub remote or hosted endpoint has been created.
 
-## Implementation details that affect acceptance
+## Local deliverables
 
-Default limits: 10 route, 600 nearby, 40 autocomplete and 20 detail attempts total, with 120 nearby queries per comparison. Attempts count before dispatch, including failures. Search sessions expire after five minutes, allow at most six suggestion calls, and resolve only a returned ID once. No typing-triggered paid request, automatic retry or daily reset exists. Private access codes protect hosted comparisons and search; one instance owns the persistent ledger.
+- App preview: http://localhost:4173/
+- Android review build: output/apk/nightwise-0.6.3-debug.apk
+- APK verification: output/apk/nightwise-0.6.3-verification.json
+- Source package: output/handoff/nightwise-prebilling-source.zip
+- Report: talks/2026-09-10_PDF_offline-completion_v01.docx and matching Markdown
+- Analysis decisions and deviations: planning/pdf-implementation-decisions.md
+- Offline tests: tests/unit/pdf-gaps.test.ts and tests/browser/pdf-gaps.spec.ts
+- Deployment recipe: planning/M07-hosting-and-team-handoff.md
 
-A single public Overpass request downloaded 13,542 road ways inside 13.02–13.085 N, 77.57–77.65 E. Raw data and provenance are in data/roads with ODbL attribution. The classifier uses explicit highway tags and geometry, keeps ambiguous parallel and grade-separated matches unknown, and requires 95 percent classified coverage before offering the road fraction to scoring. An OSM geometry smoke check returned 42.4 percent coverage on one way; this is self-consistency evidence only. It is not a measured live route or accuracy rate.
+## After billing
 
-The data pipeline keeps incomplete scans and unknown hours separate. Longest and total low-activity distances are not asserted with incomplete evidence. Actual staffing, lighting, crime, public access and entrance availability are unmeasured. Live scoring remains disabled pending provider-use review and corridor calibration. Google provider content is not persisted to the OSM extract or budget ledger. Maps handoff sends endpoints and up to three live-path preview points; it can still change the corridor.
+Confirm billing before enabling provider requests. Start with a single bounded route request; check restricted keys, exact AEOS and Manyata public entrances, map rendering, explicit place search and capped nearby scans separately. Live scoring remains off until provider-use review and local calibration are resolved. Review usage before increasing the initial allowances for broader testing.
 
-## Preview and Android artifact
+Run 10 to 20 Bengaluru journeys, including reverse travel, commercial-to-residential, metro-to-home and main-road versus internal-road examples after dark. Prepare two or three genuine reel demos only after validation. Tutorial paths, durations, scores and road fixtures remain illustrative. Road data coverage is North Bengaluru even though the enabled map can show all Bengaluru.
 
-Browser preview: http://localhost:4173 and http://127.0.0.1:4173. The existing preview remains running. Local API: http://127.0.0.1:8787, restarted with paused configuration. scripts/check-local-readiness.mjs checks local status without Google calls. Avoid duplicate preview/API processes; configuration changes require restarting the existing API.
-
-Latest APK: output/apk/nightwise-prebilling-debug.apk, version 0.6.0-prebilling, package in.nightwise.demo. Signature, current web assets and server-key absence verified. No background-location permission. Earlier APKs remain preserved. scripts/connect-phone.ps1 -Install now targets this APK. No phone check was attempted after the user deferred it.
-
-## Verification
-
-65 unit/backend tests passed. The full browser run passed 31 checks in 5.2 minutes. An additional road-evidence browser check passed in 1.4 minutes. Provider responses and locations in browser tests are controlled fixtures, not Google or physical-device evidence. Paused routing/search/map checks verified zero provider calls. Both test runners closed successfully after slow browser-worker cleanup.
-
-Android compiled successfully in 2 minutes 22 seconds. Gradle flatDir and SDK XML warnings remained non-fatal. An overstrict APK assertion initially rejected a dormant URL in Capacitor's web fallback; it was corrected to rely on runtime pause tests instead of claiming all library loader text must disappear. The packaged Node backend compiled and passed a separate paused-startup check. Docker is not installed, so the container image is prepared but not locally built or tested.
-
-The previously noted three moderate development-chain npm advisories remain outside runtime scope; no dependency upgrade was performed during this work. APK/source verification records contain hashes and checks without secrets. Document page QA is recorded below after rendering.
-
-## Remaining work and recovery
-
-1. User enables billing and confirms testing may resume. Verify services and restrictions with one bounded route call; enable search and nearby scans separately. Keep experimental scoring off until evidence/use review is resolved.
-2. User connects the intended Android phone later. Check permissions, native map layers, Back/resume and actual Maps handoff. Confirm both public gates.
-3. Run the prepared real-corridor and reel rehearsal. Establish useful alternatives and sufficient opening-hours and road coverage before claiming a live recommendation.
-4. Select and configure an HTTPS backend with persistent disk and a known egress IP. Test the prepared container on that host, migrate the existing ledger without resetting it, then rebuild for off-USB team use.
-
-Read AGENTS.md, this status, planning/M04-live-setup.md, planning/M06-rehearsal-and-phone-checklist.md, planning/M07-hosting-and-team-handoff.md, research/billing-free-implementation-decisions.md and the two latest reports in talks. Older module reports preserve history and can contain superseded missing-key or zero-attempt statements. No credentials belong in recovery notes.
-
-Final document QA: both pages of each new Word checkpoint were rendered and visually reviewed. The M4/M5 screenshot layout was tightened to remove footer crowding. All four final pages are clean. The final source package includes the reviewed Word reports and updated recovery records.
+Reconnect the phone for version 0.6.3 regression and the two remaining manual checks. Hosting and GitHub remain deferred by user instruction; they are not blocked by Google billing itself. Permanent use away from USB requires an HTTPS backend and a build pointing to it. Docker is not installed here, so the prepared container image is not locally verified.

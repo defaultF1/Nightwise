@@ -1,3 +1,5 @@
+> 10 September 2026: GitHub pushes and hosting are explicitly deferred by the user. This recipe remains local preparation. Current APK: output/apk/nightwise-0.6.3-debug.apk. Read nightwise-current-status.md before following historical build references below.
+
 # NightWise hosting and team handoff
 
 This is a prepared deployment package, not a public deployment. The current APK works independently for the bundled tutorial. Live use away from the computer requires an HTTPS backend, configured credentials, active billing and a new app build pointing to that backend.

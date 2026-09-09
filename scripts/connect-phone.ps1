@@ -11,7 +11,7 @@ if ($ready.Count -ne 1) { Write-Output 'Connect exactly one authorized Android p
 & $adb reverse tcp:8787 tcp:8787
 if ($LASTEXITCODE -ne 0) { throw 'USB API forwarding failed.' }
 if ($Install) {
-    & $adb install -r (Join-Path $project 'output/apk/nightwise-0.6.2-debug.apk')
+    & $adb install -r (Join-Path $project 'output/apk/nightwise-0.6.3-debug.apk')
     if ($LASTEXITCODE -ne 0) { throw 'APK installation failed.' }
     & $adb shell am start -n in.nightwise.demo/.MainActivity
 }

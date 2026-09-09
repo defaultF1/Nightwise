@@ -11,6 +11,7 @@ export type Route = {
   source: 'sample' | 'google';
   geometryKind: 'illustrative' | 'provider';
   turns?: number;
+  steps?: { distanceMeters: number; maneuver?: string; path?:Coordinate[] }[];
 };
 export type Evidence = {
   openPlaces: number | null;

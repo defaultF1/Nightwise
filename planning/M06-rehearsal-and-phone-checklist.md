@@ -1,12 +1,12 @@
 # NightWise rehearsal and phone checklist
 
-Prepared 9 September 2026. Physical-phone testing was explicitly deferred by the user. This checklist is ready; no completed field rehearsal is claimed.
+Updated 10 September 2026. Version 0.6.2 passed 21 recorded Redmi 9 checks. Android Back and native GPS grant/denial still need manual verification. The phone is currently disconnected. No completed field rehearsal is claimed.
 
 ## Review without billing
 
-Use http://localhost:4173 or install output/apk/nightwise-prebilling-debug.apk. Start in Tutorial mode. All Google requests and embedded map creation are paused in this build. A tutorial illustrates behavior; its paths, scores and durations are not real AEOS–Manyata measurements.
+Use http://localhost:4173 or install output/apk/nightwise-0.6.3-debug.apk. Start in Tutorial mode. All Google requests and embedded map creation are paused in this build. A tutorial illustrates behavior; its paths, scores and durations are not real AEOS–Manyata measurements.
 
-1. Launch normally and watch the complete local intro. Test Skip, Settings > Replay intro and reduced-motion behavior.
+1. Launch normally and watch the complete local intro. Confirm there is no Skip button; test Settings > Replay intro and reduced-motion behavior.
 2. Open the destination picker, type “manayata”, select Manyata Tech Park, and confirm Tutorial mode remains selected. Search an unknown name and verify the clear paused-search message. Coordinate entry remains available.
 3. Compare the supplied AEOS–Manyata tutorial. Select each route and explain the time difference. Open activity details and identify open, closed and unknown observations, longest stretch and total low-activity distance.
 4. In Settings > Tutorial scenarios, check incomplete data, all evidence unavailable, places closing soon, similar activity, a large detour, one route, no routes and connection failure. Missing evidence must never become zero activity or a safety guarantee.
@@ -15,7 +15,7 @@ Use http://localhost:4173 or install output/apk/nightwise-prebilling-debug.apk. 
 
 ## Intended phone review when connected
 
-The user will connect the phone later. Enable Developer options and USB debugging, then accept the computer's prompt. From the project folder run `powershell -ExecutionPolicy Bypass -File scripts/connect-phone.ps1 -Install`. This installs the latest prebilling APK on exactly one authorized device and sets up local USB forwarding. It does not activate Google billing or API calls.
+Reconnect the phone for the remaining manual checks and the 0.6.3 regression. Enable Developer options and USB debugging, then accept the computer's prompt. From the project folder run `powershell -ExecutionPolicy Bypass -File scripts/connect-phone.ps1 -Install`. This installs the latest prebilling APK on exactly one authorized device and sets up local USB forwarding. It does not activate Google billing or API calls.
 
 Record device model, Android version and APK version without a serial number. Check portrait and landscape, keyboard scrolling, launch playback, theme persistence, location denial, approximate location and one-time location grant. Location is optional and never tracked in the background. Use Android Back from every sheet, results, loading and the home screen. Background/resume must not create a new comparison automatically.
 

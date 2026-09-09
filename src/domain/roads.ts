@@ -1,4 +1,4 @@
-import type { Coordinate } from './types';
+import type { Coordinate, Route } from './types';
 import { distanceMeters, interpolate, pathLength } from './geometry';
 
 export type RoadClass = 'main' | 'internal' | 'unknown';
@@ -6,7 +6,8 @@ export type RoadWay = { id: number; highway: string; path: Coordinate[]; gradeSe
 export type RoadAnalysis = {
   source: 'openstreetmap'; status: 'estimated' | 'insufficient' | 'unavailable';
   mainMeters: number; internalMeters: number; unknownMeters: number; coverage: number;
-  mainRoadFraction?: number; snapshotDate?: string;
+  mainRoadFraction?: number; internalRoadFraction?: number; snapshotDate?: string;
+  internalTurns?:number; unknownTurns?:number; internalTurnsPerKm?:number;
 };
 const MAIN = new Set(['motorway','trunk','primary','secondary','tertiary','motorway_link','trunk_link','primary_link','secondary_link','tertiary_link']);
 const INTERNAL = new Set(['residential','living_street','service']);
@@ -44,7 +45,7 @@ export function createRoadAnalyzer(ways: RoadWay[], snapshotDate?: string) {
     if(matches.some(m=>m.way!==best.way && m.distance<=best.distance+8 && (m.kind!==best.kind||m.grade)))return 'unknown';
     return best.kind;
   }
-  return (path: Coordinate[]): RoadAnalysis => {
+  return (path: Coordinate[], steps?:Route['steps']): RoadAnalysis => {
     const length=pathLength(path); const totals={main:0,internal:0,unknown:0};
     if(length>30000 || path.length>4000)throw new Error('Road analysis exceeds the pilot geometry limit');
     for(let i=1;i<path.length;i++) {
@@ -52,7 +53,21 @@ export function createRoadAnalyzer(ways: RoadWay[], snapshotDate?: string) {
       for(let j=0;j<pieces;j++) totals[match(interpolate(path[i-1],path[i],(j+.5)/pieces),path[i-1],path[i])]+=meters/pieces;
     }
     const coverage=length ? (totals.main+totals.internal)/length : 0;
+    let turnEvidence:Pick<RoadAnalysis,'internalTurns'|'unknownTurns'|'internalTurnsPerKm'>={};
+    if(steps?.length&&steps.every(s=>typeof s.maneuver==='string')){
+      let internalTurns=0,unknownTurns=0;
+      for(const step of steps.filter(s=>/TURN|U_TURN|ROUNDABOUT/.test(s.maneuver!))){
+        const points=step.path;
+        const next=points?.findIndex((p,i)=>i>0&&distanceMeters(points[0],p)>1)??-1;
+        if(!points||next<1){unknownTurns++;continue;}
+        const a=points[0],b=points[next];
+        const point=interpolate(a,b,Math.min(.5,10/distanceMeters(a,b)));
+        const kind=match(point,a,b);
+        if(kind==='internal')internalTurns++;else if(kind==='unknown')unknownTurns++;
+      }
+      turnEvidence={internalTurns,unknownTurns,...(unknownTurns===0&&length>0?{internalTurnsPerKm:internalTurns/(length/1000)}:{})};
+    }
     return {source:'openstreetmap',status:!grid.size?'unavailable':coverage>=.95?'estimated':'insufficient',mainMeters:totals.main,internalMeters:totals.internal,unknownMeters:totals.unknown,coverage,snapshotDate,
-      ...(coverage>=.95 ? {mainRoadFraction:totals.main/length} : {})};
+      ...turnEvidence,...(coverage>=.95 ? {mainRoadFraction:totals.main/length,internalRoadFraction:totals.internal/length} : {})};
   };
 }
