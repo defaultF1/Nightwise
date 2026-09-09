@@ -1,6 +1,6 @@
 # NightWise
 
-Android-first Bengaluru route comparison preview for a small tutorial team. Version 0.7.3-preview. This is an experimental activity-information app; it does not measure personal safety, lighting or crime.
+Android-first Bengaluru route comparison preview for a small tutorial team. Version 0.7.5-preview. This is an experimental activity-information app; it does not measure personal safety, lighting or crime.
 
 ## Implemented
 
@@ -10,6 +10,7 @@ Android-first Bengaluru route comparison preview for a small tutorial team. Vers
 - View listed open pharmacies, hospitals and petrol pumps, with estimated gaps between help points.
 - Choose an additional travel-time allowance, save favourite places locally, and explicitly refresh comparisons.
 - Persistent Black, Light and Blue themes, full intro video and immersive Android layout.
+- Blue start pins, red destinations, yellow shops, pink medical places and green fuel stations, with a colour legend.
 
 Google opening schedules are evaluated at estimated passing times. Live activity scores remain withheld: real scans still have incomplete opening hours, capped search coverage and missing road evidence. Community reporting is outside this version. Bengaluru Palace is an example search, not a preset with invented coordinates.
 
@@ -34,5 +35,7 @@ Run `npm test` for unit/backend checks. With the preview on port 4173 and live m
 The preview has been exercised on a Redmi Android 10 phone. Physical Back-button and GPS acceptance, public entrance checks, exact external Google Maps route preservation and real journey validation remain release requirements. The local road extract covers North Bengaluru; other Bengaluru journeys can return routes with missing road evidence. Long journeys can exceed scan allowances and show no activity comparison.
 
 The source includes OpenStreetMap-derived data with attribution in the app and data files. Optional iOS packaging and public app-store release are not included in this preview.
+
+
 
 

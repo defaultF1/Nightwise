@@ -44,7 +44,9 @@ test('live response without shop analysis keeps evidence sections and details us
  await page.getByText('Help points on selected route',{exact:true}).click();await expect(page.locator('.help-points')).toContainText('Unknown');
  await page.getByRole('button',{name:'Alternative 1 · 22 min',exact:true}).click();
  await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();
- await expect(page.locator('.diagram-caption')).toContainText('Alternative 1 is highlighted');
+ await expect(page.locator('.diagram-caption').first()).toContainText('Alternative 1 is highlighted');
+ await expect(page.locator('.pin-legend')).toContainText('Start / current location');
+ await expect(page.locator('.pin-legend')).toContainText('Petrol / CNG');
  await page.getByRole('radio',{name:'Fastest',exact:true}).check();await expect(page.getByRole('button',{name:'Fastest · 18 min',exact:true})).toHaveAttribute('aria-pressed','true');
  await page.getByRole('button',{name:'View activity details'}).first().click();await expect(page.getByRole('dialog')).toContainText('no shop analysis');
  await page.getByRole('button',{name:'Back to routes',exact:true}).click();await expect(page.getByRole('dialog')).toHaveCount(0);

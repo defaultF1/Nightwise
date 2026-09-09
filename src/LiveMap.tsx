@@ -8,7 +8,7 @@ import type { Theme } from './theme';
 import { createMap, type MapHandle, type MapLine } from './maps/adapter';
 import { slicePolyline } from './domain/geometry';
 import { gapMarkers } from './domain/gap-markers';
-import { helpPoints } from './HelpPoints';
+import { placePins, PIN_COLORS } from './maps/pins';
 
 let nativeMapOwners = 0;
 
@@ -53,7 +53,7 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
           if (path.length > 1) lines.push({ id: selected.id, path, color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
         }
       }
-      await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[], analysis?.source==='live'?helpPoints(analysis).flatMap(p=>p.coordinate?[{...p.coordinate,name:p.name??'Listed help point'}]:[]):[]);
+      await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[], analysis?.source==='live'?placePins(analysis):[]);
     }).catch(() => setError(true));
   }, [ready, routes, selectedId, journey, analysis, theme]);
   useEffect(() => {
@@ -70,6 +70,8 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
     </div>
     <div className="diagram-endpoints"><span><b>A</b> {journey.origin.name}</span><span><b>B</b> {journey.destination.name}</span></div>
     <p className="diagram-caption">{routes.length ? `${routes.find(r=>r.id===selectedId)?.label??'Selected route'} is highlighted. Choose another option above or in the cards below.` : 'Endpoint preview. Confirm your journey to load routes along roads.'}</p>
+    <div className="pin-legend" aria-label="Map pin colours">{([['start','Start / current location'],['destination','Destination'],['shop','Shops'],['medical','Medical'],['fuel','Petrol / CNG']] as const).map(([kind,label])=><span key={kind}><i style={{backgroundColor:PIN_COLORS[kind]}}/>{label}</span>)}</div>
+    {routes.length>0&&<p className="diagram-caption">Business pins appear only when listings are available and scheduled open around the estimated passing time. Fuel type and access are not confirmed.</p>}
     {analysis && <p className="map-legend">{theme === 'blue' ? 'Teal' : theme === 'light' ? 'Black' : 'White'}: selected route · Amber: observed low activity · Grey: unknown. Estimated between samples.</p>}
   </section>;
 }
