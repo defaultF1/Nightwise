@@ -30,6 +30,16 @@ Install a compatible JDK and Android SDK, configure `android/local.properties`, 
 
 For USB development, reverse API port 8787 with ADB. An installed app used away from the developer computer needs a reachable HTTPS backend and a build configured for that endpoint. This GitHub repository hosts source; it does not deploy that backend. Generated APKs, credentials, private notes and phone screenshots are excluded.
 
+## Free Render with a persistent allowance
+
+Deploy the `codex/journey-updates` branch as a Node web service with build command `npm ci --include=dev && npm run build:server` and start command `node build-server/index.mjs`. Set `HOST=0.0.0.0`, `PORT=10000` and a private `PILOT_ACCESS_CODE` of at least 16 characters. Use `/api/status` as the health path. Keep the Google request switches off during setup.
+
+Set `UPSTASH_REDIS_REST_URL` to the HTTPS REST endpoint and `UPSTASH_REDIS_REST_TOKEN` to the normal write-capable token, without surrounding quotes. Both values are required together. The counter is stored under `nightwise:pilot-budget:v1`; no disk is required in this mode. Health output includes `budgetStorage` and `budgetReady`, without credentials or usage counts. A healthy process does not mean Google access or budget migration is complete.
+
+Before activating the hosted service, stop local Google requests and migrate the latest four counters as one JSON string, with no expiry, using `SET nightwise:pilot-budget:v1 '<JSON copied from the stopped local ledger>' NX` in the private Redis console. This is a command template, not literal data: never initialize an existing pilot with zero counters or overwrite an existing Redis value. If the key already exists, inspect and reconcile it before continuing. The running app never creates or resets a missing counter. Preserve the approved cumulative limits; hosting is not a fresh allowance.
+
+Reservations are atomic across instances. A database outage, invalid counter, expired key or uncertain reservation blocks the subsequent Google request. Writes are not automatically retried. Route and shop data are not stored in Redis. Free Render can take time to wake from inactivity; validate the cold-start experience before sharing the final HTTPS-configured APK.
+
 ## Verification and limitations
 
 Run `npm test` for unit/backend checks. With the preview on port 4173 and live maps disabled, run `npx playwright test` for browser checks. Set `PLAYWRIGHT_BASE_URL` to use a separate test preview while keeping a live preview enabled. Run `npm run build:server` to bundle the API.

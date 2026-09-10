@@ -2,7 +2,8 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import { timingSafeEqual } from 'node:crypto';
-import { Budget } from './budget';
+import { Budget, type BudgetStore } from './budget';
+import { RedisBudget } from './redis-budget';
 import { GoogleProvider } from './google';
 import { ServiceError } from './errors';
 import type { ServerConfig } from './config';
@@ -15,9 +16,11 @@ import type { LiveResult } from '../src/domain/live-contract';
 import { registerSearch } from './search';
 import { loadRoadAnalyzer } from './roads';
 
-export async function createServer(config: ServerConfig, fetcher?: typeof fetch) {
+export async function createServer(config: ServerConfig, fetcher?: typeof fetch, budgetFetcher?: typeof fetch) {
   const app = Fastify({ logger: false, bodyLimit: 4096, requestTimeout: 120000, trustProxy: false });
-  const budget = new Budget(config.ledgerPath, config.routeLimit, config.nearbyLimit, config.autocompleteLimit, config.detailsLimit);
+  const budget: BudgetStore = config.redisUrl
+    ? new RedisBudget(config.redisUrl, config.redisToken, config.redisKey, config.routeLimit, config.nearbyLimit, config.autocompleteLimit, config.detailsLimit, budgetFetcher)
+    : new Budget(config.ledgerPath, config.routeLimit, config.nearbyLimit, config.autocompleteLimit, config.detailsLimit);
   const analyzeRoads = loadRoadAnalyzer(config.roadFile);
   const provider = new GoogleProvider(config.serverKey, budget, fetcher);
   let busy = false;
@@ -38,7 +41,14 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch)
     const known = error instanceof ServiceError;
     void reply.code(known ? error.status : e.statusCode === 429 ? 429 : e.statusCode === 400 ? 400 : 503).send({ code: known ? error.code : e.statusCode === 400 ? 'invalid-input' : 'unavailable', message: known ? error.message : 'The request could not be completed. Please check the journey and try again.' });
   });
-  app.get('/api/status', async () => ({ ready: !!config.serverKey&&config.liveEnabled, configured:!!config.serverKey, paused:!config.liveEnabled, searchEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey, activityEnabled: config.enabled, scoringEnabled: config.scoring, accessCodeRequired: !!config.accessCode, maxQueries: config.maxQueries }));
+  app.get('/api/status', async () => {
+    let budgetReady = true;
+    try { await budget.snapshot(); } catch { budgetReady = false; }
+    return { ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
+      searchEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady, activityEnabled:config.enabled,
+      scoringEnabled:config.scoring, accessCodeRequired:!!config.accessCode, maxQueries:config.maxQueries,
+      budgetStorage:config.redisUrl?'redis':'file', budgetReady };
+  });
   registerSearch(app,config,budget,fetcher);
   const pointSchema = { type: 'object', additionalProperties: false, required: ['name', 'latitude', 'longitude'], properties: { name: { type: 'string', minLength: 1, maxLength: 100 }, latitude: { type: 'number', minimum: 12.75, maximum: 13.25 }, longitude: { type: 'number', minimum: 77.35, maximum: 77.85 } } };
   app.post<{ Body: LiveJourney }>('/api/compare', { schema: { body: { type: 'object', additionalProperties: false, required: ['origin', 'destination', 'mode'], properties: { origin: pointSchema, destination: pointSchema, mode: { type: 'string', enum: ['DRIVE'] } } } } }, async (request, reply) => {
@@ -69,7 +79,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch)
         catch { activityStatus = 'budget'; notices.push('These routes need more scans than the per-comparison limit. No partial route was ranked and no nearby requests were sent.'); }
       }
       if (plan && config.enabled && activityStatus !== 'budget') {
-        if (!budget.canScan(plan.queries.length)) { activityStatus = 'budget'; notices.push('The remaining pilot allowance cannot cover all routes. No nearby requests were sent.'); }
+        if (!await budget.canScan(plan.queries.length)) { activityStatus = 'budget'; notices.push('The remaining pilot allowance cannot cover all routes. No nearby requests were sent.'); }
         else {
           let next = 0;
           await Promise.all(Array.from({ length: Math.min(3, plan.queries.length) }, async () => {
@@ -93,7 +103,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch)
       notices.push('Road type is estimated from a local OpenStreetMap extract around North Bengaluru. Unmatched, ambiguous and grade-separated sections remain unknown. Actual staffing, lighting and crime are not measured.');
       const roads = Object.fromEntries(routes.map(r => [r.id, { ...roadAnalyses[r.id], ...(r.turns!==undefined?{maneuversPerKm:r.turns/(r.distanceMeters/1000)}:{}) }]));
       const comparison = compareActivity(routes, analyses, roads, { allowLive: config.scoring });
-      return { routes, analyses, roadAnalyses, comparison, checkedAt, activityStatus, notices, attributions: [...new Map(attributions.map(a => [a.name + (a.uri || ''), a])).values()], usage: budget.snapshot() } satisfies LiveResult;
+      return { routes, analyses, roadAnalyses, comparison, checkedAt, activityStatus, notices, attributions: [...new Map(attributions.map(a => [a.name + (a.uri || ''), a])).values()], usage: await budget.snapshot() } satisfies LiveResult;
     } finally { busy = false; request.raw.off('aborted', closed); reply.raw.off('close', closed); }
   });
   return app;

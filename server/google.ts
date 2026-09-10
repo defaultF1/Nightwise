@@ -4,7 +4,7 @@ import type { Route, Coordinate } from '../src/domain/types';
 import type { NearbyQuery, NearbyScan, PlaceObservation } from '../src/domain/activity-types';
 import { validateRoutes } from '../src/providers/routes';
 import { ServiceError } from './errors';
-import type { Budget } from './budget';
+import type { BudgetStore } from './budget';
 import { calendarHours, regularHours, scheduleDetails } from './opening-hours';
 
 type Json = Record<string, any>;
@@ -75,7 +75,7 @@ export function parseScan(data: Json, queryId: string, observedAt: string): { sc
 }
 
 export class GoogleProvider {
-  constructor(private key: string, private budget: Budget, private fetcher: typeof fetch = fetch) {}
+  constructor(private key: string, private budget: BudgetStore, private fetcher: typeof fetch = fetch) {}
   private async post(url: string, fields: string, body: Json, signal: AbortSignal): Promise<Json> {
     signal.throwIfAborted();
     try {
@@ -92,7 +92,7 @@ export class GoogleProvider {
     }
   }
   async routes(journey: LiveJourney, signal: AbortSignal) {
-    signal.throwIfAborted(); this.budget.reserve('route');
+    signal.throwIfAborted(); await this.budget.reserve('route');
     const data = await this.post('https://routes.googleapis.com/directions/v2:computeRoutes', ROUTE_FIELDS, {
       origin: { location: { latLng: { latitude: journey.origin.latitude, longitude: journey.origin.longitude } } },
       destination: { location: { latLng: { latitude: journey.destination.latitude, longitude: journey.destination.longitude } } },
@@ -101,7 +101,7 @@ export class GoogleProvider {
     return parseRoutes(data);
   }
   async nearby(query: NearbyQuery, signal: AbortSignal) {
-    signal.throwIfAborted(); this.budget.reserve('nearby');
+    signal.throwIfAborted(); await this.budget.reserve('nearby');
     const data = await this.post('https://places.googleapis.com/v1/places:searchNearby', PLACE_FIELDS, {
       includedTypes: ['restaurant', 'cafe', 'gas_station', 'hospital', 'hotel', 'pharmacy', 'police', 'convenience_store', 'supermarket', 'transit_station'],
       maxResultCount: 20, rankPreference: 'DISTANCE', languageCode: 'en',
