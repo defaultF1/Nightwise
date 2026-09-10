@@ -8,7 +8,7 @@ import type { Theme } from './theme';
 import { createMap, type MapHandle, type MapLine } from './maps/adapter';
 import { slicePolyline } from './domain/geometry';
 import { gapMarkers } from './domain/gap-markers';
-import { placePins, PIN_COLORS } from './maps/pins';
+import { visiblePlacePins, PIN_COLORS } from './maps/pins';
 
 let nativeMapOwners = 0;
 
@@ -53,7 +53,7 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
           if (path.length > 1) lines.push({ id: selected.id, path, color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
         }
       }
-      await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[], analysis?.source==='live'?placePins(analysis):[]);
+      await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[], analysis?.source==='live'?visiblePlacePins(analysis):[]);
     }).catch(() => setError(true));
   }, [ready, routes, selectedId, journey, analysis, theme]);
   useEffect(() => {

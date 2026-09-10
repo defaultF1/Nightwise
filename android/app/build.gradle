@@ -11,8 +11,8 @@ android {
         applicationId "in.nightwise.demo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 21
-        versionName "0.9.0-live-preview"
+        versionCode 22
+        versionName "0.9.1-live-preview"
         manifestPlaceholders = [nightwiseMapsKey: privateMaps.getProperty('GOOGLE_MAPS_ANDROID_KEY', '')]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {

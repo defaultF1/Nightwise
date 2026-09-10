@@ -13,4 +13,18 @@ export function placePins(analysis?:ActivityAnalysis):PlacePin[]{
   return kind&&place.coordinate&&place.hours.state==='open'&&!place.conflict?[{...place.coordinate,name:place.name??(kind==='medical'?'Medical listing':kind==='fuel'?'Fuel station':'Shop listing'),kind}]:[];
  })??[];
 }
+function evenlySpaced<T>(items:T[],limit:number){
+ if(items.length<=limit)return items;
+ return Array.from({length:limit},(_,index)=>items[Math.floor(index*items.length/limit)]);
+}
+export function visiblePlacePins(analysis?:ActivityAnalysis,limit=48):PlacePin[]{
+ const pins=placePins(analysis);
+ if(pins.length<=limit)return pins;
+ const medical=pins.filter(pin=>pin.kind==='medical');
+ const fuel=pins.filter(pin=>pin.kind==='fuel');
+ const medicalLimit=Math.min(medical.length,12);
+ const fuelLimit=Math.min(fuel.length,12);
+ const shopLimit=Math.max(0,limit-medicalLimit-fuelLimit);
+ return [...evenlySpaced(medical,medicalLimit),...evenlySpaced(fuel,fuelLimit),...evenlySpaced(pins.filter(pin=>pin.kind==='shop'),shopLimit)];
+}
 export function pinTint(kind:keyof typeof PIN_COLORS){const hex=PIN_COLORS[kind];return{r:parseInt(hex.slice(1,3),16),g:parseInt(hex.slice(3,5),16),b:parseInt(hex.slice(5,7),16),a:1};}
