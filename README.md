@@ -1,6 +1,8 @@
 # NightWise
 
-Android-first Bengaluru route comparison preview for a small tutorial team. Version 0.8.1-team-preview. This is an experimental activity-information app; it does not measure personal safety, lighting or crime.
+When Google provides no usable shop hours, the schedule list shows a labelled 9 am–8 pm IST planning estimate. Assumed availability does not replace confirmed schedules, establish holiday closures or increase confirmed-open evidence.
+
+Android-first North Bengaluru route comparison preview for a small tutorial team. Version 0.9.0-live-preview. This is an experimental activity-information app; it does not measure personal safety, lighting or crime.
 
 ## Implemented
 
@@ -14,7 +16,11 @@ Android-first Bengaluru route comparison preview for a small tutorial team. Vers
 - Expand shop schedules to see current and regular weekly opening times, closed days and reported special dates in Bengaluru time. Missing schedules remain unknown; typical weekly estimates are labelled separately.
 - Read the route strip from Start to Destination, with plain explanations of open places, few open places and missing information.
 
-Google opening schedules are evaluated at estimated passing times. Live activity scores remain withheld: real scans still have incomplete opening hours, capped search coverage and missing road evidence. Community reporting is outside this version. Bengaluru Palace is an example search, not a preset with invented coordinates.
+Google opening schedules are evaluated at estimated passing times, using step-duration distribution when available. When `ENABLE_EXPERIMENTAL_SCORING=true`, live scores are evidence ranges with all six fixed weights. Missing discovery, hours or road evidence widens the range. Automatic recommendations require a ten-point supported advantage over all other eligible alternatives; overlapping ranges leave the fastest option selected. These are assumption bounds, not statistical confidence or safety predictions. Provider-use clarification and local calibration remain acceptance dependencies. Community reporting is outside this version. Bengaluru Palace is an example search, not an invented entrance preset.
+
+Both endpoints must fall within the operational 10 km circle around AEOS. This includes ordinary GPS/manual pins. Autocomplete is restricted to that circle. Route geometry can leave the circle within the broader Bengaluru guard bounds; missing road data stays unknown. Native location recovery links to phone Location and app permission settings. The native map container is clipped to scrolling ancestors without changing touch-coordinate origins.
+
+Scans are balanced across alternatives within `MAX_NEARBY_QUERIES` and the persistent cumulative allowance. Up to four smaller overlapping child queries refine a capped circle when spare allowance remains. Omitted or still-capped samples remain partial. Up to four missing-hour listings per comparison receive a targeted Details check, consuming the shared Details allowance; exhausted limits never reset. Results report shared counter deltas, which can include concurrent search traffic.
 
 ## Local setup
 

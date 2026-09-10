@@ -28,7 +28,7 @@ test('missing and capped evidence never receive an activity recommendation',asyn
   await selectScenario(page,value);await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome','insufficient');
   await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeChecked();await expect(page.locator('.recommendation-label')).toHaveCount(0);
   await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
-  await expect(page.getByText('Longest low-activity stretch',{exact:true}).locator('..').locator('dd')).toHaveText('Not assessed');
+  await expect(page.getByText('Longest low-activity stretch',{exact:true}).locator('..').locator('dd')).toContainText('uncertain');
   await expect(page.getByRole('dialog')).toContainText('unknown, not low activity');
   if(value==='unknown')await expect(page.getByText('Observed places listed as open',{exact:true}).locator('..').locator('dd')).toHaveText('Unavailable');
   if(value==='capped')await expect(page.getByRole('dialog')).toContainText('result limit');
@@ -51,7 +51,7 @@ test('results and long evidence remain usable at narrow widths and dark appearan
  await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();
  await page.getByRole('button',{name:'Open settings'}).click();await page.getByText('Mono Dark',{exact:true}).click();await page.getByRole('button',{name:'Done',exact:true}).click();await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();
 });
-test('local illustrations load and the tutorial makes no provider calls',async({page})=>{
- const remote:string[]=[];page.on('request',request=>{if(!request.url().startsWith('http://127.0.0.1:4173/'))remote.push(request.url());});
+test('local illustrations load and the tutorial makes no provider calls',async({page,baseURL})=>{
+ const remote:string[]=[];page.on('request',request=>{if(new URL(request.url()).origin!==new URL(baseURL!).origin)remote.push(request.url());});
  await page.getByRole('button',{name:'About NightWise'}).click();await expect(page.locator('.sheet img')).toBeVisible();expect(await page.locator('.sheet img').evaluate((img:HTMLImageElement)=>img.complete&&img.naturalWidth>0)).toBe(true);await page.getByRole('button',{name:'Back to NightWise'}).click();await selectScenario(page,'normal');expect(remote).toEqual([]);
 });

@@ -2,8 +2,10 @@ import type { Coordinate, Route } from './types';
 import { distanceMeters, interpolate, pathLength } from './geometry';
 
 export type RoadClass = 'main' | 'internal' | 'unknown';
+export type RoadUnknownReason='no-candidate'|'alignment'|'grade'|'parallel'|'unsupported';
 export type RoadWay = { id: number; highway: string; path: Coordinate[]; gradeSeparated?: boolean };
 export type RoadAnalysis = {
+  unknownReasons?:Partial<Record<RoadUnknownReason,number>>;
   source: 'openstreetmap'; status: 'estimated' | 'insufficient' | 'unavailable';
   mainMeters: number; internalMeters: number; unknownMeters: number; coverage: number;
   mainRoadFraction?: number; internalRoadFraction?: number; snapshotDate?: string;
@@ -27,30 +29,34 @@ export function createRoadAnalyzer(ways: RoadWay[], snapshotDate?: string) {
         const key=`${x}:${y}`; if(!grid.has(key))grid.set(key,new Set()); grid.get(key)!.add(s);
       }
   }
-  function match(point: Coordinate, from: Coordinate, to: Coordinate): RoadClass {
+  function match(point: Coordinate, from: Coordinate, to: Coordinate): {kind:RoadClass;reason?:RoadUnknownReason} {
     const p=xy(point), a=xy(from), b=xy(to), vx=b.x-a.x, vy=b.y-a.y;
     const candidates = new Set<Segment>();
     for(const dx of [-20,0,20]) for(const dy of [-20,0,20]) for(const s of grid.get(cell(p.x+dx,p.y+dy))||[]) candidates.add(s);
     const matches: {distance:number; kind:RoadClass; grade:boolean; way:number}[]=[];
+    let nearby=false;
     for(const s of candidates) {
       const ux=s.b.x-s.a.x, uy=s.b.y-s.a.y, len2=ux*ux+uy*uy;
       const t=Math.max(0,Math.min(1,((p.x-s.a.x)*ux+(p.y-s.a.y)*uy)/len2));
       const distance=Math.hypot(p.x-s.a.x-t*ux,p.y-s.a.y-t*uy);
       const alignment=Math.abs((vx*ux+vy*uy)/(Math.hypot(vx,vy)*Math.sqrt(len2)));
+      if(distance<=15)nearby=true;
       if(distance<=15 && alignment>=Math.cos(25*Math.PI/180)) matches.push({distance,kind:s.kind,grade:s.grade,way:s.way});
     }
     matches.sort((a,b)=>a.distance-b.distance);
-    const best=matches[0]; if(!best || best.grade)return 'unknown';
+    const best=matches[0]; if(!best)return {kind:'unknown',reason:nearby?'alignment':'no-candidate'};
+    if(best.grade)return {kind:'unknown',reason:'grade'};
     // A parallel service road or an unresolved elevation cannot be assigned by proximity alone.
-    if(matches.some(m=>m.way!==best.way && m.distance<=best.distance+8 && (m.kind!==best.kind||m.grade)))return 'unknown';
-    return best.kind;
+    if(matches.some(m=>m.way!==best.way && m.distance<=best.distance+8 && (m.kind!==best.kind||m.grade)))return {kind:'unknown',reason:'parallel'};
+    return {kind:best.kind,...(best.kind==='unknown'?{reason:'unsupported' as const}:{})};
   }
   return (path: Coordinate[], steps?:Route['steps']): RoadAnalysis => {
     const length=pathLength(path); const totals={main:0,internal:0,unknown:0};
+    const unknownReasons:Partial<Record<RoadUnknownReason,number>>={};
     if(length>30000 || path.length>4000)throw new Error('Road analysis exceeds the pilot geometry limit');
     for(let i=1;i<path.length;i++) {
       const meters=distanceMeters(path[i-1],path[i]); const pieces=Math.max(1,Math.ceil(meters/40));
-      for(let j=0;j<pieces;j++) totals[match(interpolate(path[i-1],path[i],(j+.5)/pieces),path[i-1],path[i])]+=meters/pieces;
+      for(let j=0;j<pieces;j++){const found=match(interpolate(path[i-1],path[i],(j+.5)/pieces),path[i-1],path[i]);totals[found.kind]+=meters/pieces;if(found.reason)unknownReasons[found.reason]=(unknownReasons[found.reason]??0)+meters/pieces;}
     }
     const coverage=length ? (totals.main+totals.internal)/length : 0;
     let turnEvidence:Pick<RoadAnalysis,'internalTurns'|'unknownTurns'|'internalTurnsPerKm'>={};
@@ -62,12 +68,12 @@ export function createRoadAnalyzer(ways: RoadWay[], snapshotDate?: string) {
         if(!points||next<1){unknownTurns++;continue;}
         const a=points[0],b=points[next];
         const point=interpolate(a,b,Math.min(.5,10/distanceMeters(a,b)));
-        const kind=match(point,a,b);
+        const {kind}=match(point,a,b);
         if(kind==='internal')internalTurns++;else if(kind==='unknown')unknownTurns++;
       }
       turnEvidence={internalTurns,unknownTurns,...(unknownTurns===0&&length>0?{internalTurnsPerKm:internalTurns/(length/1000)}:{})};
     }
     return {source:'openstreetmap',status:!grid.size?'unavailable':coverage>=.95?'estimated':'insufficient',mainMeters:totals.main,internalMeters:totals.internal,unknownMeters:totals.unknown,coverage,snapshotDate,
-      ...turnEvidence,...(coverage>=.95 ? {mainRoadFraction:totals.main/length,internalRoadFraction:totals.internal/length} : {})};
+      unknownReasons,...turnEvidence,...(coverage>=.95 ? {mainRoadFraction:totals.main/length,internalRoadFraction:totals.internal/length} : {})};
   };
 }

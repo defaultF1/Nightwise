@@ -1,5 +1,6 @@
 import type { Route } from './types';
 import type { ActivityAnalysis, Comparison, Component, RoadEvidence } from './activity-types';
+import { compareLive } from './live-scoring';
 
 export const SCORE_VERSION='sample-activity-v3';
 export const WEIGHTS:Record<Component,number>={openDensity:25,mainRoad:20,helpDensity:15,gapContinuity:15,simplicity:15,transport:10};
@@ -23,6 +24,7 @@ export function componentValues(a:ActivityAnalysis,road:RoadEvidence={}):Partial
 export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads:Record<string,RoadEvidence>={}, options: { allowLive?: boolean; maxExtraMinutes?: number } = {}):Comparison{
   const fastest=[...routes].sort((a,b)=>a.durationSeconds-b.durationSeconds||a.id.localeCompare(b.id))[0];
   const base:Comparison={version:SCORE_VERSION,fastestId:fastest?.id??null,selectedId:fastest?.id??null,recommendedId:null,outcome:routes.length?'single':'empty',message:routes.length?'Only one route was returned. There is no alternative to compare.':'No route options were returned.',commonComponents:[],scores:{},componentScores:{},rankedIds:[]};
+  if(routes.length&&routes.every(r=>r.source==='google')&&options.allowLive===true)return compareLive(routes,analyses,roads,base,options.maxExtraMinutes);
   if(routes.length<2)return base;
   const byId=new Map(analyses.map(a=>[a.routeId,a]));
   const sameCheckTime=new Set(routes.map(r=>byId.get(r.id)?.checkedAt)).size===1;

@@ -4,6 +4,11 @@ export function formatMeters(value:number|null):string{
   if(value===null||!Number.isFinite(value))return 'Not assessed';if(value===0)return 'None observed';
   return value>=1000?`~${(value/1000).toFixed(1)} km`:`~${Math.max(1,Math.round(value/50)*50)} m`;
 }
+export function formatGap(bounds:[number,number]|undefined,fallback:number|null):string{
+  if(!bounds)return formatMeters(fallback);
+  if(Math.abs(bounds[1]-bounds[0])<1)return formatMeters(bounds[0]);
+  return `${formatMeters(bounds[0])} to ${formatMeters(bounds[1])} · uncertain`;
+}
 export function ActivityStrip({analysis}:{analysis:ActivityAnalysis}){
   const known=Math.min(100,Math.max(0,Math.floor(analysis.activityCoverage*100+1e-7)));
   return <div className="activity-strip">

@@ -1,5 +1,9 @@
 # North Bengaluru road research extract
 
+Version 0.9.0 defaults to `north-bengaluru-10km.json`, a 14.5 MB compact representation of the already-collected 10 km AEOS query: 58,613 ways and 280,746 geometry points. `north-bengaluru-10km-provenance.json` records source provenance and hashes. Only IDs, original geometry and highway/elevation tags were retained; no Google content was added. The loader permits 65,000 ways and 350,000 points within its unchanged 30 MB file cap. A route leaving the extract remains partially unknown. The original narrow extract below remains as historical source material.
+
+Unknown distances now include reason totals for no candidate, alignment mismatch, grade separation, ambiguous parallel roads and unsupported highway class. Their sum accounts for unknown route distance. Larger geographic coverage does not imply better matching accuracy on already-covered routes.
+
 This OpenStreetMap extract covers 13.02–13.085 N and 77.57–77.65 E around the AEOS–Manyata demonstration. The Google map can still cover all Bengaluru; road evidence outside this extract stays unknown.
 
 The raw response is preserved in north-bengaluru-overpass.json. provenance.json contains the exact query, retrieval time, extent, source and attribution. It was fetched once with scripts/fetch-road-extract.mjs. No download happens during app startup or comparison.

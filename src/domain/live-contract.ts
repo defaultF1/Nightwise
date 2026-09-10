@@ -2,6 +2,7 @@ import type { Route } from './types';
 import type { ActivityAnalysis, Comparison } from './activity-types';
 import type { RoadAnalysis } from './roads';
 export type LiveResult = {
+  requestUsage?: {routeCalls:number;nearbyCalls:number;detailsCalls:number;scope:string};
   routes: Route[]; analyses: ActivityAnalysis[]; comparison: Comparison;
   roadAnalyses?: Record<string,RoadAnalysis>;
   checkedAt: string; activityStatus: 'complete' | 'partial' | 'disabled' | 'budget';

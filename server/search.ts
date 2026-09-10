@@ -2,7 +2,7 @@ import type { FastifyInstance } from 'fastify';
 import type { ServerConfig } from './config';
 import type { BudgetStore } from './budget';
 import { ServiceError } from './errors';
-import { inBengaluru } from '../src/domain/journey';
+import { inPilotArea, AEOS_PIN, PILOT_RADIUS_METERS } from '../src/domain/journey';
 import type { PlaceSuggestion } from '../src/domain/search';
 
 export function registerSearch(app:FastifyInstance, config:ServerConfig, budget:BudgetStore, fetcher:typeof fetch=fetch) {
@@ -26,7 +26,7 @@ export function registerSearch(app:FastifyInstance, config:ServerConfig, budget:
     s.busy=true;s.calls++;
     try{
       await budget.reserve('autocomplete');
-      const data=await provider('https://places.googleapis.com/v1/places:autocomplete',{method:'POST',headers:{'Content-Type':'application/json','X-Goog-Api-Key':config.serverKey,'X-Goog-FieldMask':'suggestions.placePrediction.placeId,suggestions.placePrediction.structuredFormat'},body:JSON.stringify({input:query.trim(),sessionToken,languageCode:'en',includedRegionCodes:['in'],locationRestriction:{rectangle:{low:{latitude:12.75,longitude:77.35},high:{latitude:13.25,longitude:77.85}}}})});
+      const data=await provider('https://places.googleapis.com/v1/places:autocomplete',{method:'POST',headers:{'Content-Type':'application/json','X-Goog-Api-Key':config.serverKey,'X-Goog-FieldMask':'suggestions.placePrediction.placeId,suggestions.placePrediction.structuredFormat'},body:JSON.stringify({input:query.trim(),sessionToken,languageCode:'en',includedRegionCodes:['in'],locationRestriction:{circle:{center:{latitude:AEOS_PIN.latitude,longitude:AEOS_PIN.longitude},radius:PILOT_RADIUS_METERS}}})});
       if(data.suggestions!==undefined&&!Array.isArray(data.suggestions))throw new ServiceError('invalid-response','Search suggestions could not be read.');
       const suggestions:PlaceSuggestion[]=(data.suggestions||[]).slice(0,5).flatMap((item:any)=>{const p=item.placePrediction;
         if(typeof p?.placeId!=='string'||!/^[\w-]{1,200}$/.test(p.placeId)||typeof p.structuredFormat?.mainText?.text!=='string')return [];
@@ -39,13 +39,13 @@ export function registerSearch(app:FastifyInstance, config:ServerConfig, budget:
     if(!s||s.busy||!s.ids.has(placeId))throw new ServiceError('search-expired','Search again before selecting this place.',400);
     sessions.delete(sessionToken);await budget.reserve('details');
     const data=await provider(`https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}?sessionToken=${encodeURIComponent(sessionToken)}`,{headers:{'X-Goog-Api-Key':config.serverKey,'X-Goog-FieldMask':'id,location,formattedAddress'}});
-    if(data.id!==placeId||!inBengaluru(data.location))throw new ServiceError('outside-area','Choose a place within Bengaluru.',422);
+    if(data.id!==placeId||!inPilotArea(data.location))throw new ServiceError('outside-area','Choose a place within 10 km of AEOS in North Bengaluru.',422);
     return {coordinate:data.location,address:typeof data.formattedAddress==='string'?data.formattedAddress.slice(0,250):undefined};
   });
   app.post<{Body:{placeId:string}}>('/api/places/saved',{schema:{body:{type:'object',additionalProperties:false,required:['placeId'],properties:{placeId:{type:'string',pattern:'^[A-Za-z0-9_-]{1,200}$'}}}}},async request=>{
     enabled();await budget.reserve('details');
     const data=await provider(`https://places.googleapis.com/v1/places/${encodeURIComponent(request.body.placeId)}`,{headers:{'X-Goog-Api-Key':config.serverKey,'X-Goog-FieldMask':'id,location,formattedAddress'}});
-    if(data.id!==request.body.placeId||!inBengaluru(data.location))throw new ServiceError('outside-area','This saved place is unavailable or outside Bengaluru.',422);
+    if(data.id!==request.body.placeId||!inPilotArea(data.location))throw new ServiceError('outside-area','This saved place is unavailable or outside the 10 km North Bengaluru pilot.',422);
     return {coordinate:data.location,address:typeof data.formattedAddress==='string'?data.formattedAddress.slice(0,250):undefined};
   });
 }

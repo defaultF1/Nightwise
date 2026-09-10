@@ -20,7 +20,7 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env) {
     host, port: integer('PORT', 8787, 65535), serverKey: env.GOOGLE_MAPS_SERVER_KEY || '', accessCode,
     liveEnabled: env.ENABLE_LIVE_REQUESTS === 'true', searchEnabled: env.ENABLE_PLACE_SEARCH === 'true',
     autocompleteLimit: integer('PILOT_AUTOCOMPLETE_LIMIT', 40, 200), detailsLimit: integer('PILOT_DETAILS_LIMIT', 20, 100),
-    roadFile: env.ROAD_DATA_PATH || 'data/roads/north-bengaluru-overpass.json',
+    roadFile: env.ROAD_DATA_PATH || 'data/roads/north-bengaluru-10km.json',
     enabled: env.ENABLE_ACTIVITY_ANALYSIS === 'true', scoring: env.ENABLE_EXPERIMENTAL_SCORING === 'true',
     maxQueries: integer('MAX_NEARBY_QUERIES', 120, 120), routeLimit: integer('PILOT_ROUTE_LIMIT', 10, 100),
     nearbyLimit: integer('PILOT_NEARBY_LIMIT', 600, 3000),

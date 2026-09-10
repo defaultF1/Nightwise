@@ -25,7 +25,7 @@ test('late live responses cannot replace a cancelled journey',async({page})=>{
 });
 test('location denial leaves presets usable',async({page})=>{
  await page.addInitScript(()=>{navigator.geolocation.getCurrentPosition=(_ok,error)=>error?.({code:1,message:'Denied',PERMISSION_DENIED:1,POSITION_UNAVAILABLE:2,TIMEOUT:3});});await page.reload();
- await page.getByRole('button',{name:'Use my location'}).click();await page.getByRole('button',{name:'Get current location'}).click();await expect(page.getByRole('status')).toContainText('declined');await page.getByRole('button',{name:'Choose a pin instead'}).click();await page.getByRole('button',{name:/AEOS Bengaluru/}).click();await expect(page.getByRole('button',{name:/FROM AEOS/})).toBeVisible();
+ await page.getByRole('button',{name:'Use my location'}).click();await page.getByRole('button',{name:'Get current location'}).click();await expect(page.getByRole('status')).toContainText('denied');await page.getByRole('button',{name:'Choose a pin instead'}).click();await page.getByRole('button',{name:/AEOS Bengaluru/}).click();await expect(page.getByRole('button',{name:/FROM AEOS/})).toBeVisible();
 });
 test('one-time current location is sent only after explicit comparison',async({page,context})=>{
  await context.grantPermissions(['geolocation']);await context.setGeolocation({latitude:13.061,longitude:77.595,accuracy:15});let payload:any;await page.route('**/api/compare',r=>{payload=r.request().postDataJSON();return r.fulfill({json:fixture()});});

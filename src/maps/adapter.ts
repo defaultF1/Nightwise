@@ -1,4 +1,6 @@
-import { Capacitor } from '@capacitor/core';
+import { Capacitor, registerPlugin } from '@capacitor/core';
+import { syncMapViewport, type Rect } from './viewport';
+const MapViewport=registerPlugin<{clip(options:Rect&{id:string}):Promise<void>}>('MapViewport');
 import { GoogleMap, LatLngBounds, type Polyline } from '@capacitor/google-maps';
 import type { Theme } from '../theme';
 import type { Coordinate } from '../domain/types';
@@ -40,10 +42,12 @@ function styles(theme: Theme): google.maps.MapTypeStyle[] {
 export async function createMap(element: HTMLElement, theme: Theme, onSelect: (id: string) => void): Promise<MapHandle> {
   if (import.meta.env.VITE_ENABLE_LIVE_MAPS !== 'true') throw new Error('Maps paused');
   if (Capacitor.isNativePlatform()) {
-    const map = await GoogleMap.create({ id: `nightwise-${++instance}`, element, apiKey: 'configured-in-android-manifest', config: { center: { lat: 13.055, lng: 77.607 }, zoom: 13, styles: styles(theme) } });
+    const mapId=`nightwise-${++instance}`;
+    const map = await GoogleMap.create({ id: mapId, element, apiKey: 'configured-in-android-manifest', config: { center: { lat: 13.055, lng: 77.607 }, zoom: 13, styles: styles(theme) } });
     let lines: string[] = [], markers: string[] = []; let ids = new Map<string, string>();
     await map.setOnPolylineClickListener(e => { const id = ids.get(e.polylineId); if (id) onSelect(id); });
     const stopScrollSync = syncNestedMapScroll(element);
+    const stopViewport=syncMapViewport(element,rect=>MapViewport.clip({...rect,id:mapId}));
     return {
       async draw(next, pins, gaps=[], help=[]) {
         if (lines.length) await map.removePolylines(lines);
@@ -57,7 +61,7 @@ export async function createMap(element: HTMLElement, theme: Theme, onSelect: (i
         const lat = points.map(p => p.latitude), lng = points.map(p => p.longitude);
         await map.fitBounds(new LatLngBounds({ southwest: { lat: Math.min(...lat), lng: Math.min(...lng) }, northeast: { lat: Math.max(...lat), lng: Math.max(...lng) }, center: { lat: (Math.min(...lat) + Math.max(...lat)) / 2, lng: (Math.min(...lng) + Math.max(...lng)) / 2 } }), 45);
       },
-      touch: enabled => enabled ? map.enableTouch() : map.disableTouch(), destroy: async () => { stopScrollSync(); await map.destroy(); },
+      touch: enabled => enabled ? map.enableTouch() : map.disableTouch(), destroy: async () => { stopViewport();stopScrollSync(); await map.destroy(); },
     };
   }
   await loadWebMap();

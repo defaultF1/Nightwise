@@ -11,6 +11,8 @@ import androidx.core.view.ViewCompat;
 public class MainActivity extends BridgeActivity {
     @Override public void onCreate(Bundle state) {
         registerPlugin(MapsHandoffPlugin.class);
+        registerPlugin(MapViewportPlugin.class);
+        registerPlugin(DeviceSettingsPlugin.class);
         super.onCreate(state);
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         View content = findViewById(android.R.id.content);

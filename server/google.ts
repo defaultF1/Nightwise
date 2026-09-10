@@ -8,7 +8,7 @@ import type { BudgetStore } from './budget';
 import { calendarHours, regularHours, scheduleDetails } from './opening-hours';
 
 type Json = Record<string, any>;
-export const ROUTE_FIELDS = 'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline,routes.legs.steps.navigationInstruction.maneuver,routes.legs.steps.distanceMeters,routes.legs.steps.polyline.encodedPolyline';
+export const ROUTE_FIELDS = 'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline,routes.legs.steps.navigationInstruction.maneuver,routes.legs.steps.distanceMeters,routes.legs.steps.staticDuration,routes.legs.steps.polyline.encodedPolyline';
 export const PLACE_FIELDS = 'places.id,places.displayName,places.location,places.types,places.businessStatus,places.currentOpeningHours,places.regularOpeningHours,places.attributions';
 export function decodePolyline(encoded: string): Coordinate[] {
   if (typeof encoded !== 'string' || encoded.length > 50000) throw new ServiceError('invalid-response', 'Route geometry could not be read.');
@@ -44,7 +44,7 @@ export function parseRoutes(data: Json): Route[] {
     const parsedSteps=steps.filter(s=>Number.isFinite(s.distanceMeters)&&s.distanceMeters>=0).map(s=>{
       const path=typeof s.polyline?.encodedPolyline==='string'?decodePolyline(s.polyline.encodedPolyline):undefined;
       if(path?.some(p=>!inBengaluru(p)))throw new ServiceError('outside-area','A route step leaves the Bengaluru pilot area.',422);
-      return {distanceMeters:s.distanceMeters,...(typeof s.navigationInstruction?.maneuver==='string'?{maneuver:s.navigationInstruction.maneuver}:{}),...(path?{path}:{})};
+      return {distanceMeters:s.distanceMeters,...(typeof s.staticDuration==='string'&&/^\d+(\.\d+)?s$/.test(s.staticDuration)?{staticDurationSeconds:Number(s.staticDuration.slice(0,-1))}:{}),...(typeof s.navigationInstruction?.maneuver==='string'?{maneuver:s.navigationInstruction.maneuver}:{}),...(path?{path}:{})};
     });
     return { id: `google:${index}`, label: `Alternative ${index + 1}`, path, distanceMeters: r.distanceMeters, durationSeconds: Number(r.duration.slice(0, -1)), source: 'google', geometryKind: 'provider', turns, steps:parsedSteps };
   }).filter((r: Route) => { const key = JSON.stringify(r.path); if (paths.has(key)) return false; paths.add(key); return true; });
@@ -76,10 +76,10 @@ export function parseScan(data: Json, queryId: string, observedAt: string): { sc
 
 export class GoogleProvider {
   constructor(private key: string, private budget: BudgetStore, private fetcher: typeof fetch = fetch) {}
-  private async post(url: string, fields: string, body: Json, signal: AbortSignal): Promise<Json> {
+  private async post(url: string, fields: string, body: Json | undefined, signal: AbortSignal): Promise<Json> {
     signal.throwIfAborted();
     try {
-      const response = await this.fetcher(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': this.key, 'X-Goog-FieldMask': fields }, body: JSON.stringify(body), signal: AbortSignal.any([signal, AbortSignal.timeout(15000)]) });
+      const response = await this.fetcher(url, { method: body?'POST':'GET', headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': this.key, 'X-Goog-FieldMask': fields }, body: body?JSON.stringify(body):undefined, signal: AbortSignal.any([signal, AbortSignal.timeout(15000)]) });
       if (!response.ok) throw new ServiceError(response.status === 429 ? 'provider-quota' : response.status === 403 || response.status === 401 ? 'provider-access' : 'provider-unavailable', response.status === 403 || response.status === 401 ? 'Google access is not ready. Check API restrictions, enabled services and billing.' : 'Google could not finish this request. No automatic retry was made.');
       // Provider error bodies/headers can contain sensitive configuration. Never log them.
       const text = await response.text();
@@ -108,5 +108,12 @@ export class GoogleProvider {
       locationRestriction: { circle: { center: query.coordinate, radius: query.radiusMeters } },
     }, signal);
     return parseScan(data, query.id, new Date().toISOString());
+  }
+  async details(id:string,signal:AbortSignal){
+    if(!/^[\w-]{1,200}$/.test(id))throw new ServiceError('invalid-input','Invalid place reference.',400);
+    signal.throwIfAborted();await this.budget.reserve('details');
+    const data=await this.post(`https://places.googleapis.com/v1/places/${encodeURIComponent(id)}`,PLACE_FIELDS.replaceAll('places.',''),undefined,signal);
+    if(data.id!==id)throw new ServiceError('invalid-response','Place reference changed.');
+    return parseScan({places:[data]},`details:${id}`,new Date().toISOString());
   }
 }

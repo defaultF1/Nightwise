@@ -12,6 +12,7 @@ export type HoursEvaluation = { state: HoursState; closingSoon: boolean; minutes
 export type ActivitySegment = { fromMeters: number; toMeters: number; state: 'active' | 'low' | 'unknown' };
 export type DeduplicatedPlace = { id: string; name?: string; coordinate?: Coordinate; arrivalMinutes?: number; hours: HoursEvaluation; schedule?: PlaceSchedule; categories: string[]; sampleIndexes: number[]; conflict: boolean };
 export type ActivityAnalysis = {
+  lowActivityGapBounds?: [number, number]; helpGapBounds?: [number, number];
   routeId: string; source: 'sample' | 'live'; checkedAt: string; distanceMeters: number;
   openPlaces: number | null; closedPlaces: number | null; unknownHours: number | null;
   potentialHelpPoints: number | null; openTransportPoints: number | null; closingSoon: number | null;
@@ -25,8 +26,10 @@ export type ActivityAnalysis = {
   coreComparable: boolean;
 };
 export type Component = 'openDensity' | 'mainRoad' | 'helpDensity' | 'gapContinuity' | 'simplicity' | 'transport';
-export type RoadEvidence = { mainRoadFraction?: number; internalRoadFraction?: number; maneuversPerKm?: number; internalTurnsPerKm?:number };
+export type RoadEvidence = { mainRoadFraction?: number; internalRoadFraction?: number; maneuversPerKm?: number; internalTurnsPerKm?:number; mainMeters?:number; internalMeters?:number; unknownMeters?:number };
 export type Comparison = {
+  scoreBounds?: Record<string, [number, number]>;
+  componentBounds?: Record<string, Record<Component, [number, number]>>;
   version: string; fastestId: string | null; selectedId: string | null; recommendedId: string | null;
   outcome: 'empty' | 'single' | 'insufficient' | 'similar' | 'detour' | 'more-activity';
   message: string; commonComponents: Component[]; scores: Record<string,number>;

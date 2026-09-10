@@ -2,6 +2,7 @@ import type { Route } from './types';
 import type { ActivityAnalysis, ActivitySegment, NearbyScan, PlaceObservation, QueryPlan, DeduplicatedPlace, HoursEvaluation } from './activity-types';
 import { distanceMeters, samplePolyline, validCoordinate } from './geometry';
 import { evaluateObservation, isFresh } from './hours';
+import { passingMinutes } from './arrival';
 
 export const HELP_CATEGORIES = new Set(['hospital','police','pharmacy','hotel','gas_station']);
 export const STAFFED_PROXY_CATEGORIES = new Set([...HELP_CATEGORIES,'restaurant','cafe','store','convenience_store','supermarket']);
@@ -55,7 +56,7 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
   });
   const places:DeduplicatedPlace[]=[];
   for(const [id,group] of groups){
-    const arrivalMinutes = Math.min(...[...group.sampleIndexes].map(i=>samples[i].distanceMeters)) / Math.max(1,samples.at(-1)!.distanceMeters) * route.durationSeconds/60;
+    const arrivalMinutes = passingMinutes(route,Math.min(...[...group.sampleIndexes].map(i=>samples[i].distanceMeters)),samples.at(-1)!.distanceMeters);
     const evaluations=group.observations.map(p=>evaluateObservation(p,checkedAt,arrivalMinutes));
     const states=new Set(evaluations.map(e=>e.state));
     const coordinateConflict=group.observations.some(p=>distanceMeters(p.coordinate,group.observations[0].coordinate)>30);
@@ -71,18 +72,18 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
   const sampleState=statuses.map((status,i):ActivitySegment['state']=>{
     if(!status.observed)return 'unknown';
     const nearby=places.filter(p=>p.sampleIndexes.includes(i));
-    if(nearby.filter(p=>p.hours.state==='open').length>=MIN_OPEN_FOR_ACTIVITY)return 'active';
+    if(nearby.filter(p=>p.hours.state==='open'&&!p.hours.closingSoon).length>=MIN_OPEN_FOR_ACTIVITY)return 'active';
     if(!status.usable)return 'unknown';
-    if(nearby.some(p=>p.hours.state==='unknown'))return 'unknown';
+    if(nearby.some(p=>p.hours.state==='unknown'||p.hours.closingSoon))return 'unknown';
     return 'low';
   });
   const segments:ActivitySegment[]=samples.slice(1).map((sample,i)=>({fromMeters:samples[i].distanceMeters,toMeters:sample.distanceMeters,state:sampleState[i]==='unknown'||sampleState[i+1]==='unknown'?'unknown':sampleState[i]==='active'||sampleState[i+1]==='active'?'active':'low'}));
   const helpStates=statuses.map((status,i):ActivitySegment['state']=>{
     if(!status.observed)return 'unknown';
     const nearby=places.filter(p=>p.sampleIndexes.includes(i)&&p.categories.some(c=>HELP_CATEGORIES.has(c)));
-    if(nearby.some(p=>p.hours.state==='open'))return 'active';
+    if(nearby.some(p=>p.hours.state==='open'&&!p.hours.closingSoon))return 'active';
     if(!status.usable)return 'unknown';
-    if(nearby.some(p=>p.hours.state==='unknown'))return 'unknown';
+    if(nearby.some(p=>p.hours.state==='unknown'||p.hours.closingSoon))return 'unknown';
     return 'low';
   });
   const helpSegments:ActivitySegment[]=samples.slice(1).map((sample,i)=>({fromMeters:samples[i].distanceMeters,toMeters:sample.distanceMeters,state:helpStates[i]==='unknown'||helpStates[i+1]==='unknown'?'unknown':helpStates[i]==='active'||helpStates[i+1]==='active'?'active':'low'}));
@@ -110,5 +111,7 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
     closingSoon:anyObserved?open.filter(p=>p.hours.closingSoon).length:null,
     scanCoverage,activityCoverage,hoursCoverage,longestLowActivityMeters:coreComparable?longest:null,longestObservedLowActivityMeters:longest,
     totalLowActivityMeters:coreComparable?totalLow:null,totalObservedLowActivityMeters:totalLow,
+    lowActivityGapBounds:[longest,longestRun(segments.map(s=>({...s,state:s.state==='unknown'?'low':s.state})))],
+    helpGapBounds:[helpGap,longestRun(helpSegments.map(s=>({...s,state:s.state==='unknown'?'low':s.state})))],
     segments,places,limitations:[...limitations],coreComparable};
 }
