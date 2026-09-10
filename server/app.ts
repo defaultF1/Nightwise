@@ -42,12 +42,13 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     void reply.code(known ? error.status : e.statusCode === 429 ? 429 : e.statusCode === 400 ? 400 : 503).send({ code: known ? error.code : e.statusCode === 400 ? 'invalid-input' : 'unavailable', message: known ? error.message : 'The request could not be completed. Please check the journey and try again.' });
   });
   app.get('/api/status', async () => {
-    let budgetReady = true;
-    try { await budget.snapshot(); } catch { budgetReady = false; }
+    let budgetReady = true, budgetIssue: 'connection'|'missing'|'expiring'|'invalid'|undefined;
+    if (budget instanceof RedisBudget) ({ready:budgetReady,issue:budgetIssue}=await budget.health());
+    else try { await budget.snapshot(); } catch { budgetReady = false; budgetIssue='invalid'; }
     return { ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
       searchEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady, activityEnabled:config.enabled,
       scoringEnabled:config.scoring, accessCodeRequired:!!config.accessCode, maxQueries:config.maxQueries,
-      budgetStorage:config.redisUrl?'redis':'file', budgetReady };
+      budgetStorage:config.redisUrl?'redis':'file', budgetReady, ...(budgetIssue?{budgetIssue}:{}) };
   });
   registerSearch(app,config,budget,fetcher);
   const pointSchema = { type: 'object', additionalProperties: false, required: ['name', 'latitude', 'longitude'], properties: { name: { type: 'string', minLength: 1, maxLength: 100 }, latitude: { type: 'number', minimum: 12.75, maximum: 13.25 }, longitude: { type: 'number', minimum: 77.35, maximum: 77.85 } } };

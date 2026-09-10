@@ -24,6 +24,16 @@ describe('persistent hosted allowance', () => {
     expect(await budget(calls).canScan(80)).toBe(false);
     expect(await budget(calls).snapshot()).toMatchObject(counts);
   });
+  it('reports non-secret health reasons', async()=>{
+    const replies=[result(JSON.stringify(counts)),result(-1)];
+    expect(await budget(async()=>replies.shift()!).health()).toEqual({ready:true});
+    expect(await budget(async()=>result(null)).health()).toEqual({ready:false,issue:'missing'});
+    const expiring=[result(JSON.stringify(counts)),result(1000)];
+    expect(await budget(async()=>expiring.shift()!).health()).toEqual({ready:false,issue:'expiring'});
+    const invalid=[result('{bad'),result(-1)];
+    expect(await budget(async()=>invalid.shift()!).health()).toEqual({ready:false,issue:'invalid'});
+    expect(await budget(async()=>new Response('',{status:401})).health()).toEqual({ready:false,issue:'connection'});
+  });
   it('fails closed on missing, malformed, fractional and negative counters', async () => {
     for (const raw of [null, '{bad', JSON.stringify({}), JSON.stringify({...counts,routeCalls:-1}), JSON.stringify({...counts,nearbyCalls:1.5})]) {
       await expect(budget(async () => result(raw)).snapshot()).rejects.toMatchObject({code:'budget-unavailable'});
@@ -47,12 +57,15 @@ describe('persistent hosted allowance', () => {
   });
   it('never calls Google if Redis cannot reserve and keeps health checks available', async () => {
     const google=vi.fn();
-    const redis=vi.fn(async()=>result(['missing']));
+    const redis=vi.fn(async(_input:RequestInfo|URL,init?:RequestInit)=>{
+      const command=JSON.parse(String(init?.body));
+      return result(command[0]==='GET'?null:['missing']);
+    });
     const config=readConfig({HOST:'0.0.0.0',PILOT_ACCESS_CODE:'test-code-at-least-16',GOOGLE_MAPS_SERVER_KEY:'test-google-key',ENABLE_LIVE_REQUESTS:'true',
       UPSTASH_REDIS_REST_URL:endpoint,UPSTASH_REDIS_REST_TOKEN:'test-token',ROAD_DATA_PATH:'missing-fixture'});
     const app=await createServer(config,google,redis);
     try {
-      expect((await app.inject('/api/status')).json()).toMatchObject({ready:false,budgetStorage:'redis',budgetReady:false});
+      expect((await app.inject('/api/status')).json()).toMatchObject({ready:false,budgetStorage:'redis',budgetReady:false,budgetIssue:'missing'});
       const r=await app.inject({method:'POST',url:'/api/compare',headers:{'x-nightwise-code':'test-code-at-least-16'},payload:DEFAULT_JOURNEY});
       expect(r.statusCode).toBe(503); expect(r.json().code).toBe('budget-unavailable'); expect(google).not.toHaveBeenCalled();
     } finally { await app.close(); }

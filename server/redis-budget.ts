@@ -69,6 +69,21 @@ export class RedisBudget implements BudgetStore {
       routeLimit: this.routeLimit, nearbyLimit: this.nearbyLimit, autocompleteLimit: this.autocompleteLimit, detailsLimit: this.detailsLimit,
       remainingComparisons: Math.max(0, this.routeLimit - data.routeCalls) };
   }
+  async health(): Promise<{ready:boolean;issue?:'connection'|'missing'|'expiring'|'invalid'}> {
+    let raw:unknown, ttl:unknown;
+    try {
+      raw = await this.command(['GET', this.key]);
+      if (raw !== null) ttl = await this.command(['PTTL', this.key]);
+    } catch { return {ready:false,issue:'connection'}; }
+    if (raw === null) return {ready:false,issue:'missing'};
+    if (ttl !== -1) return {ready:false,issue:ttl === -2 ? 'missing' : 'expiring'};
+    if (typeof raw !== 'string') return {ready:false,issue:'invalid'};
+    try {
+      const data=JSON.parse(raw) as Record<string,unknown>;
+      if (!data || fields.some(f=>!Number.isSafeInteger(data[f]) || Number(data[f])<0)) return {ready:false,issue:'invalid'};
+    } catch { return {ready:false,issue:'invalid'}; }
+    return {ready:true};
+  }
   async canScan(count: number): Promise<boolean> {
     if (!Number.isSafeInteger(count) || count < 0) return false;
     return (await this.snapshot()).nearbyCalls + count <= this.nearbyLimit;
