@@ -1,6 +1,6 @@
 # NightWise
 
-Android-first Bengaluru route comparison preview for a small tutorial team. Version 0.8.0-team-preview. This is an experimental activity-information app; it does not measure personal safety, lighting or crime.
+Android-first Bengaluru route comparison preview for a small tutorial team. Version 0.8.1-team-preview. This is an experimental activity-information app; it does not measure personal safety, lighting or crime.
 
 ## Implemented
 
