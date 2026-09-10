@@ -5,11 +5,11 @@ import type { NearbyQuery, NearbyScan, PlaceObservation } from '../src/domain/ac
 import { validateRoutes } from '../src/providers/routes';
 import { ServiceError } from './errors';
 import type { Budget } from './budget';
-import { calendarHours } from './opening-hours';
+import { calendarHours, regularHours, scheduleDetails } from './opening-hours';
 
 type Json = Record<string, any>;
 export const ROUTE_FIELDS = 'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline,routes.legs.steps.navigationInstruction.maneuver,routes.legs.steps.distanceMeters,routes.legs.steps.polyline.encodedPolyline';
-export const PLACE_FIELDS = 'places.id,places.displayName,places.location,places.types,places.businessStatus,places.currentOpeningHours,places.attributions';
+export const PLACE_FIELDS = 'places.id,places.displayName,places.location,places.types,places.businessStatus,places.currentOpeningHours,places.regularOpeningHours,places.attributions';
 export function decodePolyline(encoded: string): Coordinate[] {
   if (typeof encoded !== 'string' || encoded.length > 50000) throw new ServiceError('invalid-response', 'Route geometry could not be read.');
   let index = 0, latitude = 0, longitude = 0; const points: Coordinate[] = [];
@@ -66,8 +66,10 @@ export function parseScan(data: Json, queryId: string, observedAt: string): { sc
     // incomplete weekly hours into an open/closed guess or claim actual staffing.
     const hours = p.currentOpeningHours;
     const currentHours = p.businessStatus === 'OPERATIONAL' && typeof hours?.openNow === 'boolean'
-      ? { openNow: hours.openNow, nextCloseTime: typeof hours.nextCloseTime === 'string' ? hours.nextCloseTime : undefined, observedAt } : undefined;
-    return [{ id: p.id, name: typeof p.displayName?.text==='string'?p.displayName.text.slice(0,150):undefined, coordinate: p.location, categories: p.types, observedAt, currentHours, calendarHours:p.businessStatus==='OPERATIONAL'?calendarHours(hours,observedAt):undefined }];
+      ? { openNow: hours.openNow, nextOpenTime: typeof hours.nextOpenTime === 'string' ? hours.nextOpenTime : undefined, nextCloseTime: typeof hours.nextCloseTime === 'string' ? hours.nextCloseTime : undefined, observedAt } : undefined;
+    const calendar=p.businessStatus==='OPERATIONAL'?calendarHours(hours,observedAt):undefined;
+    return [{ id: p.id, name: typeof p.displayName?.text==='string'?p.displayName.text.slice(0,150):undefined, coordinate: p.location, categories: p.types, observedAt, currentHours, calendarHours:calendar,
+      businessStatus:p.businessStatus, hours:p.businessStatus==='OPERATIONAL'?regularHours(p.regularOpeningHours):undefined,hoursOrigin:'google-regular',schedule:scheduleDetails(hours,p.regularOpeningHours),currentScheduleInvalid:Array.isArray(hours?.periods)&&!calendar }];
   });
   return { scan: { queryId, observedAt, status: malformed ? 'failed' : input.length === 20 ? 'capped' : 'ok', places }, attributions };
 }

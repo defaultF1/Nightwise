@@ -1,15 +1,16 @@
 import type { Coordinate, HoursState } from './types';
 
 export type WeeklyPeriod = { openDay: number; openMinute: number; closeDay: number; closeMinute: number };
-export type OpeningHours = { timeZone: string; alwaysOpen?: boolean; periods?: WeeklyPeriod[] };
-export type PlaceObservation = { id: string; name?: string; coordinate: Coordinate; categories: string[]; hours?: OpeningHours; calendarHours?: { from: string; until: string; periods: { from: string; until: string }[] }; currentHours?: { openNow: boolean; nextCloseTime?: string; observedAt: string }; observedAt: string };
+export type OpeningHours = { timeZone: string; alwaysOpen?: boolean; alwaysClosed?: boolean; periods?: WeeklyPeriod[] };
+export type PlaceSchedule = { currentWeek: string[]; regularWeek: string[]; specialDates: string[]; nextOpenTime?: string; nextCloseTime?: string };
+export type PlaceObservation = { id: string; name?: string; coordinate: Coordinate; categories: string[]; hours?: OpeningHours; hoursOrigin?: 'google-regular'; businessStatus?: string; schedule?: PlaceSchedule; currentScheduleInvalid?: boolean; calendarHours?: { from: string; until: string; periods: { from: string; until: string }[] }; currentHours?: { openNow: boolean; nextOpenTime?: string; nextCloseTime?: string; observedAt: string }; observedAt: string };
 export type NearbyScan = { queryId: string; observedAt: string; status: 'ok' | 'failed' | 'capped'; places: PlaceObservation[] };
 export type RouteSample = { coordinate: Coordinate; distanceMeters: number; queryId: string };
 export type NearbyQuery = { id: string; coordinate: Coordinate; radiusMeters: number };
 export type QueryPlan = { queries: NearbyQuery[]; samplesByRoute: Record<string, RouteSample[]>; totalSamples: number };
-export type HoursEvaluation = { state: HoursState; closingSoon: boolean; minutesUntilClose: number | null };
+export type HoursEvaluation = { state: HoursState; closingSoon: boolean; minutesUntilClose: number | null; basis?: 'current' | 'regular' | 'business-status'; reason?: string };
 export type ActivitySegment = { fromMeters: number; toMeters: number; state: 'active' | 'low' | 'unknown' };
-export type DeduplicatedPlace = { id: string; name?: string; coordinate?: Coordinate; arrivalMinutes?: number; hours: HoursEvaluation; categories: string[]; sampleIndexes: number[]; conflict: boolean };
+export type DeduplicatedPlace = { id: string; name?: string; coordinate?: Coordinate; arrivalMinutes?: number; hours: HoursEvaluation; schedule?: PlaceSchedule; categories: string[]; sampleIndexes: number[]; conflict: boolean };
 export type ActivityAnalysis = {
   routeId: string; source: 'sample' | 'live'; checkedAt: string; distanceMeters: number;
   openPlaces: number | null; closedPlaces: number | null; unknownHours: number | null;

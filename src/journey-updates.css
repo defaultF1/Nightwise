@@ -20,6 +20,14 @@ html[data-native-map=true] .brand svg,html[data-native-map=true] .brand span,htm
 .pin-legend{display:flex;flex-wrap:wrap;gap:10px 14px;padding:8px 18px 14px;background:var(--bg);color:var(--muted);font-size:10px;line-height:1.5}.pin-legend span{display:inline-flex;align-items:center;gap:6px}.pin-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;border:1px solid #ffffff66;flex-shrink:0}
 
 /* Give wrapped endpoint text breathing room and keep the last action above the screen edge. */
+.activity-strip .strip-title{align-items:flex-start;flex-wrap:wrap;gap:8px;line-height:1.5}
+.activity-strip .strip-explanation,.strip-help p,.strip-help li{font-size:12px;line-height:1.65;color:var(--muted);margin:8px 0}
+.strip-direction{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin:10px 0 7px}
+.activity-strip .segment-band{height:12px}.activity-strip .segment-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;line-height:1.5}
+.strip-help{margin-top:12px;border-top:1px solid var(--line);padding-top:5px}.strip-help summary,.coverage-details summary{min-height:44px;align-content:center;cursor:pointer;font-size:12px;color:var(--text);line-height:1.5}
+.strip-help ul{padding-left:18px}.confidence .confidence-summary{font-size:13px;margin:14px 0 8px}.confidence .confidence-summary strong{color:var(--text)}
+.shop-hours>p,.shop-hours-item p,.shop-hours-item li{font-size:12px;line-height:1.65;color:var(--muted);margin:10px 0}
+.shop-hours-list{max-height:440px;overflow:auto;overscroll-behavior:contain}.shop-hours-item{padding:12px 0;border-top:1px solid var(--line)}.shop-hours-item summary{line-height:1.5;overflow-wrap:anywhere}.shop-hours-item summary strong{font-size:13px}.shop-hours-item summary span{display:block;font-size:11px;color:var(--muted);margin:5px 0 0}.shop-hours-item h4{font-size:12px;margin:16px 0 6px}.shop-hours-item ul{padding-left:18px}
 .endpoint-confirmation{display:grid;gap:12px;min-width:0;margin:16px 0 20px;background:transparent}
 .endpoint-confirmation>div{min-width:0;padding:16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
 .endpoint-confirmation dt,.endpoint-confirmation dd{min-width:0;line-height:1.5;overflow-wrap:anywhere}

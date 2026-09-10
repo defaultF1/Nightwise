@@ -1,5 +1,5 @@
 import type { Route } from './types';
-import type { ActivityAnalysis, ActivitySegment, NearbyScan, PlaceObservation, QueryPlan, DeduplicatedPlace } from './activity-types';
+import type { ActivityAnalysis, ActivitySegment, NearbyScan, PlaceObservation, QueryPlan, DeduplicatedPlace, HoursEvaluation } from './activity-types';
 import { distanceMeters, samplePolyline, validCoordinate } from './geometry';
 import { evaluateObservation, isFresh } from './hours';
 
@@ -62,10 +62,11 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
     const conflict=states.size>1||coordinateConflict;
     if(conflict)limitations.add('Conflicting details for a place were treated as unknown.');
     const knownClosing=evaluations.map(e=>e.minutesUntilClose).filter((n):n is number=>n!==null);
-    const hours=conflict?{state:'unknown' as const,closingSoon:false,minutesUntilClose:null}:{...evaluations[0],closingSoon:evaluations.some(e=>e.closingSoon),minutesUntilClose:knownClosing.length?Math.min(...knownClosing):null};
+    const hours:HoursEvaluation=conflict?{state:'unknown' as const,closingSoon:false,minutesUntilClose:null,reason:'Different observations disagree about this place.'}:{...evaluations[0],closingSoon:evaluations.some(e=>e.closingSoon),minutesUntilClose:knownClosing.length?Math.min(...knownClosing):null};
     // Keep only categories consistently reported for a duplicate listing.
     const categories=group.observations[0].categories.filter(c=>group.observations.every(p=>p.categories.includes(c)));
-    places.push({id,name:group.observations[0].name,coordinate:conflict?undefined:group.observations[0].coordinate,arrivalMinutes,hours,categories:[...new Set(categories)],sampleIndexes:[...group.sampleIndexes],conflict});
+    if(!conflict&&evaluations.some(e=>e.basis==='regular')){hours.basis='regular';hours.reason='Based on regular weekly hours; special-day changes are not confirmed.';}
+    places.push({id,name:group.observations[0].name,coordinate:conflict?undefined:group.observations[0].coordinate,arrivalMinutes,hours,schedule:conflict?undefined:group.observations[0].schedule,categories:[...new Set(categories)],sampleIndexes:[...group.sampleIndexes],conflict});
   }
   const sampleState=statuses.map((status,i):ActivitySegment['state']=>{
     if(!status.observed)return 'unknown';
@@ -93,6 +94,7 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
   const totalLow=segments.filter(s=>s.state==='low').reduce((sum,s)=>sum+s.toMeters-s.fromMeters,0);
   const unknown=places.length-open.length-closed.length;
   if(unknown)limitations.add('Some opening hours are unknown.');
+  if(places.some(p=>p.hours.basis==='regular'))limitations.add('Some places use regular weekly hours; special-day changes are not confirmed.');
   const scanCoverage=length>0?scanned/length:0,activityCoverage=length>0?assessed/length:0;
   const hoursCoverage=places.length?(places.length-unknown)/places.length:(scanCoverage===1?1:0);
   const anyObserved=statuses.some(s=>s.observed);

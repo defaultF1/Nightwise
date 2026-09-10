@@ -1,6 +1,6 @@
 # NightWise
 
-Android-first Bengaluru route comparison preview for a small tutorial team. Version 0.7.7-preview. This is an experimental activity-information app; it does not measure personal safety, lighting or crime.
+Android-first Bengaluru route comparison preview for a small tutorial team. Version 0.7.8-preview. This is an experimental activity-information app; it does not measure personal safety, lighting or crime.
 
 ## Implemented
 
@@ -11,6 +11,8 @@ Android-first Bengaluru route comparison preview for a small tutorial team. Vers
 - Choose an additional travel-time allowance, save favourite places locally, and explicitly refresh comparisons.
 - Persistent Black, Light and Blue themes, full intro video and immersive Android layout.
 - Blue start pins, red destinations, yellow shops, pink medical places and green fuel stations, with a colour legend.
+- Expand shop schedules to see current and regular weekly opening times, closed days and reported special dates in Bengaluru time. Missing schedules remain unknown; typical weekly estimates are labelled separately.
+- Read the route strip from Start to Destination, with plain explanations of open places, few open places and missing information.
 
 Google opening schedules are evaluated at estimated passing times. Live activity scores remain withheld: real scans still have incomplete opening hours, capped search coverage and missing road evidence. Community reporting is outside this version. Bengaluru Palace is an example search, not a preset with invented coordinates.
 
@@ -30,7 +32,7 @@ For USB development, reverse API port 8787 with ADB. An installed app used away 
 
 ## Verification and limitations
 
-Run `npm test` for unit/backend checks. With the preview on port 4173 and live maps disabled, run `npx playwright test` for browser checks. Run `npm run build:server` to bundle the API.
+Run `npm test` for unit/backend checks. With the preview on port 4173 and live maps disabled, run `npx playwright test` for browser checks. Set `PLAYWRIGHT_BASE_URL` to use a separate test preview while keeping a live preview enabled. Run `npm run build:server` to bundle the API.
 
 The preview has been exercised on a Redmi Android 10 phone. Physical Back-button and GPS acceptance, public entrance checks, exact external Google Maps route preservation and real journey validation remain release requirements. The local road extract covers North Bengaluru; other Bengaluru journeys can return routes with missing road evidence. Long journeys can exceed scan allowances and show no activity comparison.
 
