@@ -9,4 +9,4 @@ export type LiveResult = {
   notices: string[]; attributions: { name: string; uri?: string }[];
   usage: { routeCalls: number; nearbyCalls: number; routeLimit: number; nearbyLimit: number; remainingComparisons: number };
 };
-export type ServiceStatus = { ready: boolean; configured?:boolean; paused?:boolean; searchEnabled?:boolean; activityEnabled: boolean; scoringEnabled: boolean; accessCodeRequired: boolean; maxQueries: number };
+export type ServiceStatus = { ready: boolean; configured?:boolean; paused?:boolean; searchEnabled?:boolean; searchPreviewEnabled?:boolean; activityEnabled: boolean; scoringEnabled: boolean; accessCodeRequired: boolean; maxQueries: number };

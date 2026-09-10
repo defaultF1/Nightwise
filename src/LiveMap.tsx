@@ -3,7 +3,7 @@ import { Capacitor } from '@capacitor/core';
 import { MapPin } from 'lucide-react';
 import type { Route } from './domain/types';
 import type { ActivityAnalysis } from './domain/activity-types';
-import type { LiveJourney } from './domain/journey';
+import { regionForPoint, type LiveJourney } from './domain/journey';
 import type { Theme } from './theme';
 import { createMap, type MapHandle, type MapLine } from './maps/adapter';
 import { slicePolyline } from './domain/geometry';
@@ -13,6 +13,7 @@ import { visiblePlacePins, PIN_COLORS } from './maps/pins';
 let nativeMapOwners = 0;
 
 export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked, analysis }: { routes: Route[]; selectedId?: string; onSelect: (id: string) => void; journey: LiveJourney; theme: Theme; blocked: boolean; analysis?: ActivityAnalysis }) {
+  const city=regionForPoint(journey.origin)?.city??'Bengaluru';
   const element = useRef<HTMLElement>(null);
   const handle = useRef<MapHandle | null>(null);
   const queue = useRef(Promise.resolve());
@@ -27,7 +28,7 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
     queue.current = queue.current.then(async () => {
       if (disposed || !element.current) return;
       try {
-        owned = await createMap(element.current, theme, id => select.current(id));
+        owned = await createMap(element.current, theme, id => select.current(id),journey.origin);
         if (disposed) { await owned.destroy(); owned = undefined; return; }
         handle.current = owned; setReady(true);
         if (Capacitor.isNativePlatform()) { nativeOwner = true; nativeMapOwners++; document.documentElement.dataset.nativeMap = 'true'; }
@@ -61,11 +62,11 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
     queue.current = queue.current.then(async () => { await handle.current?.fit(routes.length ? routes.flatMap(r => r.path) : [journey.origin, journey.destination]); }).catch(() => setError(true));
   }, [ready, routes, journey]);
   useEffect(() => { if (ready) queue.current = queue.current.then(async () => { await handle.current?.touch(!blocked); }).catch(() => {}); }, [ready, blocked]);
-  return <section className="live-map" aria-label="Bengaluru Google map">
-    <div className="diagram-heading"><span><MapPin size={14} /> Bengaluru</span><span className="sample-badge">Google map</span></div>
+  return <section className="live-map" aria-label={`${city} Google map`}>
+    <div className="diagram-heading"><span><MapPin size={14} /> {city}</span><span className="sample-badge">Google map</span></div>
     {routes.length>0&&<div className="map-route-options" role="group" aria-label="Choose route on map">{routes.map(route=><button key={route.id} aria-pressed={route.id===selectedId} onClick={()=>onSelect(route.id)}>{route.label} · {Math.round(route.durationSeconds/60)} min</button>)}</div>}
     <div className="map-slot">{createElement('capacitor-google-map', { ref: element, className: 'map-canvas' })}
-      {(!ready || error) && <div className="map-cover" role="status">{import.meta.env.VITE_ENABLE_LIVE_MAPS !== 'true' ? 'Live maps are paused to control usage. Tutorial mode remains available.' : error ? 'Map unavailable. Check connection, key restrictions and billing. Route details remain available.' : 'Loading Bengaluru map…'}</div>}
+      {(!ready || error) && <div className="map-cover" role="status">{import.meta.env.VITE_ENABLE_LIVE_MAPS !== 'true' ? 'Live maps are paused to control usage. Tutorial mode remains available.' : error ? 'Map unavailable. Check connection, key restrictions and billing. Route details remain available.' : `Loading ${city} map…`}</div>}
       {blocked && <div className="map-curtain" />}
     </div>
     <div className="diagram-endpoints"><span><b>A</b> {journey.origin.name}</span><span><b>B</b> {journey.destination.name}</span></div>

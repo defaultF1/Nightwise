@@ -39,11 +39,11 @@ function styles(theme: Theme): google.maps.MapTypeStyle[] {
     { featureType: 'poi', elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
   ];
 }
-export async function createMap(element: HTMLElement, theme: Theme, onSelect: (id: string) => void): Promise<MapHandle> {
+export async function createMap(element: HTMLElement, theme: Theme, onSelect: (id: string) => void, initialCenter:Coordinate={latitude:13.055,longitude:77.607}): Promise<MapHandle> {
   if (import.meta.env.VITE_ENABLE_LIVE_MAPS !== 'true') throw new Error('Maps paused');
   if (Capacitor.isNativePlatform()) {
     const mapId=`nightwise-${++instance}`;
-    const map = await GoogleMap.create({ id: mapId, element, apiKey: 'configured-in-android-manifest', config: { center: { lat: 13.055, lng: 77.607 }, zoom: 13, styles: styles(theme) } });
+    const map = await GoogleMap.create({ id: mapId, element, apiKey: 'configured-in-android-manifest', config: { center: { lat: initialCenter.latitude, lng: initialCenter.longitude }, zoom: 13, styles: styles(theme) } });
     let lines: string[] = [], markers: string[] = []; let ids = new Map<string, string>();
     await map.setOnPolylineClickListener(e => { const id = ids.get(e.polylineId); if (id) onSelect(id); });
     const stopScrollSync = syncNestedMapScroll(element);
@@ -65,7 +65,7 @@ export async function createMap(element: HTMLElement, theme: Theme, onSelect: (i
     };
   }
   await loadWebMap();
-  const map = new google.maps.Map(element, { center: { lat: 13.055, lng: 77.607 }, zoom: 13, styles: styles(theme), mapTypeControl: false, streetViewControl: false, fullscreenControl: false, gestureHandling: 'cooperative', clickableIcons: false });
+  const map = new google.maps.Map(element, { center: { lat: initialCenter.latitude, lng: initialCenter.longitude }, zoom: 13, styles: styles(theme), mapTypeControl: false, streetViewControl: false, fullscreenControl: false, gestureHandling: 'cooperative', clickableIcons: false });
   let lines: google.maps.Polyline[] = [], pins: google.maps.Marker[] = [];
   return {
     async draw(next, nextPins, gaps=[], help=[]) {

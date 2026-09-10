@@ -1,13 +1,13 @@
-import { AEOS_PIN, PILOT_RADIUS_METERS, inBengaluru } from './journey';
+import { regionForPoint } from './journey';
 import { distanceMeters } from './geometry';
 export function validateLocation(position:{timestamp:number;coords:{latitude:number;longitude:number;accuracy:number}},now=Date.now()){
   const {coords,timestamp}=position;
   if(!Number.isFinite(timestamp)||now-timestamp>60000||timestamp>now+10000)throw new Error('This location reading is stale. Try current location again or choose a pin.');
-  if(!inBengaluru(coords))throw new Error('You are outside the North Bengaluru pilot. Choose an origin within 10 km of AEOS.');
+  const region=regionForPoint(coords);
+  if(!region)throw new Error('You are outside the supported areas in North Bengaluru and Kanpur. Choose an in-area origin.');
   if(!Number.isFinite(coords.accuracy)||coords.accuracy<0||coords.accuracy>150)throw new Error('Location is too approximate. Enable precise location or choose a pin on the map.');
-  const distance=distanceMeters(AEOS_PIN,coords);
-  if(distance-coords.accuracy>PILOT_RADIUS_METERS)throw new Error('You are outside the 10 km North Bengaluru pilot around AEOS. Choose an in-area pin.');
-  if(distance+coords.accuracy>PILOT_RADIUS_METERS)throw new Error('Your location is close to the pilot boundary. Try for a more precise fix or choose an in-area pin.');
+  const distance=distanceMeters(region.center,coords);
+  if(distance+coords.accuracy>region.radiusMeters)throw new Error('Your location is close to the pilot boundary. Try for a more precise fix or choose an in-area pin.');
   return {name:'Current location',latitude:coords.latitude,longitude:coords.longitude,address:`GPS accuracy about ${Math.round(coords.accuracy)} m · confirm the starting entrance`};
 }
 export function locationError(error:unknown):string{

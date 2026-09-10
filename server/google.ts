@@ -1,5 +1,5 @@
 import type { LiveJourney } from '../src/domain/journey';
-import { inBengaluru } from '../src/domain/journey';
+import { inServiceMapArea } from '../src/domain/journey';
 import type { Route, Coordinate } from '../src/domain/types';
 import type { NearbyQuery, NearbyScan, PlaceObservation } from '../src/domain/activity-types';
 import { validateRoutes } from '../src/providers/routes';
@@ -38,13 +38,13 @@ export function parseRoutes(data: Json): Route[] {
   const routes = data.routes.map((r: Json, index: number): Route => {
     if (typeof r.duration !== 'string' || !/^\d+(\.\d+)?s$/.test(r.duration) || typeof r.distanceMeters !== 'number') throw new ServiceError('invalid-response', 'Route time or distance is missing.');
     const path = decodePolyline(r.polyline?.encodedPolyline);
-    if (path.some(p => !inBengaluru(p))) throw new ServiceError('outside-area', 'A route leaves this Bengaluru pilot area.', 422);
+    if (path.some(p => !inServiceMapArea(p))) throw new ServiceError('outside-area', 'A route leaves the supported city map area.', 422);
     const steps: Json[] = Array.isArray(r.legs) ? r.legs.flatMap((l: Json) => Array.isArray(l.steps) ? l.steps : []) : [];
     const maneuvers = steps.map(s => s.navigationInstruction?.maneuver);
     const turns = maneuvers.length && maneuvers.every(m => typeof m === 'string') ? maneuvers.filter(m => /TURN|U_TURN|ROUNDABOUT/.test(m)).length : undefined;
     const parsedSteps=steps.filter(s=>Number.isFinite(s.distanceMeters)&&s.distanceMeters>=0).map(s=>{
       const path=typeof s.polyline?.encodedPolyline==='string'?decodePolyline(s.polyline.encodedPolyline):undefined;
-      if(path?.some(p=>!inBengaluru(p)))throw new ServiceError('outside-area','A route step leaves the Bengaluru pilot area.',422);
+      if(path?.some(p=>!inServiceMapArea(p)))throw new ServiceError('outside-area','A route step leaves the supported city map area.',422);
       return {distanceMeters:s.distanceMeters,...(typeof s.staticDuration==='string'&&/^\d+(\.\d+)?s$/.test(s.staticDuration)?{staticDurationSeconds:Number(s.staticDuration.slice(0,-1))}:{}),...(typeof s.navigationInstruction?.maneuver==='string'?{maneuver:s.navigationInstruction.maneuver}:{}),...(path?{path}:{})};
     });
     return { id: `google:${index}`, label: `Alternative ${index + 1}`, path, distanceMeters: r.distanceMeters, durationSeconds: Number(r.duration.slice(0, -1)), source: 'google', geometryKind: 'provider', turns, steps:parsedSteps };
@@ -61,7 +61,7 @@ export function parseScan(data: Json, queryId: string, observedAt: string): { sc
   let malformed = false;
   const attributions: { name: string; uri?: string }[] = [];
   const places = input.flatMap((p): PlaceObservation[] => {
-    if (typeof p.id !== 'string' || !p.id || !inBengaluru(p.location) || !Array.isArray(p.types) || !p.types.every((t: unknown) => typeof t === 'string')) { malformed = true; return []; }
+    if (typeof p.id !== 'string' || !p.id || !inServiceMapArea(p.location) || !Array.isArray(p.types) || !p.types.every((t: unknown) => typeof t === 'string')) { malformed = true; return []; }
     for (const a of p.attributions || []) if (typeof a.provider === 'string') attributions.push({ name: a.provider, uri: typeof a.providerUri === 'string' && a.providerUri.startsWith('https://') ? a.providerUri : undefined });
     // Current openNow + nextCloseTime account for special dates. Do not turn
     // incomplete weekly hours into an open/closed guess or claim actual staffing.

@@ -7,7 +7,7 @@ import { RedisBudget } from './redis-budget';
 import { GoogleProvider } from './google';
 import { ServiceError } from './errors';
 import type { ServerConfig } from './config';
-import { inPilotArea, type LiveJourney } from '../src/domain/journey';
+import { inPilotArea, sameServiceRegion, regionForPoint, SERVICE_REGIONS, type LiveJourney } from '../src/domain/journey';
 import { distanceMeters } from '../src/domain/geometry';
 import { buildQueryPlan, analyzeRoute } from '../src/domain/activity';
 import { compareActivity } from '../src/domain/comparison';
@@ -22,7 +22,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
   const budget: BudgetStore = config.redisUrl
     ? new RedisBudget(config.redisUrl, config.redisToken, config.redisKey, config.routeLimit, config.nearbyLimit, config.autocompleteLimit, config.detailsLimit, budgetFetcher)
     : new Budget(config.ledgerPath, config.routeLimit, config.nearbyLimit, config.autocompleteLimit, config.detailsLimit);
-  const analyzeRoads = loadRoadAnalyzer(config.roadFile);
+  const roadFiles = {'north-bengaluru':config.roadFile,kanpur:config.kanpurRoadFile};
   const provider = new GoogleProvider(config.serverKey, budget, fetcher);
   let busy = false;
   await app.register(cors, { origin: config.allowedOrigins, methods: ['GET', 'POST'], allowedHeaders: ['Content-Type', 'X-Nightwise-Code'] });
@@ -34,7 +34,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     if (origin && !config.allowedOrigins.includes(origin)) return reply.code(403).send({ code: 'origin-denied', message: 'This app origin is not enabled.' });
     if(config.accessCode&&request.url.startsWith('/api/places/')){
       const supplied=Buffer.from(String(request.headers['x-nightwise-code']||'')), expected=Buffer.from(config.accessCode);
-      if(supplied.length!==expected.length||!timingSafeEqual(supplied,expected))return reply.code(401).send({code:'access-required',message:'Enter the team access code in Settings to search Bengaluru.'});
+      if(supplied.length!==expected.length||!timingSafeEqual(supplied,expected))return reply.code(401).send({code:'access-required',message:'Enter the team access code in Settings to search places.'});
     }
   });
   app.setErrorHandler((error, _request, reply) => {
@@ -46,13 +46,13 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     let budgetReady = true, budgetIssue: 'connection'|'missing'|'expiring'|'invalid'|undefined;
     if (budget instanceof RedisBudget) ({ready:budgetReady,issue:budgetIssue}=await budget.health());
     else try { await budget.snapshot(); } catch { budgetReady = false; budgetIssue='invalid'; }
-    return { buildVersion:'0.10.0-live-preview',scanStrategy:'partition-and-spatial-v1',scoringVersion:'experimental-live-activity-v4-bounds',serviceRadiusMeters:10000,ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
+    return { buildVersion:'0.11.0-live-preview',searchPreviewEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady,scanStrategy:'partition-and-spatial-v1',scoringVersion:'experimental-live-activity-v4-bounds',serviceRadiusMeters:10000,serviceRegions:SERVICE_REGIONS.map(r=>({id:r.id,city:r.city,radiusMeters:r.radiusMeters})),ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
       searchEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady, activityEnabled:config.enabled,
       scoringEnabled:config.scoring, accessCodeRequired:!!config.accessCode, maxQueries:config.maxQueries,
       budgetStorage:config.redisUrl?'redis':'file', budgetReady, ...(budgetIssue?{budgetIssue}:{}) };
   });
   registerSearch(app,config,budget,fetcher);
-  const pointSchema = { type: 'object', additionalProperties: false, required: ['name', 'latitude', 'longitude'], properties: { name: { type: 'string', minLength: 1, maxLength: 100 }, latitude: { type: 'number', minimum: 12.75, maximum: 13.25 }, longitude: { type: 'number', minimum: 77.35, maximum: 77.85 } } };
+  const pointSchema = { type: 'object', additionalProperties: false, required: ['name', 'latitude', 'longitude'], properties: { name: { type: 'string', minLength: 1, maxLength: 100 }, latitude: { type: 'number', minimum: -90, maximum: 90 }, longitude: { type: 'number', minimum: -180, maximum: 180 } } };
   app.post<{ Body: LiveJourney }>('/api/compare', { schema: { body: { type: 'object', additionalProperties: false, required: ['origin', 'destination', 'mode'], properties: { origin: pointSchema, destination: pointSchema, mode: { type: 'string', enum: ['DRIVE'] } } } } }, async (request, reply) => {
     if (config.accessCode) {
       const supplied = Buffer.from(String(request.headers['x-nightwise-code'] || ''));
@@ -62,7 +62,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     if (!config.serverKey) throw new ServiceError('not-configured', 'Live routes need the server key and enabled Google services. Tutorial mode is ready.');
     if (!config.liveEnabled) throw new ServiceError('live-paused', 'Live Google requests are paused to control usage. Tutorial mode is ready.');
     const journey = request.body;
-    if (!inPilotArea(journey.origin) || !inPilotArea(journey.destination) || distanceMeters(journey.origin, journey.destination) < 100) throw new ServiceError('outside-area', 'Choose pins within 10 km of AEOS in North Bengaluru, at least 100 m apart.', 422);
+    if (!inPilotArea(journey.origin) || !inPilotArea(journey.destination) || !sameServiceRegion(journey.origin,journey.destination) || distanceMeters(journey.origin, journey.destination) < 100) throw new ServiceError('outside-area', 'Choose pins in the same supported city (North Bengaluru or Kanpur), at least 100 m apart.', 422);
     if (busy) throw new ServiceError('busy', 'Another live comparison is running. Please wait before trying again.', 429);
     busy = true;
     const cancel = new AbortController();
@@ -110,9 +110,10 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
       if (!config.enabled) notices.push('Live activity scans are switched off. Travel times are live; activity is not assessed.');
       if (!config.scoring) notices.push('Experimental live scoring is disabled by the service setting.');
       else notices.push('Live scores are experimental evidence ranges, not safety ratings or calibrated predictions. Missing data widens the range.');
+      const analyzeRoads=loadRoadAnalyzer(roadFiles[regionForPoint(journey.origin)!.id]);
       const roadAnalyses=Object.fromEntries(routes.map(r=>[r.id,analyzeRoads(r.path,r.steps)]));
       if(routes.length)attributions.push({name:'© OpenStreetMap contributors · ODbL',uri:'https://www.openstreetmap.org/copyright'});
-      notices.push('Road type is estimated from a local OpenStreetMap extract around North Bengaluru. Unmatched, ambiguous and grade-separated sections remain unknown. Actual staffing, lighting and crime are not measured.');
+      notices.push('Road type is estimated from a local OpenStreetMap extract for the selected city. Unmatched, ambiguous and grade-separated sections remain unknown. Actual staffing, lighting and crime are not measured.');
       const roads = Object.fromEntries(routes.map(r => [r.id, { ...roadAnalyses[r.id], ...(r.turns!==undefined?{maneuversPerKm:r.turns/(r.distanceMeters/1000)}:{}) }]));
       const comparison = compareActivity(routes, analyses, roads, { allowLive: config.scoring });
       const usage=await budget.snapshot();

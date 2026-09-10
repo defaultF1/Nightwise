@@ -19,6 +19,9 @@ type Segment = { a: ReturnType<typeof xy>; b: ReturnType<typeof xy>; kind: RoadC
 const cell = (x: number, y: number) => `${Math.floor(x/100)}:${Math.floor(y/100)}`;
 
 export function createRoadAnalyzer(ways: RoadWay[], snapshotDate?: string) {
+  const referenceLatitude=ways.find(w=>w.path.length)?.path[0].latitude??13.06;
+  const longitudeScale=111195*Math.cos(referenceLatitude*Math.PI/180);
+  const xy=(p:Coordinate)=>({x:p.longitude*longitudeScale,y:p.latitude*111195});
   const grid = new Map<string, Set<Segment>>();
   for (const way of ways) for (let i=1; i<way.path.length; i++) {
     const a=xy(way.path[i-1]), b=xy(way.path[i]);
