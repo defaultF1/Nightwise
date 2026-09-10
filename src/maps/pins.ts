@@ -17,13 +17,14 @@ function evenlySpaced<T>(items:T[],limit:number){
  if(items.length<=limit)return items;
  return Array.from({length:limit},(_,index)=>items[Math.floor(index*items.length/limit)]);
 }
-export function visiblePlacePins(analysis?:ActivityAnalysis,limit=48):PlacePin[]{
+export function visiblePlacePins(analysis?:ActivityAnalysis,limit=24):PlacePin[]{
+ limit=Math.max(0,Math.floor(limit));
  const pins=placePins(analysis);
  if(pins.length<=limit)return pins;
  const medical=pins.filter(pin=>pin.kind==='medical');
  const fuel=pins.filter(pin=>pin.kind==='fuel');
- const medicalLimit=Math.min(medical.length,12);
- const fuelLimit=Math.min(fuel.length,12);
+ const medicalLimit=Math.min(medical.length,Math.ceil(limit/4));
+ const fuelLimit=Math.min(fuel.length,Math.min(limit-medicalLimit,Math.ceil(limit/4)));
  const shopLimit=Math.max(0,limit-medicalLimit-fuelLimit);
  return [...evenlySpaced(medical,medicalLimit),...evenlySpaced(fuel,fuelLimit),...evenlySpaced(pins.filter(pin=>pin.kind==='shop'),shopLimit)];
 }

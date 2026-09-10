@@ -18,7 +18,7 @@ import { RoadEvidence } from './RoadEvidence';
 import { DEFAULT_JOURNEY, type LiveJourney } from './domain/journey';
 import { liveComparison, serviceStatus } from './providers/live';
 import { mapsHandoff } from './domain/handoff';
-import { currentLocation, openMaps, openLocationSettings, openAppSettings } from './native';
+import { currentLocation, openMaps, openLocationSettings, openAppSettings, setNativeBackground } from './native';
 import type { LiveResult } from './domain/live-contract';
 import { createSampleRouteProvider, JourneyError, abortableDelay } from './providers/routes';
 import { ActivityStrip, formatMeters, formatGap } from './ActivityStrip';
@@ -79,6 +79,7 @@ export function App({ initialTheme }: { initialTheme: Theme }) {
   useEffect(() => {
     applyTheme(theme);
     if (Capacitor.isNativePlatform()) {
+      void setNativeBackground(theme === 'blue' ? '#081725' : theme === 'dark' ? '#080808' : '#f6f6f4').catch(() => {});
       void StatusBar.setStyle({ style: theme === 'light' ? Style.Light : Style.Dark }).catch(() => {});
       void StatusBar.setBackgroundColor({ color: theme === 'blue' ? '#081725' : theme === 'dark' ? '#080808' : '#f6f6f4' }).catch(() => {});
     }

@@ -19,8 +19,10 @@ test('business pins exclude closed unknown conflicted and unlocated observations
 test('visible pins cap dense live results while retaining medical and fuel evidence',()=>{
  const places=Array.from({length:90},(_,id)=>({id:String(id),categories:[id<20?'pharmacy':id<35?'gas_station':'store'],coordinate:{latitude:13.05+id/10000,longitude:77.59},hours:{state:'open'},conflict:false}));
  const pins=visiblePlacePins({places} as unknown as ActivityAnalysis);
- expect(pins).toHaveLength(48);
- expect(pins.filter(pin=>pin.kind==='medical')).toHaveLength(12);
- expect(pins.filter(pin=>pin.kind==='fuel')).toHaveLength(12);
- expect(pins.filter(pin=>pin.kind==='shop')).toHaveLength(24);
+ expect(pins).toHaveLength(24);
+ expect(pins.filter(pin=>pin.kind==='medical')).toHaveLength(6);
+ expect(pins.filter(pin=>pin.kind==='fuel')).toHaveLength(6);
+ expect(pins.filter(pin=>pin.kind==='shop')).toHaveLength(12);
+ expect(visiblePlacePins({places} as unknown as ActivityAnalysis,1)).toHaveLength(1);
+ expect(visiblePlacePins({places} as unknown as ActivityAnalysis,0)).toHaveLength(0);
 });

@@ -1,5 +1,7 @@
 package in.nightwise.demo;
 import android.graphics.Rect;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import com.getcapacitor.Plugin;
@@ -8,6 +10,19 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name="MapViewport")
 public class MapViewportPlugin extends Plugin {
+    @PluginMethod public void background(PluginCall call) {
+        String color=call.getString("color", "");
+        if(!color.matches("#[0-9a-fA-F]{6}")){call.reject("Invalid background color");return;}
+        getActivity().runOnUiThread(()->{
+            int value=Color.parseColor(color);
+            // The WebView is transparent around a native map. Match the layers
+            // beneath it to the app theme without painting over the map itself.
+            getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(value));
+            getActivity().findViewById(android.R.id.content).setBackgroundColor(value);
+            ((View)getBridge().getWebView().getParent()).setBackgroundColor(value);
+            call.resolve();
+        });
+    }
     @PluginMethod public void clip(PluginCall call) {
         String id=call.getString("id", "");
         if(!id.matches("nightwise-[0-9]+")){call.reject("Invalid map reference");return;}

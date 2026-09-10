@@ -6,6 +6,8 @@ const DeviceSettings=registerPlugin<{openLocation():Promise<void>;openApp():Prom
 export async function openLocationSettings(){if(Capacitor.isNativePlatform())await DeviceSettings.openLocation();}
 export async function openAppSettings(){if(Capacitor.isNativePlatform())await DeviceSettings.openApp();}
 const MapsHandoff = registerPlugin<{ open(options: { url: string }): Promise<void> }>('MapsHandoff');
+const MapViewport = registerPlugin<{ background(options: { color: string }): Promise<void> }>('MapViewport');
+export async function setNativeBackground(color: string) { if (Capacitor.isNativePlatform()) await MapViewport.background({ color }); }
 export async function currentLocation(): Promise<JourneyPoint> {
   if (Capacitor.isNativePlatform()) {
     let permissions;

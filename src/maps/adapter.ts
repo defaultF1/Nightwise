@@ -29,7 +29,7 @@ function loadWebMap() {
   return script;
 }
 function styles(theme: Theme): google.maps.MapTypeStyle[] {
-  if (theme === 'light') return [{ stylers: [{ saturation: -100 }] }];
+  if (theme === 'light') return [{ stylers: [{ saturation: -100 }] }, { featureType: 'poi', elementType: 'labels.icon', stylers: [{ visibility: 'off' }] }];
   return [
     { elementType: 'geometry', stylers: [{ color: theme === 'blue' ? '#0d2435' : '#151515' }] },
     { elementType: 'labels.text.stroke', stylers: [{ color: theme === 'blue' ? '#0d2435' : '#151515' }] },
@@ -54,7 +54,7 @@ export async function createMap(element: HTMLElement, theme: Theme, onSelect: (i
         if (markers.length) await map.removeMarkers(markers);
         lines = next.length ? await map.addPolylines(next.map((l): Polyline => ({ path: l.path.map(latLng), strokeColor: l.color, strokeWeight: l.width, clickable: l.clickable, tag: l.id }))) : [];
         ids = new Map(lines.map((id, i) => [id, next[i].id]));
-        markers = await map.addMarkers([...pins.map((p,i) => ({ coordinate: latLng(p), title: `${i?'Destination':'Start'} · ${p.name}`, tintColor:pinTint(i?'destination':'start'),zIndex:100 })),...gaps.map(p=>({coordinate:latLng(p),title:p.label,snippet:p.name,tintColor:pinTint('gap'),zIndex:20})),...help.map(p=>({coordinate:latLng(p),title:p.name,snippet:`${p.kind==='medical'?'Medical':p.kind==='fuel'?'Fuel':'Shop'} listing · scheduled open around arrival`,tintColor:pinTint(p.kind),zIndex:10}))]);
+        markers = await map.addMarkers([...pins.map((p,i) => ({ coordinate: latLng(p), title: `${i?'Destination':'Start'} · ${p.name}`, tintColor:pinTint(i?'destination':'start'),zIndex:100 })),...gaps.map(p=>({coordinate:latLng(p),title:p.label,snippet:p.name,tintColor:pinTint('gap'),zIndex:20})),...help.map(p=>({coordinate:latLng(p),title:p.name,snippet:`${p.kind==='medical'?'Medical':p.kind==='fuel'?'Fuel':'Shop'} listing · scheduled open around arrival`,iconUrl:`markers/${p.kind}.png`,iconSize:{width:18,height:18},iconAnchor:{x:0.5,y:0.5},zIndex:10}))]);
       },
       async fit(points) {
         if (!points.length) return;
@@ -73,7 +73,7 @@ export async function createMap(element: HTMLElement, theme: Theme, onSelect: (i
       lines = next.map(l => { const line = new google.maps.Polyline({ map, path: l.path.map(latLng), strokeColor: l.color, strokeWeight: l.width, clickable: l.clickable, zIndex: l.clickable ? 1 : 2 }); if (l.clickable) line.addListener('click', () => onSelect(l.id)); return line; });
       const icon=(kind:keyof typeof PIN_COLORS):google.maps.Symbol=>({path:'M 0,0 C -3,-5 -10,-12 -10,-20 A 10,10 0 1,1 10,-20 C 10,-12 3,-5 0,0 Z',fillColor:PIN_COLORS[kind],fillOpacity:1,strokeColor:'#ffffff',strokeWeight:1.5,scale:1,labelOrigin:new google.maps.Point(0,-20)});
       pins = nextPins.map((p, i) => new google.maps.Marker({ map, position: latLng(p), title: `${i?'Destination':'Start'} · ${p.name}`, label:{text:i?'B':'A',color:'#111111',fontWeight:'700'},icon:icon(i?'destination':'start'),zIndex:100 }));
-      pins.push(...help.map(p=>new google.maps.Marker({map,position:latLng(p),title:p.name+' · '+p.kind,label:{text:p.kind==='medical'?'+':p.kind==='fuel'?'F':'S',color:'#111111',fontWeight:'700'},icon:icon(p.kind),zIndex:10})));
+      pins.push(...help.map(p=>new google.maps.Marker({map,position:latLng(p),title:p.name+' · '+p.kind,label:{text:p.kind==='medical'?'+':p.kind==='fuel'?'F':'S',color:'#111111',fontWeight:'700',fontSize:'10px'},icon:{path:google.maps.SymbolPath.CIRCLE,scale:8,fillColor:PIN_COLORS[p.kind],fillOpacity:1,strokeColor:'#ffffff',strokeWeight:2,labelOrigin:new google.maps.Point(0,0)},zIndex:10})));
       pins.push(...gaps.map(p=>new google.maps.Marker({map,position:latLng(p),title:p.name,label:{text:p.label,color:'#171717',fontSize:'12px',fontWeight:'600'},icon:{path:google.maps.SymbolPath.CIRCLE,scale:8,fillColor:'#f4b86a',fillOpacity:1,strokeWeight:1,labelOrigin:new google.maps.Point(0,-2.5)}})));
     },
     async fit(points) { if (points.length) { const bounds = new google.maps.LatLngBounds(); points.forEach(p => bounds.extend(latLng(p))); map.fitBounds(bounds, 45); } },
