@@ -162,7 +162,7 @@ export function App({ initialTheme }: { initialTheme: Theme }) {
   const handoffUrl = mapsHandoff(journey, selectedRoute);
   async function locate() {
     const id=++locationId.current; setLocating(true); setLocationMessage('Finding your location…');
-    try { const point=await currentLocation(); if(id!==locationId.current)return; setJourney(j=>({...j,origin:point}));setDataMode('live');cancel();setModal(null); }
+    try { const point=await currentLocation(); if(id!==locationId.current)return; setJourney(j=>({...j,origin:point}));setDataMode('live');setLocationMessage('');cancel();setModal(null); }
     catch(e) { if(id===locationId.current)setLocationMessage(e instanceof Error?e.message:'Location unavailable.'); }
     finally { if(id===locationId.current)setLocating(false); }
   }
