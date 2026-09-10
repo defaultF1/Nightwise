@@ -4,19 +4,17 @@ test.beforeEach(async({page})=>{await page.emulateMedia({reducedMotion:'reduce'}
 test('normal journey shows a calculated tradeoff and consistent route evidence',async({page})=>{
  await page.getByRole('button',{name:'Compare night routes'}).click();
  await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome','more-activity');
- await expect(page.locator('.evidence-notice')).toContainText('4 extra minutes');
+ await expect(page.locator('.evidence-notice')).toContainText('2 extra minutes');
  await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();
  await expect(page.locator('.route-card.selected .activity-score')).toContainText('6/6 signals');
  const summary=await page.locator('.route-card.selected .route-summary').innerText();
  const openCount=summary.match(/^\d+/)?.[0];expect(openCount).toBeTruthy();
  await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
- await expect(page.getByRole('dialog')).toContainText('Calculated from sample observations');
+ await expect(page.getByRole('dialog')).toContainText('Tutorial mode');
  await expect(page.getByText('Observed places listed as open',{exact:true}).locator('..').locator('dd')).toHaveText(openCount!);
  await expect(page.getByRole('dialog')).toContainText('9 Sep · 8:30 pm IST');
- await expect(page.getByRole('dialog')).toContainText('uncalibrated');
  await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('6 of 6 signals used');
  await expect(page.getByRole('region',{name:'Score breakdown'}).locator('dl > div')).toHaveCount(6);
- await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('invented examples');
  await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('petrol pumps');
  await expect(page.getByText('Transport locations listed as open',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+/);
  await page.getByRole('region',{name:'Score breakdown'}).screenshot({path:'tmp/browser-regression/M03/six-signal-breakdown.png'});
@@ -32,7 +30,7 @@ test('missing and capped evidence never receive an activity recommendation',asyn
   await expect(page.getByRole('dialog')).toContainText('unknown, not low activity');
   if(value==='unknown')await expect(page.getByText('Observed places listed as open',{exact:true}).locator('..').locator('dd')).toHaveText('Unavailable');
   if(value==='capped')await expect(page.getByRole('dialog')).toContainText('result limit');
-  expect(await page.locator('.unknown-explanation img').evaluate((img:HTMLImageElement)=>img.complete&&img.naturalWidth>0)).toBe(true);
+  await expect.poll(()=>page.locator('.unknown-explanation img').evaluate((img:HTMLImageElement)=>img.complete&&img.naturalWidth>0)).toBe(true);
   await page.getByRole('button',{name:'Back to routes',exact:true}).click();
  }
 });

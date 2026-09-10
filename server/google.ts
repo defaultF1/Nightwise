@@ -10,6 +10,7 @@ import { calendarHours, regularHours, scheduleDetails } from './opening-hours';
 type Json = Record<string, any>;
 export const ROUTE_FIELDS = 'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline,routes.legs.steps.navigationInstruction.maneuver,routes.legs.steps.distanceMeters,routes.legs.steps.staticDuration,routes.legs.steps.polyline.encodedPolyline';
 export const PLACE_FIELDS = 'places.id,places.displayName,places.location,places.types,places.businessStatus,places.currentOpeningHours,places.regularOpeningHours,places.attributions';
+export const SEARCH_PARTITIONS={places:['restaurant','cafe','convenience_store','supermarket'],help:['gas_station','hospital','hotel','pharmacy','police','transit_station']} as const;
 export function decodePolyline(encoded: string): Coordinate[] {
   if (typeof encoded !== 'string' || encoded.length > 50000) throw new ServiceError('invalid-response', 'Route geometry could not be read.');
   let index = 0, latitude = 0, longitude = 0; const points: Coordinate[] = [];
@@ -103,7 +104,7 @@ export class GoogleProvider {
   async nearby(query: NearbyQuery, signal: AbortSignal) {
     signal.throwIfAborted(); await this.budget.reserve('nearby');
     const data = await this.post('https://places.googleapis.com/v1/places:searchNearby', PLACE_FIELDS, {
-      includedTypes: ['restaurant', 'cafe', 'gas_station', 'hospital', 'hotel', 'pharmacy', 'police', 'convenience_store', 'supermarket', 'transit_station'],
+      includedTypes: query.partition ? SEARCH_PARTITIONS[query.partition] : [...SEARCH_PARTITIONS.places,...SEARCH_PARTITIONS.help],
       maxResultCount: 20, rankPreference: 'DISTANCE', languageCode: 'en',
       locationRestriction: { circle: { center: query.coordinate, radius: query.radiusMeters } },
     }, signal);

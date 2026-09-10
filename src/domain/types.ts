@@ -9,7 +9,7 @@ export type Route = {
   distanceMeters: number;
   path: Coordinate[];
   source: 'sample' | 'google';
-  geometryKind: 'illustrative' | 'provider';
+  geometryKind: 'illustrative' | 'offline' | 'provider';
   turns?: number;
   steps?: { distanceMeters: number; staticDurationSeconds?:number; maneuver?: string; path?:Coordinate[] }[];
 };

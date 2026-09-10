@@ -47,7 +47,7 @@ export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads
   const allRange=Math.max(...Object.values(scores))-Math.min(...Object.values(scores));
   if(allRange<10)return {...scored,outcome:'similar',message:'These routes have similar listed activity. The fastest option is selected.'};
   if(best.id===fastest.id && ranked[0].id!==fastest.id)return {...scored,outcome:'detour',message:`The stronger activity options exceed your ${maxExtra}-minute extra-time preference. The fastest option is selected.`};
-  if(best.id===fastest.id)return {...scored,outcome:'more-activity',recommendedId:fastest.id,message:`The fastest option also has the strongest comparable ${isLive?'listing':'sample'} activity evidence.`};
+  if(best.id===fastest.id)return {...scored,outcome:'more-activity',recommendedId:fastest.id,message:`The fastest option also has the strongest comparable listing activity evidence.`};
   if(advantage<10)return {...scored,outcome:'similar',message:'The fastest option has similar activity to the strongest candidate. It is selected.'};
   const extra=best.durationSeconds-fastest.durationSeconds;
   if(options.maxExtraMinutes===undefined&&(extra>600||extra>fastest.durationSeconds*.35))return {...scored,outcome:'detour',message:'More listed activity comes with a substantial detour. The fastest option is selected so you can weigh the tradeoff.'};
@@ -56,5 +56,5 @@ export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads
   const facts=common.filter(key=>gain(key)>0).sort((a,b)=>gain(b)-gain(a)).slice(0,3).map(key=>descriptions[key]);
   if(!facts.length)facts.push('stronger comparable listing evidence');
   const explanation=facts.length>1?`${facts.slice(0,-1).join(', ')} and ${facts.at(-1)}`:facts[0];
-  return {...scored,outcome:'more-activity',selectedId:best.id,recommendedId:best.id,message:`For ${Math.ceil(extra/60)} extra minutes, this ${isLive?'route':'sample'} has ${explanation}.`};
+  return {...scored,outcome:'more-activity',selectedId:best.id,recommendedId:best.id,message:`For ${Math.ceil(extra/60)} extra minutes, this route has ${explanation}.`};
 }

@@ -13,9 +13,9 @@ export function ActivityStrip({analysis}:{analysis:ActivityAnalysis}){
   const known=Math.min(100,Math.max(0,Math.floor(analysis.activityCoverage*100+1e-7)));
   return <div className="activity-strip">
     <div className="strip-title"><strong>Open places along the way</strong><span>{known}% checked for activity</span></div>
-    <p className="strip-explanation">{known===100?'We have usable listing information along this whole route.':`Enough information for ${known}% of this route; ${100-known}% is still unknown.`} {analysis.source==='sample'?'Illustrative sample. ':''}This is data coverage, not a safety rating.</p>
+    <p className="strip-explanation">{known===100?'We have usable listing information along this whole route.':`Enough information for ${known}% of this route; ${100-known}% is still unknown.`} This is data coverage, not a safety rating.</p>
     <div className="strip-direction"><span>Start</span><span>Destination</span></div>
-    <div className="segment-band" role="img" aria-label={`${known} percent of the ${analysis.source==='sample'?'sample ':''}route has usable activity evidence. ${100-known} percent is unknown. Read from start on the left to destination on the right.`}>
+    <div className="segment-band" role="img" aria-label={`${known} percent of the route has usable activity evidence. ${100-known} percent is unknown. Read from start on the left to destination on the right.`}>
       {analysis.segments.map((segment,i)=><span key={i} className={`segment ${segment.state}`} style={{width:`${(segment.toMeters-segment.fromMeters)/analysis.distanceMeters*100}%`}} title={`${Math.round(segment.fromMeters)}–${Math.round(segment.toMeters)} m: ${segment.state==='active'?'At least two open listings observed':segment.state==='low'?'Fewer than two confirmed-open listings':'Unknown evidence'}`}/>)}
     </div>
     <div className="segment-legend"><span><i className="active"/> Open places</span><span><i className="low"/> Few open places</span><span><i className="unknown"/> Not enough data</span></div>

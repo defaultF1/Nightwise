@@ -1,9 +1,9 @@
 import {test,expect} from '@playwright/test';
-test.beforeEach(async({page})=>{await page.emulateMedia({reducedMotion:'reduce'});await page.route('https://**/*',r=>r.abort());await page.goto('/');});
+test.beforeEach(async({page})=>{await page.emulateMedia({reducedMotion:'reduce'});await page.route('https://**/*',r=>r.abort());await page.goto('/');await page.getByRole('button',{name:'Live routes',exact:true}).click();});
 test('offline pin search filters and retains the supplied demo without Google calls',async({page})=>{
  let requests=0;page.on('request',r=>{if(r.url().includes('googleapis.com')||r.url().includes('/api/places/'))requests++;});
  await page.locator('.place-field.destination').click();await page.getByLabel('Search places').fill('manayata');await expect(page.getByRole('region',{name:'Supplied locations'}).getByRole('button')).toHaveCount(1);
- await page.getByRole('button',{name:/Manyata Tech Park.*available offline/}).click();await expect(page.getByRole('button',{name:'Tutorial mode',exact:true})).toHaveAttribute('aria-pressed','true');expect(requests).toBe(0);
+ await page.getByRole('button',{name:/Manyata Tech Park.*available offline/}).click();await expect(page.getByRole('button',{name:'Live routes',exact:true})).toHaveAttribute('aria-pressed','true');expect(requests).toBe(0);
 });
 test('paused wider search returns a clear message without provider requests',async({page})=>{
  let search=0;await page.route('**/api/status',r=>r.fulfill({json:{ready:false,paused:true,searchEnabled:false,activityEnabled:false}}));await page.route('**/api/places/**',r=>{search++;return r.abort();});

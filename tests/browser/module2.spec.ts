@@ -15,6 +15,7 @@ test('AEOS to Manyata keeps supplied pins and synchronized sample choices',async
   await page.getByRole('button',{name:'Keep comparing'}).click(); await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();
 });
 test('destination rejects invalid coordinates without replacing the selected pin',async({page})=>{
+  await page.getByRole('button',{name:'Live routes',exact:true}).click();
   await page.getByRole('button',{name:/TO Manyata/}).click(); await page.getByLabel('Latitude',{exact:true}).fill('1');
   await page.getByRole('button',{name:'Use this pin'}).click(); await expect(page.getByRole('alert')).toContainText('Bengaluru');
   await page.keyboard.press('Escape'); await expect(page.getByRole('button',{name:/TO Manyata/})).toBeVisible();
@@ -30,5 +31,5 @@ test('zero one and three alternatives are truthful',async({page})=>{
 test('cancellation prevents stale results and sample errors recover',async({page})=>{
  await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Cancel',exact:true}).click();await page.waitForTimeout(600);await expect(page.getByRole('button',{name:'Compare night routes'})).toBeVisible();
  await page.getByRole('button',{name:'Open settings'}).click();await page.getByText('Tutorial scenarios',{exact:true}).click();await page.getByLabel('Preview scenario').selectOption('error');await page.getByRole('button',{name:'Done',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();
- await expect(page.getByRole('heading',{name:'We couldn’t load routes'})).toBeVisible();await page.getByRole('button',{name:'Retry sample journey'}).click();await expect(page.getByRole('radiogroup',{name:'Select a route'}).getByRole('radio')).toHaveCount(2);
+ await expect(page.getByRole('heading',{name:'We couldn’t load routes'})).toBeVisible();await page.getByRole('button',{name:'Retry journey'}).click();await expect(page.getByRole('radiogroup',{name:'Select a route'}).getByRole('radio')).toHaveCount(2);
 });

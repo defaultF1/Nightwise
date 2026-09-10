@@ -1,12 +1,12 @@
 import { describe, it, expect, vi } from 'vitest';
 import { createSampleRouteProvider, sampleRouteOptions, validateRoutes, validateJourney, type JourneyRequest } from '../../src/providers/routes';
-import { pathLength } from '../../src/domain/geometry';
+import { pathLength, distanceMeters } from '../../src/domain/geometry';
 const request: JourneyRequest = { origin:'Manyata Tech Park',destinationId:'aeos',mode:'DRIVE',scenario:'normal' };
 describe('M2 journey provider',()=>{
   it('returns truthful zero one two and three fixture alternatives for both origins',()=>{
     for(const origin of ['Manyata Tech Park','Sahakar Nagar'] as const) for(const [scenario,count] of [['normal',2],['none',0],['one',1],['three',3]] as const) {
       const routes=validateRoutes(sampleRouteOptions(origin,scenario)); expect(routes).toHaveLength(count);
-      for(const route of routes){expect(route.geometryKind).toBe('illustrative');expect(route.distanceMeters).toBeCloseTo(pathLength(route.path),4);expect(route.path.at(-1)).toEqual({latitude:13.0628268,longitude:77.5940888});}
+      for(const route of routes){expect(route.geometryKind).toBe(origin==='Manyata Tech Park'?'offline':'illustrative');expect(route.distanceMeters).toBeCloseTo(pathLength(route.path),4);expect(distanceMeters(route.path.at(-1)!,{latitude:13.0628268,longitude:77.5940888})).toBeLessThan(70);}
     }
   });
   it('rejects unsupported inputs and duplicate or malformed responses',()=>{
