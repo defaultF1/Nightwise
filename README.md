@@ -57,3 +57,7 @@ The source includes OpenStreetMap-derived data with attribution in the app and d
 
 
 
+
+## Android map scrolling patch
+
+The locked Google Maps plugin is 8.0.1. `scripts/patch-android-map.mjs` runs in `postinstall` and before Android sync to correct its physical-pixel/CSS-pixel layout comparison. It is idempotent and deliberately fails on an unfamiliar version or source. Review the patch when upgrading this dependency. Clipping bridge calls keep only the most recent pending position during scrolling.

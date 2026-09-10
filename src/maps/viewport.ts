@@ -5,6 +5,7 @@ export function intersectRects(rects:Rect[]):Rect{
 }
 export function syncMapViewport(element:HTMLElement,update:(rect:Rect)=>Promise<void>){
   let frame:number|undefined,stopped=false,last='';
+  const send=latestViewportUpdate(async rect=>{try{await update(rect);}catch(error){last='';throw error;}});
   function measure(){
     frame=undefined;if(stopped)return;
     const viewport=window.visualViewport;
@@ -14,12 +15,25 @@ export function syncMapViewport(element:HTMLElement,update:(rect:Rect)=>Promise<
     const dialogs=[...document.querySelectorAll('[role="dialog"]')];
     if(dialogs.length&&!dialogs.at(-1)!.contains(element))hidden=true;
     const rect=hidden?{left:0,top:0,right:0,bottom:0}:intersectRects(rects);
-    const key=JSON.stringify(rect);if(key!==last){last=key;void update(rect).catch(()=>{last='';});}
+    const key=JSON.stringify(rect);if(key!==last){last=key;send.push(rect);}
   }
   const notify=()=>{if(frame===undefined)frame=requestAnimationFrame(measure);};
   window.addEventListener('scroll',notify,true);window.addEventListener('resize',notify);window.visualViewport?.addEventListener('resize',notify);
   const resize=new ResizeObserver(notify);resize.observe(element);
   const mutation=new MutationObserver(notify);mutation.observe(document.body,{attributes:true,childList:true,subtree:true,attributeFilter:['class','style','open']});
   notify();
-  return ()=>{stopped=true;if(frame!==undefined)cancelAnimationFrame(frame);resize.disconnect();mutation.disconnect();window.removeEventListener('scroll',notify,true);window.removeEventListener('resize',notify);window.visualViewport?.removeEventListener('resize',notify);};
+  return ()=>{stopped=true;send.stop();if(frame!==undefined)cancelAnimationFrame(frame);resize.disconnect();mutation.disconnect();window.removeEventListener('scroll',notify,true);window.removeEventListener('resize',notify);window.visualViewport?.removeEventListener('resize',notify);};
+}
+
+// Only one bridge call may be in flight. Intermediate scroll positions are
+// obsolete when Android catches up; submit the newest measured clip instead.
+export function latestViewportUpdate(update:(rect:Rect)=>Promise<void>){
+  let pending:Rect|undefined,busy=false,stopped=false;
+  async function flush(){
+    if(busy||stopped)return;
+    busy=true;
+    try{while(pending&&!stopped){const rect=pending;pending=undefined;try{await update(rect);}catch{/* The next measured position can recover. */}}}
+    finally{busy=false;}
+  }
+  return {push(rect:Rect){if(!stopped){pending=rect;void flush();}},stop(){stopped=true;pending=undefined;}};
 }

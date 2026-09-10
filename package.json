@@ -9,16 +9,17 @@
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run",
     "server": "tsx server/index.ts",
-    "android:sync": "npm run build && cap sync android",
+    "android:sync": "node scripts/patch-android-map.mjs && npm run build && cap sync android",
     "android:build": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-android.ps1",
-    "build:server": "esbuild server/index.ts --bundle --platform=node --format=esm --packages=external --outfile=build-server/index.mjs"
+    "build:server": "esbuild server/index.ts --bundle --platform=node --format=esm --packages=external --outfile=build-server/index.mjs",
+    "postinstall": "node scripts/patch-android-map.mjs"
   },
   "dependencies": {
     "@capacitor/android": "8.5.1",
     "@capacitor/app": "^8.0.0",
     "@capacitor/core": "8.5.1",
     "@capacitor/geolocation": "^8.0.0",
-    "@capacitor/google-maps": "^8.0.0",
+    "@capacitor/google-maps": "8.0.1",
     "@capacitor/preferences": "8.0.1",
     "@capacitor/splash-screen": "^8.0.0",
     "@capacitor/status-bar": "^8.0.0",
