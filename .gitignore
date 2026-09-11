@@ -28,3 +28,6 @@ android/app/src/main/assets/capacitor.plugins.json
 android/capacitor-cordova-android-plugins/
 android/capacitor.settings.gradle
 android/app/capacitor.build.gradle
+
+# Browser-spec screenshot output (tracked only on the docs branch)
+talks/
