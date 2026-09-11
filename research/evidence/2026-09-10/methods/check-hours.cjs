@@ -1,0 +1,8 @@
+process.env.TZ='Asia/Kolkata';
+const fs=require('fs'),OH=require('opening_hours');
+const dir='research/evidence/2026-09-10';
+const records=JSON.parse(fs.readFileSync(dir+'/osm-candidates.json')).records;
+const at=new Date('2026-09-10T21:00:00+05:30');
+const rows=records.map(r=>{try{const h=new OH(r.openingHours,{lat:r.coordinates.lat,lon:r.coordinates.lng,address:{country_code:'in',state:'Karnataka'}});const warnings=h.getWarnings();const state=h.getStateString(at);return {id:r.id,parsed:true,warningCount:warnings.length,warnings,state,hasHolidayRule:/\b(PH|SH)\b/.test(r.openingHours),explicitHoursCheckDate:r.hoursCheckDate};}catch(e){return {id:r.id,parsed:false,error:String(e),hasHolidayRule:/\b(PH|SH)\b/.test(r.openingHours)};}});
+const counts={total:rows.length,parsed:rows.filter(x=>x.parsed).length,parseFailures:rows.filter(x=>!x.parsed).length,parsedWithWarnings:rows.filter(x=>x.parsed&&x.warningCount).length,parsedWithoutWarnings:rows.filter(x=>x.parsed&&!x.warningCount).length,holidayRules:rows.filter(x=>x.hasHolidayRule).length,states:rows.filter(x=>x.parsed).reduce((a,x)=>(a[x.state]=(a[x.state]||0)+1,a),{})};
+fs.writeFileSync(dir+'/osm-hours-parser-audit.json',JSON.stringify({package:'opening_hours',version:'3.14.0',license:'LGPL-3.0-only; full package includes additional component licences',evaluatedAt:at.toISOString(),timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone,counts,limitation:'Parser success is syntactic evaluation, not source truth, freshness, holiday completeness, street access or de-duplication. Library warnings and errors remain review items. Research dependency only; not added to app.',records:rows},null,2));console.log(JSON.stringify(counts));

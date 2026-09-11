@@ -1,0 +1,16 @@
+{
+  "sourceSha256": "d24903e3a580924cbc643cef6f3d05ee375fc2574be31bbbd0d6f94fdf9d1ae4",
+  "sourceProvenance": {
+    "source": "https://overpass-api.de/api/interpreter",
+    "query": "[out:json][timeout:90];way[highway](around:22000,26.48,80.30);out tags geom;",
+    "retrievedAt": "2026-09-10T13:22:53.162Z",
+    "sha256": "d24903e3a580924cbc643cef6f3d05ee375fc2574be31bbbd0d6f94fdf9d1ae4",
+    "license": "ODbL 1.0",
+    "attribution": "© OpenStreetMap contributors",
+    "centerPurpose": "Editorial Kanpur live pilot coverage, not a landmark coordinate"
+  },
+  "transform": "Retain original way IDs, highway/elevation tags and geometry; no invented geometry or Google data",
+  "elements": 40160,
+  "points": 354837,
+  "targetSha256": "6f13c77bd60d1a3d573e5bc0da940c7d9222f7f5a0931cfddce38292ed79da8d"
+}

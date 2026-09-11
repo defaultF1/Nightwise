@@ -1,0 +1,142 @@
+{
+  "filename": "2026-09-10_M07_offline-tutorial-and-live-scans_v01.docx",
+  "title": "NightWise tutorial live tests and Android display",
+  "meta": "M07 10 September 2026\nPrepared by Codex for the NightWise project owner",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Android 0.10.2 includes the offline AEOS to Manyata tutorial in both directions, a clearer route summary and the corrected Light theme. The hosted category scanner is deployed and completed a real Redmi comparison. Software paths are working, while incomplete shop evidence still prevents a supported activity winner on the tested journey. This handoff records the coding and device work requested by the owner; field surveys, reel production and community voting are excluded."
+    },
+    {
+      "type": "heading",
+      "text": "Completed changes"
+    },
+    {
+      "type": "bullet",
+      "text": "The tutorial bundles 4,035 OpenStreetMap street ways and three stored alternatives per direction, showing two by default. Paths follow connected mapped road segments with one-way and vehicle-access rules. Return routes are calculated independently. The supplied AEOS and Manyata pins remain visible."
+    },
+    {
+      "type": "bullet",
+      "text": "One Tutorial mode label identifies the fixed demonstration. Repeated sample labels were removed. Weekly shop schedules and activity are deterministic tutorial inputs; the street map is actual OSM geometry. The extract omits turn-restriction relations and is not an offline navigation engine."
+    },
+    {
+      "type": "bullet",
+      "text": "Live results lead with the supported decision, travel time and help information. Route cards appear before expandable evidence. Missing shop hours may display assumed 9 am to 8 pm hours, clearly excluded from confirmed-open evidence."
+    },
+    {
+      "type": "bullet",
+      "text": "Crowded Google searches split into exhaustive place and help categories before smaller overlapping searches. A parent scan becomes complete only if all covering queries succeed without caps. Existing request limits remain unchanged."
+    },
+    {
+      "type": "bullet",
+      "text": "The Android backing layer now follows the selected theme, removing black gaps around native maps. Compact coloured shop symbols replace large drops, with at most 24 visible business markers. Full place details remain available. Duplicate camera spacing was removed; the compact header retains Android cutout protection."
+    },
+    {
+      "type": "heading",
+      "text": "Implementation verification"
+    },
+    {
+      "type": "paragraph",
+      "text": "142 unit and backend tests passed before the final display corrections. All 47 browser cases have passing coverage across live-enabled and paused-map configurations and focused reruns. After the Light changes, three marker tests and four focused browser cases passed, including appearance persistence and the offline return route. Frontend, backend and Android builds passed."
+    },
+    {
+      "type": "page"
+    },
+    {
+      "type": "heading",
+      "text": "Offline tutorial on the Redmi"
+    },
+    {
+      "type": "image_pair",
+      "height": 5.6,
+      "images": [
+        {
+          "path": "talks/screenshots/phone0100/01-offline-forward.png",
+          "caption": "AEOS to Manyata with real OSM streets"
+        },
+        {
+          "path": "talks/screenshots/phone0100/02-offline-return-light.png",
+          "caption": "Manyata to AEOS in Light mode"
+        }
+      ],
+      "caption": "Actual screenshots from Android 0.10.0. Both directions ran with WebView networking disabled and sent no remote requests. The map and route geometry are bundled; activity inputs are fixed tutorial data."
+    },
+    {
+      "type": "paragraph",
+      "text": "Eleven offline phone checks passed, including independent return geometry, route selection, schedules, reverse handoff endpoints and no horizontal overflow. Native GPS returned an outside-pilot result consistent with the user being in Kanpur and retained AEOS. An in-area fix was not tested."
+    },
+    {
+      "type": "heading",
+      "text": "Errors and corrections"
+    },
+    {
+      "type": "paragraph",
+      "text": "An SVG selector initially enlarged toolbar icons; it now targets only the map. Browser failures also exposed obsolete tutorial expectations, a missing JSON import attribute and an image-readiness race. These were corrected and rerun. A test preview briefly served an older bundle during a build; the subsequent checks used a stable build or development server."
+    },
+    {
+      "type": "page"
+    },
+    {
+      "type": "heading",
+      "text": "Light theme and phone spacing"
+    },
+    {
+      "type": "image_pair",
+      "height": 5.6,
+      "images": [
+        {
+          "path": "talks/screenshots/phone0102/01-light-home.png",
+          "caption": "Compact header on the final APK"
+        },
+        {
+          "path": "talks/screenshots/phone0101/05-live-map.png",
+          "caption": "Real live routes with compact shop markers"
+        }
+      ],
+      "caption": "Actual Redmi screenshots. The final header is from Android 0.10.2; the live map is from the full 0.10.1 comparison. The final change only removes duplicate camera spacing and reduces header padding."
+    },
+    {
+      "type": "paragraph",
+      "text": "The native map requires a transparent WebView. Its underlying Android window stayed black, causing the Light theme gaps. The new native background method updates those underlying layers. Screenshot pixels now match Light, Dark and Blue backgrounds. Android also reserved the cutout before CSS added it again; removing the duplicate moved the header controls from 45 to 8 CSS pixels inside the protected WebView."
+    },
+    {
+      "type": "paragraph",
+      "text": "The 0.10.1 Redmi live run passed all 16 checks, including native clipping, route selection, score ranges, opaque shop panels, no horizontal overflow, Google Maps launch, return-state preservation and all three themes. Final 0.10.2 spacing and theme smoke results are recorded separately in phone0102-smoke.json."
+    },
+    {
+      "type": "page"
+    },
+    {
+      "type": "heading",
+      "text": "Live results and roadmap position"
+    },
+    {
+      "type": "paragraph",
+      "text": "The hosted 0.10.0 scanner completed a Redmi comparison at 18:04 IST on 10 September. Google returned three real routes with 220, 303 and 305 geometry points. Complete scans covered 92 to 93 percent of the routes, usable hours covered 60 to 69 percent of listings, activity assessment covered 74 to 85 percent and road matching covered 76 to 90 percent. These measures are different; the result does not establish full coverage or night-time accuracy."
+    },
+    {
+      "type": "paragraph",
+      "text": "Scores were approximately 53 to 93, 58 to 93 and 59 to 98 out of 100. The ranges overlap, so the app correctly reported insufficient evidence for an activity winner and defaulted to the fastest route. Low-activity and help gaps remain bounded where evidence is incomplete. The new scanner is live-tested, but this changing provider response is not a controlled proof of a coverage improvement."
+    },
+    {
+      "type": "paragraph",
+      "text": "The ten PDF software deliverables are implemented: no login, destination entry, permission-based location with area checks, alternatives, time and distance, place scans, activity score ranges, low-activity stretches, conditional explanations and Google Maps handoff. Alternatives depend on what Google returns. An actual in-area GPS journey, physical Back and exact road preservation in Google Maps remain unverified. MIUI denied automated Back injection. Google Maps may recalculate. See the detailed ten-row table in planning/2026-09-10_0100-pdf-checklist.md."
+    },
+    {
+      "type": "heading",
+      "text": "Usage and delivery"
+    },
+    {
+      "type": "paragraph",
+      "text": "The 0.10.1 check used one Routes request, 117 Nearby and two Details requests. Shared totals afterwards were 23 Routes, 1,292 Nearby, two Autocomplete and 20 Details, against limits of 30, 1,500, 40 and 20. No limits were raised. The earlier 0.10.0 phone check used one Routes, 94 Nearby and four Details. Map loads are separate; exact charges require Cloud Billing. The Details allowance is exhausted; remaining missing hours stay unknown."
+    },
+    {
+      "type": "paragraph",
+      "text": "Final APK: output/apk/nightwise-0.10.2-team-debug.apk, code 25, 9,654,549 bytes. Signature, bundled asset matching, hosted URL, server-key exclusion and absence of background location permission passed. SHA-256: 931be1372d2f188c16f8cd53fd9f872fac73959ca5239f5545cde5e8d7901d97. Source commit c7270fa is published to codex/journey-updates. Hosted scanner 0.10.0 is verified; this client display release does not change its scanner."
+    },
+    {
+      "type": "paragraph",
+      "text": "Recovery files include phone0100-offline.json, phone0100-location.json, phone0100-live.json, phone0101-live.json, phone0101-visual.json and phone0102-smoke.json under talks/records. Main changes are in src/RouteDiagram.tsx, src/JourneySummary.tsx, src/maps, src/native.ts, src/main.tsx, src/journey-updates.css, MapViewportPlugin.java, server/scan.ts and server/google.ts. Existing reports and unrelated working-tree changes are preserved."
+    }
+  ]
+}

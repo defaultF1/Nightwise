@@ -1,8 +1,8 @@
 import {test,expect} from '@playwright/test';
-test('PDF evidence fields and complete ranking are visible without provider requests',async({page})=>{
+test('PDF evidence fields and complete ranking are visible without provider requests',async({page,baseURL})=>{
  await page.emulateMedia({reducedMotion:'reduce'});
  const external:string[]=[];
- page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:4173/'))external.push(r.url());});
+ page.on('request',r=>{if(new URL(r.url()).origin!==new URL(baseURL!).origin)external.push(r.url());});
  await page.goto('/');
  await page.getByRole('button',{name:'Open settings'}).click();
  await page.getByText('Tutorial scenarios',{exact:true}).click();

@@ -1,7 +1,7 @@
 import { AEOS, origins, type TutorialOrigin, type TutorialScenario } from '../data/tutorial';
 import type { Coordinate, Route, TravelMode } from '../domain/types';
 import { pathLength } from '../domain/geometry';
-import { MANYATA_PIN } from '../domain/journey';
+import tutorialMap from '../data/tutorial-map.json' with { type: 'json' };
 
 export type JourneyRequest = { origin: TutorialOrigin; destinationId: 'aeos'; mode: TravelMode; scenario: TutorialScenario };
 export interface RouteProvider { getRoutes(request: JourneyRequest, signal: AbortSignal): Promise<Route[]> }
@@ -16,9 +16,9 @@ export function validateJourney(request: JourneyRequest) {
 export function validateRoutes(routes: Route[]): Route[] {
   if (routes.length > 4 || new Set(routes.map(r => r.id)).size !== routes.length) throw new JourneyError('invalid-response', 'Route options could not be read.');
   for (const route of routes) {
-    if (!route.id || !route.label || !Number.isFinite(route.durationSeconds) || route.durationSeconds <= 0 || !Number.isFinite(route.distanceMeters) || route.distanceMeters <= 0 || route.distanceMeters > 20_000 || route.path.length > 4000) throw new JourneyError('invalid-response', 'A route is outside this preview’s limits.');
+    if (!route.id || !route.label || !Number.isFinite(route.durationSeconds) || route.durationSeconds <= 0 || !Number.isFinite(route.distanceMeters) || route.distanceMeters <= 0 || route.distanceMeters > 100_000 || route.path.length > 4000) throw new JourneyError('invalid-response', 'A route is outside this preview’s limits.');
     const length = pathLength(route.path);
-    if (length < 1 || length > 20_000) throw new JourneyError('invalid-response', 'Route geometry is outside this preview’s limits.');
+    if (length < 1 || length > 100_000) throw new JourneyError('invalid-response', 'Route geometry is outside this preview’s limits.');
   }
   return routes;
 }
@@ -37,6 +37,14 @@ function illustrativePoint(east: number, north: number): Coordinate {
 }
 export function sampleRouteOptions(origin: TutorialOrigin, scenario: TutorialScenario): Route[] {
   if (scenario === 'none') return [];
+  if(origin==='AEOS'||origin==='Manyata Tech Park'){
+    const prepared=tutorialMap.journeys[origin==='AEOS'?'forward':'reverse'];
+    const count=scenario==='one'?1:scenario==='three'?3:2;
+    return prepared.slice(0,count).map((r,index)=>{
+      const path=r.coordinates.map(([latitude,longitude])=>({latitude,longitude}));
+      return {id:`sample:${origin}:${index}`,label:index?`Alternative ${index}`:'Fastest',durationSeconds:scenario==='detour'&&index===1?prepared[0].durationSeconds+900:r.durationSeconds,distanceMeters:pathLength(path),path,source:'sample',geometryKind:'offline'};
+    });
+  }
   const scale = origin === 'Sahakar Nagar' ? 0.36 : 1;
   const paths = [
     [[4500,500],[3400,700],[2200,-650],[950,-650],[0,0]],
@@ -47,12 +55,7 @@ export function sampleRouteOptions(origin: TutorialOrigin, scenario: TutorialSce
   if(scenario==='detour')durations[1]=durations[0]+15;
   const count = scenario === 'one' ? 1 : scenario === 'three' ? 3 : 2;
   return paths.slice(0,count).map((offsets,index) => {
-    let path = offsets.map(([east,north]) => illustrativePoint(east * scale, north * scale));
-    if (origin === 'AEOS') {
-      path = path.reverse();
-      path[0] = { latitude: AEOS.latitude, longitude: AEOS.longitude };
-      path[path.length - 1] = { latitude: MANYATA_PIN.latitude, longitude: MANYATA_PIN.longitude };
-    }
+    const path = offsets.map(([east,north]) => illustrativePoint(east * scale, north * scale));
     return { id: `sample:${origin}:${index}`, label: index === 0 ? 'Fastest' : `Alternative ${index}`, durationSeconds: durations[index] * 60, distanceMeters: pathLength(path), path, source:'sample', geometryKind:'illustrative' };
   });
 }

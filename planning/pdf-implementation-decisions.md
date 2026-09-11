@@ -1,3 +1,5 @@
+> Current 10 September scope: the seven journey enhancements and GitHub source publication are authorized and implemented. Source is on codex/journey-updates in defaultF1/Nightwise. Community reporting remains excluded. Dated Google schedules are evaluated at estimated passing time; capped scans support positive observations but never inferred absence. Native map overlays use detailed provider geometry. Current evidence still does not justify enabling live recommendations. See nightwise-current-status.md for measured acceptance; older deferrals below are historical.
+
 # PDF implementation decisions
 
 Updated 10 September 2026. This records implementation choices for the roadmap, not evidence that real Bengaluru routes have been validated.

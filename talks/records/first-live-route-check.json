@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-09-09T20:52:34.513Z",
+  "success": true,
+  "requests": 1,
+  "httpStatus": 200,
+  "routeCount": 2,
+  "placesRequests": 0,
+  "usage": {
+    "routeCalls": 2,
+    "nearbyCalls": 0,
+    "autocompleteCalls": 0,
+    "detailsCalls": 0,
+    "routeLimit": 10,
+    "nearbyLimit": 600,
+    "autocompleteLimit": 40,
+    "detailsLimit": 20,
+    "remainingComparisons": 8
+  },
+  "appRemainsPaused": true
+}

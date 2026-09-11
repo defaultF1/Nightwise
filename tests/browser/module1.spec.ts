@@ -108,7 +108,7 @@ test('changing appearance while a map is open respects the billing pause', async
     await page.getByRole('button', { name: 'Open settings' }).click();
     await page.getByText(name, { exact: true }).click();
     await page.getByRole('button', { name: 'Done', exact: true }).click();
-    await expect(page.getByText('Live maps are paused while billing is pending. Tutorial mode remains available.')).toBeVisible();
+    await expect(page.getByText('Live maps are paused to control usage. Tutorial mode remains available.')).toBeVisible();
   }
   expect(providerRequests).toEqual([]);
 });

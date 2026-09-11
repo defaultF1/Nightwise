@@ -1,0 +1,59 @@
+{
+  "version": "0.10.0-live-preview",
+  "device": "Redmi 9",
+  "startedAt": "2026-09-10T12:07:18.573Z",
+  "tests": [
+    {
+      "name": "Installed version",
+      "passed": true
+    },
+    {
+      "name": "Offline forward tutorial renders road geometry and two choices",
+      "passed": true
+    },
+    {
+      "name": "Single tutorial label and no repeated demonstration wording",
+      "passed": true
+    },
+    {
+      "name": "Recommendation is above map",
+      "passed": true
+    },
+    {
+      "name": "Offline selected line follows route choice",
+      "passed": true
+    },
+    {
+      "name": "Swap retains tutorial mode",
+      "passed": true
+    },
+    {
+      "name": "Return journey uses correct direction",
+      "passed": true
+    },
+    {
+      "name": "Weekly opening and closing times visible",
+      "passed": true
+    },
+    {
+      "name": "Phone has no horizontal clipping",
+      "passed": true
+    },
+    {
+      "name": "Return handoff endpoints are not reversed",
+      "passed": true
+    },
+    {
+      "name": "Tutorial did not issue remote requests",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    }
+  ],
+  "screenshots": [
+    "talks/screenshots/phone0100/01-offline-forward.png",
+    "talks/screenshots/phone0100/02-offline-return-light.png"
+  ],
+  "finishedAt": "2026-09-10T12:07:39.883Z"
+}

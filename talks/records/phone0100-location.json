@@ -1,0 +1,15 @@
+{
+  "startedAt": "2026-09-10T12:12:34.446Z",
+  "version": "0.10.0-live-preview",
+  "location": {
+    "message": "You are outside the North Bengaluru pilot. Choose an origin within 10 km of AEOS.",
+    "retainedOrigin": true,
+    "foregroundPermissionGranted": true
+  },
+  "back": {
+    "passed": false,
+    "status": "Unverified",
+    "reason": "MIUI does not permit automated key injection on this device."
+  },
+  "finishedAt": "2026-09-10T12:12:40.551Z"
+}

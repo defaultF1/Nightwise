@@ -1,0 +1,459 @@
+{
+  "checkedAt": "2026-09-10T07:52:29.083Z",
+  "attribution": "© OpenStreetMap contributors; ODbL 1.0; https://www.openstreetmap.org/copyright",
+  "productionChanged": false,
+  "routes": [
+    {
+      "routeId": "google:0",
+      "corridorOsmWayCount": 2438,
+      "hostedRoadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 3364.6828635694533,
+        "internalMeters": 955.4986377675212,
+        "unknownMeters": 481.2827942093129,
+        "coverage": 0.899763329562663,
+        "snapshotDate": "2026-09-09T17:04:42Z"
+      },
+      "expandedRoadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 3364.6828635694533,
+        "internalMeters": 955.4986377675212,
+        "unknownMeters": 481.2827942093129,
+        "coverage": 0.899763329562663,
+        "snapshotDate": "2026-09-10T07:45:15Z"
+      },
+      "operatorCandidatesWithin100m": [
+        {
+          "id": "operator-06",
+          "metresFromPolyline": 19,
+          "alongFraction": 0.3505642363114742,
+          "estimatedPassingMinutes": 6,
+          "regularScheduleProjection": "unknown"
+        }
+      ],
+      "osmHoursCandidatesWithin100m": [
+        {
+          "id": "node/1472131638",
+          "category": "supermarket",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": "0"
+        },
+        {
+          "id": "node/4822629789",
+          "category": "pharmacy",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/4822629790",
+          "category": "supermarket",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5434550526",
+          "category": "fast_food",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": "1"
+        },
+        {
+          "id": "node/5520247489",
+          "category": "bakery",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5520248631",
+          "category": "fast_food",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5520248634",
+          "category": "mobile_phone",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5520248641",
+          "category": "dairy",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5520248784",
+          "category": "yes",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5520248785",
+          "category": "dry_cleaning",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5524163967",
+          "category": "computer",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5524165033",
+          "category": "trade",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5524165034",
+          "category": "car_repair",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/8985207467",
+          "category": "restaurant",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/9830286756",
+          "category": "car_parts",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/11331384652",
+          "category": "pharmacy",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/12117952601",
+          "category": "hospital",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "way/1286715554",
+          "category": "fuel",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        }
+      ],
+      "limitations": "100m geometry proximity candidates only; no same-side access/entrance/identity reconciliation. Counts must not be added to Google counts. OSM road subset uses vertices within a padded route box and can omit crossing ways without an interior vertex; classification remains provisional."
+    },
+    {
+      "routeId": "google:1",
+      "corridorOsmWayCount": 3232,
+      "hostedRoadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 4364.4425324356935,
+        "internalMeters": 139.83878354213644,
+        "unknownMeters": 883.0732715654268,
+        "coverage": 0.836084063668784,
+        "snapshotDate": "2026-09-09T17:04:42Z"
+      },
+      "expandedRoadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 4364.4425324356935,
+        "internalMeters": 139.83878354213644,
+        "unknownMeters": 883.0732715654268,
+        "coverage": 0.836084063668784,
+        "snapshotDate": "2026-09-10T07:45:15Z"
+      },
+      "operatorCandidatesWithin100m": [
+        {
+          "id": "operator-06",
+          "metresFromPolyline": 19,
+          "alongFraction": 0.3124393682637806,
+          "estimatedPassingMinutes": 6,
+          "regularScheduleProjection": "unknown"
+        },
+        {
+          "id": "operator-17",
+          "metresFromPolyline": 75,
+          "alongFraction": 0.758921788693587,
+          "estimatedPassingMinutes": 14,
+          "regularScheduleProjection": "open"
+        }
+      ],
+      "osmHoursCandidatesWithin100m": [
+        {
+          "id": "node/1472131638",
+          "category": "supermarket",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": "0"
+        },
+        {
+          "id": "node/4822629789",
+          "category": "pharmacy",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/4822629790",
+          "category": "supermarket",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5434550526",
+          "category": "fast_food",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": "1"
+        },
+        {
+          "id": "node/5520247489",
+          "category": "bakery",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5520248631",
+          "category": "fast_food",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5520248634",
+          "category": "mobile_phone",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5520248641",
+          "category": "dairy",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5520248784",
+          "category": "yes",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5520248785",
+          "category": "dry_cleaning",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5524163967",
+          "category": "computer",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5524165033",
+          "category": "trade",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5524165034",
+          "category": "car_repair",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/8985207467",
+          "category": "restaurant",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/10009663810",
+          "category": "bakery",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/11331084829",
+          "category": "convenience",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/11331106376",
+          "category": "electrical",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/11331119805",
+          "category": "bakery",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/11331123897",
+          "category": "convenience",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/11331124545",
+          "category": "jewelry",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/11331134583",
+          "category": "bakery",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/11331139537",
+          "category": "convenience",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/11331152303",
+          "category": "supermarket",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/11331384652",
+          "category": "pharmacy",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/12020449758",
+          "category": "restaurant",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/12117952601",
+          "category": "hospital",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        }
+      ],
+      "limitations": "100m geometry proximity candidates only; no same-side access/entrance/identity reconciliation. Counts must not be added to Google counts. OSM road subset uses vertices within a padded route box and can omit crossing ways without an interior vertex; classification remains provisional."
+    },
+    {
+      "routeId": "google:2",
+      "corridorOsmWayCount": 3329,
+      "hostedRoadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 4493.880669661164,
+        "internalMeters": 153.57224196464833,
+        "unknownMeters": 1448.6358460591846,
+        "coverage": 0.7623663460882244,
+        "snapshotDate": "2026-09-09T17:04:42Z"
+      },
+      "expandedRoadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 4493.880669661164,
+        "internalMeters": 153.57224196464833,
+        "unknownMeters": 1448.6358460591846,
+        "coverage": 0.7623663460882244,
+        "snapshotDate": "2026-09-10T07:45:15Z"
+      },
+      "operatorCandidatesWithin100m": [
+        {
+          "id": "operator-17",
+          "metresFromPolyline": 68,
+          "alongFraction": 0.7849155317862401,
+          "estimatedPassingMinutes": 17,
+          "regularScheduleProjection": "open"
+        }
+      ],
+      "osmHoursCandidatesWithin100m": [
+        {
+          "id": "node/4488063668",
+          "category": "clothes",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/5286949427",
+          "category": "alcohol",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/8985207467",
+          "category": "restaurant",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/12020449758",
+          "category": "restaurant",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        },
+        {
+          "id": "node/12117952601",
+          "category": "hospital",
+          "hoursCheckDate": null,
+          "indoor": null,
+          "level": null
+        }
+      ],
+      "limitations": "100m geometry proximity candidates only; no same-side access/entrance/identity reconciliation. Counts must not be added to Google counts. OSM road subset uses vertices within a padded route box and can omit crossing ways without an interior vertex; classification remains provisional."
+    }
+  ]
+}

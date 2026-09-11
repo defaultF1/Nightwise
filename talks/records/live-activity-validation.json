@@ -1,0 +1,130 @@
+{
+  "checkedAt": "2026-09-09T20:59:30.107Z",
+  "tests": [
+    {
+      "name": "Nearby smoke using latitude and longitude only",
+      "passed": true,
+      "status": "ok",
+      "count": 11
+    },
+    {
+      "name": "AEOS to Manyata activity pipeline",
+      "passed": true,
+      "httpStatus": 200,
+      "activityStatus": "partial",
+      "routeCount": 2,
+      "scoreCount": 0,
+      "routes": [
+        {
+          "label": "Fastest",
+          "scanCoverage": 0.5001524842689808,
+          "hoursCoverage": 0.47391304347826085,
+          "activityCoverage": 0.0416539596442516,
+          "open": 3,
+          "unknownHours": 121,
+          "help": 1,
+          "longestLow": null,
+          "longestObservedLow": 200,
+          "limitations": [
+            "A search reached its result limit; counts are partial.",
+            "Some opening hours are unknown."
+          ],
+          "roadCoverage": 0.899763329562663
+        },
+        {
+          "label": "Alternative 1",
+          "scanCoverage": 0.5173883660801221,
+          "hoursCoverage": 0.5529411764705883,
+          "activityCoverage": 0,
+          "open": 3,
+          "unknownHours": 114,
+          "help": 0,
+          "longestLow": null,
+          "longestObservedLow": 0,
+          "limitations": [
+            "A search reached its result limit; counts are partial.",
+            "Some opening hours are unknown."
+          ],
+          "roadCoverage": 0.836084063668784
+        }
+      ]
+    },
+    {
+      "name": "Browser displays freshly returned live activity response",
+      "passed": true
+    },
+    {
+      "name": "Manyata to AEOS activity pipeline",
+      "passed": true,
+      "httpStatus": 200,
+      "activityStatus": "partial",
+      "routeCount": 3,
+      "scoreCount": 0,
+      "routes": [
+        {
+          "label": "Fastest",
+          "scanCoverage": 0.6106881781104389,
+          "hoursCoverage": 0.4218009478672986,
+          "activityCoverage": 0.03816801113190243,
+          "open": 3,
+          "unknownHours": 122,
+          "help": 2,
+          "longestLow": null,
+          "longestObservedLow": 200,
+          "limitations": [
+            "A search reached its result limit; counts are partial.",
+            "Some opening hours are unknown."
+          ],
+          "roadCoverage": 0.9530716844717719,
+          "unknownTurns": 3
+        },
+        {
+          "label": "Alternative 1",
+          "scanCoverage": 0.7442705853540947,
+          "hoursCoverage": 0.48068669527896996,
+          "activityCoverage": 0.11026230894134738,
+          "open": 1,
+          "unknownHours": 121,
+          "help": 0,
+          "longestLow": null,
+          "longestObservedLow": 600,
+          "limitations": [
+            "A search reached its result limit; counts are partial.",
+            "Some opening hours are unknown."
+          ],
+          "roadCoverage": 0.8857117422489461,
+          "unknownTurns": 0
+        },
+        {
+          "label": "Alternative 2",
+          "scanCoverage": 0.6748505397063435,
+          "hoursCoverage": 0.4755244755244755,
+          "activityCoverage": 0.10838315343121883,
+          "open": 1,
+          "unknownHours": 150,
+          "help": 0,
+          "longestLow": null,
+          "longestObservedLow": 400,
+          "limitations": [
+            "A search reached its result limit; counts are partial.",
+            "Some opening hours are unknown."
+          ],
+          "roadCoverage": 0.3145717436095214,
+          "unknownTurns": 2
+        }
+      ]
+    }
+  ],
+  "requests": {
+    "route": 2,
+    "nearby": 140
+  },
+  "errors": [],
+  "hours": {
+    "listings": 1428,
+    "openNow": 92,
+    "openWithoutNextClose": 78,
+    "alwaysOpenPattern": 0
+  },
+  "finishedAt": "2026-09-09T21:00:17.084Z"
+}

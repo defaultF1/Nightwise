@@ -1,0 +1,260 @@
+{
+  "version": "0.9.0-live-preview",
+  "device": "Redmi 9 M2006C3MII Android 10",
+  "startedAt": "2026-09-10T09:59:43.687Z",
+  "tests": [
+    {
+      "name": "Immersive portrait layout uses the Redmi viewport without horizontal overflow",
+      "passed": true,
+      "details": {
+        "viewport": [
+          360,
+          772
+        ],
+        "screen": [
+          360,
+          800
+        ],
+        "theme": "dark",
+        "overflow": false,
+        "bodyBottom": 1259.40625
+      }
+    },
+    {
+      "name": "Android location permission prompt is reachable",
+      "passed": true,
+      "details": {
+        "shown": true,
+        "label": "Foreground location prompt observed in the first run; Android reports permission granted."
+      }
+    },
+    {
+      "name": "One-time GPS resolves or reports a recoverable out-of-area/unavailable result without replacing AEOS",
+      "passed": true,
+      "details": {
+        "locationText": "You are outside the North Bengaluru pilot. Choose an origin within 10 km of AEOS.",
+        "retained": true
+      }
+    },
+    {
+      "name": "Location recovery opens phone settings",
+      "passed": true,
+      "details": {
+        "focus": "mCurrentFocus=Window{212cf73 u0 com.android.settings/com.android.settings.Settings$LocationSettingsActivity}"
+      }
+    },
+    {
+      "name": "Location sheet closes and keeps the journey after recovery",
+      "passed": true
+    },
+    {
+      "name": "Phone reaches the deployed Render service",
+      "passed": true,
+      "details": {
+        "connection": "Backend ready. Activity scans enabled. Live scoring experimental."
+      }
+    },
+    {
+      "name": "Theme changes on the native build",
+      "passed": true
+    },
+    {
+      "name": "Endpoint confirmation map loads with rounded sheet and no horizontal overflow",
+      "passed": true,
+      "details": {
+        "sheet": {
+          "top": 44,
+          "bottom": 756.5,
+          "left": 8,
+          "right": 352,
+          "width": 344,
+          "height": 712.5
+        },
+        "map": {
+          "top": 208.984375,
+          "bottom": 696.8125,
+          "left": 25,
+          "right": 335,
+          "width": 310,
+          "height": 487.828125
+        },
+        "slot": {
+          "top": 262.484375,
+          "bottom": 562.484375,
+          "left": 26,
+          "right": 334,
+          "width": 308,
+          "height": 300
+        },
+        "native": "true",
+        "overflow": false,
+        "corners": "24px"
+      }
+    },
+    {
+      "name": "Confirmation remains usable after sheet scroll",
+      "passed": true,
+      "details": {
+        "scrollTop": 481,
+        "buttonTop": 667.390625,
+        "buttonBottom": 723.390625,
+        "viewport": 772,
+        "mapTop": -218.515625,
+        "mapBottom": 81.484375
+      }
+    },
+    {
+      "name": "Authenticated live comparison returns real alternatives and score ranges",
+      "passed": true,
+      "details": {
+        "routeCount": 3,
+        "ranges": [
+          "Night Activity Score 58–98/100Experimental range · Missing data widens the range · not a safety rating",
+          "Night Activity Score 53–94/100Experimental range · Missing data widens the range · not a safety rating",
+          "Night Activity Score 58–93/100Experimental range · Missing data widens the range · not a safety rating"
+        ],
+        "outcome": "insufficient",
+        "requestUsage": {
+          "routeCalls": 1,
+          "nearbyCalls": 117,
+          "detailsCalls": 4,
+          "scope": "Shared counter delta during this comparison; concurrent search requests may contribute."
+        }
+      }
+    },
+    {
+      "name": "User can select a different live route",
+      "passed": true
+    },
+    {
+      "name": "Missing Google schedules show labelled assumed hours",
+      "passed": true
+    },
+    {
+      "name": "Evidence panel closes and preserves live results",
+      "passed": true,
+      "details": {
+        "routeCount": 3,
+        "method": "On-screen close verified; MIUI denied ADB hardware-key injection."
+      }
+    },
+    {
+      "name": "Final APK opens the selected live journey in Google Maps",
+      "passed": true,
+      "details": {
+        "focus": "mCurrentFocus=Window{e5223e3 u0 com.google.android.apps.maps/com.google.android.maps.MapsActivity}",
+        "handoff": "Selected: Alternative 1 · 23 min"
+      }
+    },
+    {
+      "name": "Returning from Google Maps preserves NightWise",
+      "passed": true,
+      "details": {
+        "focus": "mCurrentFocus=Window{3c9adde u0 in.nightwise.demo/in.nightwise.demo.MainActivity}",
+        "method": "Activity resume; MIUI blocks ADB key injection."
+      }
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "talks/screenshots/phone090/01-home.png",
+    "talks/screenshots/phone090/02-gps-result.png",
+    "talks/screenshots/phone090/03-confirmation-top.png",
+    "talks/screenshots/phone090/04-confirmation-bottom-clipping.png",
+    "talks/screenshots/phone090/05-live-routes-map.png",
+    "talks/screenshots/phone090/06-selected-alternative.png",
+    "talks/screenshots/phone090/07-assumed-hours.png",
+    "talks/screenshots/phone090/08-evidence-details.png",
+    "talks/screenshots/phone090/09-handoff.png"
+  ],
+  "live": {
+    "checkedAt": "2026-09-10T10:00:16.156Z",
+    "status": 200,
+    "activityStatus": "partial",
+    "routeCount": 3,
+    "requestUsage": {
+      "routeCalls": 1,
+      "nearbyCalls": 117,
+      "detailsCalls": 4,
+      "scope": "Shared counter delta during this comparison; concurrent search requests may contribute."
+    },
+    "usage": {
+      "routeCalls": 20,
+      "nearbyCalls": 987,
+      "autocompleteCalls": 2,
+      "detailsCalls": 10,
+      "routeLimit": 30,
+      "nearbyLimit": 1500,
+      "autocompleteLimit": 40,
+      "detailsLimit": 20,
+      "remainingComparisons": 10
+    },
+    "outcome": "insufficient",
+    "recommendedId": null,
+    "scoreBounds": {
+      "google:0": [
+        58.70254416713999,
+        97.98086289376431
+      ],
+      "google:1": [
+        53.040287007230795,
+        93.24616139767963
+      ],
+      "google:2": [
+        58.0152364214827,
+        92.51447872193086
+      ]
+    },
+    "routes": [
+      {
+        "id": "google:0",
+        "label": "Fastest",
+        "geometryPoints": 305,
+        "distanceMeters": 5381,
+        "durationSeconds": 1308,
+        "scanCoverage": 0.5545123379201127,
+        "hoursCoverage": 0.6952054794520548,
+        "activityCoverage": 0.8515041126400376,
+        "lowActivityGapBounds": [
+          0,
+          800
+        ],
+        "roadCoverage": 0.836084063668784
+      },
+      {
+        "id": "google:1",
+        "label": "Alternative 1",
+        "geometryPoints": 220,
+        "distanceMeters": 6091,
+        "durationSeconds": 1403,
+        "scanCoverage": 0.7375366298623899,
+        "hoursCoverage": 0.6036036036036037,
+        "activityCoverage": 0.7375366298623899,
+        "lowActivityGapBounds": [
+          400,
+          1200
+        ],
+        "roadCoverage": 0.7623663460882244
+      },
+      {
+        "id": "google:2",
+        "label": "Alternative 2",
+        "geometryPoints": 303,
+        "distanceMeters": 4795,
+        "durationSeconds": 1428,
+        "scanCoverage": 0.5001524842689808,
+        "hoursCoverage": 0.6425855513307985,
+        "activityCoverage": 0.791730201778742,
+        "lowActivityGapBounds": [
+          200,
+          800
+        ],
+        "roadCoverage": 0.899763329562663
+      }
+    ]
+  },
+  "automationLimits": [
+    "MIUI denied ADB input keyevent injection. Physical Back remains a manual-user check; the app back listener and on-screen close behavior are covered."
+  ],
+  "finishedAt": "2026-09-10T10:09:27.336Z"
+}

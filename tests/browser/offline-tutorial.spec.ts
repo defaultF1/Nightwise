@@ -1,0 +1,26 @@
+import {test,expect} from '@playwright/test';
+test('offline tutorial has real streets in both directions and keeps its mode label',async({page,context})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');
+  await expect(page.getByRole('button',{name:'Compare night routes'})).toBeVisible();
+  const remote:string[]=[];page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:'))remote.push(r.url());});
+  await context.setOffline(true);
+  await expect(page.getByRole('button',{name:/FROM AEOS/})).toBeDisabled();
+  await page.getByRole('button',{name:'Compare night routes'}).click();
+  await expect(page.getByRole('region',{name:'Journey recommendation'})).toBeVisible();
+  await expect(page.getByText('Tutorial mode',{exact:true})).toBeVisible();
+  const path=await page.locator('.offline-map .diagram-path').first().getAttribute('d');expect(path!.split('L').length).toBeGreaterThan(100);
+  const bounds=await page.locator('.journey-answer').boundingBox(),map=await page.locator('.offline-map').boundingBox();expect(bounds!.y).toBeLessThan(map!.y);
+  await expect(page.getByRole('link',{name:'© OpenStreetMap contributors'})).toBeVisible();
+  await page.locator('.offline-map').screenshot({path:'talks/screenshots/offline-tutorial/01-forward-dark.png'});
+  await page.getByRole('button',{name:'Edit journey'}).click();await page.getByRole('button',{name:'Swap origin and destination'}).click();
+  await expect(page.getByRole('button',{name:'Tutorial mode',exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(page.getByRole('button',{name:/FROM Manyata/})).toBeVisible();
+  await page.getByRole('button',{name:'Compare night routes'}).click();await expect(page.locator('.offline-map > svg')).toHaveAttribute('aria-label','Street routes from Manyata Tech Park to AEOS');
+  expect(await page.locator('.offline-map .diagram-path').first().getAttribute('d')).not.toBe(path);
+  await page.getByRole('button',{name:'Open settings'}).click();await page.getByText('Mono Light',{exact:true}).click();await page.getByRole('button',{name:'Done',exact:true}).click();
+  await page.locator('.offline-map').screenshot({path:'talks/screenshots/offline-tutorial/02-reverse-light.png'});
+  await page.getByText('Shop opening times and closed days',{exact:true}).click();await page.locator('.shop-hours-item summary').first().click();await expect(page.locator('.shop-hours-item').first()).toContainText('Wednesday:');
+  expect(await page.locator('main').innerText()).not.toMatch(/sample|illustrative|fake|not live/i);
+  await page.getByRole('button',{name:'Continue with this route'}).click();const handoff=new URL((await page.getByRole('link',{name:'Open Google Maps'}).getAttribute('href'))!);expect(handoff.searchParams.get('origin')).toBe('13.047697,77.619939');expect(handoff.searchParams.get('destination')).toBe('13.062827,77.594089');
+  expect(remote).toEqual([]);
+});

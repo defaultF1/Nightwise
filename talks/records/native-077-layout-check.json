@@ -1,0 +1,36 @@
+{
+  "version": "0.7.7-preview",
+  "installed": true,
+  "device": "Redmi M2006C3MII Android 10",
+  "layout": {
+    "width": 360,
+    "height": 772,
+    "horizontalOverflow": false,
+    "buttonVisible": true,
+    "buttonBottomClearance": 48.609375,
+    "sheetBottomCorners": "24px",
+    "cards": [
+      {
+        "padding": "16px",
+        "corners": "18px",
+        "textOverflow": false
+      },
+      {
+        "padding": "16px",
+        "corners": "18px",
+        "textOverflow": false
+      }
+    ],
+    "buttonColor": "rgb(16, 16, 16)",
+    "buttonBackground": "rgb(255, 255, 255)"
+  },
+  "requestCountsUnchanged": true,
+  "notes": "Actual native screenshots captured; map instance opened but route and Places endpoints blocked. Returned to tutorial home. Visual review separate.",
+  "visualReview": {
+    "endpointTextUnclipped": true,
+    "roundedCardsVisible": true,
+    "confirmationButtonUnclipped": true,
+    "colouredEndpointsVisible": true,
+    "remainingIssue": "Native map still paints above the sheet top edge when scrolled; sheet clipping requires a separate correction."
+  }
+}

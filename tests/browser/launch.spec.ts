@@ -44,9 +44,10 @@ test('slow media loading does not dismiss the intro after 1.2 seconds', async ({
 test('blocked autoplay offers a user initiated Play intro action', async ({ page }) => {
   await page.addInitScript(() => {
     const original = HTMLMediaElement.prototype.play;
-    let first = true;
+    let userClicked = false;
+    document.addEventListener('click', () => { userClicked = true; }, { capture: true });
     HTMLMediaElement.prototype.play = function () {
-      if (first) { first = false; return Promise.reject(new DOMException('Test autoplay policy', 'NotAllowedError')); }
+      if (!userClicked) return Promise.reject(new DOMException('Test autoplay policy', 'NotAllowedError'));
       return original.call(this);
     };
   });

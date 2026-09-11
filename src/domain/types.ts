@@ -9,9 +9,9 @@ export type Route = {
   distanceMeters: number;
   path: Coordinate[];
   source: 'sample' | 'google';
-  geometryKind: 'illustrative' | 'provider';
+  geometryKind: 'illustrative' | 'offline' | 'provider';
   turns?: number;
-  steps?: { distanceMeters: number; maneuver?: string; path?:Coordinate[] }[];
+  steps?: { distanceMeters: number; staticDurationSeconds?:number; maneuver?: string; path?:Coordinate[] }[];
 };
 export type Evidence = {
   openPlaces: number | null;

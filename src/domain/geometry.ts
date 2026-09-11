@@ -16,6 +16,23 @@ export function pathLength(path: Coordinate[]): number {
 }
 
 export type SamplePoint = { coordinate: Coordinate; distanceMeters: number };
+// Retain every provider vertex inside a distance interval, including road bends.
+export function slicePolyline(path: Coordinate[], fromMeters: number, toMeters: number): Coordinate[] {
+  const length = pathLength(path);
+  if (!Number.isFinite(fromMeters) || !Number.isFinite(toMeters) || fromMeters > toMeters) throw new Error('Invalid route interval');
+  const from = Math.max(0, Math.min(length, fromMeters)), to = Math.max(0, Math.min(length, toMeters));
+  const cumulative = [0];
+  for (let i = 1; i < path.length; i++) cumulative.push(cumulative[i-1] + distanceMeters(path[i-1], path[i]));
+  const at = (distance: number) => {
+    if (distance === length) return {...path[path.length-1]};
+    const i = cumulative.findIndex((d, index) => index > 0 && d >= distance);
+    if (i < 1) return {...path[0]};
+    const span = cumulative[i] - cumulative[i-1];
+    return interpolate(path[i-1], path[i], span ? (distance-cumulative[i-1])/span : 0);
+  };
+  if (from === to) return [at(from)];
+  return [at(from), ...path.filter((_, i) => cumulative[i] > from && cumulative[i] < to), at(to)];
+}
 export function interpolate(a: Coordinate,b: Coordinate,fraction:number): Coordinate {
   const f=Math.min(1,Math.max(0,fraction));
   if(f===0)return {...a};if(f===1)return {...b};

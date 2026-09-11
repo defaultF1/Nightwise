@@ -1,0 +1,196 @@
+{
+  "checkedAt": "2026-09-09T20:57:31.393Z",
+  "tests": [
+    {
+      "name": "Places nearby access and parser",
+      "passed": false
+    },
+    {
+      "name": "Unauthenticated comparison blocked without Google call",
+      "passed": true
+    },
+    {
+      "name": "Outside Bengaluru rejected",
+      "passed": true
+    },
+    {
+      "name": "Live autocomplete Manyata Tech Park Bengaluru",
+      "passed": true,
+      "suggestionCount": 5
+    },
+    {
+      "name": "Live place resolution Manyata Tech Park Bengaluru",
+      "passed": true
+    },
+    {
+      "name": "Live autocomplete Hebbal railway station Bengaluru",
+      "passed": true,
+      "suggestionCount": 5
+    },
+    {
+      "name": "Live place resolution Hebbal railway station Bengaluru",
+      "passed": true
+    },
+    {
+      "name": "Real browser map",
+      "passed": true,
+      "mapScripts": 1,
+      "loadedImages": 50,
+      "errorCodes": []
+    },
+    {
+      "name": "AEOS to Manyata routes and browser pipeline with activity disabled after smoke error",
+      "passed": true,
+      "routeCount": 2,
+      "activityStatus": "disabled",
+      "outcome": "insufficient",
+      "scoredRoutes": 0,
+      "routes": [
+        {
+          "label": "Fastest",
+          "minutes": 10,
+          "kilometres": 4.8,
+          "steps": 11,
+          "scanCoverage": 0,
+          "hoursCoverage": 0,
+          "activityCoverage": 0,
+          "openPlaces": null,
+          "unknownHours": null,
+          "roadCoverage": 0.899763329562663
+        },
+        {
+          "label": "Alternative 1",
+          "minutes": 12,
+          "kilometres": 5.4,
+          "steps": 14,
+          "scanCoverage": 0,
+          "hoursCoverage": 0,
+          "activityCoverage": 0,
+          "openPlaces": null,
+          "unknownHours": null,
+          "roadCoverage": 0.836084063668784
+        }
+      ]
+    },
+    {
+      "name": "Live alternative selection",
+      "passed": true
+    },
+    {
+      "name": "Live details visible with withheld unvalidated score",
+      "passed": true
+    },
+    {
+      "name": "Live Maps handoff uses correct direction and corridor points",
+      "passed": true
+    },
+    {
+      "name": "Live map theme Mono Light",
+      "passed": true
+    },
+    {
+      "name": "Live map theme NightWise Blue",
+      "passed": true
+    },
+    {
+      "name": "Live desktop layout",
+      "passed": true
+    },
+    {
+      "name": "Manyata to AEOS route-only comparison",
+      "passed": true,
+      "routeCount": 3,
+      "activityStatus": "disabled",
+      "outcome": "insufficient",
+      "scoredRoutes": 0,
+      "routes": [
+        {
+          "label": "Fastest",
+          "minutes": 12,
+          "kilometres": 5.2,
+          "steps": 12,
+          "scanCoverage": 0,
+          "hoursCoverage": 0,
+          "activityCoverage": 0,
+          "openPlaces": null,
+          "unknownHours": null,
+          "roadCoverage": 0.9530716844717719,
+          "unknownTurns": 3
+        },
+        {
+          "label": "Alternative 1",
+          "minutes": 13,
+          "kilometres": 7.2,
+          "steps": 15,
+          "scanCoverage": 0,
+          "hoursCoverage": 0,
+          "activityCoverage": 0,
+          "openPlaces": null,
+          "unknownHours": null,
+          "roadCoverage": 0.8857117422489461,
+          "unknownTurns": 0
+        },
+        {
+          "label": "Alternative 2",
+          "minutes": 16,
+          "kilometres": 7.4,
+          "steps": 10,
+          "scanCoverage": 0,
+          "hoursCoverage": 0,
+          "activityCoverage": 0,
+          "openPlaces": null,
+          "unknownHours": null,
+          "roadCoverage": 0.3145717436095214,
+          "unknownTurns": 2
+        }
+      ]
+    },
+    {
+      "name": "Searched destination route outside the demo preset",
+      "passed": true,
+      "routeCount": 1,
+      "activityStatus": "disabled",
+      "outcome": "single",
+      "scoredRoutes": 0,
+      "routes": [
+        {
+          "label": "Fastest",
+          "minutes": 31,
+          "kilometres": 18.1,
+          "steps": 17,
+          "scanCoverage": 0,
+          "hoursCoverage": 0,
+          "activityCoverage": 0,
+          "openPlaces": null,
+          "unknownHours": null,
+          "roadCoverage": 0.5676290899512803,
+          "unknownTurns": 5
+        }
+      ]
+    },
+    {
+      "name": "Browser runtime",
+      "passed": true,
+      "unhandledErrors": 0,
+      "googleMapErrorCodes": []
+    }
+  ],
+  "providerRequests": {
+    "route": 3,
+    "nearby": 1,
+    "suggest": 2,
+    "details": 2
+  },
+  "providerErrors": [
+    {
+      "kind": "nearby",
+      "status": 400,
+      "reasons": []
+    }
+  ],
+  "physicalPhoneConnected": false,
+  "fieldValidation": false,
+  "scoringEnabled": false,
+  "finishedAt": "2026-09-09T20:58:07.944Z",
+  "smokeCorrection": "The first smoke request included a display name in the LatLng object and returned HTTP 400. The corrected latitude/longitude-only request and full scans succeeded. This was a test-harness input error."
+}

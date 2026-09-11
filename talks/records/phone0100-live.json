@@ -1,0 +1,150 @@
+{
+  "version": "0.10.0-live-preview",
+  "device": "Redmi 9",
+  "startedAt": "2026-09-10T12:17:02.375Z",
+  "tests": [
+    {
+      "name": "Native map and rounded confirmation",
+      "passed": true
+    },
+    {
+      "name": "Confirmation button is visible after scrolling",
+      "passed": true
+    },
+    {
+      "name": "Live alternatives follow Google road geometry",
+      "passed": true
+    },
+    {
+      "name": "Every live route has an activity score range",
+      "passed": true
+    },
+    {
+      "name": "Live decision is above the map",
+      "passed": true
+    },
+    {
+      "name": "Selecting an alternative updates map controls",
+      "passed": true
+    },
+    {
+      "name": "Mono Light hours surface is opaque and readable",
+      "passed": true
+    },
+    {
+      "name": "No horizontal text clipping",
+      "passed": true
+    },
+    {
+      "name": "Selected route exposes gap and road evidence",
+      "passed": true
+    },
+    {
+      "name": "Maps handoff contains the selected corridor",
+      "passed": true
+    },
+    {
+      "name": "Google Maps opens on the phone",
+      "passed": true
+    },
+    {
+      "name": "Return to NightWise retains the selected alternative",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "talks/screenshots/phone0100/03-live-confirmation.png",
+    "talks/screenshots/phone0100/04-live-summary.png",
+    "talks/screenshots/phone0100/05-live-map.png",
+    "talks/screenshots/phone0100/06-live-hours.png",
+    "talks/screenshots/phone0100/07-google-maps.png"
+  ],
+  "backend": {
+    "version": "0.10.0-live-preview",
+    "scanStrategy": "partition-and-spatial-v1",
+    "newScannerVerified": true
+  },
+  "live": {
+    "checkedAt": "2026-09-10T12:17:48.470Z",
+    "activityStatus": "partial",
+    "outcome": "insufficient",
+    "recommendedId": null,
+    "usage": {
+      "routeCalls": 22,
+      "nearbyCalls": 1175,
+      "autocompleteCalls": 2,
+      "detailsCalls": 18,
+      "routeLimit": 30,
+      "nearbyLimit": 1500,
+      "autocompleteLimit": 40,
+      "detailsLimit": 20,
+      "remainingComparisons": 8
+    },
+    "requestUsage": {
+      "routeCalls": 1,
+      "nearbyCalls": 94,
+      "detailsCalls": 4,
+      "scope": "Shared counter delta during this comparison; concurrent search requests may contribute."
+    },
+    "scoreBounds": {
+      "google:0": [
+        53.040287007230795,
+        93.24616139767963
+      ],
+      "google:1": [
+        58.70254416713999,
+        97.98086289376431
+      ]
+    },
+    "notices": [
+      "16 result-limited search areas were checked with smaller overlapping searches. Remaining caps stay partial.",
+      "4 listings with missing hours received a targeted details check. Missing schedules still remain unknown.",
+      "Live scores are experimental evidence ranges, not safety ratings or calibrated predictions. Missing data widens the range.",
+      "Road type is estimated from a local OpenStreetMap extract around North Bengaluru. Unmatched, ambiguous and grade-separated sections remain unknown. Actual staffing, lighting and crime are not measured."
+    ],
+    "routes": [
+      {
+        "id": "google:0",
+        "label": "Fastest",
+        "durationSeconds": 907,
+        "distanceMeters": 6091,
+        "geometryPoints": 220,
+        "openPlaces": 105,
+        "knownHours": 0.6,
+        "completeScans": 0.9343841574655974,
+        "activityCoverage": 0.7375366298623899,
+        "roads": 0.7623663460882244,
+        "lowActivityGap": [
+          400,
+          1200
+        ],
+        "helpGap": [
+          600,
+          1400
+        ]
+      },
+      {
+        "id": "google:1",
+        "label": "Alternative 1",
+        "durationSeconds": 1110,
+        "distanceMeters": 5381,
+        "geometryPoints": 305,
+        "openPlaces": 164,
+        "knownHours": 0.6915254237288135,
+        "completeScans": 0.9257520563200188,
+        "activityCoverage": 0.8515041126400376,
+        "roads": 0.836084063668784,
+        "lowActivityGap": [
+          0,
+          800
+        ],
+        "helpGap": [
+          400,
+          1200
+        ]
+      }
+    ]
+  },
+  "physicalBack": "MIUI denied automated key injection; physical Back not verified.",
+  "finishedAt": "2026-09-10T12:18:29.965Z"
+}

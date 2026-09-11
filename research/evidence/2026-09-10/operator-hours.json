@@ -1,0 +1,588 @@
+{
+  "purpose": "Research cross-check register; not integrated live route evidence. Do not add counts to Google/OSM without resolving duplicate businesses.",
+  "sources": {
+    "apolloSahakar": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+    "apolloHegde": "https://www.apollopharmacy.in/medical-stores/bengaluru/apollo_pharmacy_rk_hegde_nagar_bangalore-18448",
+    "thirdWave": "https://stores.thirdwavecoffeeroasters.com/store-pages/third-wave-coffee-sahakar-nagar-bengaluru",
+    "seagull": "https://locator.iocl.com/indianoil-seagull-petro-park-ioc-dealer-petrol-pump-kanaka-nagar-bengaluru-183958/Home",
+    "jairam": "https://locator.iocl.com/indianoil-kv-jairam-fuel-center-petrol-pump-jakkur-bengaluru-183602/Home",
+    "kfc": "https://restaurants.kfc.co.in/kfc-kfc-hegdenagar-bangalore-restaurants-dr-srk-nagar-bengaluru-481085/Home",
+    "pizza": "https://restaurants.pizzahut.co.in/pizza-hut-sahakar-nagar-pizza-restaurant-sahakar-nagar-bengaluru-1211/Home",
+    "aster": "https://www.asterhospitals.in/hospitals/aster-cmi-bangalore",
+    "asterEmergency": "https://www.asterhospitals.in/aster-cmi-bangalore/emergency_care/zomato"
+  },
+  "records": [
+    {
+      "id": "operator-01",
+      "name": "Apollo Sahakara Nagar",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.063258,
+        "lng": 77.591258
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "09:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 310,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-02",
+      "name": "Apollo Kodigehalli Main Road 2",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.0577347,
+        "lng": 77.5893114
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "07:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 767,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-03",
+      "name": "Apollo Amurthahalli",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.06666,
+        "lng": 77.59625
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "07:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 486,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-04",
+      "name": "Apollo CQAL Layout",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.06329,
+        "lng": 77.58298
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "07:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 1204,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-05",
+      "name": "Apollo Godrej Woodmans",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.0539662,
+        "lng": 77.5972918
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "07:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 1045,
+      "notes": "Access through the estate is unverified."
+    },
+    {
+      "id": "operator-06",
+      "name": "Apollo Bhuvaneshwari Nagar 2",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.05497,
+        "lng": 77.600753
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": null,
+      "publishedAmbiguousHours": "0:00 AM - 12:00 PM",
+      "quality": "ambiguous-hours",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 1133,
+      "notes": "Midnight/noon formatting is ambiguous; excluded from schedule projection."
+    },
+    {
+      "id": "operator-07",
+      "name": "Apollo Jakkur",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.072732,
+        "lng": 77.603356
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": null,
+      "publishedAmbiguousHours": "0:00 AM - 12:00 PM",
+      "quality": "ambiguous-hours",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 1490,
+      "notes": "Midnight/noon formatting is ambiguous; excluded from schedule projection."
+    },
+    {
+      "id": "operator-08",
+      "name": "Apollo Jakkur New Extension",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.06807,
+        "lng": 77.60583
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "07:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 1399,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-09",
+      "name": "Apollo Kempapura Village",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.04958,
+        "lng": 77.60208
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": null,
+      "publishedAmbiguousHours": "0:00 AM - 12:00 PM",
+      "quality": "ambiguous-hours",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 1708,
+      "notes": "Midnight/noon formatting is ambiguous; excluded from schedule projection."
+    },
+    {
+      "id": "operator-10",
+      "name": "Apollo Hebbal",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.03989,
+        "lng": 77.59351
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "07:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 2551,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-11",
+      "name": "Apollo Devi Nagar",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.050844,
+        "lng": 77.5678918
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": null,
+      "publishedAmbiguousHours": "0:00 AM - 12:00 PM",
+      "quality": "ambiguous-hours",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 3135,
+      "notes": "Midnight/noon formatting is ambiguous; excluded from schedule projection."
+    },
+    {
+      "id": "operator-12",
+      "name": "Apollo Thindlu Main Road",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.069781,
+        "lng": 77.56443
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bangalore/apollo_pharmacy_sahakara_nagar-14597",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": null,
+      "publishedAmbiguousHours": "0:00 AM - 12:00 PM",
+      "quality": "ambiguous-hours",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 3304,
+      "notes": "Midnight/noon formatting is ambiguous; excluded from schedule projection."
+    },
+    {
+      "id": "operator-13",
+      "name": "Apollo RK Hegde Nagar",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.06796,
+        "lng": 77.62978
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bengaluru/apollo_pharmacy_rk_hegde_nagar_bangalore-18448",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "09:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 3908,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-14",
+      "name": "Apollo RK Hegde Nagar 2",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.0713666,
+        "lng": 77.6336768
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bengaluru/apollo_pharmacy_rk_hegde_nagar_bangalore-18448",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "07:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 4392,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-15",
+      "name": "Apollo K Narayanapura Road",
+      "category": "pharmacy",
+      "coordinates": {
+        "lat": 13.0642,
+        "lng": 77.649101
+      },
+      "coordinateBasis": "Operator directions link",
+      "sourceUrl": "https://www.apollopharmacy.in/medical-stores/bengaluru/apollo_pharmacy_rk_hegde_nagar_bangalore-18448",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": null,
+      "publishedAmbiguousHours": "0:00 AM - 12:00 PM",
+      "quality": "ambiguous-hours",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 5961,
+      "notes": "Midnight/noon formatting is ambiguous; excluded from schedule projection."
+    },
+    {
+      "id": "operator-16",
+      "name": "Third Wave Coffee Sahakar Nagar",
+      "category": "cafe",
+      "coordinates": {
+        "lat": 13.061092,
+        "lng": 77.587219
+      },
+      "coordinateBasis": "Operator structured data",
+      "sourceUrl": "https://stores.thirdwavecoffeeroasters.com/store-pages/third-wave-coffee-sahakar-nagar-bengaluru",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "08:00",
+        "closes": "23:59"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 769,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-17",
+      "name": "IndianOil Seagull Petro Park",
+      "category": "fuel",
+      "coordinates": {
+        "lat": 13.04162,
+        "lng": 77.61366
+      },
+      "coordinateBasis": "Operator structured data",
+      "sourceUrl": "https://locator.iocl.com/indianoil-seagull-petro-park-ioc-dealer-petrol-pump-kanaka-nagar-bengaluru-183958/Home",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "06:00",
+        "closes": "22:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 3171,
+      "notes": "Outlet CNG availability is unverified."
+    },
+    {
+      "id": "operator-18",
+      "name": "IndianOil KV Jairam Fuel Center",
+      "category": "fuel",
+      "coordinates": {
+        "lat": 13.0715,
+        "lng": 77.6077
+      },
+      "coordinateBasis": "Operator structured data",
+      "sourceUrl": "https://locator.iocl.com/indianoil-kv-jairam-fuel-center-petrol-pump-jakkur-bengaluru-183602/Home",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "06:00",
+        "closes": "22:30"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 1762,
+      "notes": "Outlet CNG availability is unverified."
+    },
+    {
+      "id": "operator-19",
+      "name": "KFC Hegdenagar",
+      "category": "restaurant",
+      "coordinates": {
+        "lat": 13.0680418,
+        "lng": 77.6304125
+      },
+      "coordinateBasis": "Operator structured data",
+      "sourceUrl": "https://restaurants.kfc.co.in/kfc-kfc-hegdenagar-bangalore-restaurants-dr-srk-nagar-bengaluru-481085/Home",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "11:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 3977,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-20",
+      "name": "Pizza Hut Sahakara Nagar",
+      "category": "restaurant",
+      "coordinates": {
+        "lat": 13.0636426,
+        "lng": 77.5908103
+      },
+      "coordinateBasis": "Operator structured data",
+      "sourceUrl": "https://restaurants.pizzahut.co.in/pizza-hut-sahakar-nagar-pizza-restaurant-sahakar-nagar-bengaluru-1211/Home",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "11:00",
+        "closes": "23:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "regular-schedule-and-coordinate",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": 367,
+      "notes": "Regular published schedule only; actual operation and holiday exceptions unverified."
+    },
+    {
+      "id": "operator-21",
+      "name": "Aster CMI emergency department",
+      "category": "hospital",
+      "coordinates": null,
+      "coordinateBasis": "Conflicting structured coordinates",
+      "sourceUrl": "https://www.asterhospitals.in/hospitals/aster-cmi-bangalore",
+      "retrievedOn": "2026-09-10",
+      "timeZone": "Asia/Kolkata",
+      "weeklyHours": {
+        "days": "Monday-Sunday",
+        "opens": "00:00",
+        "closes": "24:00"
+      },
+      "publishedAmbiguousHours": null,
+      "quality": "coordinate-conflict",
+      "hoursLastVerifiedOn": null,
+      "specialDateHours": null,
+      "entranceVerified": false,
+      "roadAccessVerified": false,
+      "routeAssociation": null,
+      "integratedIntoApp": false,
+      "distanceFromAeosMetres": null,
+      "notes": "24/7 emergency availability and pharmacy statement; not a claim that every department is open. Two coordinate candidates need entrance confirmation.",
+      "additionalSourceUrl": "https://www.asterhospitals.in/aster-cmi-bangalore/emergency_care/zomato",
+      "coordinateCandidates": [
+        {
+          "lat": 13.05525,
+          "lng": 77.59161
+        },
+        {
+          "lat": 13.0547495,
+          "lng": 77.5897244
+        }
+      ]
+    }
+  ]
+}

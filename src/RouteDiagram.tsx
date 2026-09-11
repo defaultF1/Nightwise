@@ -1,37 +1,45 @@
 import type { Route } from './domain/types';
 import { MapPin, Check } from 'lucide-react';
+import map from './data/tutorial-map.json' with { type: 'json' };
 
 export type RouteMapProps = { routes: Route[]; selectedId?: string; onSelect: (id: string) => void; origin: string; destination?: string };
-
-// This adapter intentionally renders a labelled schematic; it is not a basemap.
-export function RouteDiagram({ routes, selectedId, onSelect, origin, destination = 'AEOS' }: RouteMapProps) {
-  const points = routes.flatMap(r => r.path);
-  const minX = Math.min(...points.map(p => p.longitude));
-  const minY = Math.min(...points.map(p => p.latitude));
-  const spanX = Math.max(...points.map(p => p.longitude)) - minX || 1;
-  const spanY = Math.max(...points.map(p => p.latitude)) - minY || 1;
-  const xy = (p: Route['path'][number]) => [65 + (p.longitude-minX)/spanX*430, 70 + (1-(p.latitude-minY)/spanY)*230];
-  const pathD = (r: Route) => r.path.map((p,i) => `${i ? 'L' : 'M'} ${xy(p).join(' ')}`).join(' ');
-  const selected = routes.find(r => r.id === selectedId);
-  const ordered = [...routes.filter(r => r.id !== selectedId), ...routes.filter(r => r.id === selectedId)];
-  const endpoints = routes[0]?.path;
-  return <section className="route-diagram" aria-label="Illustrative route diagram">
-    <div className="diagram-heading"><span><MapPin size={14}/> Bengaluru tutorial</span><span className="sample-badge">Route diagram</span></div>
-    {routes.length ? <>
-      <svg viewBox="0 0 560 370" aria-label={`Illustrative paths from ${origin} to ${destination}. Not real streets.`}>
-        <defs><pattern id="diagram-dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="currentColor" opacity=".13"/></pattern></defs>
-        <rect width="560" height="370" fill="url(#diagram-dots)"/>
-        {ordered.map(route => <g key={route.id}>
-          <path d={pathD(route)} fill="none" stroke="var(--map)" strokeWidth="15" strokeLinejoin="round"/>
-          <path d={pathD(route)} className={`diagram-path ${route.id===selectedId?'chosen':''}`} fill="none" strokeWidth={route.id===selectedId?6:4} strokeDasharray={route.id===selectedId?undefined:'9 7'} strokeLinecap="round" strokeLinejoin="round"/>
-          <path d={pathD(route)} className="diagram-hit" role="button" tabIndex={0} aria-label={`Select ${route.label} on diagram`} aria-pressed={route.id===selectedId} onClick={()=>onSelect(route.id)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onSelect(route.id);}}} fill="none" stroke="transparent" strokeWidth="26"/>
+const [south,west,north,east]=map.bounds;
+const latitudeScale=Math.cos((north+south)*Math.PI/360);
+const scale=Math.min(504/((east-west)*latitudeScale),374/(north-south));
+const xy=(lat:number,lon:number)=>[280+(lon-(east+west)/2)*latitudeScale*scale,220-(lat-(north+south)/2)*scale];
+const line=(points:number[][])=>points.map(([lat,lon],i)=>`${i?'L':'M'}${xy(lat,lon).map(v=>v.toFixed(1)).join(',')}`).join(' ');
+// Group streets into three SVG paths to keep scrolling responsive on older phones.
+const streets=['main','path','local'].map(kind=>({kind,d:map.roads.filter(r=>(/^(motorway|trunk|primary|secondary|tertiary)/.test(r.kind)?'main':/footway|path|steps|cycleway/.test(r.kind)?'path':'local')===kind).map(r=>line(r.points)).join(' ')}));
+const labels:{name:string;x:number;y:number}[]=[];
+for(const road of map.roads){
+  if(!road.name||!/^(primary|secondary|tertiary)$/.test(road.kind)||labels.some(l=>l.name===road.name))continue;
+  const [lat,lon]=road.points[Math.floor(road.points.length/2)];const [x,y]=xy(lat,lon);
+  const halfWidth=road.name.length*2.5;
+  if(x<halfWidth+10||x>550-halfWidth||y<45||y>390||labels.some(l=>Math.hypot(x-l.x,y-l.y)<90||(Math.abs(y-l.y)<20&&Math.abs(x-l.x)<halfWidth+l.name.length*2.5+10)))continue;
+  labels.push({name:road.name,x,y});if(labels.length===7)break;
+}
+export function RouteDiagram({routes,selectedId,onSelect,origin,destination='AEOS'}:RouteMapProps){
+  const selected=routes.find(r=>r.id===selectedId);
+  const ordered=[...routes.filter(r=>r.id!==selectedId),...routes.filter(r=>r.id===selectedId)];
+  const pins=origin==='AEOS'?[map.pins.aeos,map.pins.manyata]:[map.pins.manyata,map.pins.aeos];
+  return <section className="route-diagram offline-map" aria-label="Bengaluru street map">
+    <div className="diagram-heading"><span><MapPin size={14}/> North Bengaluru</span></div>
+    {routes.length?<>
+      <div className="diagram-options" aria-label="Map route options">{routes.map(r=><button key={r.id} aria-pressed={r.id===selectedId} onClick={()=>onSelect(r.id)}>{r.id===selectedId&&<Check size={13}/>} {r.label} · {Math.round(r.durationSeconds/60)} min</button>)}</div>
+      <svg viewBox="0 0 560 440" role="img" aria-label={`Street routes from ${origin} to ${destination}`}>
+        <rect width="560" height="440" fill="var(--map)"/>
+        {streets.map(s=><path key={s.kind} d={s.d} fill="none" className={`offline-streets ${s.kind}`} strokeLinejoin="round" strokeLinecap="round"/>)}
+        {labels.map(l=><text key={l.name} x={l.x} y={l.y} className="offline-street-label" textAnchor="middle">{l.name}</text>)}
+        {ordered.map(r=><g key={r.id}>
+          <path d={line(r.path.map(p=>[p.latitude,p.longitude]))} fill="none" stroke="var(--map)" strokeWidth="10" strokeLinejoin="round"/>
+          <path d={line(r.path.map(p=>[p.latitude,p.longitude]))} className={`diagram-path ${r.id===selectedId?'chosen':''}`} fill="none" strokeWidth={r.id===selectedId?5:3} strokeLinecap="round" strokeLinejoin="round"/>
+          <path d={line(r.path.map(p=>[p.latitude,p.longitude]))} role="button" tabIndex={0} aria-label={`Select ${r.label} on diagram`} aria-pressed={r.id===selectedId} onClick={()=>onSelect(r.id)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onSelect(r.id);}}} fill="none" stroke="transparent" strokeWidth="18"/>
         </g>)}
-        {endpoints && [endpoints[0],endpoints[endpoints.length-1]].map((p,i)=><g key={i}><circle cx={xy(p)[0]} cy={xy(p)[1]} r="11" fill="var(--surface)" stroke="var(--accent)" strokeWidth="3"/><text x={xy(p)[0]} y={xy(p)[1]+4} textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--text)">{i?'B':'A'}</text></g>)}
+        {pins.map(([lat,lon],i)=>{const [x,y]=xy(lat,lon);return <g key={i}><circle cx={x} cy={y} r="10" fill={i?'#ef4444':'#3b82f6'} stroke="white" strokeWidth="2"/><text x={x} y={y+4} textAnchor="middle" fontSize="11" fontWeight="700" fill="white">{i?'B':'A'}</text></g>;})}
       </svg>
       <div className="diagram-endpoints"><span><b>A</b> {origin}</span><span><b>B</b> {destination}</span></div>
-      <div className="diagram-options" aria-label="Diagram route options">{routes.map(r=><button key={r.id} aria-pressed={r.id===selectedId} onClick={()=>onSelect(r.id)}>{r.id===selectedId&&<Check size={13}/>} {r.label} · {Math.round(r.durationSeconds/60)} min</button>)}</div>
-      <p className="diagram-selection" aria-live="polite">Selected: {selected?.label ?? 'Choose a route'}</p>
-    </> : <div className="diagram-empty"><MapPin size={28}/><p>No paths to display</p></div>}
-    <p className="diagram-caption">Illustrative paths, not real streets. The Bengaluru map connects in the live build.</p>
+      <p className="diagram-selection" aria-live="polite">{selected?.label??'Choose a route'} is highlighted. Tap another option to compare.</p>
+    </>:<div className="diagram-empty"><MapPin size={28}/><p>No routes to display</p></div>}
+    <p className="diagram-caption"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap contributors</a></p>
   </section>;
 }

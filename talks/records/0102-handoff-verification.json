@@ -1,0 +1,17 @@
+{
+  "apk": "nightwise-0.10.2-team-debug.apk",
+  "sourceCommit": "c7270fa",
+  "phoneSmokePassed": 6,
+  "precedingLivePhoneChecksPassed": 16,
+  "screenshotThemeChecksPassed": 3,
+  "report": "2026-09-10_M07_offline-tutorial-and-live-scans_v01.docx",
+  "renderedPages": 4,
+  "allPagesVisuallyInspected": true,
+  "layoutIssuesFound": false,
+  "latestRequestUsage": {
+    "routes": 1,
+    "nearby": 117,
+    "details": 2
+  },
+  "noAdditionalRouteForHeaderFix": true
+}

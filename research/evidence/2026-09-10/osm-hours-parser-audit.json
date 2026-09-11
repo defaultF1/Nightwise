@@ -1,0 +1,5972 @@
+{
+  "package": "opening_hours",
+  "version": "3.14.0",
+  "license": "LGPL-3.0-only; full package includes additional component licences",
+  "evaluatedAt": "2026-09-10T15:30:00.000Z",
+  "timeZone": "Asia/Calcutta",
+  "counts": {
+    "total": 671,
+    "parsed": 632,
+    "parseFailures": 39,
+    "parsedWithWarnings": 10,
+    "parsedWithoutWarnings": 622,
+    "holidayRules": 34,
+    "states": {
+      "open": 402,
+      "close": 230
+    }
+  },
+  "limitation": "Parser success is syntactic evaluation, not source truth, freshness, holiday completeness, street access or de-duplication. Library warnings and errors remain review items. Research dependency only; not added to app.",
+  "records": [
+    {
+      "id": "node/349291886",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/428845624",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/443646019",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/576960339",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/861183324",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/1472131638",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 07:29-12:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/1473169657",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 07:00-22:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/1473175979",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 09:00-23:45\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/1474819884",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/1474819888",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/1474819896",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/1725094649",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/1725094663",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/1725094667",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/1808814321",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/1809770675",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/1813501242",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/2026091417",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/2301066273",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/2513569165",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/2540896500",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/2817011517",
+      "parsed": true,
+      "warningCount": 2,
+      "warnings": [
+        "9 to <--- (Please use notation \"-\" for \"to\".)",
+        "9 to 10 <--- (Time range without minutes specified. Not very explicit! Please use this syntax instead \"09:00-10:00\".)"
+      ],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/3342066296",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/3355609489",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 08:00-23:30\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/3371410044",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/3483711802",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/3526180140",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/3549831014",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/3677324087",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/3937163557",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4007480961",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4008848437",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4008859835",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4194066092",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4225196591",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4382905015",
+      "parsed": true,
+      "warningCount": 2,
+      "warnings": [
+        "8 <--- (Single-digit hour \"8\" without leading zero - could mean 8 (in the morning) or 20 (after midday). Add a leading zero like \"08\" or change it to \"20\" to be explicit.)",
+        "8:00-3 <--- (Single-digit hour \"3\" without leading zero - could mean 3 (in the morning) or 15 (after midday). Add a leading zero like \"03\" or change it to \"15\" to be explicit.)"
+      ],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4382905021",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4399049932",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4432576889",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443274831",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443281774",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443283600",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443463419",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443466902",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443476633",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443479591",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443483171",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443525945",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443559999",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443583791",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443594010",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443610206",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443620086",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443640798",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443641881",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443649876",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443656651",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443690733",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443700234",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443710312",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443729759",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443741405",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443755486",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4443775380",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444035799",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444077849",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444099475",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444115321",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444125315",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444142525",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444149087",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444162516",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444173276",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444243028",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444301138",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444460861",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444783186",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444983153",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4444989839",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445074229",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445077284",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445082638",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445083716",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445085371",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445088662",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445089801",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445092076",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445094113",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445095692",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445098776",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445102291",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445105205",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445106810",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445109820",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445114857",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445117874",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445124766",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445124814",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445128843",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445133451",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445137901",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445151604",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445152582",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445154369",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445157674",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445159814",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445161674",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445164588",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445176613",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445182100",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445183965",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445195031",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445216241",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445229500",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445235542",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445245274",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445260573",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445266794",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445272713",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445279008",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445291701",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445334102",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445366547",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445376790",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445391057",
+      "parsed": true,
+      "warningCount": 1,
+      "warnings": [
+        "10:30-21:00; 10:00-20:30 <--- (Separate rules detected each of which only consists of a time selector. These rules should be written as one rule by combining them using \",\".)"
+      ],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445396522",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445401477",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445421552",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445599296",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445614215",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445633509",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445642736",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445679562",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445701544",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445716765",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445743378",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445744014",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445767359",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445774901",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4445786915",
+      "parsed": true,
+      "warningCount": 1,
+      "warnings": [
+        "10:00-9 <--- (Single-digit hour \"9\" without leading zero - could mean 9 (in the morning) or 21 (after midday). Add a leading zero like \"09\" or change it to \"21\" to be explicit.)"
+      ],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446200980",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446221715",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446222059",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446222060",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446256785",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446270294",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446271460",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446279429",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446286774",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446292152",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446305142",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446306046",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446311356",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446322676",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446323836",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446329921",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446337092",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446342319",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446343508",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446347659",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446378146",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446386426",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446474186",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446497849",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446521799",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446533470",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446553289",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446600481",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446606617",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446618881",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446632053",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446869496",
+      "parsed": false,
+      "error": "N <--- (Unexpected token: \"n\" This means that the syntax is not valid at that point or it is currently not supported.) NA <--- (Please use notation \"-\" for \"a\".)",
+      "hasHolidayRule": false
+    },
+    {
+      "id": "node/4446873919",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446877302",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446879588",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446882829",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446883934",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446887864",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446889638",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446891792",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446894086",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446895274",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446898660",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446899259",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446902010",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446905193",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446907052",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446907849",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446908369",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446909299",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446949042",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446954987",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446961587",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446969359",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446972680",
+      "parsed": false,
+      "error": "N <--- (Unexpected token: \"n\" This means that the syntax is not valid at that point or it is currently not supported.) NA <--- (Please use notation \"-\" for \"a\".)",
+      "hasHolidayRule": false
+    },
+    {
+      "id": "node/4446975139",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446978239",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446981238",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446983972",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446987680",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446989687",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446990609",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446992387",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446993180",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446997759",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4446999237",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447001525",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447006716",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447006891",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447009029",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447009761",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447010423",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447010887",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447010999",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447011000",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447012034",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447013045",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447013600",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447016309",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447017729",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447017910",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447017911",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447019663",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447020027",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447039075",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447076789",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447114135",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447120056",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447132775",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447156426",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447156679",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447161315",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447163944",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447171741",
+      "parsed": true,
+      "warningCount": 1,
+      "warnings": [
+        "06:30-1 <--- (Single-digit hour \"1\" without leading zero - could mean 1 (in the morning) or 13 (after midday). Add a leading zero like \"01\" or change it to \"13\" to be explicit.)"
+      ],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447193074",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447226448",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447235887",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447243242",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447249418",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447263066",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447268977",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447271702",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447284873",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447291372",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447307112",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447308906",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447315290",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447317940",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447320093",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447327735",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447331157",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447350026",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447352349",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447355796",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447358300",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447363016",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447368643",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447373687",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447376031",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447381189",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447393204",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447462331",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447466739",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447480121",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447480316",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447484455",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447486770",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447488298",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447492201",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447495451",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447497316",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447579590",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4447585910",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448577459",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448578750",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448580773",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448583534",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448584188",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448584946",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448585944",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448586763",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448587498",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448588469",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448590295",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4448630864",
+      "parsed": false,
+      "error": "week 9:30 <--- (Time range starts outside of the current day)",
+      "hasHolidayRule": false
+    },
+    {
+      "id": "node/4477083306",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488018121",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488023121",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488025977",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488026407",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488035143",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488038833",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488045269",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488052586",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488053530",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488058690",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488063668",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488065263",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488070981",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488400190",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488415979",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488516241",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488528724",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488529806",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4488962870",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489080619",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489095061",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489139931",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489149510",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489171290",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489177486",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489180444",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489190825",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489202723",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489230695",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489232255",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489241337",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489250989",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489253520",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489256960",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489264478",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489265787",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489278131",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489286744",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489288521",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489295822",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489327813",
+      "parsed": true,
+      "warningCount": 2,
+      "warnings": [
+        "0 <--- (The number 8025589788 will be interpreted as year. This is probably not intended. Times can be specified as \"12:00\".)",
+        "08025589788 <--- (This rule is not very explicit because there is no time selector being used. A time selector is the part specifying hours when the object is opened, for example \"10:00-19:00\". Please add a time selector to this rule or use a comment to make it more explicit.)"
+      ],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489336845",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489352573",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489386645",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489390993",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489416586",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489432866",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489749852",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489757350",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489763428",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489771934",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489775073",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489829045",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489840291",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489841033",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489844854",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489848616",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489857253",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489865196",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489869310",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489872855",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489877531",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489887189",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489890908",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489894388",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489905432",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489912602",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489946141",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489955031",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489966163",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489968461",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4489987205",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4490262862",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4490265653",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4490300851",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4490315583",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4490414160",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4511497057",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4565647989",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4565787289",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4581424990",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4586321862",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4586321863",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4586321864",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4586355538",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4590779232",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4599733255",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4665414251",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4697843992",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4697889490",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4717617504",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4719664188",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4758186134",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4798061775",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4822629789",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 09:00-23:30\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/4822629790",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 07:30-22:30\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/4839771323",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4847294821",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/4877306121",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5008973980",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5087470221",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5255534241",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"Mo-Su,PH 10:00-21:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/5255534242",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"Mo-Su,PH 08:00-21:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/5286949427",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5320170731",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5434550526",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 06:45-22:45\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/5447887277",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5490195921",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5520247374",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5520247489",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 07:30-22:45\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/5520248631",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 08:00-22:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/5520248634",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 08:30-21:30\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/5520248641",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 06:00-23:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/5520248784",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 07:00-22:30\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/5520248785",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5524162720",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5524163967",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5524165033",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/5524165034",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,We,Th,Sa-Mo 08:00-22:30\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/5611375921",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"Mo-Su,PH 11:00-21:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/5905947501",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6175812290",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6380870463",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6400075545",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6499750801",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6594341985",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6646295302",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6654828302",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6690499039",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": "2024-09-09"
+    },
+    {
+      "id": "node/6779119335",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6779131246",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6783371675",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6856463615",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/6944543261",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/7087384265",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/7162186811",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/7208904034",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/7255294952",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/7658290170",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8117913037",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8120700179",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8120700204",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8140950503",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8187986351",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8276770962",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8283691140",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8292584420",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8300225144",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 07:00-21:30\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/8300228268",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 07:00-20:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/8324005246",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8361978897",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8361991061",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 07:00-23:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/8403130748",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8407820626",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"Mo-Su,PH 08:00-20:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/8442191507",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8491901655",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 10:00-20:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/8510230820",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8522744899",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8540417945",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8594821791",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8594821792",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8597958242",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/8985207467",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9013769316",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 09:00-21:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/9160955548",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9197342023",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9385257826",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9385283731",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9387593150",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9387610706",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9387617539",
+      "parsed": false,
+      "error": "Mo-Su 10:00-13:00, 14:00-17:30; Mo-Su 10:00-17:30; 13:00-14:00 brea <--- (Token \"k\" is ambiguous across languages (We (et), Tu (hu)). Use a canonical abbreviation (Mo, Tu, We, Th, Fr, Sa, Su) or set the intended locale.)",
+      "hasHolidayRule": false
+    },
+    {
+      "id": "node/9415721185",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9415762917",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9483060393",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9568878438",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 08:00-22:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/9573432745",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9649217040",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659361970",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659410170",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659412265",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659423912",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659439339",
+      "parsed": true,
+      "warningCount": 1,
+      "warnings": [
+        "Mo-Su 07:00-9 <--- (Single-digit hour \"9\" without leading zero - could mean 9 (in the morning) or 21 (after midday). Add a leading zero like \"09\" or change it to \"21\" to be explicit.)"
+      ],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659499565",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659501818",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659511177",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659511363",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659513315",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659526118",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659534493",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659571345",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659576235",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659595688",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659613618",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659614525",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659615431",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659619370",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659627983",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659630613",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659667828",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659684625",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659684644",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659688763",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659694870",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659705917",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659706898",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659719676",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659720700",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659722362",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659725772",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659728000",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659732250",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659741550",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659865058",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659871864",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659877296",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9659889715",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689051678",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689067676",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689067677",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689094549",
+      "parsed": false,
+      "error": "Mo-Su 04:30: <--- (hyphen (-) or open end (+) in time range expected. For working with points in time, the mode for opening_hours.js has to be altered. Maybe wrong tag?)",
+      "hasHolidayRule": false
+    },
+    {
+      "id": "node/9689094550",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689094551",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689096230",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689096231",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689096232",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689096233",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689096235",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689096236",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689096237",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689128394",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689128395",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689128396",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689128397",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689131148",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689131149",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689131150",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689131151",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689131153",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689131154",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689131155",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689131156",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689131157",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689136421",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689136422",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162968",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162969",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162970",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162971",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162972",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162974",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162975",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162976",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162977",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162978",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9689162979",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9737551099",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 08:00-20:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/9779286640",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9779286641",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9830286756",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/9835538871",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"Mo-Sa 09:00-20:30; PH closed\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/9910000933",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/10009663804",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 07:30-22:45\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/10009663810",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 08:00-22:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/10299332310",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/10571082049",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/10571097431",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/10571126134",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/10680782993",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/10761493314",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/10875208176",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/10980098245",
+      "parsed": true,
+      "warningCount": 1,
+      "warnings": [
+        "We-Mo 10:00-20:00;  <--- (This rule does not contain anything useful. Please remove this empty rule. Might it be possible that you are a programmer and adding a semicolon after each statement is hardwired in your muscle memory ;) ? The thing is that the semicolon in the opening_hours syntax is defined as rule separator. So for compatibility reasons you should omit this last semicolon.)"
+      ],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/10980098246",
+      "parsed": true,
+      "warningCount": 1,
+      "warnings": [
+        "We-Mo 10:00-20:00;  <--- (This rule does not contain anything useful. Please remove this empty rule. Might it be possible that you are a programmer and adding a semicolon after each statement is hardwired in your muscle memory ;) ? The thing is that the semicolon in the opening_hours syntax is defined as rule separator. So for compatibility reasons you should omit this last semicolon.)"
+      ],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11035521590",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11107546220",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11158854896",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11199068287",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11215176140",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": "2026-05-07"
+    },
+    {
+      "id": "node/11219784586",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11250389087",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11331084829",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 08:00-22:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/11331106376",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 08:00-22:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/11331119805",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11331123897",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11331124545",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11331134583",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 05:30-23:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/11331139537",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11331152303",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 08:00-22:30\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/11331384652",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 08:00-22:30\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/11359611697",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11362736269",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"PH,Mo-Su 06:00-23:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/11454494922",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11465749609",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11465761782",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11468958100",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11472852213",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11500714575",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11535240176",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11540382458",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11543546144",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11543578082",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11543598140",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11578192469",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11578192474",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11592710084",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11771063155",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11777585622",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11777585623",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11777585624",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11853327841",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11853708707",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11949185950",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11949298722",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11949351190",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/11949965342",
+      "parsed": false,
+      "error": "An error occurred during evaluation of the value \"Mo-Su,PH 08:00-22:00\". Please submit a pull request: https://github.com/opening-hours/opening_hours.js. There are no holidays (PH) defined for country in.",
+      "hasHolidayRule": true
+    },
+    {
+      "id": "node/11962616019",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12020449758",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12092047871",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12117952601",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12178421101",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12252320934",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12290220790",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12363563844",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12364258201",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12412376090",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12467106279",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12497590561",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12508867414",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12834564801",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12942093401",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12955486692",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12957089042",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/12985593409",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13013584288",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13076051859",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13098372342",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13108814301",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13130861092",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13131399191",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13143950901",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13159610713",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13162084334",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13290544301",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13299123208",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13601849717",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13654839425",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13676245401",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13676263501",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13681600202",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13793817974",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13817489999",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13821035120",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/13964589901",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": "2026-06-25"
+    },
+    {
+      "id": "node/14008366201",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/14021707731",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "node/14051609925",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/37828884",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/42655444",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/133486623",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/221353984",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/314898763",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/346211252",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/346422524",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/346425569",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/346503525",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/347127623",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/351810824",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/400448361",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/635509936",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/726158201",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/816044957",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/961091791",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1068394019",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1153860352",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1245441025",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1272767313",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1272767332",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1281397133",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1286715554",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1287281136",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1298823129",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1307863852",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1343349411",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1425823554",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "way/1544778726",
+      "parsed": true,
+      "warningCount": 6,
+      "warnings": [
+        "Monday <--- (Please use the English abbreviation \"Mo\" for \"monday\".)",
+        "Monday- Sunday <--- (Please use the English abbreviation \"Su\" for \"sunday\".)",
+        "Monday- Sunday 7am <--- (Please use time format in 24 hours notation instead of the legacy 12 hours variant. If the 12 hours variant is used you might have to convert the hours to the 24 hours notation.)",
+        "Monday- Sunday 7am to <--- (Please use notation \"-\" for \"to\".)",
+        "Monday- Sunday 7am to 10pm <--- (Please use time format in 24 hours notation instead of the legacy 12 hours variant. If the 12 hours variant is used you might have to convert the hours to the 24 hours notation.)",
+        "Monday- Sunday 7am to 10pm <--- (Time range without minutes specified. Not very explicit! Please use this syntax instead \"07:00-22:00\".)"
+      ],
+      "state": "open",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    },
+    {
+      "id": "relation/20071915",
+      "parsed": true,
+      "warningCount": 0,
+      "warnings": [],
+      "state": "close",
+      "hasHolidayRule": false,
+      "explicitHoursCheckDate": null
+    }
+  ]
+}

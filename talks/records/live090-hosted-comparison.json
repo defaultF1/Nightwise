@@ -1,0 +1,300 @@
+{
+  "startedAt": "2026-09-10T09:25:36.441Z",
+  "checkedAt": "2026-09-10T09:25:55.299Z",
+  "httpStatus": 200,
+  "activityStatus": "partial",
+  "status": {
+    "buildVersion": "0.9.0-live-preview",
+    "scoringVersion": "experimental-live-activity-v4-bounds",
+    "serviceRadiusMeters": 10000,
+    "ready": true,
+    "configured": true,
+    "paused": false,
+    "searchEnabled": true,
+    "activityEnabled": true,
+    "scoringEnabled": true,
+    "accessCodeRequired": true,
+    "maxQueries": 120,
+    "budgetStorage": "redis",
+    "budgetReady": true
+  },
+  "usage": {
+    "routeCalls": 19,
+    "nearbyCalls": 870,
+    "autocompleteCalls": 2,
+    "detailsCalls": 6,
+    "routeLimit": 30,
+    "nearbyLimit": 1500,
+    "autocompleteLimit": 40,
+    "detailsLimit": 20,
+    "remainingComparisons": 11
+  },
+  "requestUsage": {
+    "routeCalls": 1,
+    "nearbyCalls": 117,
+    "detailsCalls": 4,
+    "scope": "Shared counter delta during this comparison; concurrent search requests may contribute."
+  },
+  "comparison": {
+    "version": "experimental-live-activity-v4-bounds",
+    "fastestId": "google:0",
+    "selectedId": "google:0",
+    "recommendedId": null,
+    "outcome": "insufficient",
+    "message": "Live activity scores are shown as ranges. They overlap or evidence is missing, so the fastest route stays selected. Choose a route using its travel time and listed help points.",
+    "commonComponents": [
+      "openDensity",
+      "mainRoad",
+      "helpDensity",
+      "gapContinuity",
+      "simplicity",
+      "transport"
+    ],
+    "scores": {
+      "google:0": 58.70254416713999,
+      "google:1": 58.0152364214827,
+      "google:2": 53.040287007230795
+    },
+    "componentScores": {
+      "google:0": {
+        "openDensity": 1,
+        "mainRoad": 0.8101272083569996,
+        "helpDensity": 0.7,
+        "gapContinuity": 0.4666666666666667,
+        "simplicity": 0,
+        "transport": 0
+      },
+      "google:1": {
+        "openDensity": 1,
+        "mainRoad": 0.7007618210741346,
+        "helpDensity": 0.8,
+        "gapContinuity": 0.4666666666666667,
+        "simplicity": 0,
+        "transport": 0
+      },
+      "google:2": {
+        "openDensity": 1,
+        "mainRoad": 0.7371744159722052,
+        "helpDensity": 0.65,
+        "gapContinuity": 0.19999999999999996,
+        "simplicity": 0,
+        "transport": 0.05467986877866876
+      }
+    },
+    "rankedIds": [],
+    "scoreBounds": {
+      "google:0": [
+        58.70254416713999,
+        97.98086289376431
+      ],
+      "google:1": [
+        58.0152364214827,
+        92.51447872193086
+      ],
+      "google:2": [
+        53.040287007230795,
+        93.24616139767963
+      ]
+    },
+    "componentBounds": {
+      "google:0": {
+        "openDensity": [
+          1,
+          1
+        ],
+        "mainRoad": [
+          0.8101272083569996,
+          0.974043144688216
+        ],
+        "helpDensity": [
+          0.7,
+          0.9
+        ],
+        "gapContinuity": [
+          0.4666666666666667,
+          1
+        ],
+        "simplicity": [
+          0,
+          1
+        ],
+        "transport": [
+          0,
+          1
+        ]
+      },
+      "google:1": {
+        "openDensity": [
+          1,
+          1
+        ],
+        "mainRoad": [
+          0.7007618210741346,
+          0.8009984915114716
+        ],
+        "helpDensity": [
+          0.8,
+          0.8996339261134281
+        ],
+        "gapContinuity": [
+          0.4666666666666667,
+          0.8666666666666667
+        ],
+        "simplicity": [
+          0,
+          1
+        ],
+        "transport": [
+          0,
+          1
+        ]
+      },
+      "google:2": {
+        "openDensity": [
+          1,
+          1
+        ],
+        "mainRoad": [
+          0.7371744159722052,
+          0.9748080698839813
+        ],
+        "helpDensity": [
+          0.65,
+          0.85
+        ],
+        "gapContinuity": [
+          0.19999999999999996,
+          0.7333333333333334
+        ],
+        "simplicity": [
+          0,
+          1
+        ],
+        "transport": [
+          0.05467986877866876,
+          1
+        ]
+      }
+    }
+  },
+  "notices": [
+    "12 result-limited search areas were checked with smaller overlapping searches. Remaining caps stay partial.",
+    "4 listings with missing hours received a targeted details check. Missing schedules still remain unknown.",
+    "Live scores are experimental evidence ranges, not safety ratings or calibrated predictions. Missing data widens the range.",
+    "Road type is estimated from a local OpenStreetMap extract around North Bengaluru. Unmatched, ambiguous and grade-separated sections remain unknown. Actual staffing, lighting and crime are not measured."
+  ],
+  "routes": [
+    {
+      "id": "google:0",
+      "label": "Fastest",
+      "distanceMeters": 5381,
+      "durationSeconds": 1038,
+      "geometryPoints": 305,
+      "stepsWithDurations": 14,
+      "roadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 4364.4425324356935,
+        "internalMeters": 139.83878354213644,
+        "unknownMeters": 883.0732715654268,
+        "coverage": 0.836084063668784,
+        "snapshotDate": "2026-09-10T07:45:15Z",
+        "unknownReasons": {
+          "alignment": 10.235277026076421,
+          "parallel": 811.0646071333525,
+          "grade": 61.77338740599795
+        }
+      },
+      "places": 292,
+      "open": 161,
+      "unknownHours": 89,
+      "scanCoverage": 0.5545123379201127,
+      "hoursCoverage": 0.6952054794520548,
+      "activityCoverage": 0.8515041126400376,
+      "lowActivityGapBounds": [
+        0,
+        800
+      ],
+      "helpGapBounds": [
+        400,
+        1200
+      ],
+      "assumedHoursEligible": 89
+    },
+    {
+      "id": "google:1",
+      "label": "Alternative 1",
+      "distanceMeters": 4795,
+      "durationSeconds": 1095,
+      "geometryPoints": 303,
+      "stepsWithDurations": 11,
+      "roadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 3364.6828635694533,
+        "internalMeters": 955.4986377675212,
+        "unknownMeters": 481.2827942093129,
+        "coverage": 0.899763329562663,
+        "snapshotDate": "2026-09-10T07:45:15Z",
+        "unknownReasons": {
+          "alignment": 11.787624298000749,
+          "parallel": 418.5355405933462,
+          "grade": 50.959629317966
+        }
+      },
+      "places": 263,
+      "open": 137,
+      "unknownHours": 94,
+      "scanCoverage": 0.5001524842689808,
+      "hoursCoverage": 0.6425855513307985,
+      "activityCoverage": 0.8750381210672452,
+      "lowActivityGapBounds": [
+        200,
+        800
+      ],
+      "helpGapBounds": [
+        401.46429554628776,
+        800
+      ],
+      "assumedHoursEligible": 94
+    },
+    {
+      "id": "google:2",
+      "label": "Alternative 2",
+      "distanceMeters": 6091,
+      "durationSeconds": 1129,
+      "geometryPoints": 220,
+      "stepsWithDurations": 10,
+      "roadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 4493.880669661164,
+        "internalMeters": 153.57224196464833,
+        "unknownMeters": 1448.6358460591846,
+        "coverage": 0.7623663460882244,
+        "snapshotDate": "2026-09-10T07:45:15Z",
+        "unknownReasons": {
+          "alignment": 11.787661936833132,
+          "parallel": 692.0099346418252,
+          "grade": 744.8382494805257
+        }
+      },
+      "places": 222,
+      "open": 111,
+      "unknownHours": 88,
+      "scanCoverage": 0.7375366298623899,
+      "hoursCoverage": 0.6036036036036037,
+      "activityCoverage": 0.7375366298623899,
+      "lowActivityGapBounds": [
+        400,
+        1200
+      ],
+      "helpGapBounds": [
+        600,
+        1400
+      ],
+      "assumedHoursEligible": 88
+    }
+  ],
+  "limitations": "One hosted software check at the returned time. No field validation, calibrated safety prediction or Google route geometry/place payload retained. Counter deltas can include concurrent search requests."
+}

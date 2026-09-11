@@ -1,0 +1,13 @@
+{
+  "version": "0.7.6-preview",
+  "installed": true,
+  "confirmationOpened": true,
+  "routeRequests": 0,
+  "placesRequests": 0,
+  "notes": "Blue origin and red destination visually verified. No compare request submitted; real geometry verified on 0.7.3. Business category colours unit tested; no fresh shop scan.",
+  "endpointColoursVisuallyVerified": true,
+  "nestedScrollVisuallyVerified": true,
+  "confirmationContrastVerified": true,
+  "buttonBackground": "rgb(255, 255, 255)",
+  "buttonText": "rgb(16, 16, 16)"
+}

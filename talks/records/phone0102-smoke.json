@@ -1,0 +1,41 @@
+{
+  "version": "0.10.2-live-preview",
+  "tests": [
+    {
+      "name": "Installed version code 25",
+      "passed": true
+    },
+    {
+      "name": "Light appearance persists through upgrade",
+      "passed": true
+    },
+    {
+      "name": "Compact header avoids duplicate cutout spacing",
+      "passed": true,
+      "details": {
+        "brandTop": 8,
+        "padding": "0px",
+        "platform": "android"
+      }
+    },
+    {
+      "name": "Offline tutorial renders real street geometry",
+      "passed": true
+    },
+    {
+      "name": "Native confirmation map renders after spacing change",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "talks/screenshots/phone0102/01-light-home.png",
+    "talks/screenshots/phone0102/02-light-tutorial.png",
+    "talks/screenshots/phone0102/03-light-native-confirmation.png"
+  ],
+  "googleRouteRequests": 0,
+  "note": "Full live acceptance on preceding 0.10.1. This final spacing-only smoke makes no route or shop request; native endpoint map load only."
+}

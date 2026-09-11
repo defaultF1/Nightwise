@@ -2,6 +2,15 @@ import { existsSync, mkdirSync, openSync, closeSync, readFileSync, writeFileSync
 import { dirname } from 'node:path';
 import { ServiceError } from './errors';
 
+export type BudgetKind = 'route' | 'nearby' | 'autocomplete' | 'details';
+export type BudgetSnapshot = ReturnType<Budget['snapshot']>;
+export interface BudgetStore {
+  reserve(kind: BudgetKind, amount?: number): void | Promise<void>;
+  canScan(count: number): boolean | Promise<boolean>;
+  snapshot(): BudgetSnapshot | Promise<BudgetSnapshot>;
+  close(): void;
+}
+
 // One local service owns this persistent pilot ledger. Never reset automatically.
 // Charge an attempted request before dispatch: failures and cancellation still count.
 export class Budget {

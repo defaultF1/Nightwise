@@ -1,0 +1,47 @@
+# NightWise opening hours and route explanations
+
+M04 and M05 follow-up | 10 September 2026 | Android 0.7.8-preview
+
+## What changed
+
+The app now requests Google current and regular opening-hours objects, including daily schedules, opening and closing periods, next transitions and reported special dates. It evaluates times when the traveller is expected to pass a shop. Current schedules take priority. A typical-week fallback is labelled, and conflicting or missing evidence stays unknown.
+
+Shop opening times and closed days expand inside the route screen. The activity strip now shows Start to Destination, a readable coverage sentence and three labels: Open places, Few open places and Not enough data. An expandable explanation describes how the strip helps compare routes. Viewing these details sends no additional shop request.
+
+## Live phone results
+
+One AEOS to Manyata comparison succeeded on the connected Redmi at 05:58 IST. Google returned three real road routes with 303, 220 and 305 points. Their listed-open counts were 20, 22 and 17. Usable hours covered 63.5%, 60.7% and 69.4% of listings; 124, 103 and 152 listings respectively contained both current and regular schedule text. No regular-hours fallback or special-date example was needed in this particular live result.
+
+Complete search coverage was 50.0%, 73.8% and 51.7%; usable activity coverage by route length was 20.8%, 29.5% and 7.4%. These are different measures. This morning check does not validate night-time recommendations, and the readings are not a controlled before-and-after comparison.
+
+## Usage and current state
+
+This recheck used 1 Routes and 69 nearby requests. Cumulative ledger: 16 Routes, 641 nearby, 2 autocomplete and 2 details. The user approved raising the nearby allowance from 600 to 720; route cap remains 21. Live requests remain enabled. Google map instances are separate usage; exact charges must be checked in Cloud Billing.
+
+## Verified on the Redmi
+
+![Actual Redmi screenshot showing the new activity coverage explanation.](../talks/screenshots/hours-explanation/phone-078-strip.png)
+
+![Actual Redmi screenshot showing live Google daily shop schedules.](../talks/screenshots/hours-explanation/phone-078-shop-hours.png)
+
+The APK signature, version, matching web assets and absence of the server key passed verification. The app installed successfully, completed a live comparison and displayed real schedule text and the new strip explanation. The test record is talks/records/hours-live078.json; the APK is output/apk/nightwise-0.7.8-debug.apk.
+
+## Verification and known issues
+
+All 110 unit/backend tests passed, including weekday closures, Wednesday-specific hours, overnight/week boundaries, current special-day overrides, stale evidence, malformed schedules and regular-week fallback. The two focused browser tests passed. A duplicate pharmacy name initially made a test selector ambiguous; it was scoped to the schedule section. Browser regression: 43 checks passed in the full run; the two pause-specific checks passed after rerunning against a separate map-disabled preview, for 45 passing checks overall.
+
+Two full-suite tests were first run against the live preview even though they expect maps to be paused. A separate preview with maps disabled was prepared for this check; the user's live app remained enabled. This was a test setup mismatch.
+
+## PDF scope and remaining acceptance
+
+The 14-page GPT maps roadmap was reread, including the UI and explanation requirements. This change supports its opening-hours analysis, missing-evidence handling and plain-language explanation requirements. It does not complete the PDF's live recommendation and field-validation acceptance.
+
+Live scores remain withheld. Searches still hit result caps, opening hours remain missing for some listings and road evidence is incomplete. The PDF's 10 to 20 journey checks, two or three proven reel routes, public-entrance checks and exact Google Maps handoff validation remain. Native GPS and manual Back acceptance, HTTPS hosting and the known map painting above the confirmation sheet during scroll also remain unresolved. No community submissions or voting were added.
+
+## Implementation and sources
+
+Main files: server/google.ts, server/opening-hours.ts, src/domain/hours.ts, src/domain/activity.ts, src/ShopHours.tsx, src/ActivityStrip.tsx, src/EvidenceConfidence.tsx and src/journey-updates.css. Tests: tests/unit/google-hours.test.ts and tests/browser/hours-explanation.spec.ts. Canonical folder: D:/Aevy TV ( Achina Mayya )/Nightwise. Finalized source is exported without secrets, reports or APKs to the authorized codex/journey-updates GitHub branch.
+
+Google Places documentation: https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places and https://developers.google.com/maps/documentation/places/web-service/nearby-search. Current hours describe the upcoming seven days with reported exceptions; regular hours describe a typical week. Special dates are not a complete future holiday calendar. The app cannot obtain schedules that Google has not supplied.
+
+No additional keys or billing setup are needed for this update. Further paid journey validation must stay within the remaining allowances. A hosting destination and later Bengaluru field checks are still needed for team use away from this USB-connected backend.

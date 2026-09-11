@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-09-10T09:25:36.413Z",
+  "buildVersion": "0.9.0-live-preview",
+  "scoringVersion": "experimental-live-activity-v4-bounds",
+  "serviceRadiusMeters": 10000,
+  "ready": true,
+  "configured": true,
+  "paused": false,
+  "searchEnabled": true,
+  "activityEnabled": true,
+  "scoringEnabled": true,
+  "accessCodeRequired": true,
+  "maxQueries": 120,
+  "budgetStorage": "redis",
+  "budgetReady": true
+}

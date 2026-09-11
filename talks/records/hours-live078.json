@@ -1,0 +1,78 @@
+{
+  "version": "0.7.8-preview",
+  "status": 200,
+  "checkedAt": "2026-09-10T00:28:56.867Z",
+  "requests": {
+    "routes": 1,
+    "nearby": 69
+  },
+  "usage": {
+    "routeCalls": 16,
+    "nearbyCalls": 641,
+    "autocompleteCalls": 2,
+    "detailsCalls": 2
+  },
+  "activityStatus": "partial",
+  "routes": [
+    {
+      "label": "Fastest",
+      "points": 303
+    },
+    {
+      "label": "Alternative 1",
+      "points": 220
+    },
+    {
+      "label": "Alternative 2",
+      "points": 305
+    }
+  ],
+  "analyses": [
+    {
+      "routeId": "google:0",
+      "listings": 230,
+      "open": 20,
+      "unknown": 84,
+      "hoursCoverage": 0.6347826086956522,
+      "activityCoverage": 0.208269798221258,
+      "scanCoverage": 0.5001524842689808,
+      "regularFallback": 0,
+      "currentSchedule": 124,
+      "withRegularText": 124,
+      "withCurrentText": 124,
+      "specialDates": 0,
+      "coreComparable": false
+    },
+    {
+      "routeId": "google:1",
+      "listings": 201,
+      "open": 22,
+      "unknown": 79,
+      "hoursCoverage": 0.6069651741293532,
+      "activityCoverage": 0.29527129140481134,
+      "scanCoverage": 0.7375366298623899,
+      "regularFallback": 0,
+      "currentSchedule": 103,
+      "withRegularText": 103,
+      "withCurrentText": 103,
+      "specialDates": 0,
+      "coreComparable": false
+    },
+    {
+      "routeId": "google:2",
+      "listings": 255,
+      "open": 17,
+      "unknown": 78,
+      "hoursCoverage": 0.6941176470588235,
+      "activityCoverage": 0.07424794367998122,
+      "scanCoverage": 0.5173883660801221,
+      "regularFallback": 0,
+      "currentSchedule": 152,
+      "withRegularText": 152,
+      "withCurrentText": 152,
+      "specialDates": 0,
+      "coreComparable": false
+    }
+  ],
+  "scoresReturned": 0
+}

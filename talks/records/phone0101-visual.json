@@ -1,0 +1,98 @@
+{
+  "scope": "Actual Redmi screenshots after native background fix",
+  "checks": [
+    {
+      "theme": "light",
+      "expectedRGB": [
+        246,
+        246,
+        244
+      ],
+      "samplesRGB": [
+        [
+          246,
+          246,
+          244
+        ],
+        [
+          246,
+          246,
+          244
+        ],
+        [
+          246,
+          246,
+          244
+        ],
+        [
+          246,
+          246,
+          244
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "theme": "dark",
+      "expectedRGB": [
+        8,
+        8,
+        8
+      ],
+      "samplesRGB": [
+        [
+          8,
+          8,
+          8
+        ],
+        [
+          8,
+          8,
+          8
+        ],
+        [
+          8,
+          8,
+          8
+        ],
+        [
+          8,
+          8,
+          8
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "theme": "blue",
+      "expectedRGB": [
+        8,
+        23,
+        37
+      ],
+      "samplesRGB": [
+        [
+          8,
+          23,
+          37
+        ],
+        [
+          8,
+          23,
+          37
+        ],
+        [
+          8,
+          23,
+          37
+        ],
+        [
+          8,
+          23,
+          37
+        ]
+      ],
+      "passed": true
+    }
+  ]
+}

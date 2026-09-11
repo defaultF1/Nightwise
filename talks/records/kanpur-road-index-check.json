@@ -1,0 +1,10 @@
+{
+  "snapshotDate": "2026-09-10T13:20:41Z",
+  "ways": 40160,
+  "geometryPoints": 354837,
+  "roadIndexLoads": true,
+  "localStreetCoverage": 1,
+  "elapsedMs": 2133,
+  "rssMB": 284,
+  "scope": "OSM extract loader and one mapped street self-check; not live Google comparison or independent ground validation"
+}

@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-09-09T21:51:22.408Z",
+  "httpStatus": 200,
+  "routeCalls": 1,
+  "nearbyCalls": 69,
+  "listingObservations": 663,
+  "withPeriods": 343,
+  "activityStatus": "partial",
+  "routes": [
+    {
+      "label": "Fastest",
+      "hoursCoverage": 0.5391304347826087,
+      "scanCoverage": 0.5001524842689808,
+      "activityCoverage": 0.1666158385770064,
+      "open": 17,
+      "unknown": 106,
+      "help": 14,
+      "coreComparable": false
+    },
+    {
+      "label": "Alternative 1",
+      "hoursCoverage": 0.5124378109452736,
+      "scanCoverage": 0.7371291827516532,
+      "activityCoverage": 0.2628708172483469,
+      "open": 18,
+      "unknown": 98,
+      "help": 10,
+      "coreComparable": false
+    },
+    {
+      "label": "Alternative 2",
+      "hoursCoverage": 0.596078431372549,
+      "scanCoverage": 0.5173883660801221,
+      "activityCoverage": 0.07424794367998122,
+      "open": 13,
+      "unknown": 103,
+      "help": 9,
+      "coreComparable": false
+    }
+  ],
+  "scores": {}
+}

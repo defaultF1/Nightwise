@@ -2,6 +2,10 @@
 
 These instructions record the user's ongoing project preferences. Later explicit user instructions take precedence.
 
+Latest scope update, 10 September: the user authorizes the seven journey enhancements (flexible endpoints and swap, endpoint confirmation, evidence confidence, help points, extra-time preference, saved places, freshness), smooth transitions and immersive Android fullscreen. Publish finalized source to https://github.com/defaultF1/Nightwise, preserving its existing license/history. This supersedes the earlier GitHub deferral and feature deferrals below. HTTPS service deployment still needs a destination; GitHub source hosting is not backend hosting. Community submissions/voting remain excluded. Use Bengaluru Palace rather than GrowthSchool for an example search; no unverified preset coordinates should be invented.
+
+Latest live scope expansion, 10 September: also support Kanpur current-location journeys and searched destinations in the requested north/west neighbourhoods. Keep Bengaluru presets and tutorial unchanged. Show approximate GPS address when available and real driving estimates in live typeahead. Details cap 100 is authorized and active; route/nearby caps remain 30/1500. Read current status before using paid calls.
+
 ## Resume and recover context
 
 Work in D:/Aevy TV ( Achina Mayya )/Nightwise. Before resuming after context loss, read planning/nightwise-current-status.md, planning/nightwise-72-hour-modules.md, talks/README.md and the newest module handoff in talks. Consult research/nightwise-bengaluru-research.md and linked source material for evidence or provider constraints. Check the actual files and current test/build results before treating old notes as current truth.

@@ -1,0 +1,18 @@
+{
+  "version": "0.9.0-live-preview",
+  "sourceCommit": "c70ffc9236b1c554f1c7138235e3d43548066feb",
+  "unitAndBackend": {"passed": 137, "files": 13, "finalExplanationFocusedPassed": 18},
+  "browser": {"initialPassed": 39, "initialFailed": 6, "focusedProductionPassed": 18, "allInitialFailuresResolved": true, "distinctCasesPassedAcrossRuns": 46, "providerCallsMockedOrDisabled": true},
+  "builds": {"frontend": true, "backend": true, "android": true},
+  "apk": "output/apk/nightwise-0.9.0-team-debug.apk",
+  "apkSha256": "8866288f3f950f43b9aa8d0053c0f1b3895109ea9af546fb6246c8dd390a4ae6",
+  "hostedCheck": "talks/records/live090-hosted-comparison.json",
+  "hostedRoutes": 3,
+  "hostedScoreRanges": 3,
+  "hostedRecommendedRoute": null,
+  "reason": "Evidence ranges overlapped; fastest remained selected.",
+  "phoneConnected": false,
+  "groundAndReelExcludedByUser": true,
+  "documentQa": {"pages": 5, "allPageImagesInspected": true, "layoutIssuesObserved": false},
+  "scope": "Software tests and one hosted daytime request; no native device or field acceptance claimed."
+}

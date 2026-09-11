@@ -1,0 +1,19 @@
+# Free hosting and persistent allowance checkpoint
+
+Incomplete hosting acceptance checkpoint, 10 September 2026. The user chose Render Free and created an Upstash Redis Free database in Mumbai. Render URL: https://nightwise-f5fu.onrender.com . Source branch codex/journey-updates. Latest source commit 6a63aa1 adds Redis allowance support; user must deploy it manually if auto-deploy is off.
+
+The previous Render startup failed with EACCES creating /var/data because that paid-disk path was used without a disk. Changing BUDGET_LEDGER_PATH to .local/pilot-budget.json allowed startup. That temporary file is not durable on Free. The previous hosted health result was configured false, paused true, accessCodeRequired true. It made no Google requests.
+
+The user added UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN in Render. Their first screenshot showed quotation marks around the URL; instructions were given to remove quotes, and the user replied done. Secret values are not copied into this report or source.
+
+The new backend selects Redis when both REST variables are present, with no file fallback after a Redis failure. It requires an explicit migrated counter at nightwise:pilot-budget:v1 with no expiry. Atomic Lua checks the existing counts and caps before incrementing. Missing, corrupt, expiring or unavailable counters stop subsequent Google calls. Uncertain writes are not retried. No shop schedules, routes, location history or credentials are stored in the Redis counter.
+
+TypeScript and backend bundle checks passed. All 116 unit/backend tests passed. Local fakeredis Lua integration executed 30 concurrent reservations with 5 allowed and 25 denied, preserving the limit across fresh clients. It also tested nearby exhaustion, missing/deleted counters, malformed JSON, negative/fractional counts and expiry rejection. These are local emulator results, not a claim that the live Upstash write path has been tested.
+
+No new Google calls were made. The latest observed local ledger remains 16 Routes, 641 nearby, 2 autocomplete and 2 details; approved caps remain 21/720/40/20. Do not seed Redis yet from an old snapshot: first freeze local requests, read final counts and use SET with NX in the private Redis console. Never reset the allowance or overwrite an existing key. The local API was not restarted and remains on its previous live-enabled configuration. All hosted Google switches must remain false until migration, Google key restrictions and validation are complete.
+
+Update: Render deployed the Redis integration and health diagnostics. The counter was seeded once with NX, read back as valid JSON and confirmed with no expiry. Render now reports budgetStorage redis and budgetReady true. The server key is restricted to the laptop plus Render Singapore outbound CIDRs 74.220.52.0/24 and 74.220.60.0/24. Hosted Routes, search and activity are enabled; scoring remains off. The user set total caps of 30 Routes and 1500 nearby for team testing.
+
+Android 0.8.1-team-preview (code 20) was built for https://nightwise-f5fu.onrender.com. It allows up to 65 seconds for a sleeping Free service to wake and up to 170 seconds for the first live comparison. Package verification passed: signature, web asset parity, hosted URL present, server key absent and no background-location permission. SHA-256 ea62b380c5e7461fffa653b276b83d651ed6239adaee30b884d910882dd4adb3. No phone is connected and no hosted Google call has been made. Pending: install, enter the private team access code, run one live route, observe the Free cold start and then complete the Word handoff. The older 0.7.8 APK targets the laptop; distribute output/apk/nightwise-0.8.1-team-debug.apk for hosted testing.
+
+Sources: https://upstash.com/docs/redis/features/restapi and https://upstash.com/docs/redis/sdks/ts/commands/scripts/eval . Redis calls use POST bodies and Authorization headers; no tokens are put into query strings or logs.

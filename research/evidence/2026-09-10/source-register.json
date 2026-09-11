@@ -1,0 +1,229 @@
+{
+  "checkedOn": "2026-09-10",
+  "sources": [
+    {
+      "number": 1,
+      "citation": "Project roadmap, GPT maps - roadmap.pdf, pages 2-12, user-supplied local document; accepted Bengaluru/Android scope amendments in AGENTS.md.",
+      "urls": []
+    },
+    {
+      "number": 2,
+      "citation": "NightWise, hosted-comparison.json, hosted-route-evidence-audit.json, operator-hours.json and OSM provenance files, research/evidence/2026-09-10; authenticated comparison at 2026-09-10T07:52:29Z. Current source: activity.ts, comparison.ts, roads.ts and server modules.",
+      "urls": []
+    },
+    {
+      "number": 3,
+      "citation": "Google, [Google Maps Platform Terms of Service](https://cloud.google.com/maps-platform/terms), section 3.2.3.",
+      "urls": [
+        "https://cloud.google.com/maps-platform/terms"
+      ]
+    },
+    {
+      "number": 4,
+      "citation": "Google, [Maps Service Specific Terms](https://cloud.google.com/maps-platform/terms/maps-service-terms), sections 13 and 14.",
+      "urls": [
+        "https://cloud.google.com/maps-platform/terms/maps-service-terms"
+      ]
+    },
+    {
+      "number": 5,
+      "citation": "Google, [Places Aggregate computeInsights reference](https://developers.google.com/maps/documentation/places-aggregate/reference/rest/v1/TopLevel/computeInsights), request filters and operating status.",
+      "urls": [
+        "https://developers.google.com/maps/documentation/places-aggregate/reference/rest/v1/TopLevel/computeInsights"
+      ]
+    },
+    {
+      "number": 6,
+      "citation": "Google, [Places resource reference](https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places), business status, opening hours and available fields.",
+      "urls": [
+        "https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places"
+      ]
+    },
+    {
+      "number": 7,
+      "citation": "Google, [Places policies and attributions](https://developers.google.com/maps/documentation/places/web-service/policies), caching exceptions and display requirements.",
+      "urls": [
+        "https://developers.google.com/maps/documentation/places/web-service/policies"
+      ]
+    },
+    {
+      "number": 8,
+      "citation": "OpenStreetMap Foundation, [Copyright and licence](https://www.openstreetmap.org/copyright).",
+      "urls": [
+        "https://www.openstreetmap.org/copyright"
+      ]
+    },
+    {
+      "number": 9,
+      "citation": "OpenStreetMap Foundation, [Produced Work guideline](https://osmfoundation.org/wiki/Licence/Community_Guidelines/Produced_Work_-_Guideline).",
+      "urls": [
+        "https://osmfoundation.org/wiki/Licence/Community_Guidelines/Produced_Work_-_Guideline"
+      ]
+    },
+    {
+      "number": 10,
+      "citation": "Google, [Nearby Search New](https://developers.google.com/maps/documentation/places/web-service/nearby-search), result limits and entrance/navigation-point fields.",
+      "urls": [
+        "https://developers.google.com/maps/documentation/places/web-service/nearby-search"
+      ]
+    },
+    {
+      "number": 11,
+      "citation": "Google, [Place Types New](https://developers.google.com/maps/documentation/places/web-service/place-types).",
+      "urls": [
+        "https://developers.google.com/maps/documentation/places/web-service/place-types"
+      ]
+    },
+    {
+      "number": 12,
+      "citation": "Google, [Place Details New](https://developers.google.com/maps/documentation/places/web-service/place-details), fields and SKU groups.",
+      "urls": [
+        "https://developers.google.com/maps/documentation/places/web-service/place-details"
+      ]
+    },
+    {
+      "number": 13,
+      "citation": "Google, [Choose fields to return](https://developers.google.com/maps/documentation/places/web-service/choose-fields).",
+      "urls": [
+        "https://developers.google.com/maps/documentation/places/web-service/choose-fields"
+      ]
+    },
+    {
+      "number": 14,
+      "citation": "Google, [Compute Routes reference](https://developers.google.com/maps/documentation/routes/reference/rest/v2/TopLevel/computeRoutes), route, leg and step fields.",
+      "urls": [
+        "https://developers.google.com/maps/documentation/routes/reference/rest/v2/TopLevel/computeRoutes"
+      ]
+    },
+    {
+      "number": 15,
+      "citation": "NightWise, osm-hours-parser-audit.json and method-experiments.json, research/evidence/2026-09-10; local reproducible research results, not field observations.",
+      "urls": []
+    },
+    {
+      "number": 16,
+      "citation": "opening-hours maintainers, [opening_hours.js](https://github.com/opening-hours/opening_hours.js/), documentation and licences; npm version 3.14.0 tested. See also [OSM opening-hours specification](https://wiki.openstreetmap.org/wiki/Key:opening_hours).",
+      "urls": [
+        "https://github.com/opening-hours/opening_hours.js/",
+        "https://wiki.openstreetmap.org/wiki/Key:opening_hours"
+      ]
+    },
+    {
+      "number": 17,
+      "citation": "Paul Newson and John Krumm, [Hidden Markov Map Matching Through Noise and Sparseness](https://www.microsoft.com/en-us/research/publication/hidden-markov-map-matching-noise-sparseness/), ACM SIGSPATIAL GIS, November 2009.",
+      "urls": [
+        "https://www.microsoft.com/en-us/research/publication/hidden-markov-map-matching-noise-sparseness/"
+      ]
+    },
+    {
+      "number": 18,
+      "citation": "Google, [Request flyovers and narrow roads](https://developers.google.com/maps/documentation/routes/flyover-narrow), experimental India feature, updated 1 September 2026; compare Compute Routes reference pricing caveat.",
+      "urls": [
+        "https://developers.google.com/maps/documentation/routes/flyover-narrow"
+      ]
+    },
+    {
+      "number": 19,
+      "citation": "Apple, [Apple Hebbal](https://www.apple.com/in/retail/hebbal/), Phoenix Mall of Asia address; OSM way/635509936 in the local evidence extract.",
+      "urls": [
+        "https://www.apple.com/in/retail/hebbal/"
+      ]
+    },
+    {
+      "number": 20,
+      "citation": "Wikidata, [Bengaluru Palace Q3520057](https://www.wikidata.org/wiki/Q3520057), coordinate claim and CC0 data; [Bengaluru Urban district tourism page](https://bengaluruurban.nic.in/en/tourist-place/bangalore-palace/) independently identifies the landmark. Neither establishes a driving entrance.",
+      "urls": [
+        "https://www.wikidata.org/wiki/Q3520057",
+        "https://bengaluruurban.nic.in/en/tourist-place/bangalore-palace/"
+      ]
+    },
+    {
+      "number": 21,
+      "citation": "Embassy Office Parks, [Embassy Manyata Business Park](https://www.embassyofficeparks.com/ourportfolio/bangalore/embassy-manyata/), published Nagavara address.",
+      "urls": [
+        "https://www.embassyofficeparks.com/ourportfolio/bangalore/embassy-manyata/"
+      ]
+    },
+    {
+      "number": 22,
+      "citation": "Google, [Autocomplete New](https://developers.google.com/maps/documentation/places/web-service/place-autocomplete), locationRestriction; [Place IDs](https://developers.google.com/maps/documentation/places/web-service/place-id), ID handling.",
+      "urls": [
+        "https://developers.google.com/maps/documentation/places/web-service/place-autocomplete",
+        "https://developers.google.com/maps/documentation/places/web-service/place-id"
+      ]
+    },
+    {
+      "number": 23,
+      "citation": "Capacitor, [Geolocation plugin documentation v8](https://capacitorjs.com/docs/apis/geolocation); installed geolocation 8.2.2 source and NightWise src/native.ts.",
+      "urls": [
+        "https://capacitorjs.com/docs/apis/geolocation"
+      ]
+    },
+    {
+      "number": 24,
+      "citation": "Google, [SettingsClient](https://developers.google.com/android/reference/com/google/android/gms/location/SettingsClient); Android, [Change location settings](https://developer.android.com/develop/sensors-and-location/location/change-location-settings).",
+      "urls": [
+        "https://developers.google.com/android/reference/com/google/android/gms/location/SettingsClient",
+        "https://developer.android.com/develop/sensors-and-location/location/change-location-settings"
+      ]
+    },
+    {
+      "number": 25,
+      "citation": "Android, [Request location permissions](https://developer.android.com/develop/sensors-and-location/location/permissions), precise/approximate behavior; Capacitor position timestamp/accuracy documentation.",
+      "urls": [
+        "https://developer.android.com/develop/sensors-and-location/location/permissions"
+      ]
+    },
+    {
+      "number": 26,
+      "citation": "Capacitor, [Google Maps plugin documentation v8](https://capacitorjs.com/docs/apis/google-maps); installed 8.0.1 CapacitorGoogleMap.kt updateRender and NightWise scroll-sync.ts.",
+      "urls": [
+        "https://capacitorjs.com/docs/apis/google-maps"
+      ]
+    },
+    {
+      "number": 27,
+      "citation": "Android, [Hide system bars for immersive mode](https://developer.android.com/develop/ui/views/layout/immersive).",
+      "urls": [
+        "https://developer.android.com/develop/ui/views/layout/immersive"
+      ]
+    },
+    {
+      "number": 28,
+      "citation": "Android, [Display content edge to edge](https://developer.android.com/develop/ui/views/layout/edge-to-edge).",
+      "urls": [
+        "https://developer.android.com/develop/ui/views/layout/edge-to-edge"
+      ]
+    },
+    {
+      "number": 29,
+      "citation": "Google, [Maps URLs guide](https://developers.google.com/maps/documentation/urls/get-started); [alternative routes documentation](https://developers.google.com/maps/documentation/routes/alternative-routes).",
+      "urls": [
+        "https://developers.google.com/maps/documentation/urls/get-started",
+        "https://developers.google.com/maps/documentation/routes/alternative-routes"
+      ]
+    },
+    {
+      "number": 30,
+      "citation": "Render, [Deploy for Free](https://render.com/docs/free), idle behavior, filesystem and service limitations.",
+      "urls": [
+        "https://render.com/docs/free"
+      ]
+    },
+    {
+      "number": 31,
+      "citation": "Upstash, [Eviction](https://upstash.com/docs/redis/features/eviction); NightWise server/redis-budget.ts and server/app.ts.",
+      "urls": [
+        "https://upstash.com/docs/redis/features/eviction"
+      ]
+    },
+    {
+      "number": 32,
+      "citation": "Google, [Maps Platform India pricing](https://developers.google.com/maps/billing-and-pricing/pricing-india) and [Places usage and billing](https://developers.google.com/maps/documentation/places/web-service/usage-and-billing). List prices and eligibility are not actual account charges.",
+      "urls": [
+        "https://developers.google.com/maps/billing-and-pricing/pricing-india",
+        "https://developers.google.com/maps/documentation/places/web-service/usage-and-billing"
+      ]
+    }
+  ]
+}

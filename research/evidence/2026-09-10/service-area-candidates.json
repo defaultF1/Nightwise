@@ -1,0 +1,43 @@
+{
+  "status": "Research only; no new presets implemented; area center is not public entrance",
+  "checkedOn": "2026-09-10",
+  "radiusMetres": 10000,
+  "anchors": [
+    {
+      "name": "AEOS",
+      "latitude": 13.0628268,
+      "longitude": 77.5940888,
+      "source": "User supplied",
+      "publicEntranceVerified": false,
+      "distanceFromAeosMetres": 0,
+      "withinProposed10km": true
+    },
+    {
+      "name": "Manyata Tech Park",
+      "latitude": 13.047697,
+      "longitude": 77.619939,
+      "source": "User supplied; campus identity corroborated by Embassy operator site",
+      "publicEntranceVerified": false,
+      "distanceFromAeosMetres": 3267,
+      "withinProposed10km": true
+    },
+    {
+      "name": "Phoenix Mall of Asia",
+      "latitude": 13.0708864,
+      "longitude": 77.5904608,
+      "source": "OSM way/635509936 center; identity corroborated by Apple Hebbal",
+      "publicEntranceVerified": false,
+      "distanceFromAeosMetres": 979,
+      "withinProposed10km": true
+    },
+    {
+      "name": "Bengaluru Palace",
+      "latitude": 12.998527777777777,
+      "longitude": 77.59210277777777,
+      "source": "Wikidata Q3520057; CC0 coordinate claim",
+      "publicEntranceVerified": false,
+      "distanceFromAeosMetres": 7153,
+      "withinProposed10km": true
+    }
+  ]
+}

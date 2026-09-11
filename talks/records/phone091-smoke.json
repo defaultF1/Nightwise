@@ -1,0 +1,47 @@
+{
+  "version": "0.9.1-live-preview",
+  "device": "Redmi 9 M2006C3MII Android 10",
+  "startedAt": "2026-09-10T10:21:34.070Z",
+  "tests": [
+    {
+      "name": "Corrected APK is installed",
+      "passed": true
+    },
+    {
+      "name": "Saved light theme survived the APK upgrade",
+      "passed": true
+    },
+    {
+      "name": "Corrected APK reaches the deployed backend without a Google request",
+      "passed": true
+    },
+    {
+      "name": "Light-theme result panels stay opaque and readable above a native map",
+      "passed": true,
+      "details": {
+        "panel": "rgb(246, 246, 244)",
+        "hours": "rgb(255, 255, 255)",
+        "text": "rgb(21, 21, 21)",
+        "overflow": false
+      }
+    },
+    {
+      "name": "Corrected APK still loads and clips the native endpoint map",
+      "passed": true,
+      "details": {
+        "native": "true",
+        "overflow": false,
+        "rounded": "24px"
+      }
+    },
+    {
+      "name": "Test cleanup restores Mono Dark",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "talks/screenshots/phone090/10-light-surface-fixed.png",
+    "talks/screenshots/phone090/11-light-native-confirmation.png"
+  ],
+  "finishedAt": "2026-09-10T10:22:15.843Z"
+}

@@ -1,0 +1,74 @@
+{
+  "scanGeometry": {
+    "radiusMetres": 150,
+    "spacingMetres": 200,
+    "continuousCorridorHalfWidthMetres": 111.80339887498948,
+    "shrunkRadius75AtSpacing200GapMetres": 50,
+    "coveringChildren": [
+      {
+        "x": -75,
+        "y": -75,
+        "radiusMetres": 106.06601717798212
+      },
+      {
+        "x": -75,
+        "y": 75,
+        "radiusMetres": 106.06601717798212
+      },
+      {
+        "x": 75,
+        "y": -75,
+        "radiusMetres": 106.06601717798212
+      },
+      {
+        "x": 75,
+        "y": 75,
+        "radiusMetres": 106.06601717798212
+      }
+    ],
+    "integerGridPointsChecked": 70681,
+    "uncovered": 0,
+    "limitations": "Analytical coverage of query footprint only; no evidence of Google result completeness or request yield. One refinement requires four extra calls and parent-footprint filtering."
+  },
+  "gapBoundExample": {
+    "states": [
+      "low",
+      "unknown",
+      "low",
+      "active",
+      "unknown"
+    ],
+    "segmentMetres": 200,
+    "longestLowGapBoundsMetres": [
+      200,
+      600
+    ],
+    "basis": "Synthetic states; bounds relative to assessment categories, not all real-world activity."
+  },
+  "scoreIntervalExamples": {
+    "weights": [
+      25,
+      20,
+      15,
+      15,
+      15,
+      10
+    ],
+    "a": [
+      75,
+      87.5
+    ],
+    "b": [
+      45.5,
+      60.5
+    ],
+    "c": [
+      24,
+      95.5
+    ],
+    "aRobustlyExceedsB": true,
+    "aRobustlyExceedsC": false,
+    "interpretation": "Synthetic arithmetic check only. Bounds are assumption ranges, not statistical confidence or calibrated live scores. Unknown weighted component remains [0,1]."
+  },
+  "status": "Research prototypes only; application unchanged"
+}

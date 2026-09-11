@@ -1,0 +1,113 @@
+{
+  "source": "Browser layout checks with native CSS state simulated; provider requests blocked",
+  "checks": [
+    {
+      "theme": "dark",
+      "width": 320,
+      "sheetBottomCorner": "24px",
+      "horizontalOverflow": false,
+      "buttonVisible": true,
+      "bottomClearance": 48.671875,
+      "cardPadding": [
+        "16px",
+        "16px"
+      ],
+      "cardCorners": [
+        "18px",
+        "18px"
+      ],
+      "buttonBackground": "rgb(255, 255, 255)",
+      "buttonColor": "rgb(16, 16, 16)"
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "sheetBottomCorner": "24px",
+      "horizontalOverflow": false,
+      "buttonVisible": true,
+      "bottomClearance": 49.359375,
+      "cardPadding": [
+        "16px",
+        "16px"
+      ],
+      "cardCorners": [
+        "18px",
+        "18px"
+      ],
+      "buttonBackground": "rgb(255, 255, 255)",
+      "buttonColor": "rgb(16, 16, 16)"
+    },
+    {
+      "theme": "light",
+      "width": 320,
+      "sheetBottomCorner": "24px",
+      "horizontalOverflow": false,
+      "buttonVisible": true,
+      "bottomClearance": 48.671875,
+      "cardPadding": [
+        "16px",
+        "16px"
+      ],
+      "cardCorners": [
+        "18px",
+        "18px"
+      ],
+      "buttonBackground": "rgb(17, 17, 17)",
+      "buttonColor": "rgb(255, 255, 255)"
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "sheetBottomCorner": "24px",
+      "horizontalOverflow": false,
+      "buttonVisible": true,
+      "bottomClearance": 49.359375,
+      "cardPadding": [
+        "16px",
+        "16px"
+      ],
+      "cardCorners": [
+        "18px",
+        "18px"
+      ],
+      "buttonBackground": "rgb(17, 17, 17)",
+      "buttonColor": "rgb(255, 255, 255)"
+    },
+    {
+      "theme": "blue",
+      "width": 320,
+      "sheetBottomCorner": "24px",
+      "horizontalOverflow": false,
+      "buttonVisible": true,
+      "bottomClearance": 48.671875,
+      "cardPadding": [
+        "16px",
+        "16px"
+      ],
+      "cardCorners": [
+        "18px",
+        "18px"
+      ],
+      "buttonBackground": "rgb(59, 224, 206)",
+      "buttonColor": "rgb(6, 40, 37)"
+    },
+    {
+      "theme": "blue",
+      "width": 390,
+      "sheetBottomCorner": "24px",
+      "horizontalOverflow": false,
+      "buttonVisible": true,
+      "bottomClearance": 49.359375,
+      "cardPadding": [
+        "16px",
+        "16px"
+      ],
+      "cardCorners": [
+        "18px",
+        "18px"
+      ],
+      "buttonBackground": "rgb(59, 224, 206)",
+      "buttonColor": "rgb(6, 40, 37)"
+    }
+  ]
+}

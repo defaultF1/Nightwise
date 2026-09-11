@@ -1,3 +1,9 @@
+> Latest 0.9.0 checkpoint: live evidence bounds, scanning improvements, GPS recovery, 10 km area and native clipping code are delivered. See the current status and M06 report for hosted and physical acceptance. Ground/reel excluded by latest scope.
+
+> Latest 0.7.8 checkpoint: full Google hours fields and plain-language coverage UI are implemented and phone-tested. Live testing remains enabled; scoring and field acceptance remain pending. See nightwise-current-status.md and the opening-hours Word report.
+
+> Current checkpoint: version 0.7.6 and seven enhancements are implemented; source is published. See nightwise-current-status.md for current acceptance limits. Earlier deferrals below are historical.
+
 # NightWise: Android delivery in 48–72 hours
 
 > Latest 10 September update: PDF offline completion is recorded in planning/nightwise-current-status.md. Black is the default; intro Skip is removed. Version 0.6.3 adds ranking, staffing proxies, help gaps and map labels. Google calls remain paused. The previous APK passed 21 phone checks; Back and native GPS checks remain. GitHub pushes and hosting are explicitly deferred. Older statements below are historical.

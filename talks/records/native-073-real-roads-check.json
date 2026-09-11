@@ -1,0 +1,43 @@
+{
+  "version": "0.7.3-preview",
+  "checkedAt": "2026-09-09T23:02:13.253Z",
+  "requests": {
+    "routes": 1,
+    "nearby": 0
+  },
+  "tests": [
+    {
+      "test": "Alternative selected",
+      "passed": true
+    },
+    {
+      "test": "Fresh provider request received",
+      "passed": true
+    },
+    {
+      "test": "Dense provider geometry used",
+      "passed": true
+    },
+    {
+      "test": "Synthetic test banner absent",
+      "passed": true
+    }
+  ],
+  "routeGeometry": [
+    {
+      "label": "Fastest",
+      "points": 303,
+      "distanceMeters": 4795,
+      "durationSeconds": 602,
+      "source": "google"
+    },
+    {
+      "label": "Alternative 1",
+      "points": 305,
+      "distanceMeters": 5381,
+      "durationSeconds": 717,
+      "source": "google"
+    }
+  ],
+  "leftOnPhone": "Real Google route results in memory"
+}

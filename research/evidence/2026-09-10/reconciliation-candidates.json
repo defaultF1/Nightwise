@@ -1,0 +1,96 @@
+{
+  "possibleOsmDuplicates": [
+    {
+      "a": "node/4444301138",
+      "b": "node/4445074229",
+      "name": "GKB opticals",
+      "metres": 54,
+      "status": "candidate only; not automatically merged"
+    },
+    {
+      "a": "node/4444460861",
+      "b": "node/4448590295",
+      "name": "Allen Solly",
+      "metres": 9,
+      "status": "candidate only; not automatically merged"
+    },
+    {
+      "a": "node/4445124814",
+      "b": "node/4489139931",
+      "name": "Columbia",
+      "metres": 66,
+      "status": "candidate only; not automatically merged"
+    },
+    {
+      "a": "node/4445786915",
+      "b": "node/4447462331",
+      "name": "Arrow",
+      "metres": 47,
+      "status": "candidate only; not automatically merged"
+    },
+    {
+      "a": "node/4446222059",
+      "b": "node/4446222060",
+      "name": "Rocia",
+      "metres": 0,
+      "status": "candidate only; not automatically merged"
+    },
+    {
+      "a": "node/4447009761",
+      "b": "node/4489987205",
+      "name": "O2Spa",
+      "metres": 8,
+      "status": "candidate only; not automatically merged"
+    },
+    {
+      "a": "node/4489894388",
+      "b": "node/4490414160",
+      "name": "Ebony Blonde",
+      "metres": 52,
+      "status": "candidate only; not automatically merged"
+    },
+    {
+      "a": "node/4489912602",
+      "b": "node/4489955031",
+      "name": "Brindas Beauty Clinic And Academy",
+      "metres": 46,
+      "status": "candidate only; not automatically merged"
+    },
+    {
+      "a": "node/6175812290",
+      "b": "way/346425569",
+      "name": "Kerala Mess",
+      "metres": 0,
+      "status": "candidate only; not automatically merged"
+    },
+    {
+      "a": "node/10980098245",
+      "b": "node/10980098246",
+      "name": "Genesis",
+      "metres": 3,
+      "status": "candidate only; not automatically merged"
+    },
+    {
+      "a": "node/11578192474",
+      "b": "way/1245441025",
+      "name": "Zudio",
+      "metres": 2,
+      "status": "candidate only; not automatically merged"
+    }
+  ],
+  "operatorOsmCrosschecks": [
+    {
+      "operatorId": "operator-06",
+      "operatorName": "Apollo Bhuvaneshwari Nagar 2",
+      "candidates": [
+        {
+          "osmId": "node/4822629789",
+          "name": "Manjunatha Medicals",
+          "metres": 23,
+          "hours": "PH,Mo-Su 09:00-23:30"
+        }
+      ],
+      "status": "Same-category proximity candidates; identities and hours not reconciled"
+    }
+  ]
+}

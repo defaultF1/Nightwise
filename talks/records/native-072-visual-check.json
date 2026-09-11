@@ -1,0 +1,31 @@
+{
+  "version": "0.7.2-preview",
+  "routeData": "Synthetic UI fixture; no Routes or Places requests",
+  "tests": [
+    {
+      "test": "Confirmation map native transparency enabled",
+      "passed": true
+    },
+    {
+      "test": "Map transparency survives confirmation unmount",
+      "passed": true
+    },
+    {
+      "test": "Map route selector updates route card",
+      "passed": true
+    },
+    {
+      "test": "External Google Maps opens",
+      "passed": true
+    },
+    {
+      "test": "Native map transparency retained after handoff",
+      "passed": true
+    },
+    {
+      "test": "Returned to clean tutorial home",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

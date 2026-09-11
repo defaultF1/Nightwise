@@ -1,7 +1,8 @@
 import type { Route } from './types';
-import type { ActivityAnalysis, ActivitySegment, NearbyScan, PlaceObservation, QueryPlan, DeduplicatedPlace } from './activity-types';
+import type { ActivityAnalysis, ActivitySegment, NearbyScan, PlaceObservation, QueryPlan, DeduplicatedPlace, HoursEvaluation } from './activity-types';
 import { distanceMeters, samplePolyline, validCoordinate } from './geometry';
 import { evaluateObservation, isFresh } from './hours';
+import { passingMinutes } from './arrival';
 
 export const HELP_CATEGORIES = new Set(['hospital','police','pharmacy','hotel','gas_station']);
 export const STAFFED_PROXY_CATEGORIES = new Set([...HELP_CATEGORIES,'restaurant','cafe','store','convenience_store','supermarket']);
@@ -55,30 +56,34 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
   });
   const places:DeduplicatedPlace[]=[];
   for(const [id,group] of groups){
-    const evaluations=group.observations.map(p=>evaluateObservation(p,checkedAt,route.durationSeconds/60));
+    const arrivalMinutes = passingMinutes(route,Math.min(...[...group.sampleIndexes].map(i=>samples[i].distanceMeters)),samples.at(-1)!.distanceMeters);
+    const evaluations=group.observations.map(p=>evaluateObservation(p,checkedAt,arrivalMinutes));
     const states=new Set(evaluations.map(e=>e.state));
     const coordinateConflict=group.observations.some(p=>distanceMeters(p.coordinate,group.observations[0].coordinate)>30);
     const conflict=states.size>1||coordinateConflict;
     if(conflict)limitations.add('Conflicting details for a place were treated as unknown.');
     const knownClosing=evaluations.map(e=>e.minutesUntilClose).filter((n):n is number=>n!==null);
-    const hours=conflict?{state:'unknown' as const,closingSoon:false,minutesUntilClose:null}:{...evaluations[0],closingSoon:evaluations.some(e=>e.closingSoon),minutesUntilClose:knownClosing.length?Math.min(...knownClosing):null};
+    const hours:HoursEvaluation=conflict?{state:'unknown' as const,closingSoon:false,minutesUntilClose:null,reason:'Different observations disagree about this place.'}:{...evaluations[0],closingSoon:evaluations.some(e=>e.closingSoon),minutesUntilClose:knownClosing.length?Math.min(...knownClosing):null};
     // Keep only categories consistently reported for a duplicate listing.
     const categories=group.observations[0].categories.filter(c=>group.observations.every(p=>p.categories.includes(c)));
-    places.push({id,hours,categories:[...new Set(categories)],sampleIndexes:[...group.sampleIndexes],conflict});
+    if(!conflict&&evaluations.some(e=>e.basis==='regular')){hours.basis='regular';hours.reason='Based on regular weekly hours; special-day changes are not confirmed.';}
+    places.push({id,name:group.observations[0].name,coordinate:conflict?undefined:group.observations[0].coordinate,arrivalMinutes,hours,schedule:conflict?undefined:group.observations[0].schedule,categories:[...new Set(categories)],sampleIndexes:[...group.sampleIndexes],conflict});
   }
   const sampleState=statuses.map((status,i):ActivitySegment['state']=>{
-    if(!status.usable)return 'unknown';
+    if(!status.observed)return 'unknown';
     const nearby=places.filter(p=>p.sampleIndexes.includes(i));
-    if(nearby.filter(p=>p.hours.state==='open').length>=MIN_OPEN_FOR_ACTIVITY)return 'active';
-    if(nearby.some(p=>p.hours.state==='unknown'))return 'unknown';
+    if(nearby.filter(p=>p.hours.state==='open'&&!p.hours.closingSoon).length>=MIN_OPEN_FOR_ACTIVITY)return 'active';
+    if(!status.usable)return 'unknown';
+    if(nearby.some(p=>p.hours.state==='unknown'||p.hours.closingSoon))return 'unknown';
     return 'low';
   });
   const segments:ActivitySegment[]=samples.slice(1).map((sample,i)=>({fromMeters:samples[i].distanceMeters,toMeters:sample.distanceMeters,state:sampleState[i]==='unknown'||sampleState[i+1]==='unknown'?'unknown':sampleState[i]==='active'||sampleState[i+1]==='active'?'active':'low'}));
   const helpStates=statuses.map((status,i):ActivitySegment['state']=>{
-    if(!status.usable)return 'unknown';
+    if(!status.observed)return 'unknown';
     const nearby=places.filter(p=>p.sampleIndexes.includes(i)&&p.categories.some(c=>HELP_CATEGORIES.has(c)));
-    if(nearby.some(p=>p.hours.state==='open'))return 'active';
-    if(nearby.some(p=>p.hours.state==='unknown'))return 'unknown';
+    if(nearby.some(p=>p.hours.state==='open'&&!p.hours.closingSoon))return 'active';
+    if(!status.usable)return 'unknown';
+    if(nearby.some(p=>p.hours.state==='unknown'||p.hours.closingSoon))return 'unknown';
     return 'low';
   });
   const helpSegments:ActivitySegment[]=samples.slice(1).map((sample,i)=>({fromMeters:samples[i].distanceMeters,toMeters:sample.distanceMeters,state:helpStates[i]==='unknown'||helpStates[i+1]==='unknown'?'unknown':helpStates[i]==='active'||helpStates[i+1]==='active'?'active':'low'}));
@@ -90,6 +95,7 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
   const totalLow=segments.filter(s=>s.state==='low').reduce((sum,s)=>sum+s.toMeters-s.fromMeters,0);
   const unknown=places.length-open.length-closed.length;
   if(unknown)limitations.add('Some opening hours are unknown.');
+  if(places.some(p=>p.hours.basis==='regular'))limitations.add('Some places use regular weekly hours; special-day changes are not confirmed.');
   const scanCoverage=length>0?scanned/length:0,activityCoverage=length>0?assessed/length:0;
   const hoursCoverage=places.length?(places.length-unknown)/places.length:(scanCoverage===1?1:0);
   const anyObserved=statuses.some(s=>s.observed);
@@ -105,5 +111,7 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
     closingSoon:anyObserved?open.filter(p=>p.hours.closingSoon).length:null,
     scanCoverage,activityCoverage,hoursCoverage,longestLowActivityMeters:coreComparable?longest:null,longestObservedLowActivityMeters:longest,
     totalLowActivityMeters:coreComparable?totalLow:null,totalObservedLowActivityMeters:totalLow,
+    lowActivityGapBounds:[longest,longestRun(segments.map(s=>({...s,state:s.state==='unknown'?'low':s.state})))],
+    helpGapBounds:[helpGap,longestRun(helpSegments.map(s=>({...s,state:s.state==='unknown'?'low':s.state})))],
     segments,places,limitations:[...limitations],coreComparable};
 }

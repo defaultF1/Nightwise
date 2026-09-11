@@ -1,0 +1,63 @@
+{
+  "filename": "2026-09-10_M09_map-scroll-correction_v01.docx",
+  "title": "NightWise Android map scroll correction",
+  "meta": "M09 10 September 2026\nPrepared by Codex for the NightWise project owner\nCode corrected and device smoothness check pending",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "M09 addresses the reported stop-start movement of the map when scrolling route options. The code correction removes unnecessary Android map layout requests and prevents obsolete clipping positions from accumulating across the JavaScript bridge. The four focused tests pass. A physical smoothness check remains pending because the Redmi was not connected over USB during this work; this report does not claim a measured frame-rate improvement."
+    },
+    {
+      "type": "heading",
+      "text": "Cause found in the map library"
+    },
+    {
+      "type": "paragraph",
+      "text": "The installed Capacitor Google Maps 8.0.1 Android updateRender implementation compares native LayoutParams width and height, measured in physical pixels, against config width and height, measured in CSS pixels. It then applies the density conversion when assigning the layout. On a density-two display, a 300 CSS-pixel map has a 600-pixel native width, so the old comparison requests layout even when the map has merely moved. This is a code-level finding consistent with the symptom; the contribution to the observed stutter has not been measured on the disconnected phone."
+    },
+    {
+      "type": "heading",
+      "text": "Implemented correction"
+    },
+    {
+      "type": "bullet",
+      "text": "The native comparison now uses density-scaled physical pixel sizes on both sides. Moving the map retains its existing size; real width or height changes still request layout. The route geometry, camera, markers and provider data are unchanged."
+    },
+    {
+      "type": "bullet",
+      "text": "A small version-checked patch runs after npm installation and before Android sync. The dependency is pinned to the examined 8.0.1 version. Reapplying the patch is harmless; a different version or changed source fails with an instruction to review the patch instead of silently modifying unknown code."
+    },
+    {
+      "type": "bullet",
+      "text": "Clipping updates now allow only one bridge call in flight. When several scroll positions arrive, the next call sends the newest position. Destroying a map discards queued positions, and a failed bridge update can recover on the next measurement. Nested dialog scroll forwarding remains in place."
+    },
+    {
+      "type": "heading",
+      "text": "Verification and errors"
+    },
+    {
+      "type": "paragraph",
+      "text": "Four focused tests passed: existing nested scroll forwarding plus new checks for dropping obsolete positions, discarding queued work after map destruction and recovering after a bridge failure. The dependency patch was applied and then reapplied to verify idempotence; npm reports the pinned 8.0.1 dependency as valid. The first TypeScript build found an argument type missing from a test mock. Adding its Rect argument corrected that test declaration; the runtime queue logic did not change."
+    },
+    {
+      "type": "paragraph",
+      "text": "No Google route, nearby, autocomplete or Details requests were made for this fix. The earlier live Kanpur results belong to M08, not a new run. Device screenshots and before/after frame measurements are unavailable while the phone is disconnected. Billing caps and the hosted backend behaviour remain unchanged."
+    },
+    {
+      "type": "heading",
+      "text": "Files and final acceptance"
+    },
+    {
+      "type": "paragraph",
+      "text": "Changed files: scripts/patch-android-map.mjs, package.json, package-lock.json, src/maps/viewport.ts, tests/unit/map-viewport-queue.test.ts, android/app/build.gradle and scripts/verify-current-apk.py. The inspected upstream implementation is node_modules/@capacitor/google-maps/android/src/main/java/com/capacitorjs/plugins/googlemaps/CapacitorGoogleMap.kt. The maintained patch is exported with the source; node_modules itself is not published."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reconnect the Redmi with debugging enabled to verify slow drags and fast flings on route options, clipping when the map leaves/re-enters the screen, the confirmation sheet, map panning, route selection and rotation. Reuse an existing comparison where possible. Any measured native result should be added as a follow-up; until then the correction is implemented but physical acceptance is incomplete."
+    },
+    {
+      "type": "paragraph",
+      "text": "Android 0.11.3-live-preview code 29 built successfully. APK signature, packaged web assets, hosted HTTPS endpoint and absence of the server credential passed verification. The immutable APK is output/apk/nightwise-0.11.3-team-debug.apk (9,657,593 bytes), SHA256 20844e0986eea2785d2528f7f411b6e167928b258726741019d237cb1c120a52. Source c016cf7 was pushed to codex/journey-updates. No device was visible in the final USB check."
+    }
+  ]
+}

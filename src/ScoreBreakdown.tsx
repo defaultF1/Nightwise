@@ -8,15 +8,17 @@ export function ScoreBreakdown({comparison,routeId,sample}:{comparison:Compariso
   const common=comparison.commonComponents;
   const totalWeight=common.reduce((total,key)=>total+WEIGHTS[key],0);
   const values=comparison.componentScores?.[routeId]??{};
+  const bounds=comparison.componentBounds?.[routeId];
   return <section className="score-breakdown" aria-label="Score breakdown">
     <h3>What goes into this score</h3>
-    <p className="score-coverage">{common.length} of 6 signals used · {sample?'Sample evidence':'Experimental evidence'}</p>
+    {sample&&<p className="settings-helper">Low activity means fewer than two confirmed-open listings within 150 m of a checked point. Staffed-place categories describe business types; actual staff presence is not measured.</p>}
+    <p className="score-coverage">{bounds?'6 fixed weights · missing inputs shown as ranges':`${common.length} of 6 signals used`} · {sample?'Activity evidence':'Experimental evidence'}</p>
     <dl className="evidence-rows">{(Object.keys(WEIGHTS) as Component[]).map(key=>{
       const included=common.includes(key)&&values[key]!==undefined&&totalWeight>0;
-      return <div key={key}><dt>{labels[key]}</dt><dd>{included?`${(100*WEIGHTS[key]*values[key]!/totalWeight).toFixed(1)} / ${(100*WEIGHTS[key]/totalWeight).toFixed(1)} pts`:'Not included'}</dd></div>;
+      return <div key={key}><dt>{labels[key]}</dt><dd>{bounds?`${(WEIGHTS[key]*bounds[key][0]).toFixed(1)}–${(WEIGHTS[key]*bounds[key][1]).toFixed(1)} / ${WEIGHTS[key]} pts`:included?`${(100*WEIGHTS[key]*values[key]!/totalWeight).toFixed(1)} / ${(100*WEIGHTS[key]/totalWeight).toFixed(1)} pts`:'Not included'}</dd></div>;
     })}</dl>
-    <p className="settings-helper">Each row shows its points toward the total. Only signals available for every route contribute. If fewer than six are available, their weights are rescaled; missing evidence is never scored as zero.</p>
-    {sample&&<p className="settings-helper">All tutorial evidence is illustrative. Road shares and turn rates are invented examples, not measurements of these Bengaluru streets.</p>}
+    <p className="settings-helper">{bounds?'Each row keeps its fixed weight. Missing evidence widens its possible points instead of receiving zero or having its weight redistributed. These are evidence bounds, not statistical confidence intervals. A higher upper number alone is not a reason to choose a route.':'Each row shows its points toward the total. Only signals available for every route contribute. If fewer than six are available, their weights are rescaled; missing evidence is never scored as zero.'}</p>
+
     <p className="settings-helper">The help component combines help density (75%) and open staffed-place category density (25%), then reduces points for long stretches without open help listings. Route simplicity counts turns per kilometre, with an extra penalty for turns estimated to enter internal roads when that evidence is complete for every route. Road matches are estimates and staffed-place categories do not measure staff presence.</p><p className="settings-helper">Potential help listings include petrol pumps, hospitals, police, pharmacies and hotels listed as open. Transport listings do not verify running services or people nearby.</p>
   </section>;
 }

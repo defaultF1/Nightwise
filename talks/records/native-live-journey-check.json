@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-09-09T22:05:19.329Z",
+  "requests": {
+    "routes": 1,
+    "nearby": 43
+  },
+  "tests": [
+    {
+      "test": "Native confirmation map initialized",
+      "passed": true
+    },
+    {
+      "test": "Native live comparison returned",
+      "passed": true,
+      "cards": 2
+    },
+    {
+      "test": "Native routes map initialized",
+      "passed": true
+    },
+    {
+      "test": "Help point list renders",
+      "passed": true
+    },
+    {
+      "test": "Correct AEOS to Manyata URL",
+      "passed": true
+    },
+    {
+      "test": "Google Maps opened on Android",
+      "passed": false
+    }
+  ],
+  "errors": [],
+  "hardwareBack": "Blocked by device INJECT_EVENTS permission"
+}

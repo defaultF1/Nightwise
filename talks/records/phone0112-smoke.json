@@ -1,0 +1,12 @@
+{
+  "version": "0.11.2-live-preview",
+  "startedAt": "2026-09-10T13:47:00.475Z",
+  "gpsAccepted": true,
+  "addressResolved": true,
+  "addressCityKanpur": true,
+  "kanpurDestinationRequired": true,
+  "crossCityCompareBlocked": true,
+  "noHorizontalOverflow": true,
+  "googlePaidRequests": 0,
+  "completedGpsMessageCleared": true
+}

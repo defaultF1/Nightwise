@@ -1,0 +1,141 @@
+{
+  "version": "0.11.1-live-preview",
+  "startedAt": "2026-09-10T13:40:17.764Z",
+  "backend": {
+    "buildVersion": "0.11.0-live-preview",
+    "searchPreviewEnabled": true,
+    "scanStrategy": "partition-and-spatial-v1",
+    "scoringVersion": "experimental-live-activity-v4-bounds",
+    "serviceRadiusMeters": 10000,
+    "serviceRegions": [
+      {
+        "id": "north-bengaluru",
+        "city": "Bengaluru",
+        "radiusMeters": 10000
+      },
+      {
+        "id": "kanpur",
+        "city": "Kanpur",
+        "radiusMeters": 20000
+      }
+    ],
+    "ready": true,
+    "configured": true,
+    "paused": false,
+    "searchEnabled": true,
+    "activityEnabled": true,
+    "scoringEnabled": true,
+    "accessCodeRequired": true,
+    "maxQueries": 120,
+    "budgetStorage": "redis",
+    "budgetReady": true
+  },
+  "search": {
+    "suggestions": [
+      {
+        "title": "Dr. Virendra Swarup Education Centre",
+        "address": "Sharda Nagar, Kanpur, Uttar Pradesh, India"
+      }
+    ],
+    "requests": 1
+  },
+  "preview": {
+    "http": 200,
+    "elements": 1,
+    "estimates": [
+      {
+        "available": true,
+        "distanceMeters": 1088,
+        "durationSeconds": 209
+      }
+    ]
+  },
+  "schoolAddress": "49-A, 117/Q/49-A, Sharda Nagar, Kanpur, Uttar Pradesh 208025, India",
+  "schoolResolved": true,
+  "nativeEndpointMap": true,
+  "live": {
+    "checkedAt": "2026-09-10T13:40:31.049Z",
+    "outcome": "insufficient",
+    "recommendedId": null,
+    "scoreBounds": {
+      "google:1": [
+        49.5,
+        61.89214917302347
+      ],
+      "google:0": [
+        53.84112175886271,
+        65.124928646678
+      ],
+      "google:2": [
+        50.25,
+        61.705999300885516
+      ]
+    },
+    "usage": {
+      "routeCalls": 25,
+      "nearbyCalls": 1307,
+      "autocompleteCalls": 3,
+      "detailsCalls": 25,
+      "routeLimit": 30,
+      "nearbyLimit": 1500,
+      "autocompleteLimit": 40,
+      "detailsLimit": 100,
+      "remainingComparisons": 5
+    },
+    "requestUsage": {
+      "routeCalls": 1,
+      "nearbyCalls": 15,
+      "detailsCalls": 4,
+      "scope": "Shared counter delta during this comparison; concurrent search requests may contribute."
+    },
+    "notices": [
+      "4 listings with missing hours received a targeted details check. Missing schedules still remain unknown.",
+      "Live scores are experimental evidence ranges, not safety ratings or calibrated predictions. Missing data widens the range.",
+      "Road type is estimated from a local OpenStreetMap extract for the selected city. Unmatched, ambiguous and grade-separated sections remain unknown. Actual staffing, lighting and crime are not measured."
+    ],
+    "routes": [
+      {
+        "id": "google:1",
+        "label": "Fastest",
+        "durationSeconds": 220,
+        "distanceMeters": 979,
+        "geometryPoints": 25,
+        "openPlaces": 15,
+        "knownHours": 0.8125,
+        "completeScans": 1,
+        "activityCoverage": 0.5913515494392112,
+        "roadCoverage": 0.9959329168161509
+      },
+      {
+        "id": "google:0",
+        "label": "Alternative 1",
+        "durationSeconds": 232,
+        "distanceMeters": 1094,
+        "geometryPoints": 25,
+        "openPlaces": 16,
+        "knownHours": 0.7619047619047619,
+        "completeScans": 1,
+        "activityCoverage": 0.7312672096516175,
+        "roadCoverage": 0.9999999999999998
+      },
+      {
+        "id": "google:2",
+        "label": "Alternative 2",
+        "durationSeconds": 240,
+        "distanceMeters": 995,
+        "geometryPoints": 24,
+        "openPlaces": 15,
+        "knownHours": 0.8125,
+        "completeScans": 1,
+        "activityCoverage": 0.5976400419468691,
+        "roadCoverage": 1.0000000000000002
+      }
+    ]
+  },
+  "nativeRouteMap": true,
+  "selectionUpdatesMap": true,
+  "noHorizontalOverflow": true,
+  "handoffHasCorridor": true,
+  "mapsOpened": false,
+  "returnRetainsSelection": true
+}

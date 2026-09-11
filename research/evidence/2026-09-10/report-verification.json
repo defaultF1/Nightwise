@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "markdownCompanionMatches": true,
+  "structuredFilesValid": true,
+  "privateCodeAbsentFromArtifacts": true,
+  "footnotes": 40,
+  "sourceEntries": 32,
+  "titleBordersAbsent": true,
+  "documentSha256": "b3a8c9b6828dafb3a1e98a128c409f5599b0b0c21f0106cba2e5455d56141b85",
+  "scope": "Artifact integrity checks only; no new application or physical tests",
+  "renderedPages": 12,
+  "everyPageVisuallyReviewed": true,
+  "visualResult": "Passed after removing inherited title border and separating adjacent citation numbers; no clipped text or tables observed."
+}

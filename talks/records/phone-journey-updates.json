@@ -1,0 +1,37 @@
+{
+  "tests": [
+    {
+      "test": "Webview fills display outside camera cutout",
+      "passed": true
+    },
+    {
+      "test": "Theme survives webview reload",
+      "passed": true
+    },
+    {
+      "test": "Settings close control works",
+      "passed": true
+    },
+    {
+      "test": "Extra time survives reload",
+      "passed": true
+    },
+    {
+      "test": "Saved place available after reload",
+      "passed": true
+    },
+    {
+      "test": "Sample comparison works on phone",
+      "passed": true
+    },
+    {
+      "test": "Handoff preview opens",
+      "passed": true
+    },
+    {
+      "test": "Edit journey returns to plan",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

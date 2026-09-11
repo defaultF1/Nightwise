@@ -1,0 +1,406 @@
+{
+  "label": "Regular-schedule projection, not observed activity or current opening confirmation",
+  "method": "Existing app evaluateHours function; 14 operator records with clear regular schedules and coordinates; excludes 6 ambiguous schedules and the coordinate-conflicted hospital.",
+  "limitations": "No holiday overrides or field visits. These locations are not assigned to a route. Passing time along a real route still needs calculation.",
+  "projections": [
+    {
+      "at": "2026-09-10T21:00:00+05:30",
+      "regularScheduleOpen": 14,
+      "regularScheduleClosed": 0,
+      "places": [
+        {
+          "id": "operator-01",
+          "name": "Apollo Sahakara Nagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        },
+        {
+          "id": "operator-02",
+          "name": "Apollo Kodigehalli Main Road 2",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        },
+        {
+          "id": "operator-03",
+          "name": "Apollo Amurthahalli",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        },
+        {
+          "id": "operator-04",
+          "name": "Apollo CQAL Layout",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        },
+        {
+          "id": "operator-05",
+          "name": "Apollo Godrej Woodmans",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        },
+        {
+          "id": "operator-08",
+          "name": "Apollo Jakkur New Extension",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        },
+        {
+          "id": "operator-10",
+          "name": "Apollo Hebbal",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        },
+        {
+          "id": "operator-13",
+          "name": "Apollo RK Hegde Nagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        },
+        {
+          "id": "operator-14",
+          "name": "Apollo RK Hegde Nagar 2",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        },
+        {
+          "id": "operator-16",
+          "name": "Third Wave Coffee Sahakar Nagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 179
+          }
+        },
+        {
+          "id": "operator-17",
+          "name": "IndianOil Seagull Petro Park",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 60
+          }
+        },
+        {
+          "id": "operator-18",
+          "name": "IndianOil KV Jairam Fuel Center",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 90
+          }
+        },
+        {
+          "id": "operator-19",
+          "name": "KFC Hegdenagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        },
+        {
+          "id": "operator-20",
+          "name": "Pizza Hut Sahakara Nagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 120
+          }
+        }
+      ]
+    },
+    {
+      "at": "2026-09-10T22:30:00+05:30",
+      "regularScheduleOpen": 12,
+      "regularScheduleClosed": 2,
+      "places": [
+        {
+          "id": "operator-01",
+          "name": "Apollo Sahakara Nagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        },
+        {
+          "id": "operator-02",
+          "name": "Apollo Kodigehalli Main Road 2",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        },
+        {
+          "id": "operator-03",
+          "name": "Apollo Amurthahalli",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        },
+        {
+          "id": "operator-04",
+          "name": "Apollo CQAL Layout",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        },
+        {
+          "id": "operator-05",
+          "name": "Apollo Godrej Woodmans",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        },
+        {
+          "id": "operator-08",
+          "name": "Apollo Jakkur New Extension",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        },
+        {
+          "id": "operator-10",
+          "name": "Apollo Hebbal",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        },
+        {
+          "id": "operator-13",
+          "name": "Apollo RK Hegde Nagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        },
+        {
+          "id": "operator-14",
+          "name": "Apollo RK Hegde Nagar 2",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        },
+        {
+          "id": "operator-16",
+          "name": "Third Wave Coffee Sahakar Nagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 89
+          }
+        },
+        {
+          "id": "operator-17",
+          "name": "IndianOil Seagull Petro Park",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-18",
+          "name": "IndianOil KV Jairam Fuel Center",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-19",
+          "name": "KFC Hegdenagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        },
+        {
+          "id": "operator-20",
+          "name": "Pizza Hut Sahakara Nagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 30
+          }
+        }
+      ]
+    },
+    {
+      "at": "2026-09-10T23:30:00+05:30",
+      "regularScheduleOpen": 1,
+      "regularScheduleClosed": 13,
+      "places": [
+        {
+          "id": "operator-01",
+          "name": "Apollo Sahakara Nagar",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-02",
+          "name": "Apollo Kodigehalli Main Road 2",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-03",
+          "name": "Apollo Amurthahalli",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-04",
+          "name": "Apollo CQAL Layout",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-05",
+          "name": "Apollo Godrej Woodmans",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-08",
+          "name": "Apollo Jakkur New Extension",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-10",
+          "name": "Apollo Hebbal",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-13",
+          "name": "Apollo RK Hegde Nagar",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-14",
+          "name": "Apollo RK Hegde Nagar 2",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-16",
+          "name": "Third Wave Coffee Sahakar Nagar",
+          "result": {
+            "state": "open",
+            "closingSoon": false,
+            "minutesUntilClose": 29
+          }
+        },
+        {
+          "id": "operator-17",
+          "name": "IndianOil Seagull Petro Park",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-18",
+          "name": "IndianOil KV Jairam Fuel Center",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-19",
+          "name": "KFC Hegdenagar",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        },
+        {
+          "id": "operator-20",
+          "name": "Pizza Hut Sahakara Nagar",
+          "result": {
+            "state": "closed",
+            "closingSoon": false,
+            "minutesUntilClose": null
+          }
+        }
+      ]
+    }
+  ]
+}

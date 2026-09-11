@@ -1,0 +1,134 @@
+{
+  "startedAt": "2026-09-10T07:52:24.274Z",
+  "httpStatus": 200,
+  "checkedAt": "2026-09-10T07:52:29.083Z",
+  "journey": {
+    "origin": {
+      "name": "AEOS",
+      "latitude": 13.0628268,
+      "longitude": 77.5940888
+    },
+    "destination": {
+      "name": "Manyata Tech Park",
+      "latitude": 13.047697,
+      "longitude": 77.619939
+    },
+    "mode": "DRIVE"
+  },
+  "health": {
+    "ready": true,
+    "configured": true,
+    "paused": false,
+    "searchEnabled": true,
+    "activityEnabled": true,
+    "scoringEnabled": false,
+    "accessCodeRequired": true,
+    "maxQueries": 120,
+    "budgetStorage": "redis",
+    "budgetReady": true
+  },
+  "activityStatus": "partial",
+  "usage": {
+    "routeCalls": 18,
+    "nearbyCalls": 753,
+    "autocompleteCalls": 2,
+    "detailsCalls": 2,
+    "routeLimit": 30,
+    "nearbyLimit": 1500,
+    "autocompleteLimit": 40,
+    "detailsLimit": 20,
+    "remainingComparisons": 12
+  },
+  "scoresReturned": 0,
+  "outcome": "insufficient",
+  "routes": [
+    {
+      "id": "google:0",
+      "label": "Fastest",
+      "distanceMeters": 4795,
+      "durationSeconds": 1029,
+      "geometryPoints": 303,
+      "roadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 3364.6828635694533,
+        "internalMeters": 955.4986377675212,
+        "unknownMeters": 481.2827942093129,
+        "coverage": 0.899763329562663,
+        "snapshotDate": "2026-09-09T17:04:42Z"
+      },
+      "listings": 230,
+      "open": 116,
+      "closed": 30,
+      "unknownHours": 84,
+      "hoursCoverage": 0.6347826086956522,
+      "scanCoverage": 0.5001524842689808,
+      "activityCoverage": 0.8750381210672452,
+      "coreComparable": false,
+      "regularFallback": 0,
+      "specialDateListings": 0,
+      "hoursUnknownReasons": {
+        "Google did not return usable opening and closing times.": 84
+      }
+    },
+    {
+      "id": "google:1",
+      "label": "Alternative 1",
+      "distanceMeters": 5381,
+      "durationSeconds": 1073,
+      "geometryPoints": 305,
+      "roadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 4364.4425324356935,
+        "internalMeters": 139.83878354213644,
+        "unknownMeters": 883.0732715654268,
+        "coverage": 0.836084063668784,
+        "snapshotDate": "2026-09-09T17:04:42Z"
+      },
+      "listings": 254,
+      "open": 137,
+      "closed": 39,
+      "unknownHours": 78,
+      "hoursCoverage": 0.6929133858267716,
+      "scanCoverage": 0.5173883660801221,
+      "activityCoverage": 0.8515041126400376,
+      "coreComparable": false,
+      "regularFallback": 0,
+      "specialDateListings": 0,
+      "hoursUnknownReasons": {
+        "Google did not return usable opening and closing times.": 78
+      }
+    },
+    {
+      "id": "google:2",
+      "label": "Alternative 2",
+      "distanceMeters": 6091,
+      "durationSeconds": 1283,
+      "geometryPoints": 220,
+      "roadEvidence": {
+        "source": "openstreetmap",
+        "status": "insufficient",
+        "mainMeters": 4493.880669661164,
+        "internalMeters": 153.57224196464833,
+        "unknownMeters": 1448.6358460591846,
+        "coverage": 0.7623663460882244,
+        "snapshotDate": "2026-09-09T17:04:42Z"
+      },
+      "listings": 201,
+      "open": 99,
+      "closed": 22,
+      "unknownHours": 80,
+      "hoursCoverage": 0.6019900497512438,
+      "scanCoverage": 0.7375366298623899,
+      "activityCoverage": 0.7375366298623899,
+      "coreComparable": false,
+      "regularFallback": 0,
+      "specialDateListings": 0,
+      "hoursUnknownReasons": {
+        "Google did not return usable opening and closing times.": 80
+      }
+    }
+  ],
+  "limitations": "One daytime hosted journey. No field observation, calibration or provider route geometry retained. Server counters are cumulative and may include user activity. Operator proximity is not road access."
+}

@@ -1,0 +1,11 @@
+{
+  "retrievedAt": "2026-09-10T07:39:27.039Z",
+  "source": "https://overpass-api.de/api/interpreter",
+  "query": "[out:json][timeout:35];(nwr(around:10000,13.0628268,77.5940888)[opening_hours][shop];nwr(around:10000,13.0628268,77.5940888)[opening_hours][amenity~\"^(pharmacy|hospital|clinic|fuel|restaurant|cafe|fast_food|police|bus_station)$\"];);out center tags;",
+  "attribution": "© OpenStreetMap contributors",
+  "license": "ODbL 1.0",
+  "licenseUrl": "https://www.openstreetmap.org/copyright",
+  "elements": 671,
+  "sha256": "ce6fbb7a872b024af5210ab12b34d51715efc8ab1fd436a504122a51e519e319",
+  "interpretation": "Volunteer-contributed published schedules; retrieval is not field verification. Nodes/ways/relations may duplicate a physical business. Way/relation centers are not entrances. No Google data is included."
+}

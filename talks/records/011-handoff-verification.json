@@ -1,0 +1,13 @@
+{
+  "module": "M08",
+  "at": "2026-09-10",
+  "docx": "talks/2026-09-10_M08_kanpur-live-search_v01.docx",
+  "renderedPages": 3,
+  "allPagesVisuallyInspected": true,
+  "layout": "No clipped text or page overflow; screenshot values explicitly marked mocked",
+  "apk": "output/apk/nightwise-0.11.2-team-debug.apk",
+  "sourceCommit": "3f710f6",
+  "liveRecord": "talks/records/phone011-live.json",
+  "handoffRecord": "talks/records/phone011-handoff.json",
+  "finalPhoneSmoke": "talks/records/phone0112-smoke.json"
+}
