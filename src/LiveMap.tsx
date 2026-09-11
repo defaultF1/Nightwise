@@ -70,9 +70,9 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
       {blocked && <div className="map-curtain" />}
     </div>
     <div className="diagram-endpoints"><span><b>A</b> {journey.origin.name}</span><span><b>B</b> {journey.destination.name}</span></div>
-    <p className="diagram-caption">{routes.length ? `${routes.find(r=>r.id===selectedId)?.label??'Selected route'} is highlighted. Choose another option above or in the cards below.` : 'Endpoint preview. Confirm your journey to load routes along roads.'}</p>
+    {!routes.length&&<p className="diagram-caption">Endpoint preview. Confirm your journey to load routes along roads.</p>}
     <div className="pin-legend" aria-label="Map pin colours">{([['start','Start / current location'],['destination','Destination'],['shop','Shops'],['medical','Medical'],['fuel','Petrol / CNG']] as const).map(([kind,label])=><span key={kind}><i style={{backgroundColor:PIN_COLORS[kind]}}/>{label}</span>)}</div>
-    {routes.length>0&&<p className="diagram-caption">Business pins appear only when listings are available and scheduled open around the estimated passing time. Fuel type and access are not confirmed.</p>}
-    {analysis && <p className="map-legend">{theme === 'blue' ? 'Teal' : theme === 'light' ? 'Black' : 'White'}: selected route · Amber: observed low activity · Grey: unknown. Estimated between samples.</p>}
+    {routes.length>0&&<p className="diagram-caption">Pins show listings scheduled open around your estimated passing time.</p>}
+    {analysis && <p className="map-legend">{theme === 'blue' ? 'Teal' : theme === 'light' ? 'Black' : 'White'}: selected route · Amber: low activity · Grey: unknown.</p>}
   </section>;
 }

@@ -11,7 +11,7 @@ test('normal journey shows a calculated tradeoff and consistent route evidence',
  const openCount=summary.match(/^\d+/)?.[0];expect(openCount).toBeTruthy();
  await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
  await expect(page.getByRole('dialog')).toContainText('Tutorial mode');
- await expect(page.getByText('Observed places listed as open',{exact:true}).locator('..').locator('dd')).toHaveText(openCount!);
+ await expect(page.getByText('Listed places nearby',{exact:true}).locator('..').locator('dd')).toContainText(`${openCount} open`);
  await expect(page.getByRole('dialog')).toContainText('9 Sep · 8:30 pm IST');
  await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('6 of 6 signals used');
  await expect(page.getByRole('region',{name:'Score breakdown'}).locator('dl > div')).toHaveCount(6);
@@ -28,7 +28,7 @@ test('missing and capped evidence never receive an activity recommendation',asyn
   await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
   await expect(page.getByText('Longest low-activity stretch',{exact:true}).locator('..').locator('dd')).toContainText('uncertain');
   await expect(page.getByRole('dialog')).toContainText('unknown, not low activity');
-  if(value==='unknown')await expect(page.getByText('Observed places listed as open',{exact:true}).locator('..').locator('dd')).toHaveText('Unavailable');
+  if(value==='unknown')await expect(page.getByText('Listed places nearby',{exact:true})).toHaveCount(0);
   if(value==='capped')await expect(page.getByRole('dialog')).toContainText('result limit');
   await expect.poll(()=>page.locator('.unknown-explanation img').evaluate((img:HTMLImageElement)=>img.complete&&img.naturalWidth>0)).toBe(true);
   await page.getByRole('button',{name:'Back to routes',exact:true}).click();

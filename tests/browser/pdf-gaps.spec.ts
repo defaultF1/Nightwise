@@ -15,7 +15,7 @@ test('PDF evidence fields and complete ranking are visible without provider requ
  await expect(page.locator('.route-card-top').nth(2)).toContainText('Activity rank 3');
  await page.screenshot({path:'talks/screenshots/PDF-offline/routes.png',fullPage:true});
  await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
- await expect(page.getByText('Open staffed-place categories',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+/);
+ await expect(page.getByText('Listed places nearby',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+ open/);
  await expect(page.getByText('Longest stretch without an open help listing',{exact:true}).locator('..').locator('dd')).not.toHaveText('Not assessed');
  await expect(page.getByRole('dialog')).toContainText('fewer than two confirmed-open listings');
  await expect(page.getByRole('dialog')).toContainText('actual staff presence is not measured');
