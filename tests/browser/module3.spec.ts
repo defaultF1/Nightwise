@@ -6,14 +6,14 @@ test('normal journey shows a calculated tradeoff and consistent route evidence',
  await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome','more-activity');
  await expect(page.locator('.evidence-notice')).toContainText('2 extra minutes');
  await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();
- await expect(page.locator('.route-card.selected .activity-score')).toContainText('6/6 signals');
+ await expect(page.locator('.route-card.selected .activity-score')).toContainText('Based on 6 of 6 signals');
  const summary=await page.locator('.route-card.selected .route-summary').innerText();
- const openCount=summary.match(/^\d+/)?.[0];expect(openCount).toBeTruthy();
+ expect(summary.match(/^\d+/)?.[0]).toBeTruthy();
  await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
  await expect(page.getByRole('dialog')).toContainText('Tutorial mode');
- await expect(page.getByText('Listed places nearby',{exact:true}).locator('..').locator('dd')).toContainText(`${openCount} open`);
+ await expect(page.getByText('Shops & food',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+ open/);
  await expect(page.getByRole('dialog')).toContainText('9 Sep · 8:30 pm IST');
- await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('6 of 6 signals used');
+ await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('Based on 6 of 6 signals');
  await expect(page.getByRole('region',{name:'Score breakdown'}).locator('dl > div')).toHaveCount(6);
  await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('petrol pumps');
  await expect(page.getByText('Transport locations listed as open',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+/);
@@ -21,23 +21,20 @@ test('normal journey shows a calculated tradeoff and consistent route evidence',
  await page.getByRole('button',{name:'Back to routes',exact:true}).click();
  await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();
 });
-test('missing and capped evidence never receive an activity recommendation',async({page})=>{
- for(const value of ['limited','unknown','capped']){
-  await selectScenario(page,value);await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome','insufficient');
-  await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeChecked();await expect(page.locator('.recommendation-label')).toHaveCount(0);
+test('partially observed scenarios still score from what was seen',async({page})=>{
+ for(const value of ['limited','unknown','capped','closing']){
+  await selectScenario(page,value);await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome','more-activity');
+  await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();await expect(page.locator('.recommendation-label')).toHaveCount(1);
   await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
-  await expect(page.getByText('Longest low-activity stretch',{exact:true}).locator('..').locator('dd')).toContainText('uncertain');
-  await expect(page.getByRole('dialog')).toContainText('unknown, not low activity');
-  if(value==='unknown')await expect(page.getByText('Listed places nearby',{exact:true})).toHaveCount(0);
-  if(value==='capped')await expect(page.getByRole('dialog')).toContainText('result limit');
-  await expect.poll(()=>page.locator('.unknown-explanation img').evaluate((img:HTMLImageElement)=>img.complete&&img.naturalWidth>0)).toBe(true);
+  await expect(page.getByText('Longest low-activity stretch',{exact:true}).locator('..').locator('dd')).toBeVisible();
+  if(value==='unknown'){await expect(page.getByText('None seen nearby').first()).toBeVisible();await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('Based on 2 of 6 signals');}
+  if(value==='closing')await expect(page.getByText('Listed places closing soon',{exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Back to routes',exact:true}).click();
  }
 });
-test('ties detours and soon-closing listings keep the fastest selectable',async({page})=>{
- for(const [scenario,outcome] of [['similar','similar'],['detour','detour'],['closing','insufficient']] as const){
+test('ties and detours keep the fastest selectable',async({page})=>{
+ for(const [scenario,outcome] of [['similar','similar'],['detour','detour']] as const){
   await selectScenario(page,scenario);await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome',outcome);await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeChecked();
-  if(scenario==='closing'){await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();await expect(page.getByRole('dialog')).toContainText('may close before arrival');await page.getByRole('button',{name:'Back to routes',exact:true}).click();}
   await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();await expect(page.getByRole('button',{name:'Select Alternative 1 on diagram'})).toHaveAttribute('aria-pressed','true');
  }
 });

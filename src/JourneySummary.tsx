@@ -1,6 +1,6 @@
 import type { ActivityAnalysis, Comparison } from './domain/activity-types';
 import type { Route } from './domain/types';
-import { formatGap } from './ActivityStrip';
+import { formatMeters } from './ActivityStrip';
 
 export function JourneySummary({routes,comparison,analyses,onSelect}:{routes:Route[];comparison:Comparison|null;analyses:ActivityAnalysis[];onSelect:(id:string)=>void}){
   if(!routes.length||!comparison)return null;
@@ -10,7 +10,7 @@ export function JourneySummary({routes,comparison,analyses,onSelect}:{routes:Rou
     <span className="small-label">{comparison.recommendedId?'RECOMMENDED FOR LISTED ACTIVITY':'QUICKEST OPTION'}</span>
     <h2>{choice.label} · {Math.round(choice.durationSeconds/60)} min <span>· {(choice.distanceMeters/1000).toFixed(1)} km</span></h2>
     <p>{comparison.message}</p>
-    {a&&<ul><li>{a.openPlaces===null?'Open-place information is unavailable':`${a.openPlaces} places listed as open around your passing time`}</li><li>{a.potentialHelpPoints===null?'Help-point information is unavailable':`${a.potentialHelpPoints} listed open help points · longest gap ${formatGap(a.helpGapBounds,a.longestHelpGapMeters)}`}</li></ul>}
+    {a&&a.openPlaces!==null&&<ul><li>{`${a.openPlaces} places listed as open around your passing time`}</li>{a.potentialHelpPoints!==null&&<li>{`${a.potentialHelpPoints} listed open help points · longest gap ${formatMeters(a.longestObservedHelpGapMeters)}`}</li>}</ul>}
     <button className="secondary-button" onClick={()=>onSelect(choice.id)}>Select {choice.label.toLowerCase()}</button>
   </section>;
 }

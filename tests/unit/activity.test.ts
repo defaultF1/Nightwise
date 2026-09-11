@@ -51,7 +51,7 @@ describe('observations and distance-weighted coverage',()=>{
   const {r,plan,scans}=setup(400);
   scans[0].places=[{...place('station',0),categories:['transit_station'],hours:undefined}];
   const a=analyzeRoute(r,plan,scans,now);
-  expect(a.openTransportPoints).toBe(0);expect(a.coreComparable).toBe(false);expect(componentValues(a).transport).toBeUndefined();
+  expect(a.openTransportPoints).toBe(0);expect(a.coreComparable).toBe(false);expect(componentValues(a).transport).toBe(0);
  });
  it('deduplicates place identity while retaining sample associations',()=>{const {r,plan,scans}=setup(400);scans[0].places=[place('same',100)];scans[1].places=[place('same',100)];const a=analyzeRoute(r,plan,scans,now);expect(a.openPlaces).toBe(1);expect(a.potentialHelpPoints).toBe(1);expect(a.places[0].sampleIndexes).toEqual([0,1]);});
  it('filters off-route observations beyond the query radius',()=>{const {r,plan,scans}=setup(400);scans[0].places=[place('far',1000)];expect(analyzeRoute(r,plan,scans,now).openPlaces).toBe(0);});
@@ -63,11 +63,11 @@ describe('observations and distance-weighted coverage',()=>{
  it('duplicate search records are excluded conservatively',()=>{const {r,plan,scans}=setup();const a=analyzeRoute(r,plan,[...scans,scans[0]],now);expect(a.scanCoverage).toBeLessThan(1);expect(a.limitations.join(' ')).toContain('Conflicting search');});
  it('empty completed searches mean observed absence, not unavailable evidence',()=>{const {r,plan,scans}=setup();const a=analyzeRoute(r,plan,scans,now);expect(a.openPlaces).toBe(0);expect(a.longestLowActivityMeters).toBeCloseTo(1000,5);expect(a.coreComparable).toBe(true);});
 });
-function evidence(r:Route,overrides:Partial<ActivityAnalysis>={}):ActivityAnalysis {const plan=buildQueryPlan([r]);return {...analyzeRoute(r,plan,plan.queries.map(q=>({queryId:q.id,observedAt:now,status:'ok',places:[]})),now),openPlaces:4,potentialHelpPoints:1,staffedPlaceProxy:4,longestHelpGapMeters:0,longestLowActivityMeters:200,...overrides};}
+function evidence(r:Route,overrides:Partial<ActivityAnalysis>={}):ActivityAnalysis {const plan=buildQueryPlan([r]);return {...analyzeRoute(r,plan,plan.queries.map(q=>({queryId:q.id,observedAt:now,status:'ok',places:[]})),now),openPlaces:4,potentialHelpPoints:1,staffedPlaceProxy:4,longestObservedHelpGapMeters:0,longestObservedLowActivityMeters:200,...overrides};}
 describe('comparison invariants',()=>{
  it('uses all six weighted signals when comparable inputs exist',()=>{
   const a=route(1000,'a'),b={...route(1000,'b'),durationSeconds:660};
-  const result=compareActivity([a,b],[evidence(a,{openTransportPoints:0}),evidence(b,{openPlaces:8,potentialHelpPoints:2,staffedPlaceProxy:8,longestLowActivityMeters:0,openTransportPoints:3})],{a:{mainRoadFraction:.5,maneuversPerKm:5},b:{mainRoadFraction:1,maneuversPerKm:0}});
+  const result=compareActivity([a,b],[evidence(a,{openTransportPoints:0}),evidence(b,{openPlaces:8,potentialHelpPoints:2,staffedPlaceProxy:8,longestObservedLowActivityMeters:0,openTransportPoints:3})],{a:{mainRoadFraction:.5,maneuversPerKm:5},b:{mainRoadFraction:1,maneuversPerKm:0}});
   expect(result.commonComponents).toHaveLength(6);expect(result.scores.b).toBe(100);
   expect(result.scores.a).toBeCloseTo(12.5+10+7.5+13+7.5,5);
   expect(result.selectedId).toBe('b');expect(result.componentScores.b.transport).toBe(1);
@@ -80,24 +80,24 @@ describe('comparison invariants',()=>{
   expect(result.scores.a).toBe(result.scores.b);expect(result.componentScores.b.transport).toBeUndefined();
   expect(result.componentScores.a.transport).toBe(1);
  });
- it('runs every tutorial scenario with six-signal fixtures while preserving missing-data and detour gates',()=>{
-  for(const [scenario,outcome] of [['normal','more-activity'],['similar','similar'],['detour','detour'],['unknown','insufficient'],['capped','insufficient'],['closing','insufficient']] as const){
+ it('scores every tutorial scenario from observed signals while preserving the detour gate',()=>{
+  for(const [scenario,outcome,componentCount] of [['normal','more-activity',6],['similar','similar',6],['detour','detour',6],['unknown','more-activity',2],['capped','more-activity',6],['closing','more-activity',6]] as const){
    const routes=sampleRouteOptions('Manyata Tech Park',scenario);
    const result=analyzeComparison(routes,plan=>fixtureScans(plan,scenario),now,fixtureRoadEvidence(routes,scenario));
    expect(result.comparison.outcome,scenario).toBe(outcome);
-   if(outcome!=='insufficient')expect(result.comparison.commonComponents,scenario).toHaveLength(6);
-   else expect(result.comparison.scores).toEqual({});
+   expect(result.comparison.commonComponents,scenario).toHaveLength(componentCount);
+   expect(Object.keys(result.comparison.scores),scenario).toHaveLength(routes.length);
   }
   expect(fixtureRoadEvidence([{...route(),source:'google'}],'normal')).toEqual({});
  });
  it('normalizes counts by distance and does not reward a longer equal-density route',()=>{const a=route(1000,'a'),b=route(2000,'b');const ea=evidence(a),eb=evidence(b,{openPlaces:8,potentialHelpPoints:2,staffedPlaceProxy:8});expect(componentValues(ea).openDensity).toBe(componentValues(eb).openDensity);expect(componentValues(ea).helpDensity).toBe(componentValues(eb).helpDensity);expect(compareActivity([a,b],[ea,eb]).outcome).toBe('similar');});
  it('uses the same available factors and denominator for every route',()=>{const a=route(1000,'a'),b=route(1000,'b'),ea=evidence(a),eb=evidence(b);const result=compareActivity([a,b],[ea,eb],{a:{mainRoadFraction:1}});expect(result.commonComponents).toEqual(['openDensity','helpDensity','gapContinuity','transport']);expect(result.scores.a).toBe(result.scores.b);});
- it('moves in the expected direction for more open evidence and a longer gap',()=>{const r=route(),base=evidence(r);expect(componentValues({...base,openPlaces:6}).openDensity).toBeGreaterThan(componentValues(base).openDensity!);expect(componentValues({...base,longestLowActivityMeters:800}).gapContinuity).toBeLessThan(componentValues(base).gapContinuity!);});
- it('withholds unequal missing evidence and keeps the fastest route',()=>{const a=route(1000,'a'),b={...route(1000,'b'),durationSeconds:900};const result=compareActivity([a,b],[evidence(a),evidence(b,{coreComparable:false})]);expect(result.outcome).toBe('insufficient');expect(result.scores).toEqual({});expect(result.selectedId).toBe('a');});
+ it('moves in the expected direction for more open evidence and a longer gap',()=>{const r=route(),base=evidence(r);expect(componentValues({...base,openPlaces:6}).openDensity).toBeGreaterThan(componentValues(base).openDensity!);expect(componentValues({...base,longestObservedLowActivityMeters:800}).gapContinuity).toBeLessThan(componentValues(base).gapContinuity!);});
+ it('scores partially covered routes from what was seen and keeps the fastest when similar',()=>{const a=route(1000,'a'),b={...route(1000,'b'),durationSeconds:900};const result=compareActivity([a,b],[evidence(a),evidence(b,{coreComparable:false})]);expect(result.outcome).toBe('similar');expect(Object.keys(result.scores)).toHaveLength(2);expect(result.selectedId).toBe('a');});
  it('does not force a large detour despite stronger activity',()=>{const a=route(1000,'a'),b={...route(1000,'b'),durationSeconds:1800};const result=compareActivity([a,b],[evidence(a,{openPlaces:0,potentialHelpPoints:0,longestLowActivityMeters:1000}),evidence(b,{openPlaces:8,potentialHelpPoints:2,staffedPlaceProxy:8,longestLowActivityMeters:0})]);expect(result.outcome).toBe('detour');expect(result.recommendedId).toBeNull();expect(result.selectedId).toBe('a');});
- it('does not rank live-derived observations or soon-closing evidence',()=>{const a=route(1000,'a'),b=route(1000,'b');for(const changes of [{source:'live' as const},{closingSoon:1}])expect(compareActivity([a,b],[evidence(a),evidence(b,changes)]).outcome).toBe('insufficient');});
+ it('scores live-derived and soon-closing observations from what was seen',()=>{const a=route(1000,'a'),b=route(1000,'b');for(const changes of [{source:'live' as const},{closingSoon:1}]){const c=compareActivity([a,b],[evidence(a),evidence(b,changes)]);expect(c.outcome).toBe('similar');expect(Object.keys(c.scores)).toHaveLength(2);}});
  it('does not compare observations evaluated at different times',()=>{const a=route(1000,'a'),b=route(1000,'b');expect(compareActivity([a,b],[evidence(a),evidence(b,{checkedAt:'2026-09-09T16:00:00Z'})]).outcome).toBe('insufficient');});
  it('does not call the fastest strongest when a three-route comparison has a small advantage elsewhere',()=>{const a=route(1000,'a'),b={...route(1000,'b'),durationSeconds:650},c={...route(1000,'c'),durationSeconds:700};const result=compareActivity([a,b,c],[evidence(a),evidence(b,{openPlaces:5}),evidence(c,{openPlaces:0,potentialHelpPoints:0,longestLowActivityMeters:1500})]);expect(result.outcome).toBe('similar');expect(result.message).not.toContain('also has the strongest');expect(result.recommendedId).toBeNull();});
  it('handles zero and one candidate without comparative claims',()=>{expect(compareActivity([],[]).outcome).toBe('empty');const r=route();expect(compareActivity([r],[evidence(r)]).outcome).toBe('single');});
- it('calculates actual fixture evidence for the normal and limited journeys',()=>{for(const origin of ['Manyata Tech Park','Sahakar Nagar'] as const){const routes=sampleRouteOptions(origin,'normal');const result=analyzeComparison(routes,plan=>fixtureScans(plan,'normal'),now);expect(result.analyses.every(a=>a.coreComparable)).toBe(true);expect(result.analyses[1].openPlaces!).toBeGreaterThan(result.analyses[0].openPlaces!);const limited=analyzeComparison(routes,plan=>fixtureScans(plan,'limited'),now);expect(limited.comparison.outcome).toBe('insufficient');}});
+ it('calculates actual fixture evidence for the normal and limited journeys',()=>{for(const origin of ['Manyata Tech Park','Sahakar Nagar'] as const){const routes=sampleRouteOptions(origin,'normal');const result=analyzeComparison(routes,plan=>fixtureScans(plan,'normal'),now);expect(result.analyses.every(a=>a.coreComparable)).toBe(true);expect(result.analyses[1].openPlaces!).toBeGreaterThan(result.analyses[0].openPlaces!);const limited=analyzeComparison(routes,plan=>fixtureScans(plan,'limited'),now);expect(limited.analyses.some(a=>!a.coreComparable)).toBe(true);expect(Object.keys(limited.comparison.scores)).toHaveLength(routes.length);}});
 });

@@ -53,6 +53,27 @@ describe('live backend', () => {
   it('counts a failed provider call and never retries or leaks the error body', async () => { const calls=vi.fn(async()=>new Response('private-provider-message',{status:403})); const app=await createServer(config({PILOT_ROUTE_LIMIT:'1'}),calls); try { const first=await app.inject(request); expect(first.json().code).toBe('provider-access'); expect(first.body).not.toContain('private-provider'); expect((await app.inject(request)).statusCode).toBe(429); expect(calls).toHaveBeenCalledTimes(1); } finally { await app.close(); } });
   it('uses the remaining bounded allowance and keeps unscanned distance unknown', async () => { const calls=vi.fn(async()=>new Response(JSON.stringify(response))); const app=await createServer(config({ENABLE_ACTIVITY_ANALYSIS:'true',PILOT_NEARBY_LIMIT:'1'}),calls); try { const res=await app.inject(request); expect(res.json().activityStatus).toBe('partial'); expect(res.json().usage.nearbyCalls).toBe(1); expect(res.json().analyses[0].scanCoverage).toBeLessThan(1); expect(calls).toHaveBeenCalledTimes(2); } finally { await app.close(); } });
   it('analyzes live scans with no stored provider data and reports total low distance', async () => { const calls=vi.fn(async(url: string|URL|Request)=>new Response(JSON.stringify(String(url).includes('routes.googleapis')?response:{places:[]}))); const conf=config({ENABLE_ACTIVITY_ANALYSIS:'true'}); const app=await createServer(conf,calls); try { const res=await app.inject(request); expect(res.statusCode).toBe(200); const body=res.json(); expect(body.activityStatus).toBe('complete'); expect(body.analyses[0].totalLowActivityMeters).toBeGreaterThan(100); expect(body.usage.nearbyCalls).toBeGreaterThan(0); expect(Object.keys(JSON.parse(readFileSync(conf.ledgerPath,'utf8'))).sort()).toEqual(['autocompleteCalls','detailsCalls','nearbyCalls','routeCalls']); } finally { await app.close(); } });
+  it('reuses recent nearby results without spending the allowance again', async () => {
+    const calls=vi.fn(async(_url:string|URL|Request)=>new Response(JSON.stringify(response)));
+    const app=await createServer(config({ENABLE_ACTIVITY_ANALYSIS:'true'}),calls);
+    try {
+      const first=await app.inject(request); expect(first.statusCode).toBe(200);
+      const spentNearby=first.json().usage.nearbyCalls; expect(spentNearby).toBeGreaterThan(0);
+      const second=await app.inject(request); expect(second.statusCode).toBe(200);
+      expect(second.json().usage.nearbyCalls).toBe(spentNearby);
+      expect(second.json().usage.routeCalls).toBe(2);
+      expect(calls.mock.calls.filter(c=>String(c[0]).includes('searchNearby')).length).toBe(spentNearby);
+    } finally { await app.close(); }
+  });
+  it('stores anonymous feedback without touching the Google allowance', async () => {
+    const calls=vi.fn(); const app=await createServer(config(),calls);
+    try {
+      const res=await app.inject({method:'POST',url:'/api/feedback',payload:{rating:'up',routeLabel:'Fastest',city:'Kanpur'}});
+      expect(res.statusCode).toBe(200); expect(res.json().ok).toBe(true);
+      expect((await app.inject({method:'POST',url:'/api/feedback',payload:{rating:'sideways'}})).statusCode).toBe(400);
+      expect(calls).not.toHaveBeenCalled();
+    } finally { await app.close(); }
+  });
   it('serializes comparisons so concurrent callers cannot reserve past the allowance', async () => { let release!:()=>void; let entered!:()=>void; const started=new Promise<void>(r=>entered=r); const paused=new Promise<void>(r=>release=r); const calls=vi.fn(async()=>{entered();await paused;return new Response(JSON.stringify(response));}); const app=await createServer(config(),calls); try { const first=app.inject(request); await started; const second=await app.inject(request); expect(second.statusCode).toBe(429); expect(second.json().code).toBe('busy'); release(); expect((await first).statusCode).toBe(200); expect(calls).toHaveBeenCalledTimes(1); } finally { release?.(); await app.close(); } });
 });
 describe('phone handoff and live score gate', () => {
@@ -70,6 +91,6 @@ describe('targeted missing-hours enrichment',()=>{
      return new Response(JSON.stringify({places:[raw]}));
    });
    const app=await createServer(config({ENABLE_ACTIVITY_ANALYSIS:'true',ENABLE_EXPERIMENTAL_SCORING:'true',PILOT_DETAILS_LIMIT:'1'}),calls);
-   try {const res=await app.inject(request),body=res.json();expect(res.statusCode).toBe(200);expect(body.usage.detailsCalls).toBe(1);expect(body.requestUsage.detailsCalls).toBe(1);expect(body.analyses[0].places[0].hours.state).toBe(succeeds?'open':'unknown');expect(body.comparison.scoreBounds).toBeDefined();expect(res.body).not.toContain('private-provider-error');}finally{await app.close();}
+   try {const res=await app.inject(request),body=res.json();expect(res.statusCode).toBe(200);expect(body.usage.detailsCalls).toBe(1);expect(body.requestUsage.detailsCalls).toBe(1);expect(body.analyses[0].places[0].hours.state).toBe(succeeds?'open':'unknown');expect(Object.keys(body.comparison.scores).length).toBeGreaterThan(0);expect(res.body).not.toContain('private-provider-error');}finally{await app.close();}
  });
 });

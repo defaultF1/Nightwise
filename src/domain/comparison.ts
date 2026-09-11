@@ -1,18 +1,22 @@
 import type { Route } from './types';
 import type { ActivityAnalysis, Comparison, Component, RoadEvidence } from './activity-types';
-import { compareLive } from './live-scoring';
 
-export const SCORE_VERSION='sample-activity-v3';
+export const SCORE_VERSION='night-activity-v5-observed';
 export const WEIGHTS:Record<Component,number>={openDensity:25,mainRoad:20,helpDensity:15,gapContinuity:15,simplicity:15,transport:10};
 const clamp=(x:number)=>Math.max(0,Math.min(1,x));
+// Components are built from what was actually observed. A signal missing for
+// any route is left out and the remaining weights rescale to 100; missing
+// evidence is never scored as zero.
 export function componentValues(a:ActivityAnalysis,road:RoadEvidence={}):Partial<Record<Component,number>>{
-  if(!a.coreComparable||a.distanceMeters<=0)return {};
+  if(a.distanceMeters<=0)return {};
   const km=a.distanceMeters/1000;
   const values:Partial<Record<Component,number>>={};
   if(a.openPlaces!==null)values.openDensity=clamp(a.openPlaces/km/8);
-  if(a.potentialHelpPoints!==null&&a.staffedPlaceProxy!==null&&a.longestHelpGapMeters!==null)values.helpDensity=(.75*clamp(a.potentialHelpPoints/km/2)+.25*clamp(a.staffedPlaceProxy/km/8))*(1-.5*clamp(a.longestHelpGapMeters/2000));
-  if(a.longestLowActivityMeters!==null)values.gapContinuity=1-clamp(a.longestLowActivityMeters/1500);
+  if(a.potentialHelpPoints!==null&&a.staffedPlaceProxy!==null)values.helpDensity=(.75*clamp(a.potentialHelpPoints/km/2)+.25*clamp(a.staffedPlaceProxy/km/8))*(1-.5*clamp(a.longestObservedHelpGapMeters/2000));
+  if(a.openPlaces!==null)values.gapContinuity=1-clamp(a.longestObservedLowActivityMeters/1500);
+  const roadTotal=(road.mainMeters??0)+(road.internalMeters??0)+(road.unknownMeters??0);
   if(Number.isFinite(road.mainRoadFraction)&&road.mainRoadFraction!>=0&&road.mainRoadFraction!<=1)values.mainRoad=road.mainRoadFraction;
+  else if(roadTotal>0)values.mainRoad=clamp((road.mainMeters??0)/roadTotal);
   if(Number.isFinite(road.maneuversPerKm)&&road.maneuversPerKm!>=0){
     const internal=Number.isFinite(road.internalTurnsPerKm)&&road.internalTurnsPerKm!>=0?road.internalTurnsPerKm!:0;
     // An estimated turn onto an internal road carries one additional turn penalty.
@@ -24,25 +28,22 @@ export function componentValues(a:ActivityAnalysis,road:RoadEvidence={}):Partial
 export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads:Record<string,RoadEvidence>={}, options: { allowLive?: boolean; maxExtraMinutes?: number } = {}):Comparison{
   const fastest=[...routes].sort((a,b)=>a.durationSeconds-b.durationSeconds||a.id.localeCompare(b.id))[0];
   const base:Comparison={version:SCORE_VERSION,fastestId:fastest?.id??null,selectedId:fastest?.id??null,recommendedId:null,outcome:routes.length?'single':'empty',message:routes.length?'Only one route was returned. There is no alternative to compare.':'No route options were returned.',commonComponents:[],scores:{},componentScores:{},rankedIds:[]};
-  if(routes.length&&routes.every(r=>r.source==='google')&&options.allowLive===true)return compareLive(routes,analyses,roads,base,options.maxExtraMinutes);
-  if(routes.length<2)return base;
+  if(!routes.length)return base;
+  if(routes.every(r=>r.source==='google')&&options.allowLive!==true)return routes.length<2?base:{...base,outcome:'insufficient',message:'Live scoring is switched off by the service setting.'};
   const byId=new Map(analyses.map(a=>[a.routeId,a]));
-  const sameCheckTime=new Set(routes.map(r=>byId.get(r.id)?.checkedAt)).size===1;
-  const usable=sameCheckTime&&routes.every(r=>{const a=byId.get(r.id);return a?.coreComparable&&(a.source==='sample'||options.allowLive===true)&&(a.closingSoon??0)===0;});
-  if(!usable)return {...base,outcome:'insufficient',message:'Not enough information to recommend a route. Unknown areas and uncertain opening hours are kept separate.'};
+  if(new Set(routes.map(r=>byId.get(r.id)?.checkedAt)).size!==1)return {...base,outcome:'insufficient',message:'These routes do not share one evidence check. Refresh the comparison.'};
   const useInternal=routes.every(r=>Number.isFinite(roads[r.id]?.internalTurnsPerKm)&&roads[r.id].internalTurnsPerKm!>=0);
-  const values=routes.map(r=>componentValues(byId.get(r.id)!,{...roads[r.id],internalTurnsPerKm:useInternal?roads[r.id].internalTurnsPerKm:undefined}));
+  const values=routes.map(r=>{const a=byId.get(r.id);return a?componentValues(a,{...roads[r.id],internalTurnsPerKm:useInternal?roads[r.id]?.internalTurnsPerKm:undefined}):{};});
   const common=(Object.keys(WEIGHTS) as Component[]).filter(key=>values.every(v=>v[key]!==undefined&&Number.isFinite(v[key])));
-  const required:Component[]=['openDensity','helpDensity','gapContinuity'];
-  if(!required.every(c=>common.includes(c)))return {...base,outcome:'insufficient',message:'The available evidence is not comparable across these routes.'};
+  if(!common.length)return routes.length<2?base:{...base,outcome:'insufficient',message:'Not enough shared evidence to score these routes yet. Travel times remain comparable.'};
   const denominator=common.reduce((sum,key)=>sum+WEIGHTS[key],0);
   const scores=Object.fromEntries(routes.map((route,i)=>[route.id,100*common.reduce((sum,key)=>sum+WEIGHTS[key]*values[i][key]!,0)/denominator]));
   const ranked=[...routes].sort((a,b)=>scores[b.id]-scores[a.id]||a.durationSeconds-b.durationSeconds||a.id.localeCompare(b.id));
   const maxExtra = options.maxExtraMinutes === undefined ? 10 : Math.max(0, Math.min(30, options.maxExtraMinutes));
   const best=ranked.find(r=>r.durationSeconds-fastest.durationSeconds<=maxExtra*60) ?? fastest;
-  const isLive=routes.every(r=>r.source==='google');
   const componentScores=Object.fromEntries(routes.map((r,i)=>[r.id,values[i]]));
-  const scored={...base,version:isLive?'experimental-live-activity-v3':SCORE_VERSION,commonComponents:common,scores,componentScores,rankedIds:ranked.map(r=>r.id)};
+  const scored={...base,commonComponents:common,scores,componentScores,rankedIds:ranked.map(r=>r.id)};
+  if(routes.length<2)return scored;
   const advantage=scores[best.id]-scores[fastest.id];
   const allRange=Math.max(...Object.values(scores))-Math.min(...Object.values(scores));
   if(allRange<10)return {...scored,outcome:'similar',message:'These routes have similar listed activity. The fastest option is selected.'};

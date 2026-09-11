@@ -14,7 +14,7 @@ test('configuration checks do not compare; missing server configuration is expli
 test('live routes have no invented activity and selected corridor handoff survives map failure',async({page})=>{
  let compares=0;await page.route('**/api/compare',r=>{compares++;return r.fulfill({json:fixture()});});
  await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeChecked();
- await expect(page.locator('.activity-score')).toHaveCount(0);await expect(page.locator('.route-summary').first()).toContainText('unavailable');
+ await expect(page.locator('.activity-score')).toHaveCount(0);await expect(page.locator('.route-summary')).toHaveCount(0);await expect(page.locator('.score-unavailable').first()).toContainText('Not enough shared evidence');
  await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();await page.getByRole('button',{name:'Continue with this route'}).click();const url=new URL((await page.getByRole('link',{name:'Open Google Maps'}).getAttribute('href'))!);expect(url.searchParams.get('waypoints')).toBeTruthy();expect(url.searchParams.get('destination')).toBe('13.047697,77.619939');await expect(page.getByRole('dialog')).toContainText('three points');
  await page.getByRole('dialog').screenshot({path:'talks/screenshots/M05/01-browser-handoff-mocked-provider.png'});
  await page.getByRole('button',{name:'Keep comparing'}).click();await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();expect(compares).toBe(1);
@@ -40,14 +40,13 @@ test('live response without shop analysis keeps evidence sections and details us
  await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();
  await expect(page.getByRole('dialog')).toContainText('Step 1 of 2');
  await page.getByRole('button',{name:'Confirm and compare'}).click();
- await expect(page.getByRole('region',{name:'Evidence confidence'})).toContainText('Not assessed');
- await page.getByText('Help points on selected route',{exact:true}).click();await expect(page.locator('.help-points')).toContainText('Unknown');
+ await page.getByText('Help points on selected route',{exact:true}).click();await expect(page.locator('.help-points')).toContainText('not checked');
  await page.getByRole('button',{name:'Alternative 1 · 22 min',exact:true}).click();
  await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();
  await expect(page.getByRole('button',{name:'Alternative 1 · 22 min',exact:true})).toHaveAttribute('aria-pressed','true');
  await expect(page.locator('.pin-legend')).toContainText('Start / current location');
  await expect(page.locator('.pin-legend')).toContainText('Petrol / CNG');
  await page.getByRole('radio',{name:'Fastest',exact:true}).check();await expect(page.getByRole('button',{name:'Fastest · 18 min',exact:true})).toHaveAttribute('aria-pressed','true');
- await page.getByRole('button',{name:'View activity details'}).first().click();await expect(page.getByRole('dialog')).toContainText('no shop analysis');
+ await page.getByRole('button',{name:'View activity details'}).first().click();await expect(page.getByRole('dialog')).toContainText('travel times only');
  await page.getByRole('button',{name:'Back to routes',exact:true}).click();await expect(page.getByRole('dialog')).toHaveCount(0);
 });

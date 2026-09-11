@@ -2,8 +2,10 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import { timingSafeEqual } from 'node:crypto';
+import { appendFileSync, mkdirSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { Budget, type BudgetStore } from './budget';
-import { RedisBudget } from './redis-budget';
+import { RedisBudget, redisCommand } from './redis-budget';
 import { GoogleProvider } from './google';
 import { ServiceError } from './errors';
 import type { ServerConfig } from './config';
@@ -46,12 +48,26 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     let budgetReady = true, budgetIssue: 'connection'|'missing'|'expiring'|'invalid'|undefined;
     if (budget instanceof RedisBudget) ({ready:budgetReady,issue:budgetIssue}=await budget.health());
     else try { await budget.snapshot(); } catch { budgetReady = false; budgetIssue='invalid'; }
-    return { buildVersion:'0.11.0-live-preview',searchPreviewEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady,scanStrategy:'partition-and-spatial-v1',scoringVersion:'experimental-live-activity-v4-bounds',serviceRadiusMeters:10000,serviceRegions:SERVICE_REGIONS.map(r=>({id:r.id,city:r.city,radiusMeters:r.radiusMeters})),ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
+    return { buildVersion:'0.11.0-live-preview',searchPreviewEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady,scanStrategy:'partition-and-spatial-v1',scoringVersion:'night-activity-v5-observed',serviceRadiusMeters:10000,serviceRegions:SERVICE_REGIONS.map(r=>({id:r.id,city:r.city,radiusMeters:r.radiusMeters})),ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
       searchEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady, activityEnabled:config.enabled,
       scoringEnabled:config.scoring, accessCodeRequired:!!config.accessCode, maxQueries:config.maxQueries,
       budgetStorage:config.redisUrl?'redis':'file', budgetReady, ...(budgetIssue?{budgetIssue}:{}) };
   });
   registerSearch(app,config,budget,fetcher);
+  // Anonymous pilot feedback: a rating plus coarse context, never coordinates.
+  app.post<{ Body: { rating: 'up' | 'down'; routeLabel?: string; city?: string } }>('/api/feedback', { schema: { body: { type: 'object', additionalProperties: false, required: ['rating'], properties: { rating: { type: 'string', enum: ['up', 'down'] }, routeLabel: { type: 'string', maxLength: 40 }, city: { type: 'string', maxLength: 40 } } } } }, async request => {
+    const entry = JSON.stringify({ ...request.body, at: new Date().toISOString() });
+    try {
+      if (config.redisUrl) {
+        await redisCommand(config.redisUrl, config.redisToken, ['LPUSH', 'nightwise:feedback:v1', entry], budgetFetcher);
+        await redisCommand(config.redisUrl, config.redisToken, ['LTRIM', 'nightwise:feedback:v1', 0, 999], budgetFetcher);
+      } else {
+        mkdirSync(dirname(config.ledgerPath), { recursive: true });
+        appendFileSync(join(dirname(config.ledgerPath), 'feedback.jsonl'), entry + '\n');
+      }
+    } catch { throw new ServiceError('feedback-unavailable', 'Feedback could not be saved right now.'); }
+    return { ok: true };
+  });
   const pointSchema = { type: 'object', additionalProperties: false, required: ['name', 'latitude', 'longitude'], properties: { name: { type: 'string', minLength: 1, maxLength: 100 }, latitude: { type: 'number', minimum: -90, maximum: 90 }, longitude: { type: 'number', minimum: -180, maximum: 180 } } };
   app.post<{ Body: LiveJourney }>('/api/compare', { schema: { body: { type: 'object', additionalProperties: false, required: ['origin', 'destination', 'mode'], properties: { origin: pointSchema, destination: pointSchema, mode: { type: 'string', enum: ['DRIVE'] } } } } }, async (request, reply) => {
     if (config.accessCode) {
@@ -109,7 +125,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
       if (activityStatus === 'complete' && analyses.some(a => !a.coreComparable)) activityStatus = 'partial';
       if (!config.enabled) notices.push('Live activity scans are switched off. Travel times are live; activity is not assessed.');
       if (!config.scoring) notices.push('Experimental live scoring is disabled by the service setting.');
-      else notices.push('Live scores are experimental evidence ranges, not safety ratings or calibrated predictions. Missing data widens the range.');
+      else notices.push('Live scores are experimental estimates from listed data, not safety ratings.');
       const analyzeRoads=loadRoadAnalyzer(roadFiles[regionForPoint(journey.origin)!.id]);
       const roadAnalyses=Object.fromEntries(routes.map(r=>[r.id,analyzeRoads(r.path,r.steps)]));
       if(routes.length)attributions.push({name:'© OpenStreetMap contributors · ODbL',uri:'https://www.openstreetmap.org/copyright'});

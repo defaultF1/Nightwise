@@ -2,8 +2,7 @@ import {describe,it,expect,vi} from 'vitest';
 import {sampleRouteOptions} from '../../src/providers/routes';
 import {fixtureScans,TUTORIAL_CHECKED_AT} from '../../src/data/activity-fixtures';
 import {buildQueryPlan,analyzeRoute} from '../../src/domain/activity';
-import {compareActivity} from '../../src/domain/comparison';
-import {liveComponentBounds} from '../../src/domain/live-scoring';
+import {compareActivity,componentValues} from '../../src/domain/comparison';
 import {balancedPlan,coveringChildren,collectScans} from '../../server/scan';
 import {distanceMeters} from '../../src/domain/geometry';
 import {validateLocation,locationError} from '../../src/domain/location';
@@ -16,22 +15,23 @@ import {createRoadAnalyzer} from '../../src/domain/roads';
 import type {NearbyScan} from '../../src/domain/activity-types';
 
 function evidence(){const routes=sampleRouteOptions('Manyata Tech Park','normal').map(r=>({...r,source:'google' as const,geometryKind:'provider' as const}));const plan=buildQueryPlan(routes);const scans=fixtureScans(plan,'normal');return {routes,plan,scans,analyses:routes.map(r=>analyzeRoute(r,plan,scans,TUTORIAL_CHECKED_AT))};}
-describe('live interval comparison',()=>{
- it('recommends a supported winner and explains the actual extra time',()=>{
+describe('observed live comparison',()=>{
+ it('recommends a stronger observed route and explains the actual extra time',()=>{
    const {routes,analyses}=evidence();
    const cases=routes.map((r,i)=>({...r,distanceMeters:1000,durationSeconds:i?720:600,turns:i?0:10}));
-   const known=analyses.map((a,i)=>({...a,distanceMeters:1000,scanCoverage:1,openPlaces:i?12:0,places:i?Array.from({length:12},(_,j)=>({id:`known-${j}`,hours:{state:'open' as const,closingSoon:false,minutesUntilClose:120},categories:['pharmacy','restaurant','bus_station'],sampleIndexes:[0],conflict:false})):[],lowActivityGapBounds:(i?[0,0]:[1000,1000]) as [number,number],helpGapBounds:(i?[0,0]:[1000,1000]) as [number,number]}));
+   const known=analyses.map((a,i)=>({...a,distanceMeters:1000,openPlaces:i?12:0,potentialHelpPoints:i?6:0,staffedPlaceProxy:i?8:0,openTransportPoints:i?3:0,longestObservedLowActivityMeters:i?0:1000,longestObservedHelpGapMeters:i?0:1000}));
    const roads=Object.fromEntries(cases.map((r,i)=>[r.id,{mainRoadFraction:i?1:0,maneuversPerKm:i?0:10,internalTurnsPerKm:0}]));
    const comparison=compareActivity(cases,known,roads,{allowLive:true,maxExtraMinutes:5});
    expect(comparison.recommendedId).toBe(cases[1].id);expect(comparison.message).toContain('2 extra minutes');
-   expect(comparison.scoreBounds![cases[1].id][0]).toBeGreaterThan(comparison.scoreBounds![cases[0].id][1]+10);
+   expect(comparison.commonComponents).toHaveLength(6);
+   expect(comparison.scores[cases[1].id]).toBeGreaterThan(comparison.scores[cases[0].id]+10);
  });
- it('publishes bounded scores for incomplete live observations without a false rank',()=>{const {routes,analyses}=evidence();const partial=analyses.map(a=>({...a,coreComparable:false,scanCoverage:.5,lowActivityGapBounds:[0,a.distanceMeters] as [number,number]}));const c=compareActivity(routes,partial,{}, {allowLive:true});expect(Object.keys(c.scoreBounds!)).toHaveLength(2);expect(c.rankedIds).toEqual([]);expect(c.recommendedId).toBeNull();expect(c.selectedId).toBe(c.fastestId);for(const [low,high]of Object.values(c.scoreBounds!)){expect(low).toBeGreaterThanOrEqual(0);expect(high).toBeGreaterThanOrEqual(low);expect(high).toBeLessThanOrEqual(100);}});
- it('retains all six fixed weights and complete uncertainty for missing roads',()=>{const {analyses}=evidence();const b=liveComponentBounds(analyses[0],{});expect(b.mainRoad).toEqual([0,1]);expect(b.simplicity).toEqual([0,1]);const c=compareActivity(evidence().routes,analyses,{}, {allowLive:true});expect(c.commonComponents).toHaveLength(6);expect(c.scoreBounds![analyses[0].routeId][1]-c.scoreBounds![analyses[0].routeId][0]).toBeGreaterThanOrEqual(35);});
- it('does not reward a missing internal-turn penalty',()=>{const {analyses}=evidence();expect(liveComponentBounds(analyses[0],{maneuversPerKm:4}).simplicity).toEqual([.19999999999999996,.6]);});
- it('does not produce a number for unavailable scans or mismatched times',()=>{const {routes,analyses}=evidence();expect(compareActivity(routes,analyses.map(a=>({...a,openPlaces:null})),{}, {allowLive:true}).scores).toEqual({});expect(compareActivity(routes,[analyses[0],{...analyses[1],checkedAt:'invalid'}],{}, {allowLive:true}).scores).toEqual({});});
+ it('scores partially observed routes from what was seen',()=>{const {routes,analyses}=evidence();const partial=analyses.map(a=>({...a,coreComparable:false,scanCoverage:.5}));const c=compareActivity(routes,partial,{}, {allowLive:true});expect(Object.keys(c.scores)).toHaveLength(2);expect(c.commonComponents).not.toContain('mainRoad');expect(c.commonComponents).not.toContain('simplicity');for(const s of Object.values(c.scores)){expect(s).toBeGreaterThanOrEqual(0);expect(s).toBeLessThanOrEqual(100);}});
+ it('leaves unassessed road signals out and rescales instead of scoring them zero',()=>{const {routes,analyses}=evidence();const c=compareActivity(routes,analyses,{}, {allowLive:true});expect(c.commonComponents).toEqual(expect.arrayContaining(['openDensity','helpDensity','gapContinuity','transport']));expect(c.commonComponents).not.toContain('mainRoad');const withRoads=compareActivity(routes,analyses,Object.fromEntries(routes.map(r=>[r.id,{mainRoadFraction:.8,maneuversPerKm:2,internalTurnsPerKm:0}])),{allowLive:true});expect(withRoads.commonComponents).toHaveLength(6);});
+ it('counts internal-turn penalties only when that evidence exists',()=>{const {analyses}=evidence();expect(componentValues(analyses[0],{maneuversPerKm:4,internalTurnsPerKm:2}).simplicity).toBeCloseTo(.4);expect(componentValues(analyses[0],{maneuversPerKm:4}).simplicity).toBeCloseTo(.6);expect(componentValues(analyses[0],{mainMeters:800,internalMeters:100,unknownMeters:100}).mainRoad).toBeCloseTo(.8);});
+ it('does not produce a number when nothing was observed or check times mismatch',()=>{const {routes,analyses}=evidence();const blank=analyses.map(a=>({...a,openPlaces:null,potentialHelpPoints:null,staffedPlaceProxy:null,openTransportPoints:null}));expect(compareActivity(routes,blank,{}, {allowLive:true}).scores).toEqual({});expect(compareActivity(routes,[analyses[0],{...analyses[1],checkedAt:'invalid'}],{}, {allowLive:true}).scores).toEqual({});});
  it('does not rank a single eligible option under a zero-minute preference',()=>{const {routes,analyses}=evidence();const c=compareActivity(routes,analyses,{}, {allowLive:true,maxExtraMinutes:0});expect(c.outcome).toBe('detour');expect(c.recommendedId).toBeNull();});
- it('keeps a single route score without implying comparison',()=>{const {routes,analyses}=evidence();const c=compareActivity(routes.slice(0,1),analyses.slice(0,1),{}, {allowLive:true});expect(c.outcome).toBe('single');expect(c.scoreBounds![routes[0].id]).toBeDefined();});
+ it('keeps a single route score without implying comparison',()=>{const {routes,analyses}=evidence();const c=compareActivity(routes.slice(0,1),analyses.slice(0,1),{}, {allowLive:true});expect(c.outcome).toBe('single');expect(c.scores[routes[0].id]).toBeDefined();});
 });
 describe('bounded scan coverage',()=>{
  it('allocates limited queries across alternatives and leaves omitted intervals unknown',()=>{const {routes}=evidence();const p=balancedPlan(routes,6);expect(p.queries).toHaveLength(6);for(const route of routes){const samples=p.samplesByRoute[route.id];expect(samples.some(s=>p.queries.some(q=>q.id===s.queryId))).toBe(true);const a=analyzeRoute(route,p,[],TUTORIAL_CHECKED_AT);expect(a.activityCoverage).toBe(0);expect(a.lowActivityGapBounds![1]).toBeCloseTo(a.distanceMeters);}});

@@ -23,28 +23,32 @@ redis.call('SET', KEYS[1], cjson.encode(data))
 return {'ok'}
 `;
 
+// Shared Upstash REST call. Never exposes a token, endpoint or transport error,
+// and never retries: a lost response might still represent a completed write.
+export async function redisCommand(url: string, token: string, command: (string | number)[], fetcher: typeof fetch = fetch): Promise<unknown> {
+  try {
+    const response = await fetcher(url, {
+      method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(command), signal: AbortSignal.timeout(8000), redirect: 'error',
+    });
+    if (!response.ok) throw new Error();
+    const text = await response.text();
+    if (text.length > 8192) throw new Error();
+    const data = JSON.parse(text);
+    if (!data || typeof data !== 'object' || data.error || !Object.hasOwn(data, 'result')) throw new Error();
+    return data.result;
+  } catch {
+    throw new ServiceError('budget-unavailable', 'The request allowance could not be verified. No Google request was sent.');
+  }
+}
+
 export class RedisBudget implements BudgetStore {
   constructor(private url: string, private token: string, private key: string,
     public routeLimit: number, public nearbyLimit: number,
     public autocompleteLimit = 40, public detailsLimit = 20, private fetcher: typeof fetch = fetch) {}
 
-  private async command(command: (string | number)[]): Promise<unknown> {
-    try {
-      const response = await this.fetcher(this.url, {
-        method: 'POST', headers: { Authorization: `Bearer ${this.token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify(command), signal: AbortSignal.timeout(8000), redirect: 'error',
-      });
-      if (!response.ok) throw new Error();
-      const text = await response.text();
-      if (text.length > 8192) throw new Error();
-      const data = JSON.parse(text);
-      if (!data || typeof data !== 'object' || data.error || !Object.hasOwn(data, 'result')) throw new Error();
-      return data.result;
-    } catch {
-      // Never expose a token, endpoint, provider body or transport error. No automatic retries:
-      // a lost response might still represent a successful reservation.
-      throw new ServiceError('budget-unavailable', 'The request allowance could not be verified. No Google request was sent.');
-    }
+  private command(command: (string | number)[]): Promise<unknown> {
+    return redisCommand(this.url, this.token, command, this.fetcher);
   }
 
   async reserve(kind: BudgetKind, amount = 1): Promise<void> {

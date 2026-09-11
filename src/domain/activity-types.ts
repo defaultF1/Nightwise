@@ -28,8 +28,6 @@ export type ActivityAnalysis = {
 export type Component = 'openDensity' | 'mainRoad' | 'helpDensity' | 'gapContinuity' | 'simplicity' | 'transport';
 export type RoadEvidence = { mainRoadFraction?: number; internalRoadFraction?: number; maneuversPerKm?: number; internalTurnsPerKm?:number; mainMeters?:number; internalMeters?:number; unknownMeters?:number };
 export type Comparison = {
-  scoreBounds?: Record<string, [number, number]>;
-  componentBounds?: Record<string, Record<Component, [number, number]>>;
   version: string; fastestId: string | null; selectedId: string | null; recommendedId: string | null;
   outcome: 'empty' | 'single' | 'insufficient' | 'similar' | 'detour' | 'more-activity';
   message: string; commonComponents: Component[]; scores: Record<string,number>;

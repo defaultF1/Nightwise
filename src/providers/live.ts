@@ -9,6 +9,10 @@ const ANDROID_FALLBACK_API_BASE = 'https://nightwise-f5fu.onrender.com';
 const base = Capacitor.isNativePlatform()
   ? import.meta.env.VITE_ANDROID_API_BASE_URL || import.meta.env.VITE_API_BASE_URL || ANDROID_FALLBACK_API_BASE
   : import.meta.env.VITE_API_BASE_URL || (['localhost', '127.0.0.1'].includes(window.location.hostname) ? 'http://127.0.0.1:8787' : '');
+export async function sendRouteFeedback(rating: 'up' | 'down', routeLabel: string, city: string): Promise<void> {
+  const response = await fetch(`${base}/api/feedback`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ rating, routeLabel: routeLabel.slice(0, 40), city: city.slice(0, 40) }), signal: AbortSignal.timeout(10000), cache: 'no-store' });
+  if (!response.ok) throw new Error('Feedback unavailable');
+}
 export async function serviceStatus(signal?: AbortSignal): Promise<ServiceStatus> {
   const response = await fetch(`${base}/api/status`, { signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(65000)]) : AbortSignal.timeout(65000), cache: 'no-store' });
   if (!response.ok) throw new Error('Backend unavailable');

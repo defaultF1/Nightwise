@@ -48,8 +48,8 @@ describe('PDF gap completion',()=>{
   const a=analyzeRoute(route,plan,scans,now);expect(a.longestHelpGapMeters).toBeNull();expect(a.longestObservedHelpGapMeters).toBeLessThan(610);
  });
  it('penalizes a long help gap at equal counts and turns onto internal roads at equal total turn rates',()=>{
-  const a={...evidence(2,'pharmacy').analysis,longestHelpGapMeters:0};
-  expect(componentValues({...a,longestHelpGapMeters:1800}).helpDensity).toBeLessThan(componentValues(a).helpDensity!);
+  const a={...evidence(2,'pharmacy').analysis,longestObservedHelpGapMeters:0};
+  expect(componentValues({...a,longestObservedHelpGapMeters:1800}).helpDensity).toBeLessThan(componentValues(a).helpDensity!);
   expect(componentValues(a,{maneuversPerKm:3,internalTurnsPerKm:3}).simplicity).toBeLessThan(componentValues(a,{maneuversPerKm:3,internalTurnsPerKm:0}).simplicity!);
  });
  it('returns a deterministic full activity ranking independent of input order',()=>{
@@ -57,7 +57,7 @@ describe('PDF gap completion',()=>{
   const a=evidence(2,'pharmacy').analysis;
   const result=compareActivity([c,route,b],[{...a,routeId:'c',openPlaces:0},a,{...a,routeId:'b'}]);
   expect(result.rankedIds).toEqual(['a','b','c']);
-  expect(compareActivity([route,b],[a,{...a,routeId:'b',coreComparable:false}]).rankedIds).toEqual([]);
+  expect(compareActivity([route,b],[a,{...a,routeId:'b',coreComparable:false}]).rankedIds).toEqual(['a','b']);
  });
  it('does not apply internal-road adjustment unequally when one road input is missing',()=>{
   const a=evidence(2).analysis,b={...route,id:'b'};

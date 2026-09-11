@@ -75,7 +75,33 @@ export function parseScan(data: Json, queryId: string, observedAt: string): { sc
   return { scan: { queryId, observedAt, status: malformed ? 'failed' : input.length === 20 ? 'capped' : 'ok', places }, attributions };
 }
 
+type ScanResult = { scan: NearbyScan; attributions: { name: string; uri?: string }[] };
+// Places change slowly: remembering results briefly stops the same street
+// corner being paid for on every comparison. The TTL stays well inside the
+// domain's 15-minute evidence freshness window, so cached observations are
+// still treated as fresh. Failed scans are never cached.
+export class PlacesCache {
+  private entries = new Map<string, { at: number; result: ScanResult }>();
+  constructor(private ttlMs = 10 * 60_000, private max = 600) {}
+  private static key(query: NearbyQuery) { return `${query.coordinate.latitude},${query.coordinate.longitude},${query.radiusMeters},${query.partition ?? ''}`; }
+  get(query: NearbyQuery): ScanResult | undefined {
+    const key = PlacesCache.key(query), entry = this.entries.get(key);
+    if (!entry) return;
+    if (Date.now() - entry.at > this.ttlMs) { this.entries.delete(key); return; }
+    const copy = structuredClone(entry.result);
+    copy.scan.queryId = query.id;
+    return copy;
+  }
+  set(query: NearbyQuery, result: ScanResult) {
+    if (result.scan.status === 'failed') return;
+    if (this.entries.size >= this.max) this.entries.delete(this.entries.keys().next().value!);
+    this.entries.set(PlacesCache.key(query), { at: Date.now(), result: structuredClone(result) });
+  }
+}
+
 export class GoogleProvider {
+  private cache = new PlacesCache();
+  private detailsCache = new Map<string, { at: number; result: ScanResult }>();
   constructor(private key: string, private budget: BudgetStore, private fetcher: typeof fetch = fetch) {}
   private async post(url: string, fields: string, body: Json | undefined, signal: AbortSignal): Promise<Json> {
     signal.throwIfAborted();
@@ -102,19 +128,28 @@ export class GoogleProvider {
     return parseRoutes(data);
   }
   async nearby(query: NearbyQuery, signal: AbortSignal) {
+    const cached = this.cache.get(query);
+    if (cached) return cached;
     signal.throwIfAborted(); await this.budget.reserve('nearby');
     const data = await this.post('https://places.googleapis.com/v1/places:searchNearby', PLACE_FIELDS, {
       includedTypes: query.partition ? SEARCH_PARTITIONS[query.partition] : [...SEARCH_PARTITIONS.places,...SEARCH_PARTITIONS.help],
       maxResultCount: 20, rankPreference: 'DISTANCE', languageCode: 'en',
       locationRestriction: { circle: { center: query.coordinate, radius: query.radiusMeters } },
     }, signal);
-    return parseScan(data, query.id, new Date().toISOString());
+    const result = parseScan(data, query.id, new Date().toISOString());
+    this.cache.set(query, result);
+    return result;
   }
   async details(id:string,signal:AbortSignal){
     if(!/^[\w-]{1,200}$/.test(id))throw new ServiceError('invalid-input','Invalid place reference.',400);
+    const cached=this.detailsCache.get(id);
+    if(cached&&Date.now()-cached.at<=10*60_000)return structuredClone(cached.result);
     signal.throwIfAborted();await this.budget.reserve('details');
     const data=await this.post(`https://places.googleapis.com/v1/places/${encodeURIComponent(id)}`,PLACE_FIELDS.replaceAll('places.',''),undefined,signal);
     if(data.id!==id)throw new ServiceError('invalid-response','Place reference changed.');
-    return parseScan({places:[data]},`details:${id}`,new Date().toISOString());
+    const result=parseScan({places:[data]},`details:${id}`,new Date().toISOString());
+    if(this.detailsCache.size>=200)this.detailsCache.delete(this.detailsCache.keys().next().value!);
+    this.detailsCache.set(id,{at:Date.now(),result:structuredClone(result)});
+    return result;
   }
 }
