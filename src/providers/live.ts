@@ -13,11 +13,11 @@ export async function serviceStatus(signal?: AbortSignal): Promise<ServiceStatus
   if (typeof status.ready !== 'boolean' || typeof status.activityEnabled !== 'boolean') throw new Error('Unexpected backend');
   return status;
 }
-export async function liveComparison(journey: LiveJourney, signal: AbortSignal): Promise<LiveResult> {
+export async function liveComparison(journey: LiveJourney, signal: AbortSignal, accessCode: string): Promise<LiveResult> {
   const pin = (p:LiveJourney['origin'])=>({name:p.name,latitude:p.latitude,longitude:p.longitude});
   const payload={origin:pin(journey.origin),destination:pin(journey.destination),mode:journey.mode};
   let response: Response;
-  try { response = await fetch(`${base}/api/compare`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: AbortSignal.any([signal, AbortSignal.timeout(170000)]), cache: 'no-store' }); }
+  try { response = await fetch(`${base}/api/compare`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(accessCode ? { 'X-Nightwise-Code': accessCode } : {}) }, body: JSON.stringify(payload), signal: AbortSignal.any([signal, AbortSignal.timeout(170000)]), cache: 'no-store' }); }
   catch { if (signal.aborted) throw new DOMException('Cancelled', 'AbortError'); throw new JourneyError('unavailable', 'The live service could not be reached. Check the connection and backend. Your journey is saved.', true); }
   let data: any;
   try { data = await response.json(); } catch { throw new JourneyError('invalid-response', 'The live service returned an unreadable response.'); }

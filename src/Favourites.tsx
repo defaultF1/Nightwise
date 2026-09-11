@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { makeFavourite, readFavourites, writeFavourites } from './domain/favourites';
 import type { JourneyPoint } from './domain/journey';
 import { resolveFavourite } from './providers/search';
-export function Favourites({point,onChoose}:{point:JourneyPoint;onChoose:(p:JourneyPoint)=>void}){
+export function Favourites({point,onChoose,accessCode}:{point:JourneyPoint;onChoose:(p:JourneyPoint)=>void;accessCode:string}){
   const [items,setItems]=useState(readFavourites),[label,setLabel]=useState(''),[message,setMessage]=useState(''),[busy,setBusy]=useState(false);
   const request=useRef<AbortController|null>(null);
   useEffect(()=>()=>request.current?.abort(),[]);
   async function choose(item:typeof items[number]){
     request.current?.abort();const c=new AbortController();request.current=c;setBusy(true);setMessage('');
-    try{const p=item.point??await resolveFavourite(item.placeId!,item.label,c.signal);if(!c.signal.aborted)onChoose(p);}
+    try{const p=item.point??await resolveFavourite(item.placeId!,item.label,c.signal,accessCode);if(!c.signal.aborted)onChoose(p);}
     catch(e){if(!c.signal.aborted)setMessage(e instanceof Error?e.message:'Saved place unavailable.');}
     finally{if(!c.signal.aborted)setBusy(false);}
   }

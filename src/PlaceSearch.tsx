@@ -5,7 +5,7 @@ import { suggestPlaces, resolvePlace, previewPlaces } from './providers/search';
 import { serviceStatus } from './providers/live';
 const distanceText=(m:number)=>m<1000?`${Math.round(m/10)*10} m`:`${(m/1000).toFixed(1)} km`;
 const timeText=(s:number)=>s<60?'Under 1 min':`${Math.ceil(s/60)} min`;
-export function PlaceSearch({onChoose,anchor,direction}:{onChoose:(point:JourneyPoint)=>void;anchor:JourneyPoint;direction:SearchDirection}){
+export function PlaceSearch({onChoose,anchor,direction,accessCode}:{onChoose:(point:JourneyPoint)=>void;anchor:JourneyPoint;direction:SearchDirection;accessCode:string}){
   const city=regionForPoint(anchor)?.city??'Bengaluru';
   const [query,setQuery]=useState(''),[error,setError]=useState(''),[message,setMessage]=useState(''),[busy,setBusy]=useState(false),[choosing,setChoosing]=useState(false),[suggestions,setSuggestions]=useState<PlaceSuggestion[]>([]);
   const [estimates,setEstimates]=useState<PlaceTravelEstimate[]>([]),[previewState,setPreviewState]=useState(''),[checkedAt,setCheckedAt]=useState('');
@@ -20,12 +20,12 @@ export function PlaceSearch({onChoose,anchor,direction}:{onChoose:(point:Journey
       const status=await serviceStatus(c.signal);if(c.signal.aborted||id!==sequence.current)return;
       if(!status.searchEnabled){setMessage('Place search is paused. Supplied pins and coordinate entry still work.');return;}
       const coordinate={latitude:anchor.latitude,longitude:anchor.longitude};
-      const found=await suggestPlaces(query.trim(),token.current,c.signal,status.searchPreviewEnabled?coordinate:undefined);if(id!==sequence.current||c.signal.aborted)return;
+      const found=await suggestPlaces(query.trim(),token.current,c.signal,status.searchPreviewEnabled?coordinate:undefined,accessCode);if(id!==sequence.current||c.signal.aborted)return;
       setSuggestions(found);if(!found.length){setMessage('No matching places found. Try a more specific name or use coordinates.');return;}
       if(!status.searchPreviewEnabled){setPreviewState('Travel estimates need the updated live service. You can still choose a place.');return;}
       setPreviewState('Checking driving times…');
       previewTimer.current=setTimeout(()=>{void (async()=>{
-        try{const result=await previewPlaces(found.map(p=>p.id),token.current,coordinate,direction,c.signal);if(id!==sequence.current||c.signal.aborted)return;setEstimates(result.estimates);setCheckedAt(result.checkedAt);setPreviewState('');}
+        try{const result=await previewPlaces(found.map(p=>p.id),token.current,coordinate,direction,c.signal,accessCode);if(id!==sequence.current||c.signal.aborted)return;setEstimates(result.estimates);setCheckedAt(result.checkedAt);setPreviewState('');}
         catch{if(id===sequence.current&&!c.signal.aborted)setPreviewState('Driving estimates unavailable. You can still choose a place.');}
       })();},900);
     }catch(e){if(id===sequence.current&&!c.signal.aborted){setError(e instanceof Error?e.message:'Search unavailable. Use a supplied pin.');token.current=crypto.randomUUID();}}
@@ -33,7 +33,7 @@ export function PlaceSearch({onChoose,anchor,direction}:{onChoose:(point:Journey
   }
   async function choose(s:PlaceSuggestion){
     cancel();const id=sequence.current,c=new AbortController();request.current=c;setChoosing(true);setError('');
-    try{const point=await resolvePlace(s,token.current,c.signal);if(id===sequence.current&&!c.signal.aborted)onChoose(point);}
+    try{const point=await resolvePlace(s,token.current,c.signal,accessCode);if(id===sequence.current&&!c.signal.aborted)onChoose(point);}
     catch(e){if(id===sequence.current&&!c.signal.aborted){setSuggestions([]);token.current=crypto.randomUUID();setError(e instanceof Error?e.message:'Place unavailable. Search again.');}}
     finally{if(id===sequence.current)setChoosing(false);}
   }
