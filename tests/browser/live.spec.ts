@@ -11,11 +11,11 @@ test('configuration checks do not compare; missing server configuration is expli
  await page.locator('.state-panel img').evaluate((img:HTMLImageElement)=>img.decode());
  await page.screenshot({path:'talks/screenshots/M04/01-missing-server-key.png',fullPage:true});
 });
-test('live routes have no invented activity and selected corridor handoff survives map failure',async({page})=>{
+test('live routes have no invented activity and endpoint-only handoff survives map failure',async({page})=>{
  let compares=0;await page.route('**/api/compare',r=>{compares++;return r.fulfill({json:fixture()});});
  await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeChecked();
  await expect(page.locator('.activity-score')).toHaveCount(0);await expect(page.locator('.route-summary').first()).toContainText('unavailable');
- await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();await page.getByRole('button',{name:'Continue with this route'}).click();const url=new URL((await page.getByRole('link',{name:'Open Google Maps'}).getAttribute('href'))!);expect(url.searchParams.get('waypoints')).toBeTruthy();expect(url.searchParams.get('destination')).toBe('13.047697,77.619939');await expect(page.getByRole('dialog')).toContainText('three points');
+ await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();await page.getByRole('button',{name:'Continue with this route'}).click();const url=new URL((await page.getByRole('link',{name:'Open Google Maps'}).getAttribute('href'))!);expect(url.searchParams.has('waypoints')).toBe(false);expect(url.searchParams.get('destination')).toBe('13.047697,77.619939');await expect(page.getByRole('dialog')).toContainText('no stops in between');
  await page.getByRole('dialog').screenshot({path:'talks/screenshots/M05/01-browser-handoff-mocked-provider.png'});
  await page.getByRole('button',{name:'Keep comparing'}).click();await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();expect(compares).toBe(1);
 });
