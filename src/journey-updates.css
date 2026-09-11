@@ -1,0 +1,56 @@
+.journey-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 18px}.journey-tools .secondary-button{font-size:12px;min-height:44px;padding:10px}.time-preference{display:grid;gap:8px;font-size:12px;color:var(--muted);margin:12px 0 20px}.time-preference select,.save-place input{width:100%;border:1px solid var(--line);border-radius:10px;min-height:46px;background:var(--raised);color:var(--text);padding:12px;font:inherit}.save-place{display:grid;gap:12px}.save-place label{display:grid;gap:8px;font-size:12px}.saved-list>div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line)}.saved-list button{overflow-wrap:anywhere;text-align:left}.favourites{border-top:1px solid var(--line);padding-top:8px}.endpoint-confirmation>div{padding:14px 0;border-bottom:1px solid var(--line)}.endpoint-confirmation dt{font-size:12px;color:var(--muted)}.endpoint-confirmation dd{margin:8px 0}.endpoint-confirmation dd span{display:block;margin:8px 0;font-size:12px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}.confidence{padding:16px;border:1px solid var(--line);border-radius:14px;margin-bottom:14px;background:var(--surface)}.confidence h3{font-size:13px;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between}.confidence h3 span{font-size:11px;font-weight:400;color:var(--muted)}.confidence dl{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}.confidence dt{font-size:10px;color:var(--muted)}.confidence dd{margin:5px 0 0;font-size:17px}.confidence p,.help-points p{font-size:11px;line-height:1.6;color:var(--muted)}.help-details{padding:14px;border:1px solid var(--line);border-radius:14px;margin-bottom:14px}.help-details summary{cursor:pointer;min-height:30px;font-size:13px}.help-points h3{font-size:14px;margin:12px 0}.help-points ul{padding:0;list-style:none;max-height:260px;overflow:auto}.help-points li{display:grid;gap:5px;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.help-points li span{font-size:11px;color:var(--muted)}.freshness{display:flex;gap:10px;align-items:center;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:10px}.freshness span{line-height:1.6}.freshness button{white-space:nowrap}.preference-note{font-size:11px;color:var(--muted);line-height:1.5;margin:10px 0 16px}
+html,body,#root{min-height:100%;width:100%}.app-shell{min-height:100dvh}.sheet{overscroll-behavior:contain}.sheet-inner{padding-bottom:max(24px,env(safe-area-inset-bottom))}.app-footer{padding-bottom:max(14px,env(safe-area-inset-bottom))}
+@media(prefers-reduced-motion:no-preference){button,a,.route-card,.theme-option{transition:background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease}button:active,.primary-button:active{transform:scale(.985)}.plan-main,.journey-main{animation:page-arrive .22s ease-out}.sheet[open]{animation:sheet-arrive .24s cubic-bezier(.2,.8,.2,1)}.sheet[open]::backdrop{animation:backdrop-arrive .2s ease-out}@keyframes page-arrive{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:none}}@keyframes sheet-arrive{from{opacity:.3;transform:translateY(18px)}to{opacity:1;transform:none}}@keyframes backdrop-arrive{from{opacity:0}to{opacity:1}}}
+@media(max-width:400px){.freshness{flex-wrap:wrap}.journey-tools{display:grid}.time-preference{font-size:11px}}
+
+/* Native maps render beneath the WebView, including maps inside a dialog. */
+html[data-native-map=true]:has(.sheet .live-map) .app-shell>main,
+html[data-native-map=true]:has(.sheet .live-map) .app-shell>.app-header,
+html[data-native-map=true]:has(.sheet .live-map) .app-shell>.app-footer{visibility:hidden}
+html[data-native-map=true] .sheet:has(.live-map),
+html[data-native-map=true] .sheet:has(.live-map)::backdrop{background:transparent;backdrop-filter:none}
+html[data-native-map=true] .sheet:has(.live-map) .sheet-inner>*:not(.live-map):not(button):not(.endpoint-confirmation){background:var(--surface)}
+/* Keep native map bounds stable while Capacitor measures its host element. */
+.plan-main:has(.live-map),.journey-main:has(.live-map),.sheet:has(.live-map){animation:none}
+.map-route-options{display:flex;gap:8px;flex-wrap:wrap;background:var(--bg);padding:0 14px 12px}.map-route-options button{font:inherit;font-size:11px;min-height:44px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text)}.map-route-options button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}.score-unavailable{display:flex;flex-wrap:wrap;gap:8px;font-size:11px;margin:14px 0;color:var(--muted)}.score-unavailable small{flex-basis:100%;line-height:1.5}
+/* Opaque text and icon surfaces prevent redraw loss in the Android WebView. */
+html[data-native-map=true] .brand,html[data-native-map=true] .journey-heading,html[data-native-map=true] .diagram-heading{transform:translateZ(0);backface-visibility:hidden}
+html[data-native-map=true] .brand,html[data-native-map=true] .journey-heading>div,html[data-native-map=true] .diagram-heading>span{background:var(--bg);isolation:isolate;contain:paint}
+html[data-native-map=true] .brand svg,html[data-native-map=true] .brand span,html[data-native-map=true] .back-link,html[data-native-map=true] .back-link svg,html[data-native-map=true] .diagram-heading svg,html[data-native-map=true] .header-actions svg{background:var(--bg);transform:translateZ(0)}
+.pin-legend{display:flex;flex-wrap:wrap;gap:10px 14px;padding:8px 18px 14px;background:var(--bg);color:var(--muted);font-size:10px;line-height:1.5}.pin-legend span{display:inline-flex;align-items:center;gap:6px}.pin-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;border:1px solid #ffffff66;flex-shrink:0}
+
+/* Give wrapped endpoint text breathing room and keep the last action above the screen edge. */
+.activity-strip .strip-title{align-items:flex-start;flex-wrap:wrap;gap:8px;line-height:1.5}
+.activity-strip .strip-explanation,.strip-help p,.strip-help li{font-size:12px;line-height:1.65;color:var(--muted);margin:8px 0}
+.strip-direction{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin:10px 0 7px}
+.activity-strip .segment-band{height:12px}.activity-strip .segment-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;line-height:1.5}
+.strip-help{margin-top:12px;border-top:1px solid var(--line);padding-top:5px}.strip-help summary,.coverage-details summary{min-height:44px;align-content:center;cursor:pointer;font-size:12px;color:var(--text);line-height:1.5}
+.strip-help ul{padding-left:18px}.confidence .confidence-summary{font-size:13px;margin:14px 0 8px}.confidence .confidence-summary strong{color:var(--text)}
+.shop-hours>p,.shop-hours-item p,.shop-hours-item li{font-size:12px;line-height:1.65;color:var(--muted);margin:10px 0}
+.shop-hours-list{max-height:440px;overflow:auto;overscroll-behavior:contain}.shop-hours-item{padding:12px 0;border-top:1px solid var(--line)}.shop-hours-item summary{line-height:1.5;overflow-wrap:anywhere}.shop-hours-item summary strong{font-size:13px}.shop-hours-item summary span{display:block;font-size:11px;color:var(--muted);margin:5px 0 0}.shop-hours-item h4{font-size:12px;margin:16px 0 6px}.shop-hours-item ul{padding-left:18px}
+.endpoint-confirmation{display:grid;gap:12px;min-width:0;margin:16px 0 20px;background:transparent}
+.endpoint-confirmation>div{min-width:0;padding:16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.endpoint-confirmation dt,.endpoint-confirmation dd{min-width:0;line-height:1.5;overflow-wrap:anywhere}
+.endpoint-confirmation dd{margin:8px 0 0}
+.endpoint-confirmation dd strong{display:block;line-height:1.4;overflow-wrap:anywhere}
+.endpoint-confirmation dd span{line-height:1.65}
+.sheet-inner>.primary-button{border-radius:18px;line-height:1.4;white-space:normal;overflow-wrap:anywhere;min-height:56px}
+.sheet .sheet-inner{padding-bottom:calc(32px + env(safe-area-inset-bottom));min-width:0}
+.sheet .sheet-heading h2{min-width:0;line-height:1.3;overflow-wrap:anywhere}
+@media(max-width:760px){.sheet[open]{width:calc(100% - 16px);max-height:calc(100dvh - 32px - env(safe-area-inset-top) - env(safe-area-inset-bottom));margin:16px auto;border:1px solid var(--line);border-radius:24px}.sheet .sheet-inner{padding-left:16px;padding-right:16px}}
+
+/* Keep result controls readable above Capacitor's native map surface. */
+.help-details{background:var(--surface)}
+html[data-native-map=true] .results-panel{background:var(--bg)}
+.journey-answer{display:block;padding:20px;margin-bottom:20px;border:1px solid var(--line);border-radius:20px;background:var(--surface);overflow-wrap:anywhere}
+.journey-answer h2{font-size:21px;line-height:1.4;margin:12px 0}.journey-answer h2 span{font-weight:400;font-size:15px;color:var(--muted)}
+.journey-answer p,.journey-answer li{font-size:13px;line-height:1.7}.journey-answer ul{padding-left:18px;color:var(--muted)}.journey-answer button{margin-top:8px}
+.offline-map{overflow:hidden;background:var(--surface)}.offline-map>svg{display:block;width:100%;height:auto;max-height:none;aspect-ratio:560/440}
+.offline-map .diagram-heading svg,.offline-map .diagram-options svg{width:14px;height:14px;flex-shrink:0;aspect-ratio:auto}
+.offline-streets{stroke:var(--line);stroke-width:1.3}.offline-streets.main{stroke:var(--muted);stroke-width:2.5;opacity:.55}.offline-streets.path{stroke-width:.6;opacity:.5}
+.offline-street-label{fill:var(--muted);font-size:9px;paint-order:stroke;stroke:var(--map);stroke-width:3px;stroke-linejoin:round}
+.offline-map .diagram-options{padding:8px 14px 14px}.offline-map .diagram-options button{min-height:44px}.offline-map .diagram-caption a{color:var(--muted)}
+/* MainActivity already reserves the Android camera cutout. Do not add it twice. */
+html[data-platform=android] .app-shell{padding-top:0;padding-bottom:0}
+@media(max-width:760px){html[data-platform=android] .app-header{padding:8px 0 10px}}
+.search-result>span{min-width:0;width:100%;overflow-wrap:anywhere}.search-result strong{line-height:1.5}.search-result small{line-height:1.6}.search-trip-context{font-size:12px;color:var(--muted);line-height:1.6;margin:10px 0}.search-travel{display:block;margin-top:10px}.search-travel b{display:inline-block;border-radius:8px;padding:7px 10px;background:var(--raised);color:var(--text);font-size:13px}.search-travel small{display:block}
