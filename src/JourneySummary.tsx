@@ -10,7 +10,7 @@ export function JourneySummary({routes,comparison,analyses,onSelect}:{routes:Rou
     <span className="small-label">{comparison.recommendedId?'RECOMMENDED FOR LISTED ACTIVITY':'QUICKEST OPTION'}</span>
     <h2>{choice.label} · {Math.round(choice.durationSeconds/60)} min <span>· {(choice.distanceMeters/1000).toFixed(1)} km</span></h2>
     <p>{comparison.message}</p>
-    {a&&a.openPlaces!==null&&<ul><li>{`${a.openPlaces} places listed as open around your passing time`}</li>{a.potentialHelpPoints!==null&&<li>{`${a.potentialHelpPoints} listed open help points · longest gap ${formatMeters(a.longestObservedHelpGapMeters)}`}</li>}</ul>}
+    {!!a?.openPlaces&&<ul><li>{`${a.openPlaces} places listed as open around your passing time`}</li>{!!a.potentialHelpPoints&&<li>{`${a.potentialHelpPoints} listed open help points${a.longestObservedHelpGapMeters>0?` · longest gap ${formatMeters(a.longestObservedHelpGapMeters)}`:''}`}</li>}</ul>}
     <button className="secondary-button" onClick={()=>onSelect(choice.id)}>Select {choice.label.toLowerCase()}</button>
   </section>;
 }

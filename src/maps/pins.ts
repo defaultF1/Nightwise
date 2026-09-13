@@ -5,7 +5,7 @@ export type PlacePin=Coordinate&{name:string;kind:'shop'|'medical'|'fuel'};
 export function placePinKind(categories:string[]):PlacePin['kind']|undefined{
  if(categories.some(c=>['pharmacy','drugstore','hospital','doctor','medical_lab'].includes(c)))return 'medical';
  if(categories.includes('gas_station'))return 'fuel';
- if(categories.some(c=>['store','shopping_mall','supermarket','convenience_store','cafe','restaurant','bakery'].includes(c)))return 'shop';
+ if(categories.some(c=>['store','shopping_mall','supermarket','convenience_store','grocery_store','department_store','cafe','restaurant','bakery'].includes(c)))return 'shop';
 }
 export function placePins(analysis?:ActivityAnalysis):PlacePin[]{
  return analysis?.places.flatMap(place=>{

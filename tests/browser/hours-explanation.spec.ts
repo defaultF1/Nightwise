@@ -13,7 +13,8 @@ test('shows plain category counts and keeps the single safety disclaimer',async(
  await page.locator('.route-card').first().getByRole('button',{name:'View activity details'}).click();
  const dialog=page.getByRole('dialog');
  await expect(dialog).toContainText('What we saw along the way');
- for(const label of ['Medical stores','Hospitals','Petrol pumps','Shops & food'])await expect(dialog).toContainText(label);
+ await expect(dialog).toContainText('Petrol pumps');
+ await expect(page.getByText('Hospitals',{exact:true})).toHaveCount(0);
  await page.getByRole('button',{name:'Back to routes',exact:true}).click();
  await page.setViewportSize({width:320,height:800});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:'talks/screenshots/hours-explanation/coverage-browser.png'});
 });

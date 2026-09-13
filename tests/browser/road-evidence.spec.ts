@@ -7,7 +7,7 @@ test('road evidence feeds the score without exposing road jargon in the UI',asyn
  await page.goto('/');await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();
  await expect(page.locator('.activity-score')).toContainText('Based on 1 of 6 signals');
  await page.getByRole('button',{name:'View activity details'}).click();
- await expect(page.getByText('None seen nearby').first()).toBeVisible();
+ await expect(page.getByText('Medical stores',{exact:true})).toHaveCount(0);
  const breakdown=page.getByRole('region',{name:'Score breakdown'});
  await expect(breakdown).toContainText('Main-road share');
  await expect(page.getByRole('dialog')).not.toContainText('Unclassified distance');

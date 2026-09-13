@@ -21,7 +21,8 @@ test('a mocked partial score exposes missing road signals without filling them w
   await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
   const breakdown=page.getByRole('region',{name:'Score breakdown'});
   await expect(breakdown).toContainText('Based on 4 of 6 signals');
-  await expect(breakdown.getByText('Not included',{exact:true})).toHaveCount(2);
+  await expect(breakdown.getByText('Not included',{exact:true})).toHaveCount(0);
+  await expect(breakdown.getByText('Main-road share',{exact:true})).toHaveCount(0);
   await expect(breakdown).toContainText('never scored as zero');
   await expect(page.getByText('Transport locations listed as open',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+/);
 });

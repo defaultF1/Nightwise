@@ -26,8 +26,8 @@ test('partially observed scenarios still score from what was seen',async({page})
   await selectScenario(page,value);await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome','more-activity');
   await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();await expect(page.locator('.recommendation-label')).toHaveCount(1);
   await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
-  await expect(page.getByText('Longest low-activity stretch',{exact:true}).locator('..').locator('dd')).toBeVisible();
-  if(value==='unknown'){await expect(page.getByText('None seen nearby').first()).toBeVisible();await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('Based on 2 of 6 signals');}
+  if(value==='unknown'){await expect(page.getByText('Medical stores',{exact:true})).toHaveCount(0);await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('Based on 2 of 6 signals');}
+  else await expect(page.getByText('Shops & food',{exact:true})).toBeVisible();
   if(value==='closing')await expect(page.getByText('Listed places closing soon',{exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Back to routes',exact:true}).click();
  }

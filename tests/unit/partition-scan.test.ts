@@ -4,8 +4,11 @@ import {SEARCH_PARTITIONS} from '../../server/google';
 import type {NearbyQuery,NearbyScan} from '../../src/domain/activity-types';
 const q={id:'q',coordinate:{latitude:13.06,longitude:77.6},radiusMeters:150};
 const plan={queries:[q],samplesByRoute:{},totalSamples:1};
-test('category partitions cover the original ten categories',()=>{
-  expect(new Set(Object.values(SEARCH_PARTITIONS).flat()).size).toBe(10);
+test('category partitions stay disjoint and cover every requested type',()=>{
+  const all=Object.values(SEARCH_PARTITIONS).flat();
+  expect(new Set(all).size).toBe(all.length);
+  expect(all.length).toBe(15);
+  for(const type of ['bakery','shopping_mall','grocery_store','department_store','drugstore'])expect(all).toContain(type);
 });
 test('a failed partition cannot turn a capped search into a complete scan',async()=>{
   const queries:NearbyQuery[]=[];
