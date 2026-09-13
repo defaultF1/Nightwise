@@ -22,7 +22,6 @@ export function PlaceSearch({onChoose,accessCode,anchor,direction}:{onChoose:(po
       const coordinate={latitude:anchor.latitude,longitude:anchor.longitude};
       const found=await suggestPlaces(query.trim(),token.current,c.signal,accessCode,status.searchPreviewEnabled?coordinate:undefined);if(id!==sequence.current||c.signal.aborted)return;
       setSuggestions(found);if(!found.length){setMessage('No matching places found. Try a more specific name or use coordinates.');return;}
-      requestAnimationFrame(()=>document.getElementById('place-results')?.scrollIntoView({block:'nearest'}));
       if(!status.searchPreviewEnabled){setPreviewState('Travel estimates need the updated live service. You can still choose a place.');return;}
       setPreviewState('Checking driving times…');
       previewTimer.current=setTimeout(()=>{void (async()=>{
@@ -39,10 +38,8 @@ export function PlaceSearch({onChoose,accessCode,anchor,direction}:{onChoose:(po
     finally{if(id===sequence.current)setChoosing(false);}
   }
   const pins=searchKnownPins(query),tripLabel=`${direction==='from-anchor'?'From':'To'} ${anchor.name}`;
-  // Submitting blurs the input so the phone keyboard closes and the results
-  // that arrive are actually visible instead of hidden behind it.
-  return <><form className="place-search" onSubmit={e=>{e.preventDefault();(document.activeElement as HTMLElement|null)?.blur?.();if(query.trim().length>=3&&!choosing)void search();}}>
-    <label className="search-label" htmlFor="place-query">Search places</label><input className="origin-search" id="place-query" value={query} onChange={e=>editQuery(e.target.value)} placeholder={city==='Kanpur'?'Try Sharda Nagar or a school name':'Try Bengaluru Palace or Manyata'} maxLength={100} autoComplete="off" enterKeyHint="search" disabled={choosing} aria-controls="place-results"/>
+  return <><form className="place-search" onSubmit={e=>{e.preventDefault();if(query.trim().length>=3&&!busy&&!choosing)void search();}}>
+    <label className="search-label" htmlFor="place-query">Search places</label><input className="origin-search" id="place-query" value={query} onChange={e=>editQuery(e.target.value)} placeholder={city==='Kanpur'?'Try Sharda Nagar or a school name':'Try Bengaluru Palace or Manyata'} maxLength={100} autoComplete="off" disabled={choosing} aria-controls="place-results"/>
     <button className="secondary-button" type="submit" disabled={busy||choosing||query.trim().length<3}>{busy?'Searching…':`Search ${city}`}</button><p className="settings-helper">Suggestions appear after you pause typing. Driving estimates use your selected journey endpoints.</p></form>
     <div aria-live="polite">{busy&&<p className="search-notice" role="status">Finding matching places…</p>}{message&&<p className="search-notice" role="status">{message}</p>}{error&&<p className="search-notice" role="alert">{error}</p>}</div>
     {suggestions.length>0&&<section id="place-results" aria-label="Google place results"><p className="search-label">Google Maps</p><p className="search-trip-context">Driving · {tripLabel}</p>{suggestions.map(p=>{
