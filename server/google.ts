@@ -85,12 +85,12 @@ type ScanResult = { scan: NearbyScan; attributions: { name: string; uri?: string
 // still treated as fresh. Failed scans are never cached.
 export class PlacesCache {
   private entries = new Map<string, { at: number; result: ScanResult }>();
-  constructor(private ttlMs = 10 * 60_000, private max = 600) {}
+  constructor(private ttlMs = 5 * 60_000, private max = 600) {}
   private static key(query: NearbyQuery) { return `${query.coordinate.latitude},${query.coordinate.longitude},${query.radiusMeters},${query.partition ?? ''}`; }
   get(query: NearbyQuery): ScanResult | undefined {
     const key = PlacesCache.key(query), entry = this.entries.get(key);
     if (!entry) return;
-    if (Date.now() - entry.at > this.ttlMs) { this.entries.delete(key); return; }
+    if (Date.now() - entry.at >= this.ttlMs) { this.entries.delete(key); return; }
     const copy = structuredClone(entry.result);
     copy.scan.queryId = query.id;
     return copy;
@@ -130,8 +130,8 @@ export class GoogleProvider {
     }, signal);
     return parseRoutes(data);
   }
-  async nearby(query: NearbyQuery, signal: AbortSignal) {
-    const cached = this.cache.get(query);
+  async nearby(query: NearbyQuery, signal: AbortSignal, refresh=false) {
+    const cached = refresh?undefined:this.cache.get(query);
     if (cached) return cached;
     signal.throwIfAborted(); await this.budget.reserve('nearby');
     const data = await this.post('https://places.googleapis.com/v1/places:searchNearby', PLACE_FIELDS, {
@@ -143,10 +143,10 @@ export class GoogleProvider {
     this.cache.set(query, result);
     return result;
   }
-  async details(id:string,signal:AbortSignal){
+  async details(id:string,signal:AbortSignal,refresh=false){
     if(!/^[\w-]{1,200}$/.test(id))throw new ServiceError('invalid-input','Invalid place reference.',400);
     const cached=this.detailsCache.get(id);
-    if(cached&&Date.now()-cached.at<=10*60_000)return structuredClone(cached.result);
+    if(!refresh&&cached&&Date.now()-cached.at<5*60_000)return structuredClone(cached.result);
     signal.throwIfAborted();await this.budget.reserve('details');
     const data=await this.post(`https://places.googleapis.com/v1/places/${encodeURIComponent(id)}`,PLACE_FIELDS.replaceAll('places.',''),undefined,signal);
     if(data.id!==id)throw new ServiceError('invalid-response','Place reference changed.');

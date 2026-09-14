@@ -9,7 +9,7 @@ html[data-native-map=true]:has(.sheet .live-map) .app-shell>.app-header,
 html[data-native-map=true]:has(.sheet .live-map) .app-shell>.app-footer{visibility:hidden}
 html[data-native-map=true] .sheet:has(.live-map),
 html[data-native-map=true] .sheet:has(.live-map)::backdrop{background:transparent;backdrop-filter:none}
-html[data-native-map=true] .sheet:has(.live-map) .sheet-inner>*:not(.live-map):not(button):not(.endpoint-confirmation){background:var(--surface)}
+html[data-native-map=true] .sheet:has(.live-map) .sheet-body>:not(.live-map):not(button):not(.endpoint-confirmation){background:var(--surface)}
 /* Keep native map bounds stable while Capacitor measures its host element. */
 .plan-main:has(.live-map),.journey-main:has(.live-map),.sheet:has(.live-map){animation:none}
 .map-route-options{display:flex;gap:8px;flex-wrap:wrap;background:var(--bg);padding:0 14px 12px}.map-route-options button{font:inherit;font-size:11px;min-height:44px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text)}.map-route-options button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}.score-unavailable{display:flex;flex-wrap:wrap;gap:8px;font-size:11px;margin:14px 0;color:var(--muted)}.score-unavailable small{flex-basis:100%;line-height:1.5}
@@ -62,6 +62,13 @@ html[data-platform=android] .app-shell{padding-top:0;padding-bottom:0}
 .sheet-overlay .sheet-inner{display:flex;flex-direction:column;min-height:0;max-height:100%;padding:20px 16px;overflow:hidden;width:100%}
 .sheet-heading{flex-shrink:0}.sheet-body{min-height:0;overflow-y:auto;overscroll-behavior:contain;scroll-padding:16px;padding:4px}
 @media(max-width:760px){.sheet-overlay{padding:16px 12px}.sheet-overlay .sheet{height:100%;width:100%}.sheet-overlay .sheet-inner{height:100%}}
-html[data-native-map=true] .sheet:has(.live-map) .sheet-body{background:transparent}
+html[data-native-map=true] .sheet-overlay:has(.live-map),
+html[data-native-map=true] .sheet:has(.live-map),
+html[data-native-map=true] .sheet:has(.live-map) .sheet-inner,
+html[data-native-map=true] .sheet:has(.live-map) .sheet-body{background:transparent;backdrop-filter:none;box-shadow:none}
+html[data-native-map=true] .sheet:has(.live-map) .sheet-heading,
+html[data-native-map=true] .sheet:has(.live-map) .sheet-body>:not(.live-map){background:var(--surface)}
+.map-place-controls{padding:12px 16px;background:var(--bg);font-size:12px;line-height:1.6}.map-place-controls label{display:flex;align-items:center;gap:8px;min-height:44px}.map-place-controls input{width:18px;height:18px}.map-place-controls p{margin:8px 0}.map-place-controls ul{padding-left:18px;max-height:180px;overflow:auto}.map-place-controls li{margin-bottom:8px}
+.score-breakdown dt small{display:block;max-width:240px;font-size:11px;line-height:1.5;margin-top:6px}
 .score-unavailable{display:block;font-size:11px;margin-top:14px;color:var(--muted)}.score-unavailable b{font-size:16px}.score-unavailable small{display:block;font-size:10px;margin-top:3px}
 .route-feedback{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:14px;font-size:12px;color:var(--muted)}.route-feedback button{min-height:44px;min-width:52px;border:1px solid var(--line);border-radius:10px;background:var(--raised);font-size:17px}.route-feedback p{margin:0;font-size:12px}

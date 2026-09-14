@@ -35,7 +35,7 @@ describe('road evidence',()=>{
  it('keeps nearby parallel roads with conflicting classes unknown',()=>{const p=path.map(v=>({...v,longitude:v.longitude+.00005}));const a=createRoadAnalyzer([{id:1,highway:'primary',path},{id:2,highway:'service',path:p}])(path);expect(a.coverage).toBe(0);});
  it('does not match crossing roads by proximity or elevated roads by guessing',()=>{const across=[{latitude:13.055,longitude:77.59},{latitude:13.055,longitude:77.61}];expect(createRoadAnalyzer([{id:1,highway:'primary',path:across}])(path).coverage).toBe(0);expect(createRoadAnalyzer([{id:1,highway:'primary',path,gradeSeparated:true}])(path).coverage).toBe(0);});
  it('returns unknown outside coverage or when data is missing',()=>{expect(loadRoadAnalyzer('missing-road-file')(path).status).toBe('unavailable');const shifted=path.map(p=>({...p,longitude:77.7}));expect(createRoadAnalyzer([{id:1,highway:'primary',path}])(shifted).unknownMeters).toBeGreaterThan(1000);});
- it('rejects oversized route analysis instead of unbounded work',()=>{expect(()=>createRoadAnalyzer([])([{latitude:13,longitude:77.6},{latitude:13.4,longitude:77.6}])).toThrow(/limit/);});
+ it('rejects oversized route analysis instead of unbounded work',()=>{expect(()=>createRoadAnalyzer([])([{latitude:13,longitude:77.6},{latitude:14,longitude:77.6}])).toThrow(/limit/);});
 });
 describe('search and pause protection',()=>{
  it('finds supplied locations and common spelling variants without a provider',()=>{expect(searchKnownPins('manayata tech')[0].name).toBe('Manyata Tech Park');expect(searchKnownPins('AEOS')[0].name).toBe('AEOS');expect(searchKnownPins('airport')).toHaveLength(0);});

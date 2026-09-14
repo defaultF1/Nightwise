@@ -22,7 +22,7 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env) {
     // The maxima are typo guards against a runaway paid-request allowance, not usage targets.
     autocompleteLimit: integer('PILOT_AUTOCOMPLETE_LIMIT', 40, 500), detailsLimit: integer('PILOT_DETAILS_LIMIT', 20, 500),
     kanpurRoadFile: env.KANPUR_ROAD_DATA_PATH || 'data/roads/kanpur-22km.json',
-    roadFile: env.ROAD_DATA_PATH || 'data/roads/north-bengaluru-10km.json',
+    roadFile: env.ROAD_DATA_PATH || 'data/roads/north-bengaluru-22km.json',
     enabled: env.ENABLE_ACTIVITY_ANALYSIS === 'true', scoring: env.ENABLE_EXPERIMENTAL_SCORING === 'true',
     maxQueries: integer('MAX_NEARBY_QUERIES', 120, 120), routeLimit: integer('PILOT_ROUTE_LIMIT', 10, 500),
     nearbyLimit: integer('PILOT_NEARBY_LIMIT', 600, 5000),

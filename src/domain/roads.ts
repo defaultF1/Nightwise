@@ -56,7 +56,7 @@ export function createRoadAnalyzer(ways: RoadWay[], snapshotDate?: string) {
   return (path: Coordinate[], steps?:Route['steps']): RoadAnalysis => {
     const length=pathLength(path); const totals={main:0,internal:0,unknown:0};
     const unknownReasons:Partial<Record<RoadUnknownReason,number>>={};
-    if(length>30000 || path.length>4000)throw new Error('Road analysis exceeds the pilot geometry limit');
+    if(length>100000 || path.length>4000)throw new Error('Road analysis exceeds the pilot geometry limit');
     for(let i=1;i<path.length;i++) {
       const meters=distanceMeters(path[i-1],path[i]); const pieces=Math.max(1,Math.ceil(meters/40));
       for(let j=0;j<pieces;j++){const found=match(interpolate(path[i-1],path[i],(j+.5)/pieces),path[i-1],path[i]);totals[found.kind]+=meters/pieces;if(found.reason)unknownReasons[found.reason]=(unknownReasons[found.reason]??0)+meters/pieces;}

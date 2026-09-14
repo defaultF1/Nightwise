@@ -3,6 +3,7 @@ import {placePinKind,placePins,pinTint,visiblePlacePins} from '../../src/maps/pi
 import type {ActivityAnalysis} from '../../src/domain/activity-types';
 test('medical and fuel categories take precedence over a generic store',()=>{
  expect(placePinKind(['store','pharmacy'])).toBe('medical');
+ expect(placePinKind(['store','pharmacy','hospital'])).toBe('hospital');
  expect(placePinKind(['store','gas_station'])).toBe('fuel');
  expect(placePinKind(['restaurant'])).toBe('shop');
  expect(placePinKind(['train_station'])).toBeUndefined();
@@ -25,4 +26,13 @@ test('visible pins cap dense live results while retaining medical and fuel evide
  expect(pins.filter(pin=>pin.kind==='shop')).toHaveLength(12);
  expect(visiblePlacePins({places} as unknown as ActivityAnalysis,1)).toHaveLength(1);
  expect(visiblePlacePins({places} as unknown as ActivityAnalysis,0)).toHaveLength(0);
+});
+
+test('all listings mode shows known locations without implying unknown or closed shops are open',()=>{
+ const base={id:'shop',categories:['store'],coordinate:{latitude:13.06,longitude:77.59},hours:{state:'unknown'},conflict:false};
+ const analysis={places:[base,{...base,id:'hospital',categories:['hospital'],hours:{state:'closed'}},{...base,id:'fuel',categories:['gas_station'],hours:{state:'open'}},{...base,id:'conflict',conflict:true}]} as unknown as ActivityAnalysis;
+ const pins=visiblePlacePins(analysis,60,true);
+ expect(pins.map(p=>p.status)).toEqual(['Opening hours unknown','Listed closed around arrival','Listed open around arrival']);
+ expect(pins.map(p=>p.kind)).toEqual(['shop','hospital','fuel']);
+ expect(visiblePlacePins(analysis,60,false)).toHaveLength(1);
 });

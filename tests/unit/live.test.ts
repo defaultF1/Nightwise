@@ -26,7 +26,35 @@ const path = [{ latitude: 13.06, longitude: 77.60 }, { latitude: 13.0605, longit
 const response = { routes: [ { duration: '120s', distanceMeters: 170, polyline: { encodedPolyline: encode(path) }, legs: [{ steps: [{ navigationInstruction: { maneuver: 'DEPART' } }, { navigationInstruction: { maneuver: 'TURN_LEFT' } }] }] } ] };
 const request = { method: 'POST' as const, url: '/api/compare', payload: DEFAULT_JOURNEY };
 
+it('scans only returned route corridors, shares identical samples and bypasses reuse only on refresh',async()=>{
+ const circles:any[]=[];
+ const alternate=[path[0],{latitude:13.06,longitude:77.603},path.at(-1)!];
+ const alternatives={routes:[...response.routes,{duration:'240s',distanceMeters:650,polyline:{encodedPolyline:encode(alternate)}}]};
+ const calls=vi.fn(async(url:any,options:any)=>{
+   if(String(url).includes('computeRoutes'))return new Response(JSON.stringify(alternatives));
+   circles.push(JSON.parse(options.body).locationRestriction.circle);
+   return new Response(JSON.stringify({places:[]}));
+ });
+ const app=await createServer(config({ENABLE_ACTIVITY_ANALYSIS:'true',MAX_NEARBY_QUERIES:'12'}),calls);
+ try{
+   const first=(await app.inject(request)).json();expect(first.routes).toHaveLength(2);
+   const plan=buildQueryPlan(first.routes,200,1000);
+   expect(circles).toHaveLength(plan.queries.length);expect(circles.length).toBeLessThan(plan.totalSamples);
+   for(const c of circles){expect(c.radius).toBe(150);expect(plan.queries.some(q=>q.coordinate.latitude===c.center.latitude&&q.coordinate.longitude===c.center.longitude)).toBe(true);}
+   const count=circles.length;
+   const reused=(await app.inject(request)).json();expect(reused.requestUsage.nearbyCalls).toBe(0);expect(circles).toHaveLength(count);
+   const refreshed=await app.inject({...request,payload:{...DEFAULT_JOURNEY,refresh:true}});expect(refreshed.statusCode).toBe(200);expect(refreshed.json().requestUsage.nearbyCalls).toBe(count);expect(circles).toHaveLength(count*2);
+ }finally{await app.close();}
+});
+
 describe('persistent request allowance', () => {
+  it('returns routes with an explicit exhausted-nearby status instead of silent empty scans',async()=>{
+    const cfg=config({ENABLE_ACTIVITY_ANALYSIS:'true',ENABLE_EXPERIMENTAL_SCORING:'true',PILOT_NEARBY_LIMIT:'1'});
+    const budget=new Budget(cfg.ledgerPath,10,1);budget.reserve('nearby');budget.close();
+    const calls=vi.fn(async()=>new Response(JSON.stringify(response)));
+    const app=await createServer(cfg,calls);
+    try{const r=await app.inject(request);expect(r.statusCode).toBe(200);const data=r.json();expect(data.routes).toHaveLength(1);expect(data.activityStatus).toBe('budget');expect(data.notices.join(' ')).toContain('nearby-search allowance is used up');expect(data.analyses).toEqual([]);expect(data.comparison.recommendedId).toBeNull();expect(calls).toHaveBeenCalledTimes(1);expect(data.requestUsage.nearbyCalls).toBe(0);}finally{await app.close();}
+  });
   it('counts attempted requests across restarts and refuses overspend', () => {
     const file = ledger(); let b = new Budget(file, 2, 3); b.reserve('route'); b.reserve('nearby', 2); b.close();
     b = new Budget(file, 2, 3); expect(b.snapshot().routeCalls).toBe(1); expect(b.canScan(2)).toBe(false);
@@ -78,7 +106,7 @@ describe('live backend', () => {
 });
 describe('phone handoff and live score gate', () => {
   it('uses exact supplied endpoints and never transfers illustrative geometry', () => { const url=new URL(mapsHandoff(DEFAULT_JOURNEY)); expect(url.searchParams.get('origin')).toBe('13.062827,77.594089'); expect(url.searchParams.get('destination')).toBe('13.047697,77.619939'); expect(url.searchParams.has('waypoints')).toBe(false); expect(url.searchParams.has('dir_action')).toBe(false); });
-  it('hands off endpoints only, with no waypoint stops for any journey', () => { const url=new URL(mapsHandoff(DEFAULT_JOURNEY)); expect(url.searchParams.has('waypoints')).toBe(false); expect(url.searchParams.get('travelmode')).toBe('driving'); expect(url.toString().length).toBeLessThan(2048); });
+  it('hands off endpoints when no selected live route is provided', () => { const url=new URL(mapsHandoff(DEFAULT_JOURNEY)); expect(url.searchParams.has('waypoints')).toBe(false); expect(url.searchParams.get('travelmode')).toBe('driving'); expect(url.toString().length).toBeLessThan(2048); });
   it('keeps live ranks off by default even with full scans', () => { const routes=[...parseRoutes(response),{...parseRoutes(response)[0],id:'second',durationSeconds:140}]; const plan=buildQueryPlan(routes); const now=new Date().toISOString(); const scans=plan.queries.map(q=>({queryId:q.id,observedAt:now,status:'ok' as const,places:[]})); const analyses=routes.map(r=>analyzeRoute(r,plan,scans,now)); expect(compareActivity(routes,analyses).scores).toEqual({}); expect(Object.keys(compareActivity(routes,analyses,{}, {allowLive:true}).scores)).toHaveLength(2); });
 });
 

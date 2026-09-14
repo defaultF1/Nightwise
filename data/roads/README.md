@@ -1,5 +1,11 @@
 # North Bengaluru road research extract
 
+## 14 September 2026 expansion
+
+The current default is `north-bengaluru-22km.json`: a tile manifest for a 22 km query around AEOS, supporting a 20 km journey-endpoint circle. Keep the sibling `north-bengaluru-22km-tiles/` directory with it. It contains 196,038 original OSM ways and 979,088 geometry points across 266 tiles. The loader reads tiles around the requested route paths and deduplicates whole ways by ID, retaining geometry and elevation information. Per-tile hashes, the source query, date and license are recorded in `north-bengaluru-22km-provenance.json`. Existing deployments must update their `ROAD_DATA_PATH` override to this manifest. `scripts/fetch-expanded-roads.mjs` explicitly rebuilds it; it never runs automatically on a journey request.
+
+The road-loading check on the same AEOS/Manyata/Kanpur paths used about 107–154 MB process RSS with tiles, compared with 227–436 MB while reading and parsing the full Bengaluru extract repeatedly. This is a local measurement, not a Render load test. Road matching results were unchanged. Unknown parallel-road and grade-separated sections remain unknown. Historical extract notes follow.
+
 Version 0.9.0 defaults to `north-bengaluru-10km.json`, a 14.5 MB compact representation of the already-collected 10 km AEOS query: 58,613 ways and 280,746 geometry points. `north-bengaluru-10km-provenance.json` records source provenance and hashes. Only IDs, original geometry and highway/elevation tags were retained; no Google content was added. The loader permits 65,000 ways and 350,000 points within its unchanged 30 MB file cap. A route leaving the extract remains partially unknown. The original narrow extract below remains as historical source material.
 
 Unknown distances now include reason totals for no candidate, alignment mismatch, grade separation, ambiguous parallel roads and unsupported highway class. Their sum accounts for unknown route distance. Larger geographic coverage does not imply better matching accuracy on already-covered routes.

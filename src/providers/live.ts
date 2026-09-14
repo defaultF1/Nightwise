@@ -2,6 +2,8 @@ import { Capacitor } from '@capacitor/core';
 import type { LiveJourney } from '../domain/journey';
 import type { LiveResult, ServiceStatus } from '../domain/live-contract';
 import { JourneyError, validateRoutes } from './routes';
+import {ComparisonCache} from './comparison-cache';
+const comparisonCache=new ComparisonCache();
 // A phone off the developer's WiFi has no localhost backend to fall back to.
 // Bake the hosted URL in so the app works on any mobile network, not just
 // the network it happened to be built on.
@@ -20,9 +22,14 @@ export async function serviceStatus(signal?: AbortSignal): Promise<ServiceStatus
   if (typeof status.ready !== 'boolean' || typeof status.activityEnabled !== 'boolean') throw new Error('Unexpected backend');
   return status;
 }
-export async function liveComparison(journey: LiveJourney, signal: AbortSignal, accessCode: string): Promise<LiveResult> {
+export async function liveComparison(journey: LiveJourney, signal: AbortSignal, accessCode: string, refresh=false): Promise<LiveResult> {
+  signal.throwIfAborted();
+  const cacheKey=comparisonCache.key(journey,accessCode);
+  refresh=refresh||comparisonCache.requiresFresh(cacheKey);
+  if(refresh)comparisonCache.invalidate(cacheKey);
+  else {const cached=comparisonCache.get(cacheKey);if(cached)return cached;}
   const pin = (p:LiveJourney['origin'])=>({name:p.name,latitude:p.latitude,longitude:p.longitude});
-  const payload={origin:pin(journey.origin),destination:pin(journey.destination),mode:journey.mode};
+  const payload={origin:pin(journey.origin),destination:pin(journey.destination),mode:journey.mode,...(refresh?{refresh:true}:{})};
   let response: Response;
   try { response = await fetch(`${base}/api/compare`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(accessCode ? { 'X-Nightwise-Code': accessCode } : {}) }, body: JSON.stringify(payload), signal: AbortSignal.any([signal, AbortSignal.timeout(170000)]), cache: 'no-store' }); }
   catch { if (signal.aborted) throw new DOMException('Cancelled', 'AbortError'); throw new JourneyError('unavailable', 'The live service could not be reached. Check the connection and backend. Your journey is saved.', true); }
@@ -32,5 +39,7 @@ export async function liveComparison(journey: LiveJourney, signal: AbortSignal, 
   if (!Array.isArray(data.routes) || !Array.isArray(data.analyses) || !data.comparison || !Array.isArray(data.notices) || !Array.isArray(data.attributions) || !Number.isFinite(Date.parse(data.checkedAt))) throw new JourneyError('invalid-response', 'The live response was incomplete.');
   validateRoutes(data.routes);
   if (data.routes.some((r: any) => r.source !== 'google' || r.geometryKind !== 'provider')) throw new JourneyError('invalid-response', 'The live service did not return provider routes.');
+  signal.throwIfAborted();
+  comparisonCache.set(cacheKey,data as LiveResult);
   return data as LiveResult;
 }

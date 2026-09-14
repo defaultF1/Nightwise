@@ -4,6 +4,28 @@ const paths=[[
 ],[{latitude:13.0628268,longitude:77.5940888},{latitude:13.047,longitude:77.601},{latitude:13.047697,longitude:77.619939}]];
 function fixture(){return {routes:paths.map((path,i)=>({id:`google:${i}`,label:i?'Alternative 1':'Fastest',path,durationSeconds:i?1320:1080,distanceMeters:i?4400:3800,source:'google',geometryKind:'provider'})),analyses:[],comparison:{version:'sample-activity-v1',fastestId:'google:0',selectedId:'google:0',recommendedId:null,outcome:'insufficient',message:'Not enough information to recommend a route.',commonComponents:[],scores:{}},checkedAt:new Date().toISOString(),activityStatus:'disabled',notices:['Live activity scans are switched off.'],attributions:[],usage:{routeCalls:1,nearbyCalls:0,routeLimit:10,nearbyLimit:600,remainingComparisons:9}};}
 test.beforeEach(async({page})=>{await page.emulateMedia({reducedMotion:'reduce'});await page.route('https://maps.googleapis.com/**',r=>r.abort());await page.goto('/');});
+test('after five minutes the next comparison bypasses both caches without a background call',async({page})=>{
+ await page.clock.install();
+ const bodies:any[]=[];await page.route('**/api/compare',r=>{bodies.push(r.request().postDataJSON());return r.fulfill({json:fixture()});});
+ await page.getByRole('button',{name:'Live routes',exact:true}).click();
+ await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();
+ await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeVisible();
+ await page.clock.fastForward(5*60_000+1000);expect(bodies).toHaveLength(1);
+ await page.getByRole('button',{name:'NightWise home'}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();
+ await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeVisible();expect(bodies).toHaveLength(2);expect(bodies[1].refresh).toBe(true);
+});
+test('repeating the journey uses the five-minute device cache while refresh and a swapped journey fetch again',async({page})=>{
+ const bodies:any[]=[];await page.route('**/api/compare',r=>{bodies.push(r.request().postDataJSON());return r.fulfill({json:fixture()});});
+ await page.getByRole('button',{name:'Live routes',exact:true}).click();
+ const compare=async()=>{await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeVisible();};
+ await compare();expect(bodies).toHaveLength(1);
+ await page.getByRole('button',{name:'NightWise home'}).click();await compare();
+ await expect(page.locator('.freshness')).toContainText('Saved on this device');expect(bodies).toHaveLength(1);
+ await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();expect(bodies).toHaveLength(1);
+ await page.getByRole('button',{name:'Refresh live results'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeVisible();
+ expect(bodies).toHaveLength(2);expect(bodies[1].refresh).toBe(true);await expect(page.locator('.freshness')).not.toContainText('Saved on this device');
+ await page.getByRole('button',{name:'NightWise home'}).click();await page.getByRole('button',{name:'Swap origin and destination'}).click();await compare();expect(bodies).toHaveLength(3);
+});
 test('configuration checks do not compare; missing server configuration is explicit',async({page})=>{
  let compares=0;await page.route('**/api/status',r=>r.fulfill({json:{ready:false,activityEnabled:false,scoringEnabled:false,accessCodeRequired:false,maxQueries:120}}));await page.route('**/api/compare',r=>{compares++;return r.fulfill({status:503,json:{message:'Live routes need the server key and enabled Google services.'}});});
  await page.getByRole('button',{name:'Open settings'}).click();await page.getByText('Live service',{exact:true}).click();await page.getByRole('button',{name:'Check connection'}).click();await expect(page.getByRole('dialog')).toContainText('Add the restricted server key');expect(compares).toBe(0);await page.getByRole('button',{name:'Done',exact:true}).click();
@@ -15,9 +37,10 @@ test('live routes have no invented activity and selected corridor handoff surviv
  let compares=0;await page.route('**/api/compare',r=>{compares++;return r.fulfill({json:fixture()});});
  await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeChecked();
  await expect(page.locator('.activity-score')).toHaveCount(0);await expect(page.locator('.route-summary')).toHaveCount(0);await expect(page.locator('.score-unavailable')).toHaveCount(0);
- await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();await page.getByRole('button',{name:'Continue with this route'}).click();const url=new URL((await page.getByRole('link',{name:'Open Google Maps'}).getAttribute('href'))!);expect(url.searchParams.has('waypoints')).toBe(false);expect(url.searchParams.get('destination')).toBe('13.047697,77.619939');await expect(page.getByRole('dialog')).toContainText('no stops in between');
+ await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();await page.getByRole('button',{name:'Continue with this route'}).click();const url=new URL((await page.getByRole('link',{name:'Open Google Maps'}).getAttribute('href'))!);expect(url.searchParams.get('waypoints')?.split('|')).toHaveLength(3);expect(url.searchParams.get('destination')).toBe('13.047697,77.619939');await expect(page.getByRole('dialog')).toContainText('They may appear as stops');
  await page.getByRole('dialog').screenshot({path:'talks/screenshots/M05/01-browser-handoff-mocked-provider.png'});
  await page.getByRole('button',{name:'Keep comparing'}).click();await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();expect(compares).toBe(1);
+ await page.getByRole('radio',{name:'Fastest',exact:true}).check();await page.getByRole('button',{name:'Continue with this route'}).click();const fastestUrl=new URL((await page.getByRole('link',{name:'Open Google Maps'}).getAttribute('href'))!);expect(fastestUrl.searchParams.get('waypoints')).not.toBe(url.searchParams.get('waypoints'));expect(compares).toBe(1);
 });
 test('late live responses cannot replace a cancelled journey',async({page})=>{
  await page.route('**/api/compare',async r=>{await new Promise(resolve=>setTimeout(resolve,900));await r.fulfill({json:fixture()}).catch(()=>{});});

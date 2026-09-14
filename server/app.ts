@@ -9,7 +9,7 @@ import { RedisBudget, redisCommand } from './redis-budget';
 import { GoogleProvider } from './google';
 import { ServiceError } from './errors';
 import type { ServerConfig } from './config';
-import { inPilotArea, sameServiceRegion, regionForPoint, SERVICE_REGIONS, type LiveJourney } from '../src/domain/journey';
+import { inPilotArea, sameServiceRegion, regionForPoint, PILOT_RADIUS_METERS, SERVICE_REGIONS, type LiveJourney } from '../src/domain/journey';
 import { distanceMeters } from '../src/domain/geometry';
 import { buildQueryPlan, analyzeRoute } from '../src/domain/activity';
 import { compareActivity } from '../src/domain/comparison';
@@ -48,7 +48,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     let budgetReady = true, budgetIssue: 'connection'|'missing'|'expiring'|'invalid'|undefined;
     if (budget instanceof RedisBudget) ({ready:budgetReady,issue:budgetIssue}=await budget.health());
     else try { await budget.snapshot(); } catch { budgetReady = false; budgetIssue='invalid'; }
-    return { buildVersion:'0.11.0-live-preview',searchPreviewEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady,scanStrategy:'partition-and-spatial-v1',scoringVersion:'night-activity-v5-observed',serviceRadiusMeters:10000,serviceRegions:SERVICE_REGIONS.map(r=>({id:r.id,city:r.city,radiusMeters:r.radiusMeters})),ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
+    return { buildVersion:'0.11.0-live-preview',searchPreviewEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady,scanStrategy:'partition-and-spatial-v1',scoringVersion:'night-activity-v5-observed',serviceRadiusMeters:PILOT_RADIUS_METERS,serviceRegions:SERVICE_REGIONS.map(r=>({id:r.id,city:r.city,radiusMeters:r.radiusMeters})),ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
       searchEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady, activityEnabled:config.enabled,
       scoringEnabled:config.scoring, accessCodeRequired:!!config.accessCode, maxQueries:config.maxQueries,
       budgetStorage:config.redisUrl?'redis':'file', budgetReady, ...(budgetIssue?{budgetIssue}:{}) };
@@ -69,7 +69,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     return { ok: true };
   });
   const pointSchema = { type: 'object', additionalProperties: false, required: ['name', 'latitude', 'longitude'], properties: { name: { type: 'string', minLength: 1, maxLength: 100 }, latitude: { type: 'number', minimum: -90, maximum: 90 }, longitude: { type: 'number', minimum: -180, maximum: 180 } } };
-  app.post<{ Body: LiveJourney }>('/api/compare', { schema: { body: { type: 'object', additionalProperties: false, required: ['origin', 'destination', 'mode'], properties: { origin: pointSchema, destination: pointSchema, mode: { type: 'string', enum: ['DRIVE'] } } } } }, async (request, reply) => {
+  app.post<{ Body: LiveJourney & {refresh?:boolean} }>('/api/compare', { schema: { body: { type: 'object', additionalProperties: false, required: ['origin', 'destination', 'mode'], properties: { refresh:{type:'boolean'}, origin: pointSchema, destination: pointSchema, mode: { type: 'string', enum: ['DRIVE'] } } } } }, async (request, reply) => {
     if (config.accessCode) {
       const supplied = Buffer.from(String(request.headers['x-nightwise-code'] || ''));
       const expected = Buffer.from(config.accessCode);
@@ -94,13 +94,17 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
       let plan: ReturnType<typeof buildQueryPlan> | null = null;
       const scans: NearbyScan[] = [];
       if (routes.length) {
-        try { const remaining=Math.max(0,usageBefore.nearbyLimit-usageBefore.nearbyCalls);plan = balancedPlan(routes,Math.min(config.maxQueries,remaining)); }
+        try {
+          const remaining=Math.max(0,usageBefore.nearbyLimit-usageBefore.nearbyCalls);
+          if(config.enabled&&!remaining){activityStatus='budget';notices.push('The nearby-search allowance is used up. Routes are available, but shop, hospital and fuel scans could not run. Increase the allowance, then refresh.');}
+          else plan = balancedPlan(routes,Math.min(config.maxQueries,remaining));
+        }
         catch { activityStatus = 'budget'; notices.push('These routes need more scans than the per-comparison limit. No partial route was ranked and no nearby requests were sent.'); }
       }
       if (plan && config.enabled && activityStatus !== 'budget') {
         if (!await budget.canScan(plan.queries.length)) { activityStatus = 'budget'; notices.push('The remaining pilot allowance cannot cover all routes. No nearby requests were sent.'); }
         else {
-          const collected=await collectScans(plan,provider,signal,Math.min(config.maxQueries,Math.max(0,usageBefore.nearbyLimit-usageBefore.nearbyCalls)));
+          const collected=await collectScans(plan,{nearby:(q,s)=>provider.nearby(q,s,request.body.refresh===true)},signal,Math.min(config.maxQueries,Math.max(0,usageBefore.nearbyLimit-usageBefore.nearbyCalls)));
           scans.push(...collected.scans);attributions.push(...collected.attributions);
           if(collected.refined)notices.push(`${collected.refined} result-limited search areas were checked with smaller overlapping searches. Remaining caps stay partial.`);
           const previewTime=new Date().toISOString();
@@ -111,7 +115,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
           for(const id of detailIds){
             if(signal.aborted)break;
             const allowance=await budget.snapshot();if(allowance.detailsCalls>=allowance.detailsLimit)break;
-            try{const detail=await provider.details(id,signal);attributions.push(...detail.attributions);const place=detail.scan.status==='ok'?detail.scan.places[0]:undefined;
+            try{const detail=await provider.details(id,signal,request.body.refresh===true);attributions.push(...detail.attributions);const place=detail.scan.status==='ok'?detail.scan.places[0]:undefined;
               if(place){for(const scan of scans)scan.places=scan.places.map(p=>p.id===id?place:p);detailsAdded++;}
             }catch{/* Preserve the original missing-hours evidence on failure. */}
           }
@@ -126,7 +130,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
       if (!config.enabled) notices.push('Live activity scans are switched off. Travel times are live; activity is not assessed.');
       if (!config.scoring) notices.push('Experimental live scoring is disabled by the service setting.');
       else notices.push('Live scores are experimental estimates from listed data, not safety ratings.');
-      const analyzeRoads=loadRoadAnalyzer(roadFiles[regionForPoint(journey.origin)!.id]);
+      const analyzeRoads=loadRoadAnalyzer(roadFiles[regionForPoint(journey.origin)!.id],routes.map(r=>r.path));
       const roadAnalyses=Object.fromEntries(routes.map(r=>[r.id,analyzeRoads(r.path,r.steps)]));
       if(routes.length)attributions.push({name:'© OpenStreetMap contributors · ODbL',uri:'https://www.openstreetmap.org/copyright'});
       notices.push('Road type is estimated from a local OpenStreetMap extract for the selected city. Unmatched, ambiguous and grade-separated sections remain unknown. Actual staffing, lighting and crime are not measured.');

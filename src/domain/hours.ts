@@ -16,6 +16,10 @@ export function evaluateObservation(place: PlaceObservation, at: string, arrival
   if (place.calendarHours) {
     const h = place.calendarHours;
     if (arrival < Date.parse(h.from) || arrival >= Date.parse(h.until)) return unknown();
+    if(h.alwaysOpen){
+      if(place.currentHours&&(!place.currentHours.openNow||Number.isFinite(Date.parse(place.currentHours.nextCloseTime??''))))return unknown('Current status conflicts with the listed 24-hour schedule.');
+      return {state:'open',closingSoon:false,minutesUntilClose:null,basis:'current',open24Hours:true};
+    }
     const period = h.periods.find(p => Date.parse(p.from) <= arrival && arrival < Date.parse(p.until));
     if (!period) return {state:'closed',closingSoon:false,minutesUntilClose:null,basis:'current'};
     const remaining = (Date.parse(period.until)-arrival)/60000;
@@ -55,7 +59,7 @@ export function evaluateHours(hours:OpeningHours|undefined,at:string,arrivalMinu
     const day=days.indexOf(value('weekday'));
     if(day<0)return unknown();local=day*1440+Number(value('hour'))*60+Number(value('minute'));
   }catch{return unknown();}
-  if(hours.alwaysOpen)return {state:'open',closingSoon:false,minutesUntilClose:null};
+  if(hours.alwaysOpen)return {state:'open',closingSoon:false,minutesUntilClose:null,open24Hours:true};
   if(hours.alwaysClosed)return {state:'closed',closingSoon:false,minutesUntilClose:null};
   if(!hours.periods?.length)return unknown();
   const intervals:{start:number;end:number}[]=[];
@@ -73,5 +77,6 @@ export function evaluateHours(hours:OpeningHours|undefined,at:string,arrivalMinu
   const match=merged.find(i=>i.start<=local&&local<i.end);
   if(!match)return {state:'closed',closingSoon:false,minutesUntilClose:null};
   const until=match.end-local;
+  if(match.end-match.start>=WEEK)return {state:'open',closingSoon:false,minutesUntilClose:null,open24Hours:true};
   return {state:'open',closingSoon:until<=15,minutesUntilClose:until};
 }

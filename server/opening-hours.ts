@@ -17,16 +17,22 @@ export function calendarHours(hours: any, observedAt: string): PlaceObservation[
   const start=Date.UTC(local.getUTCFullYear(),local.getUTCMonth(),local.getUTCDate())-OFFSET;
   const end=start+7*86400000;
   const periods: {from:string;until:string}[]=[];
+  let alwaysOpen=false;
   for(const p of hours.periods){
     const from=pointTime(p.open),until=pointTime(p.close);
     // Google's documented 24/7 representation. A truncated/date-specific entry is not this sentinel.
     if(hours.periods.length===1&&p.open?.day===0&&(p.open.hour??0)===0&&(p.open.minute??0)===0&&!p.open.date&&!p.open.truncated&&!p.close){
+      alwaysOpen=true;
       periods.push({from:new Date(start).toISOString(),until:new Date(end).toISOString()});continue;
     }
     if(from===null||until===null||until<=from)return undefined;
     periods.push({from:new Date(from).toISOString(),until:new Date(until).toISOString()});
   }
-  return {from:new Date(start).toISOString(),until:new Date(end).toISOString(),periods};
+  periods.sort((a,b)=>Date.parse(a.from)-Date.parse(b.from));
+  const merged:typeof periods=[];
+  for(const p of periods){const last=merged.at(-1);if(last&&Date.parse(p.from)<=Date.parse(last.until)){if(Date.parse(p.until)>Date.parse(last.until))last.until=p.until;}else merged.push({...p});}
+  alwaysOpen=alwaysOpen||merged.some(p=>Date.parse(p.from)<=start&&Date.parse(p.until)>=end);
+  return {from:new Date(start).toISOString(),until:new Date(end).toISOString(),periods:merged,...(alwaysOpen?{alwaysOpen:true}:{})};
 }
 
 export function regularHours(hours: any): OpeningHours | undefined {

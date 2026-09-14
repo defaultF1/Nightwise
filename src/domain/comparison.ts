@@ -44,6 +44,7 @@ export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads
   const componentScores=Object.fromEntries(routes.map((r,i)=>[r.id,values[i]]));
   const scored={...base,commonComponents:common,scores,componentScores,rankedIds:ranked.map(r=>r.id)};
   if(routes.length<2)return scored;
+  if(!common.includes('openDensity'))return {...scored,outcome:'insufficient',recommendedId:null,message:'The fastest route is selected. We could compare road information, but there is not enough shop-opening data to say which route has more activity.'};
   const advantage=scores[best.id]-scores[fastest.id];
   const allRange=Math.max(...Object.values(scores))-Math.min(...Object.values(scores));
   if(allRange<10)return {...scored,outcome:'similar',message:'These routes have similar listed activity. The fastest option is selected.'};

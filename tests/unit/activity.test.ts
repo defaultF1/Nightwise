@@ -81,12 +81,13 @@ describe('comparison invariants',()=>{
   expect(result.componentScores.a.transport).toBe(1);
  });
  it('scores every tutorial scenario from observed signals while preserving the detour gate',()=>{
-  for(const [scenario,outcome,componentCount] of [['normal','more-activity',6],['similar','similar',6],['detour','detour',6],['unknown','more-activity',2],['capped','more-activity',6],['closing','more-activity',6]] as const){
+  for(const [scenario,outcome,componentCount] of [['normal','more-activity',6],['similar','similar',6],['detour','detour',6],['unknown','insufficient',2],['capped','more-activity',6],['closing','more-activity',6]] as const){
    const routes=sampleRouteOptions('Manyata Tech Park',scenario);
    const result=analyzeComparison(routes,plan=>fixtureScans(plan,scenario),now,fixtureRoadEvidence(routes,scenario));
    expect(result.comparison.outcome,scenario).toBe(outcome);
    expect(result.comparison.commonComponents,scenario).toHaveLength(componentCount);
    expect(Object.keys(result.comparison.scores),scenario).toHaveLength(routes.length);
+   if(scenario==='unknown'){expect(result.comparison.recommendedId).toBeNull();expect(result.comparison.message).toContain('not enough shop-opening data');}
   }
   expect(fixtureRoadEvidence([{...route(),source:'google'}],'normal')).toEqual({});
  });
