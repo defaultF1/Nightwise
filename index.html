@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en" data-theme="dark"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><meta name="theme-color" content="#080808"/><meta name="description" content="Compare estimated route activity and travel time in Bengaluru."/><title>NightWise · Bengaluru</title>
+<script>
+  (() => {
+    let theme = 'dark';
+    try { const saved = localStorage.getItem('nightwise.appearance.v1'); if (['dark', 'light', 'blue'].includes(saved)) theme = saved; } catch {}
+    const color = { dark: '#080808', light: '#f6f6f4', blue: '#081725' }[theme];
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.backgroundColor = color;
+    document.querySelector('meta[name="theme-color"]').content = color;
+  })();
+</script></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>

@@ -1,0 +1,24 @@
+import {test,expect} from '@playwright/test';
+test('PDF evidence fields and complete ranking are visible without provider requests',async({page,baseURL})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ const external:string[]=[];
+ page.on('request',r=>{if(new URL(r.url()).origin!==new URL(baseURL!).origin)external.push(r.url());});
+ await page.goto('/');
+ await page.getByRole('button',{name:'Open settings'}).click();
+ await page.getByText('Tutorial scenarios',{exact:true}).click();
+ await page.getByLabel('Preview scenario').selectOption('three');
+ await page.getByRole('button',{name:'Done',exact:true}).click();
+ await page.getByRole('button',{name:'Compare night routes'}).click();
+ await expect(page.locator('.route-card')).toHaveCount(3);
+ await expect(page.locator('.route-card-top').nth(0)).toContainText('Activity rank 1');
+ await expect(page.locator('.route-card-top').nth(1)).toContainText('Activity rank 2');
+ await expect(page.locator('.route-card-top').nth(2)).toContainText('Activity rank 3');
+ await page.screenshot({path:'talks/screenshots/PDF-offline/routes.png',fullPage:true});
+ await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
+ await expect(page.getByText('Shops & food',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+ open/);
+ await expect(page.getByText('Longest stretch without an open help point',{exact:true}).locator('..').locator('dd')).not.toHaveText('Not assessed');
+ await expect(page.getByRole('dialog')).toContainText('fewer than two confirmed-open listings');
+ await expect(page.getByRole('dialog')).toContainText('actual staff presence is not measured');
+ await page.getByRole('dialog').screenshot({path:'talks/screenshots/PDF-offline/evidence.png'});
+ expect(external).toEqual([]);
+});
