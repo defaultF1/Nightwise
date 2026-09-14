@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Capacitor } from '@capacitor/core';
 import { App } from './App';
 import './styles.css';
+import './maps/expanded-map.css';
 import { applyTheme, loadTheme } from './theme';
 import { loadTeamAccess } from './team-access';
 

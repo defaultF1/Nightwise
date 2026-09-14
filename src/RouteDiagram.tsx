@@ -1,5 +1,6 @@
 import type { Route } from './domain/types';
-import { MapPin, Check } from 'lucide-react';
+import { MapPin, Check, Maximize2, Minimize2 } from 'lucide-react';
+import { useExpandedMap } from './maps/use-expanded-map';
 import map from './data/tutorial-map.json' with { type: 'json' };
 
 export type RouteMapProps = { routes: Route[]; selectedId?: string; onSelect: (id: string) => void; origin: string; destination?: string };
@@ -19,11 +20,12 @@ for(const road of map.roads){
   labels.push({name:road.name,x,y});if(labels.length===7)break;
 }
 export function RouteDiagram({routes,selectedId,onSelect,origin,destination='AEOS'}:RouteMapProps){
+  const {expanded,setExpanded,container,toggle}=useExpandedMap();
   const selected=routes.find(r=>r.id===selectedId);
   const ordered=[...routes.filter(r=>r.id!==selectedId),...routes.filter(r=>r.id===selectedId)];
   const pins=origin==='AEOS'?[map.pins.aeos,map.pins.manyata]:[map.pins.manyata,map.pins.aeos];
-  return <section className="route-diagram offline-map" aria-label="Bengaluru street map">
-    <div className="diagram-heading"><span><MapPin size={14}/> North Bengaluru</span></div>
+  return <section ref={container} className={`route-diagram offline-map${expanded?' map-expanded':''}`} role={expanded?'dialog':undefined} aria-modal={expanded?true:undefined} aria-label="Bengaluru street map">
+    <div className="diagram-heading"><span><MapPin size={14}/> North Bengaluru</span><button ref={toggle} className="map-size-button" type="button" aria-expanded={expanded} onClick={()=>setExpanded(!expanded)}>{expanded?<Minimize2 size={17}/>:<Maximize2 size={17}/>} {expanded?'Minimize map':'Full screen'}</button></div>
     {routes.length?<>
       <div className="diagram-options" aria-label="Map route options">{routes.map(r=><button key={r.id} aria-pressed={r.id===selectedId} onClick={()=>onSelect(r.id)}>{r.id===selectedId&&<Check size={13}/>} {r.label} · {Math.round(r.durationSeconds/60)} min</button>)}</div>
       <svg viewBox="0 0 560 440" role="img" aria-label={`Street routes from ${origin} to ${destination}`}>

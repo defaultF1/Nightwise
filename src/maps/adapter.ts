@@ -9,7 +9,7 @@ import { syncNestedMapScroll } from './scroll-sync';
 import { PIN_COLORS, pinTint, type PlacePin } from './pins';
 
 export type MapLine = { id: string; path: Coordinate[]; color: string; width: number; clickable: boolean };
-export type MapHandle = { draw(lines: MapLine[], pins: { name: string; latitude: number; longitude: number }[], gaps?:GapMarker[], places?: PlacePin[]): Promise<void>; fit(points: Coordinate[]): Promise<void>; touch(enabled: boolean): Promise<void>; destroy(): Promise<void> };
+export type MapHandle = { draw(lines: MapLine[], pins: { name: string; latitude: number; longitude: number }[], gaps?:GapMarker[], places?: PlacePin[]): Promise<void>; fit(points: Coordinate[]): Promise<void>; touch(enabled: boolean, expanded?: boolean): Promise<void>; destroy(): Promise<void> };
 const latLng = (p: Coordinate) => ({ lat: p.latitude, lng: p.longitude });
 let script: Promise<void> | undefined;
 let instance = 0;
@@ -77,7 +77,7 @@ export async function createMap(element: HTMLElement, theme: Theme, onSelect: (i
       pins.push(...gaps.map(p=>new google.maps.Marker({map,position:latLng(p),title:p.name,label:{text:p.label,color:'#171717',fontSize:'12px',fontWeight:'600'},icon:{path:google.maps.SymbolPath.CIRCLE,scale:8,fillColor:'#f4b86a',fillOpacity:1,strokeWeight:1,labelOrigin:new google.maps.Point(0,-2.5)}})));
     },
     async fit(points) { if (points.length) { const bounds = new google.maps.LatLngBounds(); points.forEach(p => bounds.extend(latLng(p))); map.fitBounds(bounds, 45); } },
-    async touch(enabled) { map.setOptions({ gestureHandling: enabled ? 'cooperative' : 'none', keyboardShortcuts: enabled }); },
+    async touch(enabled, expanded = false) { map.setOptions({ gestureHandling: enabled ? expanded ? 'greedy' : 'cooperative' : 'none', keyboardShortcuts: enabled }); },
     async destroy() { lines.forEach(l => l.setMap(null)); pins.forEach(p => p.setMap(null)); google.maps.event.clearInstanceListeners(map); element.replaceChildren(); },
   };
 }

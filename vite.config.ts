@@ -7,6 +7,8 @@ export default defineConfig({
     proxy: { '/api': 'http://127.0.0.1:8787' },
     watch: { ignored: ['**/.tools/**', '**/android/**', '**/talks/**', '**/planning/**', '**/research/**', '**/output/**', '**/tmp/**', '**/dist/**'] },
   },
-  preview: { proxy: { '/api': 'http://127.0.0.1:8787' } },
+  // Keep the preview on the origin allowed by the browser Maps key.
+  // Fail if occupied instead of silently switching to an unauthorised port.
+  preview: { port: 4173, strictPort: true, proxy: { '/api': 'http://127.0.0.1:8787' } },
   build: { target: 'es2022' },
 });
