@@ -21,8 +21,7 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
   const queue = useRef(Promise.resolve());
   const select = useRef(onSelect); select.current = onSelect;
   const [ready, setReady] = useState(false), [error, setError] = useState(false);
-  const [openOnly,setOpenOnly]=useState(false);
-  const placeMarkers=visiblePlacePins(analysis,60,!openOnly);
+  const placeMarkers=visiblePlacePins(analysis,60,false);
   useEffect(() => {
     let disposed = false; let owned: MapHandle | undefined; let nativeOwner = false;
     setError(false);
@@ -58,9 +57,9 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
           if (path.length > 1) lines.push({ id: selected.id, path, color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
         }
       }
-      await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[], analysis?.source==='live'?visiblePlacePins(analysis,60,!openOnly):[]);
+      await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[], analysis?.source==='live'?visiblePlacePins(analysis,60,false):[]);
     }).catch(() => setError(true));
-  }, [ready, routes, selectedId, journey, analysis, theme, openOnly]);
+  }, [ready, routes, selectedId, journey, analysis, theme]);
   useEffect(() => {
     if (!ready) return;
     queue.current = queue.current.then(async () => { await handle.current?.fit(routes.length ? routes.flatMap(r => r.path) : [journey.origin, journey.destination]); }).catch(() => setError(true));
@@ -76,11 +75,10 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
     <div className="diagram-endpoints"><span><b>A</b> {journey.origin.name}</span><span><b>B</b> {journey.destination.name}</span></div>
     {!routes.length&&<p className="diagram-caption">Endpoint preview. Confirm your journey to load routes along roads.</p>}
     <div className="pin-legend" aria-label="Map pin colours">{([['start','Start / current location'],['destination','Destination'],['shop','Shops'],['medical','Pharmacies / clinics'],['hospital','Hospitals'],['fuel','Petrol / CNG']] as const).map(([kind,label])=><span key={kind}><i style={{backgroundColor:PIN_COLORS[kind]}}/>{label}</span>)}</div>
-    {routes.length>0&&<div className="map-place-controls"><label><input type="checkbox" checked={openOnly} onChange={e=>setOpenOnly(e.target.checked)}/>Only places open or estimated open around arrival</label>
+    {routes.length>0&&<div className="map-place-controls">
       {analysis&&<ul aria-label="Places along this route">{PLACE_GROUPS.map(group=>{const count=groupCounts(analysis,group.categories);return count.total?<li key={group.id}><strong>{group.label}</strong> · {groupSummary(count)}</li>:null;})}</ul>}
-      <p>{placeMarkers.length?`${placeMarkers.length} place markers shown. Yellow: shops · Pink: pharmacies / clinics · Purple H: hospitals · Green: petrol / CNG. Tap a marker to check its hours status.`:activityStatus==='budget'?'Place scans could not run because the service search allowance is too low. Increase the nearby-search allowance, then refresh the comparison.':activityStatus==='disabled'?'The service has place scans switched off. Enable them to show shops and help points.':openOnly?'No returned places are open or estimated open when you pass. Turn off the filter to see other listings.':'No shop, medical or fuel locations were returned for this route. This does not mean the road has no shops. Refresh the comparison to check again.'}</p>
-      {placeMarkers.length>0&&<details><summary>Places shown on this map</summary><ul>{placeMarkers.map((p,i)=><li key={`${p.name}-${i}`}><strong>{p.name}</strong> · {p.status??'Listed open around arrival'}</li>)}</ul></details>}
+      {!placeMarkers.length&&<p>{activityStatus==='budget'?'Place scans could not run because the service search allowance is used up.':activityStatus==='disabled'?'Place scans are switched off.':'No returned places are open or estimated open when you pass. Missing listings do not mean this road is empty.'}</p>}
+
     </div>}
-    {analysis && <p className="map-legend">{theme === 'blue' ? 'Teal' : theme === 'light' ? 'Black' : 'White'}: selected route · Amber: low activity · Grey: unknown.</p>}
   </section>;
 }

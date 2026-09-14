@@ -14,10 +14,10 @@ export function handoffWaypoints(journey:LiveJourney,route?:Route):Coordinate[]{
   const seen=new Set([coordinate(journey.origin),coordinate(journey.destination)]);
   return samples.flatMap(p=>{const key=coordinate(p.coordinate);if(seen.has(key))return [];seen.add(key);return [p.coordinate];});
 }
-export function mapsHandoff(journey: LiveJourney,route?:Route) {
+export function mapsHandoff(journey: LiveJourney,route?:Route,fastestRouteId?:string) {
   const url = new URL('https://www.google.com/maps/dir/');
   url.search = new URLSearchParams({ api: '1', origin: coordinate(journey.origin), destination: coordinate(journey.destination), travelmode: journey.mode==='WALK'?'walking':journey.mode==='TWO_WHEELER'?'two-wheeler':'driving' }).toString();
-  const via=handoffWaypoints(journey,route);
+  const via=route?.id===fastestRouteId?[]:handoffWaypoints(journey,route);
   if(via.length)url.searchParams.set('waypoints',via.map(coordinate).join('|'));
   return url.toString();
 }

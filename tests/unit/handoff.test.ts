@@ -9,6 +9,10 @@ test('Google Maps preserves car, motorbike and walking choices',()=>{
  }
 });
 const route:Route={id:'one',label:'Route one',durationSeconds:600,distanceMeters:5000,source:'google',geometryKind:'provider',path:[journey.origin,{latitude:13.07,longitude:77.61},journey.destination]};
+test('fastest route opens without stops even when its displayed label changes',()=>{
+ expect(new URL(mapsHandoff(journey,{...route,label:'Most active route'},route.id)).searchParams.has('waypoints')).toBe(false);
+ expect(new URL(mapsHandoff(journey,route,'another-fastest-id')).searchParams.get('waypoints')?.split('|')).toHaveLength(3);
+});
 test('selected routes carry up to three ordered road points and exact endpoints',()=>{
  const url=new URL(mapsHandoff(journey,route));
  expect(url.searchParams.get('waypoints')?.split('|')).toHaveLength(3);

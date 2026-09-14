@@ -41,6 +41,11 @@ html[data-native-map=true] .brand svg,html[data-native-map=true] .brand span,htm
 
 /* Keep result controls readable above Capacitor's native map surface. */
 .help-details{background:var(--surface)}
+.route-list+.help-details,.route-list+.shop-hours{margin-top:20px}
+.help-details{padding:16px;border-radius:18px;min-width:0}
+.help-details>summary{min-height:24px;line-height:1.6;overflow-wrap:anywhere;cursor:pointer}
+.help-details[open]>summary{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.help-points li{overflow-wrap:anywhere;line-height:1.6}
 html[data-native-map=true] .results-panel{background:var(--bg)}
 .journey-answer{display:block;padding:20px;margin-bottom:20px;border:1px solid var(--line);border-radius:20px;background:var(--surface);overflow-wrap:anywhere}
 .journey-answer h2{font-size:21px;line-height:1.4;margin:12px 0}.journey-answer h2 span{font-weight:400;font-size:15px;color:var(--muted)}

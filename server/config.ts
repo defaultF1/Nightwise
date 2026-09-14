@@ -25,7 +25,7 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env) {
     roadFile: env.ROAD_DATA_PATH || 'data/roads/north-bengaluru-22km.json',
     enabled: env.ENABLE_ACTIVITY_ANALYSIS === 'true', scoring: env.ENABLE_EXPERIMENTAL_SCORING === 'true',
     maxQueries: integer('MAX_NEARBY_QUERIES', 120, 120), routeLimit: integer('PILOT_ROUTE_LIMIT', 10, 500),
-    nearbyLimit: integer('PILOT_NEARBY_LIMIT', 600, 5000),
+    nearbyLimit: integer('PILOT_NEARBY_LIMIT', 600, 20000),
     ledgerPath: env.BUDGET_LEDGER_PATH || '.local/pilot-budget.json',
     redisUrl, redisToken, redisKey: 'nightwise:pilot-budget:v1',
     allowedOrigins: (env.ALLOWED_ORIGINS || 'http://localhost:4173,http://127.0.0.1:4173,http://localhost:5173,http://127.0.0.1:5173,https://localhost,http://localhost').split(',').map(s => s.trim()),

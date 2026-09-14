@@ -16,9 +16,14 @@ test('hospital colour, 24-hour status and opening-hours details fit a narrow pho
  await page.getByRole('button',{name:'Confirm and compare'}).click();
  await expect(page.locator('.pin-legend').getByText('Hospitals',{exact:true})).toBeVisible();
  await expect(page.locator('.pin-legend span').filter({hasText:'Hospitals'}).locator('i')).toHaveCSS('background-color','rgb(167, 139, 250)');
- await page.getByText('Places shown on this map',{exact:true}).click();
- await expect(page.locator('.map-place-controls')).toContainText('Test 24-hour hospital');
- await expect(page.locator('.map-place-controls')).toContainText('Open 24 hours');
+ await expect(page.locator('.map-place-controls input[type=checkbox]')).toHaveCount(0);
+ await expect(page.getByText('Places shown on this map',{exact:true})).toHaveCount(0);
+ const help=page.locator('.help-details').filter({has:page.getByText('Help points on selected route',{exact:true})});
+ await help.locator('summary').click();
+ await expect(help).toContainText('Test 24-hour hospital');
+ await expect(help).toContainText('Open 24 hours');
+ const gap=await help.evaluate(el=>el.getBoundingClientRect().top-el.previousElementSibling!.getBoundingClientRect().bottom);
+ expect(gap).toBeGreaterThanOrEqual(16);
  await page.getByText('Opening times and closed days',{exact:true}).click();
  const item=page.locator('.shop-hours-item').filter({hasText:'Test 24-hour hospital'});
  await item.locator('summary').click();
