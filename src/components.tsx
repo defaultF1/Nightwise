@@ -22,7 +22,7 @@ export function Sheet({ title, children, onClose }: { title: string; children: R
   }, []);
   return <div className="sheet-overlay" onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
     <div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" className="sheet" aria-labelledby="sheet-title">
-      <div className="sheet-inner"><div className="sheet-heading"><h2 id="sheet-title">{title}</h2><button className="icon-button" onClick={onClose} aria-label="Close"><X size={21} /></button></div>{children}</div>
+      <div className="sheet-inner"><div className="sheet-heading"><h2 id="sheet-title">{title}</h2><button className="icon-button" onClick={onClose} aria-label="Close"><X size={21} /></button></div><div className="sheet-body" onSubmitCapture={()=>{if(document.activeElement instanceof HTMLInputElement)document.activeElement.blur();}}>{children}</div></div>
     </div>
   </div>;
 }

@@ -24,7 +24,8 @@ public class MainActivity extends BridgeActivity {
             androidx.core.graphics.Insets cutout = insets.getInsets(WindowInsetsCompat.Type.displayCutout());
             androidx.core.graphics.Insets keyboard = insets.getInsets(WindowInsetsCompat.Type.ime());
             view.setPadding(cutout.left, cutout.top, cutout.right, Math.max(cutout.bottom, keyboard.bottom));
-            return insets;
+            // This container owns IME spacing. Do not apply it again in children.
+            return WindowInsetsCompat.CONSUMED;
         });
         immersive();
     }
