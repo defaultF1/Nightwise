@@ -26,6 +26,23 @@ const path = [{ latitude: 13.06, longitude: 77.60 }, { latitude: 13.0605, longit
 const response = { routes: [ { duration: '120s', distanceMeters: 170, polyline: { encodedPolyline: encode(path) }, legs: [{ steps: [{ navigationInstruction: { maneuver: 'DEPART' } }, { navigationInstruction: { maneuver: 'TURN_LEFT' } }] }] } ] };
 const request = { method: 'POST' as const, url: '/api/compare', payload: DEFAULT_JOURNEY };
 
+it('passes each mode and a future departure to Google, rejecting out-of-range times before billing',async()=>{
+ const calls=vi.fn(async()=>new Response(JSON.stringify({routes:[]})));
+ const app=await createServer(config(),calls);
+ try{
+  const departureTime=new Date(Date.now()+4*60*60_000).toISOString();
+  for(const mode of ['DRIVE','WALK','TWO_WHEELER']){
+   const result=await app.inject({...request,payload:{...DEFAULT_JOURNEY,mode,departureTime}});
+   expect(result.statusCode).toBe(200);
+   const body=JSON.parse((calls.mock.calls.at(-1) as unknown as [string,RequestInit])[1].body as string);
+   expect(body.travelMode).toBe(mode);expect(body.departureTime).toBe(departureTime);
+   expect(body.routingPreference).toBe(mode==='WALK'?undefined:'TRAFFIC_AWARE');
+  }
+  for(const offset of [-60_000,6*60*60_000])expect((await app.inject({...request,payload:{...DEFAULT_JOURNEY,departureTime:new Date(Date.now()+offset).toISOString()}})).statusCode).toBe(422);
+  expect(calls).toHaveBeenCalledTimes(3);
+ }finally{await app.close();}
+});
+
 it('scans only returned route corridors, shares identical samples and bypasses reuse only on refresh',async()=>{
  const circles:any[]=[];
  const alternate=[path[0],{latitude:13.06,longitude:77.603},path.at(-1)!];
@@ -74,7 +91,7 @@ describe('live backend', () => {
   it('configuration checks cost nothing and never return secrets', async () => { const calls=vi.fn(); const app=await createServer(config(),calls); try { const res=await app.inject('/api/status'); expect(res.statusCode).toBe(200); expect(res.body).not.toContain('test-key'); expect(calls).not.toHaveBeenCalled(); } finally { await app.close(); } },15000);
   it('refuses missing credentials, invalid inputs, disallowed origins and missing access code before provider calls', async () => {
     const calls=vi.fn(); const app=await createServer(config({GOOGLE_MAPS_SERVER_KEY:''}),calls);
-    try { expect((await app.inject(request)).statusCode).toBe(503); expect((await app.inject({...request,payload:{...DEFAULT_JOURNEY,mode:'WALK'}})).statusCode).toBe(400); expect((await app.inject({...request,headers:{origin:'https://untrusted.example'}})).statusCode).toBe(403); expect(calls).not.toHaveBeenCalled(); } finally { await app.close(); }
+    try { expect((await app.inject(request)).statusCode).toBe(503); expect((await app.inject({...request,payload:{...DEFAULT_JOURNEY,mode:'FLY'}})).statusCode).toBe(400); expect((await app.inject({...request,headers:{origin:'https://untrusted.example'}})).statusCode).toBe(403); expect(calls).not.toHaveBeenCalled(); } finally { await app.close(); }
     const secured=await createServer(config({PILOT_ACCESS_CODE:'secret-pilot-code'}),calls); try { expect((await secured.inject(request)).statusCode).toBe(401); expect(calls).not.toHaveBeenCalled(); } finally { await secured.close(); }
   });
   it('returns real-provider routes without inventing activity when scans are off', async () => { const calls=vi.fn(async()=>new Response(JSON.stringify(response))); const app=await createServer(config(),calls); try { const res=await app.inject(request); expect(res.statusCode).toBe(200); const body=res.json(); expect(body.activityStatus).toBe('disabled'); expect(body.analyses[0].openPlaces).toBeNull(); expect(body.comparison.scores).toEqual({}); expect(body.usage.routeCalls).toBe(1); expect(calls).toHaveBeenCalledTimes(1); const options=calls.mock.calls[0] as unknown as [string,RequestInit]; expect(String(options[0])).toContain('routes.googleapis.com'); } finally { await app.close(); } });

@@ -3,6 +3,11 @@ import {mapsHandoff,handoffWaypoints} from '../../src/domain/handoff';
 import {DEFAULT_JOURNEY} from '../../src/domain/journey';
 import type {Route} from '../../src/domain/types';
 const journey=DEFAULT_JOURNEY;
+test('Google Maps preserves car, motorbike and walking choices',()=>{
+ for(const [mode,expected] of [['DRIVE','driving'],['TWO_WHEELER','two-wheeler'],['WALK','walking']] as const){
+  expect(new URL(mapsHandoff({...journey,mode})).searchParams.get('travelmode')).toBe(expected);
+ }
+});
 const route:Route={id:'one',label:'Route one',durationSeconds:600,distanceMeters:5000,source:'google',geometryKind:'provider',path:[journey.origin,{latitude:13.07,longitude:77.61},journey.destination]};
 test('selected routes carry up to three ordered road points and exact endpoints',()=>{
  const url=new URL(mapsHandoff(journey,route));

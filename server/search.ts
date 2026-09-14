@@ -38,11 +38,12 @@ export function registerSearch(app:FastifyInstance, config:ServerConfig, budget:
       s.ids=new Set(suggestions.map(p=>p.id));return {suggestions};
     }finally{s.busy=false;}
   });
-  app.post<{Body:{sessionToken:string;placeIds:string[];anchor:Coordinate;direction:SearchDirection}}>('/api/places/preview',{schema:{body:{type:'object',additionalProperties:false,required:['sessionToken','placeIds','anchor','direction'],properties:{sessionToken:sessionSchema,placeIds:{type:'array',minItems:1,maxItems:5,uniqueItems:true,items:{type:'string',pattern:'^[A-Za-z0-9_-]{1,200}$'}},anchor:coordinateSchema,direction:{enum:['from-anchor','to-anchor']}}}}},async request=>{
-    enabled();prune();const {sessionToken,placeIds,anchor,direction}=request.body,s=sessions.get(sessionToken);
+  app.post<{Body:{sessionToken:string;placeIds:string[];anchor:Coordinate;direction:SearchDirection;mode?:import('../src/domain/types').TravelMode;departureTime?:string}}>('/api/places/preview',{schema:{body:{type:'object',additionalProperties:false,required:['sessionToken','placeIds','anchor','direction'],properties:{mode:{enum:['DRIVE','WALK','TWO_WHEELER']},departureTime:{type:'string',format:'date-time'},sessionToken:sessionSchema,placeIds:{type:'array',minItems:1,maxItems:5,uniqueItems:true,items:{type:'string',pattern:'^[A-Za-z0-9_-]{1,200}$'}},anchor:coordinateSchema,direction:{enum:['from-anchor','to-anchor']}}}}},async request=>{
+    enabled();prune();const {sessionToken,placeIds,anchor,direction,mode='DRIVE',departureTime}=request.body,s=sessions.get(sessionToken);
     if(!inPilotArea(anchor))throw new ServiceError('outside-area','Choose a point within the supported North Bengaluru or Kanpur area.',422);
     if(!s||s.busy||placeIds.some(id=>!s.ids.has(id)))throw new ServiceError('search-expired','Search again to update travel estimates.',400);
-    const cacheKey=JSON.stringify([anchor,direction,placeIds]),cached=s.previews.get(cacheKey);
+    if(departureTime){const delay=Date.parse(departureTime)-Date.now();if(!Number.isFinite(delay)||delay<0||delay>5*60*60_000)throw new ServiceError('invalid-departure','Choose a departure time from now to five hours ahead.',422);}
+    const cacheKey=JSON.stringify([anchor,direction,placeIds,mode,departureTime]),cached=s.previews.get(cacheKey);
     if(cached&&Date.now()-Date.parse(cached.checkedAt)<90000)return cached;
     // A matrix is billed per origin/destination pair. Reserve every element,
     // retaining one route unit for a full comparison. Never reset the ledger.
@@ -50,7 +51,7 @@ export function registerSearch(app:FastifyInstance, config:ServerConfig, budget:
     if(usage.routeLimit-usage.routeCalls<placeIds.length+1)throw new ServiceError('budget-exhausted','Travel-time preview allowance is used up. Place suggestions remain available.',429);
     await budget.reserve('route',placeIds.length);
     const fixed={waypoint:{location:{latLng:anchor}}},places=placeIds.map(placeId=>({waypoint:{placeId}}));
-    const data=await provider('https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix',{method:'POST',headers:{'Content-Type':'application/json','X-Goog-Api-Key':config.serverKey,'X-Goog-FieldMask':'originIndex,destinationIndex,status,condition,distanceMeters,duration'},body:JSON.stringify({origins:direction==='from-anchor'?[fixed]:places,destinations:direction==='from-anchor'?places:[fixed],travelMode:'DRIVE',routingPreference:'TRAFFIC_AWARE',languageCode:'en-IN',units:'METRIC'})});
+    const data=await provider('https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix',{method:'POST',headers:{'Content-Type':'application/json','X-Goog-Api-Key':config.serverKey,'X-Goog-FieldMask':'originIndex,destinationIndex,status,condition,distanceMeters,duration'},body:JSON.stringify({origins:direction==='from-anchor'?[fixed]:places,destinations:direction==='from-anchor'?places:[fixed],travelMode:mode,...(mode==='WALK'?{}:{routingPreference:'TRAFFIC_AWARE'}),...(departureTime?{departureTime}:{}),languageCode:'en-IN',units:'METRIC'})});
     if(!Array.isArray(data)||data.length>placeIds.length)throw new ServiceError('invalid-response','Travel estimates could not be read.');
     const estimates:PlaceTravelEstimate[]=placeIds.map(id=>({id,available:false})),seen=new Set<number>();
     for(const item of data){

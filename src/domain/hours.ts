@@ -8,9 +8,9 @@ export function isFresh(observedAt:string,checkedAt:string):boolean{
   const age=Date.parse(checkedAt)-Date.parse(observedAt);
   return Number.isFinite(age)&&age>=-60_000&&age<=EVIDENCE_MAX_AGE_MS;
 }
-export function evaluateObservation(place: PlaceObservation, at: string, arrivalMinutes = 0): HoursEvaluation {
+export function evaluateObservation(place: PlaceObservation, at: string, arrivalMinutes = 0, evidenceAt = at): HoursEvaluation {
   if (!Number.isFinite(arrivalMinutes) || arrivalMinutes < 0 || !Number.isFinite(Date.parse(at))) return unknown();
-  if (!isFresh(place.observedAt,at)) return unknown('These opening hours need a fresh check.');
+  if (!isFresh(place.observedAt,evidenceAt)) return unknown('These opening hours need a fresh check.');
   const arrival = Date.parse(at) + arrivalMinutes * 60000;
   if(['CLOSED_TEMPORARILY','CLOSED_PERMANENTLY','FUTURE_OPENING'].includes(place.businessStatus??''))return {state:'closed',closingSoon:false,minutesUntilClose:null,basis:'business-status',reason:'Google lists this business as temporarily closed, permanently closed or not yet open.'};
   if (place.calendarHours) {
@@ -27,15 +27,15 @@ export function evaluateObservation(place: PlaceObservation, at: string, arrival
   }
   const h = place.currentHours;
   if(h){
-    if(!isFresh(h.observedAt,at))return unknown('These opening hours need a fresh check.');
+    if(!isFresh(h.observedAt,evidenceAt))return unknown('These opening hours need a fresh check.');
     if(!h.openNow){
       const opens=Date.parse(h.nextOpenTime??'');
-      if(arrivalMinutes===0||Number.isFinite(opens)&&arrival<opens)return {state:'closed',closingSoon:false,minutesUntilClose:null,basis:'current'};
+      if(Math.abs(arrival-Date.parse(h.observedAt))<=60_000||Number.isFinite(opens)&&arrival<opens)return {state:'closed',closingSoon:false,minutesUntilClose:null,basis:'current'};
       if(Number.isFinite(opens))return unknown('Opening is listed, but the closing time after arrival is unavailable.');
     }else{
       const remaining=(Date.parse(h.nextCloseTime??'')-Date.parse(at))/60000;
       if(Number.isFinite(remaining))return remaining>arrivalMinutes?{state:'open',closingSoon:remaining<=arrivalMinutes+15,minutesUntilClose:remaining-arrivalMinutes,basis:'current'}:unknown('The current opening period ends before you pass; later hours are unavailable.');
-      if(arrivalMinutes===0)return {state:'open',closingSoon:false,minutesUntilClose:null,basis:'current'};
+      if(Math.abs(arrival-Date.parse(h.observedAt))<=60_000)return {state:'open',closingSoon:false,minutesUntilClose:null,basis:'current'};
     }
   }
   if(place.currentScheduleInvalid)return unknown('Google returned an incomplete current schedule.');
@@ -44,7 +44,7 @@ export function evaluateObservation(place: PlaceObservation, at: string, arrival
   const previousDay=new Date(arrival+330*60000-86400000).toISOString().slice(0,10);
   if(place.schedule?.specialDates.some(d=>d===day||d===previousDay))return unknown('Special hours are flagged around this date, but usable times are missing.');
   if(h&&place.hours){
-    const typicalNow=evaluateHours(place.hours,at);
+    const typicalNow=evaluateHours(place.hours,h.observedAt);
     if(typicalNow.state!=='unknown'&&(typicalNow.state==='open')!==h.openNow)return unknown('Current status differs from the regular weekly schedule.');
   }
   const typical=evaluateHours(place.hours,at,arrivalMinutes);

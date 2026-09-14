@@ -5,6 +5,11 @@ import type {LiveResult} from '../../src/domain/live-contract';
 import {PlacesCache} from '../../server/google';
 const start=Date.parse('2026-09-14T10:00:00Z');
 const result=()=>({routes:[{id:'r'}],analyses:[],checkedAt:new Date(start).toISOString(),activityStatus:'partial',requestUsage:{routeCalls:1,nearbyCalls:50,detailsCalls:2}} as unknown as LiveResult);
+it('does not mix travel modes or departure times in the five-minute cache',()=>{
+ const cache=new ComparisonCache(()=>start),key=cache.key(DEFAULT_JOURNEY,'a');cache.set(key,result());
+ expect(cache.get(cache.key({...DEFAULT_JOURNEY,mode:'WALK'},'a'))).toBeUndefined();
+ expect(cache.get(cache.key({...DEFAULT_JOURNEY,departureTime:new Date(start+3600000).toISOString()},'a'))).toBeUndefined();
+});
 it('reuses a result locally for less than five minutes without renewing its timestamp',()=>{
  let now=start;const cache=new ComparisonCache(()=>now),key=cache.key(DEFAULT_JOURNEY,'test-code');
  cache.set(key,result());now+=COMPARISON_CACHE_MS-1;

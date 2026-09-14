@@ -13,7 +13,7 @@ export function inPilotArea(p:Coordinate):boolean{return !!regionForPoint(p);}
 export function sameServiceRegion(a:Coordinate,b:Coordinate):boolean{const region=regionForPoint(a);return !!region&&region.id===regionForPoint(b)?.id;}
 export function inServiceMapArea(p:Coordinate):boolean{return inBengaluru(p)||(!!p&&Number.isFinite(p.latitude)&&Number.isFinite(p.longitude)&&p.latitude>=26.2&&p.latitude<=26.75&&p.longitude>=79.98&&p.longitude<=80.62);}
 export type JourneyPoint = Coordinate & { name: string; address?: string; placeId?: string };
-export type LiveJourney = { origin: JourneyPoint; destination: JourneyPoint; mode: 'DRIVE' };
+export type LiveJourney = { origin: JourneyPoint; destination: JourneyPoint; mode: import('./types').TravelMode; departureTime?: string };
 export const DEFAULT_JOURNEY: LiveJourney = { origin: AEOS_PIN, destination: MANYATA_PIN, mode: 'DRIVE' };
 // Request bounds include Bengaluru; the map itself remains freely pannable.
 export function inBengaluru(p: Coordinate): boolean {

@@ -34,7 +34,7 @@ html[data-native-map=true] .brand svg,html[data-native-map=true] .brand span,htm
 .endpoint-confirmation dd{margin:8px 0 0}
 .endpoint-confirmation dd strong{display:block;line-height:1.4;overflow-wrap:anywhere}
 .endpoint-confirmation dd span{line-height:1.65}
-.sheet-inner>.primary-button{border-radius:18px;line-height:1.4;white-space:normal;overflow-wrap:anywhere;min-height:56px}
+.sheet-body>.primary-button{border-radius:18px;line-height:1.4;white-space:normal;overflow-wrap:anywhere;min-height:56px}
 .sheet .sheet-inner{padding-bottom:calc(32px + env(safe-area-inset-bottom));min-width:0}
 .sheet .sheet-heading h2{min-width:0;line-height:1.3;overflow-wrap:anywhere}
 @media(max-width:760px){.sheet[open]{width:calc(100% - 16px);max-height:calc(100dvh - 32px - env(safe-area-inset-top) - env(safe-area-inset-bottom));margin:16px auto;border:1px solid var(--line);border-radius:24px}.sheet .sheet-inner{padding-left:16px;padding-right:16px}}
@@ -67,8 +67,34 @@ html[data-native-map=true] .sheet:has(.live-map),
 html[data-native-map=true] .sheet:has(.live-map) .sheet-inner,
 html[data-native-map=true] .sheet:has(.live-map) .sheet-body{background:transparent;backdrop-filter:none;box-shadow:none}
 html[data-native-map=true] .sheet:has(.live-map) .sheet-heading,
-html[data-native-map=true] .sheet:has(.live-map) .sheet-body>:not(.live-map){background:var(--surface)}
+html[data-native-map=true] .sheet:has(.live-map) .sheet-body>:not(.live-map):not(button):not(.endpoint-confirmation){background:var(--surface)}
 .map-place-controls{padding:12px 16px;background:var(--bg);font-size:12px;line-height:1.6}.map-place-controls label{display:flex;align-items:center;gap:8px;min-height:44px}.map-place-controls input{width:18px;height:18px}.map-place-controls p{margin:8px 0}.map-place-controls ul{padding-left:18px;max-height:180px;overflow:auto}.map-place-controls li{margin-bottom:8px}
 .score-breakdown dt small{display:block;max-width:240px;font-size:11px;line-height:1.5;margin-top:6px}
 .score-unavailable{display:block;font-size:11px;margin-top:14px;color:var(--muted)}.score-unavailable b{font-size:16px}.score-unavailable small{display:block;font-size:10px;margin-top:3px}
 .route-feedback{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:14px;font-size:12px;color:var(--muted)}.route-feedback button{min-height:44px;min-width:52px;border:1px solid var(--line);border-radius:10px;background:var(--raised);font-size:17px}.route-feedback p{margin:0;font-size:12px}
+
+/* Draw text-field focus inside its bounds so the scroll area cannot clip it. */
+.sheet input:not([type=radio]):not([type=checkbox]):focus,
+.sheet select:focus{outline:2px solid var(--accent);outline-offset:-2px}
+.sheet-body{padding-bottom:16px;scroll-padding-block:16px}
+.sheet .tutorial-controls>button+label{margin-top:16px}
+.sheet .tutorial-controls>small{margin-top:10px;line-height:1.6}
+.sheet .selected-handoff{margin-bottom:12px;line-height:1.5}
+.sheet-body>.primary-button{flex-shrink:0}
+/* The handoff has little content; avoid stretching it into an empty full-screen panel. */
+.sheet-overlay .sheet:has(.selected-handoff),
+.sheet-overlay .sheet:has(.selected-handoff) .sheet-inner{height:auto}
+.sheet:has(.selected-handoff) .place-icon.large{margin-top:4px}
+.sheet:has(.selected-handoff) .evidence-lead{margin:18px 0}
+.trip-settings{flex-wrap:wrap;gap:16px}
+.trip-settings>label{display:flex;align-items:center;gap:10px;flex:1;min-width:120px}
+.trip-settings>label>span{display:grid;gap:7px;min-width:0;width:100%;font-size:11px;color:var(--muted)}
+.trip-settings select{width:100%;min-height:44px;border:1px solid var(--line);border-radius:12px;padding:8px;background:var(--raised);color:var(--text);font:inherit;font-size:13px}
+.score-display{display:flex;align-items:center;gap:14px;margin:18px 0;min-width:0}
+.score-ring{position:relative;display:grid;place-items:center;width:80px;height:80px;flex-shrink:0;color:var(--accent)}
+.score-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg) scaleY(-1);overflow:visible}
+.score-ring circle{fill:none;stroke-width:5}.score-track{stroke:var(--line)}
+.score-progress{stroke:var(--accent);stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:var(--score-offset)}
+.score-ring>span{display:grid;text-align:center}.score-ring b{font-size:24px;line-height:1.1}.score-ring small{font-size:10px;color:var(--muted);margin-top:3px}
+.score-caption{font-size:13px;line-height:1.5;min-width:0}.score-caption small{display:block;font-size:10px;color:var(--muted);margin-top:5px}
+@media(prefers-reduced-motion:no-preference){.score-progress{animation:score-fill .9s ease-out both}@keyframes score-fill{from{stroke-dashoffset:100}to{stroke-dashoffset:var(--score-offset)}}}

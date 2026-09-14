@@ -6,6 +6,19 @@ const sessionToken='12345678-1234-4123-8123-123456789abc',anchor={latitude:AEOS_
 const predictions={suggestions:['one','two'].map(placeId=>({placePrediction:{placeId,distanceMeters:500,structuredFormat:{mainText:{text:placeId},secondaryText:{text:'Bengaluru'}}}}))};
 const suggest={method:'POST' as const,url:'/api/places/suggest',payload:{query:'Bengaluru',sessionToken,anchor}};
 const preview={method:'POST' as const,url:'/api/places/preview',payload:{sessionToken,placeIds:['one','two'],anchor,direction:'from-anchor'}};
+it('search estimates respect mode and departure without reusing another mode',async()=>{
+ const {app,fetcher}=await setup('20');
+ try{
+  await app.inject(suggest);const departureTime=new Date(Date.now()+3600000).toISOString();
+  for(const mode of ['DRIVE','WALK','TWO_WHEELER']){
+   expect((await app.inject({...preview,payload:{...preview.payload,mode,departureTime}})).statusCode).toBe(200);
+   const body=JSON.parse(String((fetcher.mock.calls.at(-1) as unknown as [string,RequestInit])[1].body));
+   expect(body.travelMode).toBe(mode);expect(body.departureTime).toBe(departureTime);
+   expect(body.routingPreference).toBe(mode==='WALK'?undefined:'TRAFFIC_AWARE');
+  }
+  expect(fetcher).toHaveBeenCalledTimes(4);
+ }finally{await app.close();}
+});
 async function setup(limit='10',elements:any[]=[{destinationIndex:1,status:{},condition:'ROUTE_EXISTS',distanceMeters:7000,duration:'1000s'},{status:{},condition:'ROUTE_EXISTS',distanceMeters:6000,duration:'900s'}]){
  const dir=mkdtempSync(join(tmpdir(),'nightwise-preview-'));dirs.push(dir);const ledger=join(dir,'counts.json');const fetcher=vi.fn(async(url:any)=>new Response(JSON.stringify(String(url).includes('autocomplete')?predictions:elements)));
  const app=await createServer(readConfig({ENABLE_LIVE_REQUESTS:'true',ENABLE_PLACE_SEARCH:'true',GOOGLE_MAPS_SERVER_KEY:'fake',ROAD_DATA_PATH:'missing',BUDGET_LEDGER_PATH:ledger,PILOT_ROUTE_LIMIT:limit}),fetcher);return{app,fetcher,ledger};

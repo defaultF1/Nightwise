@@ -69,7 +69,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     return { ok: true };
   });
   const pointSchema = { type: 'object', additionalProperties: false, required: ['name', 'latitude', 'longitude'], properties: { name: { type: 'string', minLength: 1, maxLength: 100 }, latitude: { type: 'number', minimum: -90, maximum: 90 }, longitude: { type: 'number', minimum: -180, maximum: 180 } } };
-  app.post<{ Body: LiveJourney & {refresh?:boolean} }>('/api/compare', { schema: { body: { type: 'object', additionalProperties: false, required: ['origin', 'destination', 'mode'], properties: { refresh:{type:'boolean'}, origin: pointSchema, destination: pointSchema, mode: { type: 'string', enum: ['DRIVE'] } } } } }, async (request, reply) => {
+  app.post<{ Body: LiveJourney & {refresh?:boolean} }>('/api/compare', { schema: { body: { type: 'object', additionalProperties: false, required: ['origin', 'destination', 'mode'], properties: { refresh:{type:'boolean'}, departureTime:{type:'string',format:'date-time'}, origin: pointSchema, destination: pointSchema, mode: { type: 'string', enum: ['DRIVE','WALK','TWO_WHEELER'] } } } } }, async (request, reply) => {
     if (config.accessCode) {
       const supplied = Buffer.from(String(request.headers['x-nightwise-code'] || ''));
       const expected = Buffer.from(config.accessCode);
@@ -78,6 +78,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     if (!config.serverKey) throw new ServiceError('not-configured', 'Live routes need the server key and enabled Google services. Tutorial mode is ready.');
     if (!config.liveEnabled) throw new ServiceError('live-paused', 'Live Google requests are paused to control usage. Tutorial mode is ready.');
     const journey = request.body;
+    if(journey.departureTime){const delay=Date.parse(journey.departureTime)-Date.now();if(!Number.isFinite(delay)||delay<0||delay>5*60*60_000)throw new ServiceError('invalid-departure','Choose a departure time from now to five hours ahead.',422);}
     if (!inPilotArea(journey.origin) || !inPilotArea(journey.destination) || !sameServiceRegion(journey.origin,journey.destination) || distanceMeters(journey.origin, journey.destination) < 100) throw new ServiceError('outside-area', 'Choose pins in the same supported city (North Bengaluru or Kanpur), at least 100 m apart.', 422);
     if (busy) throw new ServiceError('busy', 'Another live comparison is running. Please wait before trying again.', 429);
     busy = true;
@@ -107,8 +108,8 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
           const collected=await collectScans(plan,{nearby:(q,s)=>provider.nearby(q,s,request.body.refresh===true)},signal,Math.min(config.maxQueries,Math.max(0,usageBefore.nearbyLimit-usageBefore.nearbyCalls)));
           scans.push(...collected.scans);attributions.push(...collected.attributions);
           if(collected.refined)notices.push(`${collected.refined} result-limited search areas were checked with smaller overlapping searches. Remaining caps stay partial.`);
-          const previewTime=new Date().toISOString();
-          const unknownByRoute=routes.map(r=>analyzeRoute(r,plan!,scans,previewTime).places.filter(p=>p.hours.state==='unknown'&&!p.conflict));
+          const previewTime=journey.departureTime??new Date().toISOString();
+          const unknownByRoute=routes.map(r=>analyzeRoute(r,plan!,scans,previewTime,new Date().toISOString()).places.filter(p=>p.hours.state==='unknown'&&!p.conflict));
           const detailIds=new Set<string>();
           for(let i=0;unknownByRoute.some(p=>p[i])&&detailIds.size<4;i++)for(const places of unknownByRoute){if(places[i]&&detailIds.size<4)detailIds.add(places[i].id);}
           let detailsAdded=0;
@@ -125,7 +126,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
         }
       }
       const checkedAt = new Date().toISOString();
-      const analyses = plan ? routes.map(r => analyzeRoute(r, plan!, scans, checkedAt)) : [];
+      const analyses = plan ? routes.map(r => analyzeRoute(r, plan!, scans, journey.departureTime??checkedAt,checkedAt)) : [];
       if (activityStatus === 'complete' && analyses.some(a => !a.coreComparable)) activityStatus = 'partial';
       if (!config.enabled) notices.push('Live activity scans are switched off. Travel times are live; activity is not assessed.');
       if (!config.scoring) notices.push('Experimental live scoring is disabled by the service setting.');
@@ -135,7 +136,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
       if(routes.length)attributions.push({name:'© OpenStreetMap contributors · ODbL',uri:'https://www.openstreetmap.org/copyright'});
       notices.push('Road type is estimated from a local OpenStreetMap extract for the selected city. Unmatched, ambiguous and grade-separated sections remain unknown. Actual staffing, lighting and crime are not measured.');
       const roads = Object.fromEntries(routes.map(r => [r.id, { ...roadAnalyses[r.id], ...(r.turns!==undefined?{maneuversPerKm:r.turns/(r.distanceMeters/1000)}:{}) }]));
-      const comparison = compareActivity(routes, analyses, roads, { allowLive: config.scoring });
+      const comparison = compareActivity(routes, analyses, journey.mode==='WALK'?{}:roads, { allowLive: config.scoring });
       const usage=await budget.snapshot();
       return { routes, analyses, roadAnalyses, comparison, checkedAt, activityStatus, notices, attributions: [...new Map(attributions.map(a => [a.name + (a.uri || ''), a])).values()], usage,
         requestUsage:{routeCalls:usage.routeCalls-usageBefore.routeCalls,nearbyCalls:usage.nearbyCalls-usageBefore.nearbyCalls,detailsCalls:usage.detailsCalls-usageBefore.detailsCalls,scope:'Shared counter delta during this comparison; concurrent search requests may contribute.'} } satisfies LiveResult;

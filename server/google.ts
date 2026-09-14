@@ -126,7 +126,7 @@ export class GoogleProvider {
     const data = await this.post('https://routes.googleapis.com/directions/v2:computeRoutes', ROUTE_FIELDS, {
       origin: { location: { latLng: { latitude: journey.origin.latitude, longitude: journey.origin.longitude } } },
       destination: { location: { latLng: { latitude: journey.destination.latitude, longitude: journey.destination.longitude } } },
-      travelMode: 'DRIVE', computeAlternativeRoutes: true, routingPreference: 'TRAFFIC_AWARE', polylineQuality: 'HIGH_QUALITY', languageCode: 'en-IN', units: 'METRIC',
+      travelMode: journey.mode, computeAlternativeRoutes: true, ...(journey.mode==='WALK'?{}:{routingPreference:'TRAFFIC_AWARE'}), ...(journey.departureTime?{departureTime:journey.departureTime}:{}), polylineQuality: 'HIGH_QUALITY', languageCode: 'en-IN', units: 'METRIC',
     }, signal);
     return parseRoutes(data);
   }

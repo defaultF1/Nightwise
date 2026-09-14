@@ -24,12 +24,13 @@ export async function serviceStatus(signal?: AbortSignal): Promise<ServiceStatus
 }
 export async function liveComparison(journey: LiveJourney, signal: AbortSignal, accessCode: string, refresh=false): Promise<LiveResult> {
   signal.throwIfAborted();
+  if(journey.departureTime){const delay=Date.parse(journey.departureTime)-Date.now();if(!Number.isFinite(delay)||delay<0||delay>5*60*60_000)throw new JourneyError('unavailable','Choose a departure time from now to five hours ahead.');}
   const cacheKey=comparisonCache.key(journey,accessCode);
   refresh=refresh||comparisonCache.requiresFresh(cacheKey);
   if(refresh)comparisonCache.invalidate(cacheKey);
   else {const cached=comparisonCache.get(cacheKey);if(cached)return cached;}
   const pin = (p:LiveJourney['origin'])=>({name:p.name,latitude:p.latitude,longitude:p.longitude});
-  const payload={origin:pin(journey.origin),destination:pin(journey.destination),mode:journey.mode,...(refresh?{refresh:true}:{})};
+  const payload={origin:pin(journey.origin),destination:pin(journey.destination),mode:journey.mode,...(journey.departureTime?{departureTime:journey.departureTime}:{}),...(refresh?{refresh:true}:{})};
   let response: Response;
   try { response = await fetch(`${base}/api/compare`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(accessCode ? { 'X-Nightwise-Code': accessCode } : {}) }, body: JSON.stringify(payload), signal: AbortSignal.any([signal, AbortSignal.timeout(170000)]), cache: 'no-store' }); }
   catch { if (signal.aborted) throw new DOMException('Cancelled', 'AbortError'); throw new JourneyError('unavailable', 'The live service could not be reached. Check the connection and backend. Your journey is saved.', true); }

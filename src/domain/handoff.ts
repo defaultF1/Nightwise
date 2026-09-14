@@ -16,7 +16,7 @@ export function handoffWaypoints(journey:LiveJourney,route?:Route):Coordinate[]{
 }
 export function mapsHandoff(journey: LiveJourney,route?:Route) {
   const url = new URL('https://www.google.com/maps/dir/');
-  url.search = new URLSearchParams({ api: '1', origin: coordinate(journey.origin), destination: coordinate(journey.destination), travelmode: 'driving' }).toString();
+  url.search = new URLSearchParams({ api: '1', origin: coordinate(journey.origin), destination: coordinate(journey.destination), travelmode: journey.mode==='WALK'?'walking':journey.mode==='TWO_WHEELER'?'two-wheeler':'driving' }).toString();
   const via=handoffWaypoints(journey,route);
   if(via.length)url.searchParams.set('waypoints',via.map(coordinate).join('|'));
   return url.toString();

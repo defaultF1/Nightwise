@@ -20,8 +20,8 @@ export async function suggestPlaces(query:string,sessionToken:string,signal:Abor
   if(!Array.isArray(data.suggestions)||data.suggestions.length>5||data.suggestions.some((p:any)=>typeof p.id!=='string'||typeof p.title!=='string'||typeof p.address!=='string'))throw new Error('Search results could not be read.');
   return data.suggestions;
 }
-export async function previewPlaces(placeIds:string[],sessionToken:string,anchor:Coordinate,direction:SearchDirection,signal:AbortSignal,accessCode:string):Promise<{checkedAt:string;estimates:PlaceTravelEstimate[]}>{
-  const data=await post('/api/places/preview',{placeIds,sessionToken,anchor,direction},signal,accessCode);
+export async function previewPlaces(placeIds:string[],sessionToken:string,anchor:Coordinate,direction:SearchDirection,signal:AbortSignal,accessCode:string,mode:import('../domain/types').TravelMode='DRIVE',departureTime?:string):Promise<{checkedAt:string;estimates:PlaceTravelEstimate[]}>{
+  const data=await post('/api/places/preview',{placeIds,sessionToken,anchor,direction,mode,...(departureTime?{departureTime}:{})},signal,accessCode);
   if(!Number.isFinite(Date.parse(data.checkedAt))||!Array.isArray(data.estimates)||data.estimates.length!==placeIds.length||data.estimates.some((p:any,i:number)=>p.id!==placeIds[i]||typeof p.available!=='boolean'||(p.available&&(!Number.isFinite(p.distanceMeters)||p.distanceMeters<0||!Number.isFinite(p.durationSeconds)||p.durationSeconds<0))))throw new Error('Travel estimates could not be read.');
   return data;
 }

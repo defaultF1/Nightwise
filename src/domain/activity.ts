@@ -29,7 +29,7 @@ export function buildQueryPlan(routes:Route[],spacing=200,maxQueries=120):QueryP
   return {queries:[...queries.values()],samplesByRoute,totalSamples};
 }
 
-export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],checkedAt:string):ActivityAnalysis{
+export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],checkedAt:string,evidenceAt=checkedAt):ActivityAnalysis{
   const samples=plan.samplesByRoute[route.id];
   if(!samples?.length||!Number.isFinite(Date.parse(checkedAt)))throw new Error('Missing analysis inputs');
   const queries=new Map(plan.queries.map(q=>[q.id,q]));
@@ -39,7 +39,7 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
   const groups=new Map<string,{observations:PlaceObservation[];sampleIndexes:Set<number>}>();
   const statuses=samples.map((sample,index)=>{
     const scan=scanMap.get(sample.queryId),query=queries.get(sample.queryId);
-    const fresh=!!scan&&isFresh(scan.observedAt,checkedAt);
+    const fresh=!!scan&&isFresh(scan.observedAt,evidenceAt);
     const usable=!!scan&&!!query&&fresh&&scan.status==='ok'&&!duplicateScans.has(sample.queryId);
     if(!scan||scan.status==='failed')limitations.add('Some nearby searches were unavailable.');
     if(scan&&!fresh)limitations.add('Stale or invalid evidence was excluded.');
@@ -47,7 +47,7 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
     if(duplicateScans.has(sample.queryId))limitations.add('Conflicting search records were excluded.');
     let invalidPlace=false;
     if(scan&&query&&fresh&&scan.status!=='failed'&&!duplicateScans.has(sample.queryId))for(const place of scan.places){
-      if(!place.id||!validCoordinate(place.coordinate)||!isFresh(place.observedAt,checkedAt)){invalidPlace=true;limitations.add('Invalid or stale place details were excluded.');continue;}
+      if(!place.id||!validCoordinate(place.coordinate)||!isFresh(place.observedAt,evidenceAt)){invalidPlace=true;limitations.add('Invalid or stale place details were excluded.');continue;}
       if(distanceMeters(query.coordinate,place.coordinate)>query.radiusMeters+1)continue;
       let group=groups.get(place.id);if(!group){group={observations:[],sampleIndexes:new Set()};groups.set(place.id,group);}
       group.observations.push(place);group.sampleIndexes.add(index);
@@ -57,7 +57,7 @@ export function analyzeRoute(route:Route,plan:QueryPlan,scans:NearbyScan[],check
   const places:DeduplicatedPlace[]=[];
   for(const [id,group] of groups){
     const arrivalMinutes = passingMinutes(route,Math.min(...[...group.sampleIndexes].map(i=>samples[i].distanceMeters)),samples.at(-1)!.distanceMeters);
-    const evaluations=group.observations.map(p=>evaluateObservation(p,checkedAt,arrivalMinutes));
+    const evaluations=group.observations.map(p=>evaluateObservation(p,checkedAt,arrivalMinutes,evidenceAt));
     const states=new Set(evaluations.map(e=>e.state));
     const coordinateConflict=group.observations.some(p=>distanceMeters(p.coordinate,group.observations[0].coordinate)>30);
     const conflict=states.size>1||coordinateConflict;

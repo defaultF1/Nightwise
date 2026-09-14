@@ -7,7 +7,7 @@ export const COMPARISON_CACHE_MS=5*60_000;
 export class ComparisonCache {
   private entries=new Map<string,{savedAt:number;expiresAt:number;result:LiveResult}>();
   constructor(private now=()=>Date.now(),private max=3){}
-  key(journey:LiveJourney,accessCode:string){return JSON.stringify([journey.origin.latitude,journey.origin.longitude,journey.destination.latitude,journey.destination.longitude,journey.mode,accessCode]);}
+  key(journey:LiveJourney,accessCode:string){return JSON.stringify([journey.origin.latitude,journey.origin.longitude,journey.destination.latitude,journey.destination.longitude,journey.mode,journey.departureTime??null,accessCode]);}
   requiresFresh(key:string):boolean{
     const entry=this.entries.get(key);if(!entry)return false;
     const now=this.now();return now<Date.parse(entry.result.checkedAt)||now>=entry.expiresAt||now-entry.savedAt>=COMPARISON_CACHE_MS;
@@ -21,7 +21,7 @@ export class ComparisonCache {
     if(result.activityStatus==='budget'||!result.routes.length)return;
     const checked=Date.parse(result.checkedAt);let expiresAt=checked+COMPARISON_CACHE_MS;
     // A known opening/closing boundary can invalidate sooner than five minutes.
-    for(const a of result.analyses)for(const p of a.places){
+    for(const a of result.analyses.filter(a=>!(Date.parse(a.checkedAt)>checked)))for(const p of a.places){
       if(p.hours.state==='open'&&p.hours.minutesUntilClose!==null&&Number.isFinite(p.hours.minutesUntilClose))expiresAt=Math.min(expiresAt,checked+p.hours.minutesUntilClose*60000);
       for(const time of [p.schedule?.nextOpenTime,p.schedule?.nextCloseTime]){
         const transition=Date.parse(time??'')-(p.arrivalMinutes??0)*60000;

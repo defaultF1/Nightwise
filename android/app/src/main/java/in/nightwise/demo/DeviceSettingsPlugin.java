@@ -11,6 +11,14 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name="DeviceSettings")
 public class DeviceSettingsPlugin extends Plugin {
+    @PluginMethod public void installationStamp(PluginCall call) {
+        try {
+            var info=getContext().getPackageManager().getPackageInfo(getContext().getPackageName(),0);
+            JSObject result=new JSObject();
+            result.put("stamp",info.firstInstallTime+":"+info.lastUpdateTime);
+            call.resolve(result);
+        } catch(Exception error) { call.reject("Could not identify this installation."); }
+    }
     // Android 10's synchronous geocoder must run off the UI thread.
     @PluginMethod public void address(PluginCall call) {
         Double latitude=call.getDouble("latitude"), longitude=call.getDouble("longitude");

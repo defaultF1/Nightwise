@@ -6,6 +6,13 @@ const at='2026-09-09T15:00:00Z'; // Wednesday 20:30 IST
 const weekly={periods:Array.from({length:7},(_,day)=>({open:{day,hour:9},close:{day,hour:22}})),weekdayDescriptions:['Wednesday: 9:00 AM – 10:00 PM']};
 const parse=(extra:any={})=>parseScan({places:[{id:'p',displayName:{text:'Test pharmacy'},location:{latitude:13.06,longitude:77.6},types:['pharmacy'],businessStatus:'OPERATIONAL',regularOpeningHours:weekly,...extra}]},'q',at).scan.places[0];
 const date=(day:number,hour:number)=>({date:{year:2026,month:9,day},hour});
+it('uses fresh schedules for a future departure without treating them as stale',()=>{
+ const future='2026-09-09T17:00:00Z'; // 22:30 IST, after the weekly closing time.
+ expect(evaluateObservation(parse(),future,0,at)).toMatchObject({state:'closed',basis:'regular'});
+ expect(evaluateObservation(parse(),future).state).toBe('unknown');
+ const onlyNow=parse({regularOpeningHours:undefined,currentOpeningHours:{openNow:true}});
+ expect(evaluateObservation(onlyNow,future,0,at).state).toBe('unknown');
+});
 describe('Google weekly schedules and exceptions',()=>{
  it('requests both full schedule objects, without a wildcard',()=>{expect(PLACE_FIELDS.split(',')).toContain('places.currentOpeningHours');expect(PLACE_FIELDS.split(',')).toContain('places.regularOpeningHours');expect(PLACE_FIELDS).not.toContain('*');});
  it('uses regular hours as an explicitly labelled fallback',()=>{expect(evaluateObservation(parse(),at,20)).toMatchObject({state:'open',basis:'regular',minutesUntilClose:70});});
