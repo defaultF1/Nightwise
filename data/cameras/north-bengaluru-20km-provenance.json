@@ -1,0 +1,18 @@
+{
+ "source": "OpenStreetMap via Overpass API (overpass-api.de)",
+ "license": "ODbL 1.0 - (c) OpenStreetMap contributors",
+ "osmDataTimestamp": "2026-09-15T23:03:27Z",
+ "query": "man_made=surveillance within 20000 m of 13.0553,77.6070 (AEOS-Manyata corridor midpoint)",
+ "retrieved": "2026-09-16",
+ "note": "Mapped camera locations only. Mapping does not confirm a camera is installed today, working, recording or monitored.",
+ "pointCount": 2803,
+ "fields": [
+  "id",
+  "latitude",
+  "longitude",
+  "zone",
+  "cameraType",
+  "operator"
+ ],
+ "refresh": "Re-run the Overpass query above and regenerate src/data/cameras-north-bengaluru.json; see research/bengaluru-govt-cameras-2026-09-16.md"
+}

@@ -1,7 +1,7 @@
 import directoryData from './data/aeos-manyata-directory.json';
 import {directoryAlongRoute,directoryPins,type Directory} from './domain/local-directory';
 import { usesGeoapify } from './providers/selection';
-import { useEffect, useRef, useState, createElement } from 'react';
+import { useEffect, useMemo, useRef, useState, createElement } from 'react';
 import { Capacitor } from '@capacitor/core';
 import { MapPin, Maximize2, Minimize2 } from 'lucide-react';
 import { useExpandedMap } from './maps/use-expanded-map';
@@ -13,6 +13,7 @@ import { createMap, type MapHandle, type MapLine } from './maps/adapter';
 import { slicePolyline } from './domain/geometry';
 import { gapMarkers } from './domain/gap-markers';
 import { visiblePlacePins, pinsNearRoute, PIN_COLORS } from './maps/pins';
+import { camerasNearRoute, mappedCameraPins, MAPPED_CAMERA_DISTANCE_METERS, CAMERA_DATA_TIMESTAMP } from './domain/camera-layer';
 import type { LiveResult } from './domain/live-contract';
 import {PLACE_GROUPS,groupCounts,groupSummary} from './domain/category-counts';
 
@@ -32,6 +33,8 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
   const directory=directoryData as Directory;
   const localRows=usesGeoapify?directoryAlongRoute(directory,selectedRoute):[];
   const localPins=selectedRoute?pinsNearRoute(directoryPins(localRows,directory.savedAt,placeMarkers),selectedRoute.path):[];
+  const [showCameras,setShowCameras]=useState(true);
+  const mappedCameras=useMemo(()=>usesGeoapify&&selectedRoute?camerasNearRoute(selectedRoute.path):[],[selectedRoute]);
   useEffect(() => {
     let disposed = false; let owned: MapHandle | undefined; let nativeOwner = false;
     setError(false);
@@ -67,9 +70,9 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
           if (path.length > 1) lines.push({ id: selected.id, path, color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
         }
       }
-      await map.draw(lines, [journey.origin, journey.destination], selected&&routeAnalysis?.source==='live'?gapMarkers(selected,routeAnalysis):[], [...placeMarkers,...localPins]);
+      await map.draw(lines, [journey.origin, journey.destination], selected&&routeAnalysis?.source==='live'?gapMarkers(selected,routeAnalysis):[], [...placeMarkers,...localPins,...(showCameras?mappedCameraPins(mappedCameras):[])]);
     }).catch(() => setError(true));
-  }, [ready, routes, selectedId, journey, analysis, theme]);
+  }, [ready, routes, selectedId, journey, analysis, theme, showCameras, mappedCameras]);
   useEffect(() => {
     if (!ready) return;
     queue.current = queue.current.then(async () => { await handle.current?.fit(routes.length ? routes.flatMap(r => r.path) : [journey.origin, journey.destination]); }).catch(() => setError(true));
@@ -84,8 +87,9 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
     </div>
     <div className="diagram-endpoints"><span><b>A</b> {journey.origin.name}</span><span><b>B</b> {journey.destination.name}</span></div>
     {!routes.length&&<p className="diagram-caption">Endpoint preview. Confirm your journey to load routes along roads.</p>}
-    <div className="pin-legend" aria-label="Map pin colours">{([['start','Start / current location'],['destination','Destination'],['shop','Shops'],['medical','Pharmacies / clinics'],['hospital','Hospitals'],['fuel','Petrol / CNG']] as const).map(([kind,label])=><span key={kind}><i style={{backgroundColor:PIN_COLORS[kind]}}/>{label}</span>)}</div>
+    <div className="pin-legend" aria-label="Map pin colours">{([['start','Start / current location'],['destination','Destination'],['shop','Shops'],['medical','Pharmacies / clinics'],['hospital','Hospitals'],['fuel','Petrol / CNG'],['camera','Mapped cameras (OSM)']] as const).map(([kind,label])=><span key={kind}><i style={{backgroundColor:PIN_COLORS[kind]}}/>{label}</span>)}</div>
     {routes.length>0&&<div className="map-place-controls">
+      {usesGeoapify&&selectedRoute&&<div className="camera-layer"><label><input type="checkbox" checked={showCameras} onChange={e=>setShowCameras(e.target.checked)}/><i style={{backgroundColor:PIN_COLORS.camera}}/> Mapped cameras</label><p>{mappedCameras.length?`${mappedCameras.length} OpenStreetMap-mapped camera${mappedCameras.length===1?'':'s'} within ${MAPPED_CAMERA_DISTANCE_METERS} m of this route`:'No OpenStreetMap-mapped cameras within 60 m of this route. Unmapped cameras may still exist.'}</p><small>Community-mapped locations (data {CAMERA_DATA_TIMESTAMP.slice(0,10)}). A marker does not confirm the camera is installed, working or monitored.</small></div>}
       {analysis&&<ul aria-label="Places along this route">{PLACE_GROUPS.map(group=>{const count=groupCounts(analysis,group.categories);return count.total?<li key={group.id}><strong>{group.label}</strong> · {groupSummary(count)}</li>:null;})}</ul>}
       {usesGeoapify&&<p className="settings-helper">Pins show places within 50 m of the selected route, at their listed locations. Nearby counts include a wider area; entrances may require a detour.</p>}
       {!placeMarkers.length&&<p>{activityStatus==='budget'?'Place scans could not run because the service search allowance is used up.':activityStatus==='disabled'?'Place scans are switched off.':usesGeoapify?'No open or estimated-open listings were returned close enough to this route to show as live pins.':'No returned places are open or estimated open when you pass. Missing listings do not mean this road is empty.'}</p>}

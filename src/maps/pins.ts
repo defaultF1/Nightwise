@@ -7,8 +7,8 @@ export const MAP_PLACE_DISTANCE_METERS=50;
 export function pinsNearRoute(pins:PlacePin[],path:Coordinate[]):PlacePin[]{
  return pins.filter(pin=>distanceToRoute(pin,path)<=MAP_PLACE_DISTANCE_METERS);
 }
-export const PIN_COLORS={start:'#3b82f6',destination:'#ef4444',shop:'#facc15',medical:'#ec4899',hospital:'#a78bfa',fuel:'#22c55e',gap:'#fb923c'} as const;
-export type PlacePin=Coordinate&{name:string;kind:'shop'|'medical'|'hospital'|'fuel';status?:string;sourceUrl?:string};
+export const PIN_COLORS={start:'#3b82f6',destination:'#ef4444',shop:'#facc15',medical:'#ec4899',hospital:'#a78bfa',fuel:'#22c55e',gap:'#fb923c',camera:'#22d3ee'} as const;
+export type PlacePin=Coordinate&{name:string;kind:'shop'|'medical'|'hospital'|'fuel'|'camera';status?:string;sourceUrl?:string};
 export function placePinKind(categories:string[]):PlacePin['kind']|undefined{
  if(categories.includes('hospital'))return 'hospital';
  if(categories.some(c=>['pharmacy','drugstore','doctor','medical_lab'].includes(c)))return 'medical';

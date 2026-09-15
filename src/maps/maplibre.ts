@@ -63,7 +63,7 @@ export async function createMapLibre(element:HTMLElement,theme:Theme,onSelect:(i
    for(const id of lineIds){if(map.getLayer(id))map.removeLayer(id);if(map.getSource(id))map.removeSource(id);}lineIds=[];
    markers.forEach(m=>m.remove());markers=[];
    lines.forEach((line,i)=>{const id=`route-${i}`;map.addSource(id,{type:'geojson',data:{type:'Feature',properties:{routeId:line.id,clickable:line.clickable},geometry:{type:'LineString',coordinates:line.path.map(ll)}}});map.addLayer({id,type:'line',source:id,layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':line.color,'line-width':line.width}});lineIds.push(id);});
-   places.forEach(p=>mark(p,p.name,p.kind,p.kind==='hospital'?'H':p.kind==='medical'?'+':p.kind==='fuel'?'F':'S',p.status??'Listed open around arrival',p.sourceUrl));
+   places.forEach(p=>mark(p,p.name,p.kind,p.kind==='hospital'?'H':p.kind==='medical'?'+':p.kind==='fuel'?'F':p.kind==='camera'?'C':'S',p.status??'Listed open around arrival',p.sourceUrl));
    gaps.forEach(p=>mark(p,`${p.label} · ${p.name}`,'gap','!'));
    pins.forEach((p,i)=>mark(p,p.name,i?'destination':'start',i?'B':'A'));
   },
