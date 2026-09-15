@@ -26,6 +26,6 @@ export function groupSummary(count:GroupCount):string{
   if(count.closed)parts.push(`${count.closed} closed`);
   if(count.estimatedOpen)parts.push(`${count.estimatedOpen} estimated open`);
   if(count.estimatedClosed)parts.push(`${count.estimatedClosed} estimated closed`);
-  if(count.unknown)parts.push(`${count.unknown} unknown`);
+  // Unresolved opening hours stay included in "found"; details retain their status.
   return parts.join(' · ');
 }

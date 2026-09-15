@@ -10,6 +10,7 @@ export function ScoreBreakdown({comparison,routeId,sample}:{comparison:Compariso
   const values=comparison.componentScores?.[routeId]??{};
   return <section className="score-breakdown" aria-label="Score breakdown">
     <h3>What goes into this score</h3>
+    {comparison.estimated&&<p className="score-coverage">Planning estimate. Listed hours take priority. When hours are missing: shops use 9 am–8 pm, pharmacies 10 am–11 pm, and petrol pumps 24 hours (IST). Hospitals and clinics receive no default hours. Unverified help availability, activity gaps and transport are left out.</p>}
     <p className="score-coverage">{common.includes('openDensity')?`Based on ${common.length} of 6 available checks${sample?' · Tutorial mode':''}`:'Road information only — open-shop activity could not be compared.'}</p>
     <dl className="evidence-rows">{(Object.keys(WEIGHTS) as Component[]).map(key=>{
       const included=common.includes(key)&&values[key]!==undefined&&totalWeight>0;

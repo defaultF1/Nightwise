@@ -1,5 +1,6 @@
 import type { Route } from './types';
 import type { ActivityAnalysis, Comparison, Component, RoadEvidence } from './activity-types';
+import { assumedShopHours } from './assumed-hours';
 
 export const SCORE_VERSION='night-activity-v5-observed';
 export const WEIGHTS:Record<Component,number>={openDensity:25,mainRoad:20,helpDensity:15,gapContinuity:15,simplicity:15,transport:10};
@@ -25,16 +26,30 @@ export function componentValues(a:ActivityAnalysis,road:RoadEvidence={}):Partial
   if(a.openTransportPoints!=null&&Number.isFinite(a.openTransportPoints)&&a.openTransportPoints>=0)values.transport=clamp(a.openTransportPoints/km/3);
   return values;
 }
-export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads:Record<string,RoadEvidence>={}, options: { allowLive?: boolean; maxExtraMinutes?: number } = {}):Comparison{
+/** A separate planning estimate; the underlying observations remain unchanged. */
+function estimatedValues(a:ActivityAnalysis,road:RoadEvidence):Partial<Record<Component,number>>{
+  const values=componentValues(a,road);
+  // Sparse schedules cannot establish help availability, gap continuity or transit.
+  delete values.openDensity;delete values.helpDensity;delete values.gapContinuity;delete values.transport;
+  const places=a.places.filter(p=>!p.conflict&&p.coordinate);
+  const states=places.map(p=>p.hours.state!=='unknown'?p.hours.state:assumedShopHours(p,a.checkedAt)?.open===true?'open':assumedShopHours(p,a.checkedAt)?.open===false?'closed':'unknown');
+  if(a.distanceMeters>0&&places.length&&states.filter(s=>s!=='unknown').length/places.length>=.5){
+    values.openDensity=clamp(states.filter((state,i)=>state==='open'&&!places[i].hours.closingSoon).length/(a.distanceMeters/1000)/8);
+  }
+  return values;
+}
+export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads:Record<string,RoadEvidence>={}, options: { allowLive?: boolean; allowEstimates?: boolean; maxExtraMinutes?: number } = {}):Comparison{
   const fastest=[...routes].sort((a,b)=>a.durationSeconds-b.durationSeconds||a.id.localeCompare(b.id))[0];
   const base:Comparison={version:SCORE_VERSION,fastestId:fastest?.id??null,selectedId:fastest?.id??null,recommendedId:null,outcome:routes.length?'single':'empty',message:routes.length?'Only one route was returned. There is no alternative to compare.':'No route options were returned.',commonComponents:[],scores:{},componentScores:{},rankedIds:[]};
   if(!routes.length)return base;
-  if(routes.every(r=>r.source==='geoapify')&&routes.some(r=>{const a=analyses.find(a=>a.routeId===r.id);return !a||!(a.hoursCoverage>=.5)||!(a.scanCoverage>=.8);}))return {...base,outcome:'insufficient',message:'The fastest route is selected. Too many opening hours or road sections are unknown to compare night activity reliably.'};
+  const sparse=routes.every(r=>r.source==='geoapify')&&routes.some(r=>{const a=analyses.find(a=>a.routeId===r.id);return !a||!(a.hoursCoverage>=.5)||!(a.scanCoverage>=.8);});
+  const estimated=sparse&&options.allowEstimates===true&&options.allowLive===true&&routes.every(r=>{const a=analyses.find(a=>a.routeId===r.id);return !!a&&a.scanCoverage>=.8&&Array.isArray(a.places)&&a.places.length>0;});
+  if(sparse&&!estimated)return {...base,outcome:'insufficient',message:'The fastest route is selected. Too many opening hours or road sections are unknown to compare night activity reliably.'};
   if(routes.every(r=>r.source!=='sample')&&options.allowLive!==true)return routes.length<2?base:{...base,outcome:'insufficient',message:'Live scoring is switched off by the service setting.'};
   const byId=new Map(analyses.map(a=>[a.routeId,a]));
   if(new Set(routes.map(r=>byId.get(r.id)?.checkedAt)).size!==1)return {...base,outcome:'insufficient',message:'These routes do not share one evidence check. Refresh the comparison.'};
   const useInternal=routes.every(r=>Number.isFinite(roads[r.id]?.internalTurnsPerKm)&&roads[r.id].internalTurnsPerKm!>=0);
-  const values=routes.map(r=>{const a=byId.get(r.id);return a?componentValues(a,{...roads[r.id],internalTurnsPerKm:useInternal?roads[r.id]?.internalTurnsPerKm:undefined}):{};});
+  const values=routes.map(r=>{const a=byId.get(r.id);return a?(estimated?estimatedValues:componentValues)(a,{...roads[r.id],internalTurnsPerKm:useInternal?roads[r.id]?.internalTurnsPerKm:undefined}):{};});
   const common=(Object.keys(WEIGHTS) as Component[]).filter(key=>values.every(v=>v[key]!==undefined&&Number.isFinite(v[key])));
   if(!common.length)return routes.length<2?base:{...base,outcome:'insufficient',message:'Not enough shared evidence to score these routes yet. Travel times remain comparable.'};
   const denominator=common.reduce((sum,key)=>sum+WEIGHTS[key],0);
@@ -44,6 +59,7 @@ export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads
   const best=ranked.find(r=>r.durationSeconds-fastest.durationSeconds<=maxExtra*60) ?? fastest;
   const componentScores=Object.fromEntries(routes.map((r,i)=>[r.id,values[i]]));
   const scored={...base,commonComponents:common,scores,componentScores,rankedIds:ranked.map(r=>r.id)};
+  if(estimated)return {...scored,estimated:true,outcome:'insufficient',message:'The fastest route is selected. Estimated scores combine available road information with listed hours and typical shop schedules. They do not confirm which route is safer.'};
   if(routes.length<2)return scored;
   if(!common.includes('openDensity'))return {...scored,outcome:'insufficient',recommendedId:null,message:'The fastest route is selected. We could compare road information, but there is not enough shop-opening data to say which route has more activity.'};
   const advantage=scores[best.id]-scores[fastest.id];

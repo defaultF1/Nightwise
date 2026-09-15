@@ -84,7 +84,7 @@ export async function createGeoapifyServer(key:string){
    const analyzeRoads=loadRoadAnalyzer('data/roads/north-bengaluru-22km.json',routes.map(r=>r.path));
    const roadAnalyses=Object.fromEntries(routes.map(r=>[r.id,analyzeRoads(r.path,r.steps)]));
    const roads=Object.fromEntries(routes.map(r=>[r.id,{...roadAnalyses[r.id],maneuversPerKm:(r.turns??0)/(r.distanceMeters/1000)}]));
-   const comparison=compareActivity(routes,analyses,j.mode==='WALK'?{}:roads,{allowLive:true});
+   const comparison=compareActivity(routes,analyses,j.mode==='WALK'?{}:roads,{allowLive:true,allowEstimates:true});
    const now=provider.usage();
    return {provider:'geoapify',routes,analyses,roadAnalyses,comparison,checkedAt,activityStatus:analyses.every(a=>a.coreComparable)?'complete':'partial',notices:[
     'Routes, places and opening hours: Geoapify / OpenStreetMap. Travel times use approximated traffic, not live traffic measurements.',

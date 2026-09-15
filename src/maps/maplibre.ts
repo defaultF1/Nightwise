@@ -20,7 +20,7 @@ export async function createMapLibre(element:HTMLElement,theme:Theme,onSelect:(i
  const resize=new ResizeObserver(()=>map.resize());resize.observe(element);
  try{await new Promise<void>((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('Map timed out')),45000);map.once('load',()=>{clearTimeout(timer);resolve();});map.once('error',()=>{clearTimeout(timer);reject(new Error('Map tiles unavailable'));});});}
  catch(e){resize.disconnect();map.remove();throw e;}
- let markers:maplibregl.Marker[]=[],lineIds:string[]=[];
+ let markers:maplibregl.Marker[]=[],lineIds:string[]=[],pickable:MapLine[]=[];
  const mark=(p:Coordinate,name:string,kind:keyof typeof PIN_COLORS,text:string,status?:string,sourceUrl?:string)=>{
   const el=document.createElement('button');el.type='button';el.className='nightwise-map-pin';el.style.backgroundColor=PIN_COLORS[kind];el.textContent=text;el.setAttribute('aria-label',`${name}${status?' · '+status:''}`);
   const card=document.createElement('div'),title=document.createElement('strong');title.textContent=name;card.append(title);
@@ -28,9 +28,35 @@ export async function createMapLibre(element:HTMLElement,theme:Theme,onSelect:(i
   if(sourceUrl?.startsWith('https://')){const link=document.createElement('a');link.href=sourceUrl;link.target='_blank';link.rel='noopener noreferrer';link.textContent='View source';card.append(link);}
   const marker=new maplibregl.Marker({element:el,anchor:'center'}).setLngLat(ll(p)).setPopup(new maplibregl.Popup({offset:18,maxWidth:'240px'}).setDOMContent(card)).addTo(map);markers.push(marker);
  };
- map.on('click',e=>{const hit=map.queryRenderedFeatures(e.point,{layers:lineIds}).find(f=>f.properties?.clickable);if(hit)onSelect(String(hit.properties.routeId));});
+ // A 44px-wide touch target around the road, independent of its thin visual line.
+ // Choose the nearest road when alternatives run close together; shared sections
+ // retain the uppermost route. Keep business-marker taps reserved for their popup.
+ const routeAt=(point:maplibregl.Point)=>{
+  if(!lineIds.length)return undefined;
+  const radius=22,box:[[number,number],[number,number]]=[[point.x-radius,point.y-radius],[point.x+radius,point.y+radius]];
+  const hits=map.queryRenderedFeatures(box,{layers:lineIds}).filter(f=>f.properties?.clickable);
+  let nearest:string|undefined,best=radius*radius;const seen=new Set<string>();
+  for(const hit of hits){
+   const id=String(hit.properties.routeId);if(seen.has(id))continue;seen.add(id);
+   const line=pickable.find(line=>line.id===id);if(!line)continue;
+   for(let i=1;i<line.path.length;i++){
+    const a=map.project(ll(line.path[i-1])),b=map.project(ll(line.path[i]));
+    const dx=b.x-a.x,dy=b.y-a.y;
+    const t=Math.max(0,Math.min(1,((point.x-a.x)*dx+(point.y-a.y)*dy)/(dx*dx+dy*dy||1)));
+    const distance=(a.x+t*dx-point.x)**2+(a.y+t*dy-point.y)**2;
+    if(distance<best-.01){best=distance;nearest=id;}
+   }
+  }
+  return nearest;
+ };
+ map.on('click',e=>{
+  if(e.originalEvent.target instanceof Element&&e.originalEvent.target.closest('.nightwise-map-pin,.maplibregl-popup,.maplibregl-ctrl'))return;
+  const id=routeAt(e.point);if(id)onSelect(id);
+ });
+ map.on('mousemove',e=>{map.getCanvas().style.cursor=routeAt(e.point)?'pointer':'';});
  return {
   async draw(lines:MapLine[],pins:({name:string}&Coordinate)[],gaps:GapMarker[]=[],places:PlacePin[]=[]){
+   pickable=lines.filter(line=>line.clickable);
    for(const id of lineIds){if(map.getLayer(id))map.removeLayer(id);if(map.getSource(id))map.removeSource(id);}lineIds=[];
    markers.forEach(m=>m.remove());markers=[];
    lines.forEach((line,i)=>{const id=`route-${i}`;map.addSource(id,{type:'geojson',data:{type:'Feature',properties:{routeId:line.id,clickable:line.clickable},geometry:{type:'LineString',coordinates:line.path.map(ll)}}});map.addLayer({id,type:'line',source:id,layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':line.color,'line-width':line.width}});lineIds.push(id);});
