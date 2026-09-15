@@ -1,12 +1,12 @@
 import { inServiceMapArea, type JourneyPoint } from './journey';
 export type Favourite = { id: string; label: string; placeId?: string; point?: JourneyPoint };
-const key = 'nightwise.favourites.v1';
+const key = import.meta.env.VITE_MAP_PROVIDER==='geoapify'?'nightwise.favourites.geoapify.v1':'nightwise.favourites.v1';
 export function readFavourites(): Favourite[] {
   try {
     const rows: unknown = JSON.parse(localStorage.getItem(key) || '[]');
     if (!Array.isArray(rows)) return [];
     return rows.filter((p): p is Favourite => !!p && typeof p.id === 'string' && typeof p.label === 'string' && p.label.length > 0 && p.label.length <= 60 &&
-      (typeof p.placeId === 'string' && /^[\w-]{1,200}$/.test(p.placeId) || !!p.point && typeof p.point.name === 'string' && inServiceMapArea(p.point))).slice(0,20);
+      (typeof p.placeId === 'string' && /^[\w-]{1,604}$/.test(p.placeId) || !!p.point && typeof p.point.name === 'string' && inServiceMapArea(p.point))).slice(0,20);
   } catch { return []; }
 }
 export function makeFavourite(label: string, point: JourneyPoint): Favourite {

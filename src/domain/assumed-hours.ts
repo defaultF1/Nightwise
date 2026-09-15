@@ -2,7 +2,7 @@ import type { DeduplicatedPlace } from './activity-types';
 const SHOP_CATEGORIES=new Set(['store','shopping_mall','supermarket','convenience_store','grocery_store','department_store','cafe','restaurant','bakery']);
 /** User-selected planning fallback. Never replaces provider evidence or feeds confirmed-open counts. */
 export function assumedShopHours(place:DeduplicatedPlace, checkedAt:string) {
-  if(place.conflict || place.hours.state!=='unknown' || place.hours.reason!=='Google did not return usable opening and closing times.')return null;
+  if(place.conflict || place.hours.state!=='unknown' || !['Google did not return usable opening and closing times.','Opening and closing times were not provided.'].includes(place.hours.reason??''))return null;
   if(place.categories.includes('hospital'))return null;
   const medical=place.categories.some(c=>['pharmacy','drugstore'].includes(c));
   const fuel=place.categories.includes('gas_station');
@@ -16,5 +16,5 @@ export function assumedShopHours(place:DeduplicatedPlace, checkedAt:string) {
   const opens=medical?10*60:9*60,closes=medical?23*60:20*60;
   const open=fuel||minute>=opens&&minute<closes;
   return {label:medical?'10 am–11 pm IST':fuel?'24 hours':'9 am–8 pm IST',open,
-    explanation:'Google did not return opening hours. This category schedule is a planning estimate; weekly closures and holidays are unknown.'};
+    explanation:`${place.hours.reason==='Opening and closing times were not provided.'?'Opening hours were not provided.':'Google did not return opening hours.'} This category schedule is a planning estimate; weekly closures and holidays are unknown.`};
 }

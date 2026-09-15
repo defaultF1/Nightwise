@@ -1,8 +1,9 @@
+import { usesGeoapify, placesAttribution } from './providers/selection';
 import type { ActivityAnalysis } from './domain/activity-types';
 import { assumedShopHours } from './domain/assumed-hours';
 function localTime(value?:string){return value&&Number.isFinite(Date.parse(value))?new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',weekday:'short',hour:'numeric',minute:'2-digit'}).format(new Date(value)):null;}
 export function ShopHours({analysis}:{analysis?:ActivityAnalysis}){
-  return <details className="help-details shop-hours"><summary>Opening times and closed days</summary><p>Times are in Indian Standard Time (IST).{analysis?.source==='sample'?'':' Current schedules include special-day changes reported by Google.'}</p>
+  return <details className="help-details shop-hours"><summary>Opening times and closed days</summary><p>Times are in Indian Standard Time (IST).{analysis?.source==='sample'?'':usesGeoapify?` Source: ${placesAttribution}. Weekly schedules do not confirm holiday changes.`:' Current schedules include special-day changes reported by Google.'}</p>
   {!analysis?.places.length?<p>No shop schedules were returned for this comparison.</p>:<div className="shop-hours-list">{analysis.places.map(p=>{
     const s=p.schedule, assumed=assumedShopHours(p,analysis.checkedAt);
     // A place with no schedule data gets one status line, not a list of empty sections.

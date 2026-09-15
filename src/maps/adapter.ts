@@ -1,3 +1,4 @@
+import { usesGeoapify } from '../providers/selection';
 import { Capacitor, registerPlugin } from '@capacitor/core';
 import { syncMapViewport, type Rect } from './viewport';
 const MapViewport=registerPlugin<{clip(options:Rect&{id:string}):Promise<void>}>('MapViewport');
@@ -40,6 +41,7 @@ function styles(theme: Theme): google.maps.MapTypeStyle[] {
   ];
 }
 export async function createMap(element: HTMLElement, theme: Theme, onSelect: (id: string) => void, initialCenter:Coordinate={latitude:13.055,longitude:77.607}): Promise<MapHandle> {
+  if(usesGeoapify){const {createMapLibre}=await import('./maplibre');return createMapLibre(element,theme,onSelect,initialCenter);}
   if (import.meta.env.VITE_ENABLE_LIVE_MAPS !== 'true') throw new Error('Maps paused');
   if (Capacitor.isNativePlatform()) {
     const mapId=`nightwise-${++instance}`;

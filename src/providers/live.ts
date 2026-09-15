@@ -1,3 +1,4 @@
+import { usesGeoapify } from './selection';
 import { Capacitor } from '@capacitor/core';
 import type { LiveJourney } from '../domain/journey';
 import type { LiveResult, ServiceStatus } from '../domain/live-contract';
@@ -8,7 +9,7 @@ const comparisonCache=new ComparisonCache();
 // Bake the hosted URL in so the app works on any mobile network, not just
 // the network it happened to be built on.
 const ANDROID_FALLBACK_API_BASE = 'https://nightwise-f5fu.onrender.com';
-const base = Capacitor.isNativePlatform()
+const base = usesGeoapify ? '' : Capacitor.isNativePlatform()
   ? import.meta.env.VITE_ANDROID_API_BASE_URL || import.meta.env.VITE_API_BASE_URL || ANDROID_FALLBACK_API_BASE
   : import.meta.env.VITE_API_BASE_URL || (['localhost', '127.0.0.1'].includes(window.location.hostname) ? 'http://127.0.0.1:8787' : '');
 export async function sendRouteFeedback(rating: 'up' | 'down', routeLabel: string, city: string): Promise<void> {
@@ -39,7 +40,7 @@ export async function liveComparison(journey: LiveJourney, signal: AbortSignal, 
   if (!response.ok) throw new JourneyError('unavailable', typeof data.message === 'string' ? data.message.slice(0, 300) : 'Live routes are unavailable.', response.status >= 500);
   if (!Array.isArray(data.routes) || !Array.isArray(data.analyses) || !data.comparison || !Array.isArray(data.notices) || !Array.isArray(data.attributions) || !Number.isFinite(Date.parse(data.checkedAt))) throw new JourneyError('invalid-response', 'The live response was incomplete.');
   validateRoutes(data.routes);
-  if (data.routes.some((r: any) => r.source !== 'google' || r.geometryKind !== 'provider')) throw new JourneyError('invalid-response', 'The live service did not return provider routes.');
+  if (data.routes.some((r: any) => r.source !== (usesGeoapify?'geoapify':'google') || r.geometryKind !== 'provider')) throw new JourneyError('invalid-response', 'The live service did not return provider routes.');
   signal.throwIfAborted();
   comparisonCache.set(cacheKey,data as LiveResult);
   return data as LiveResult;

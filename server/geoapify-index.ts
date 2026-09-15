@@ -1,0 +1,10 @@
+import { config } from 'dotenv';
+import { createGeoapifyServer } from './geoapify-app';
+process.env.TZ='Asia/Kolkata';
+config({path:'.local/geoapify.env',quiet:true});
+const key=process.env.GEOAPIFY_API_KEY;
+if(!key)throw new Error('Save GEOAPIFY_API_KEY in .local/geoapify.env first.');
+const app=await createGeoapifyServer(key);
+await app.listen({host:'127.0.0.1',port:8788});
+console.log('Nightwise local Geoapify API: http://127.0.0.1:8788');
+for(const s of ['SIGINT','SIGTERM'] as const)process.once(s,()=>{void app.close().then(()=>process.exit(0));});

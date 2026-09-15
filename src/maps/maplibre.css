@@ -1,0 +1,6 @@
+.nightwise-map-pin{width:27px;height:27px;min-height:0;padding:0;border:2px solid white;border-radius:50%;color:#101010;font-size:13px;font-weight:800;line-height:23px;box-shadow:0 1px 4px #0008;cursor:pointer}
+.maplibregl-popup-content{background:#fff;color:#111;border-radius:12px;padding:12px 24px 12px 12px;font:13px/1.5 system-ui}
+.maplibregl-popup-close-button{color:#111;background:transparent;min-height:24px;width:24px;padding:0;border:0}
+.maplibregl-ctrl-attrib{font:11px/1.5 system-ui;color:#333}
+.maplibregl-ctrl-attrib-button{min-height:24px;padding:0;border:0}
+.maplibregl-map{width:100%;height:100%;position:relative;isolation:isolate}

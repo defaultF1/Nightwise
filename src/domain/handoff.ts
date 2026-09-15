@@ -5,7 +5,7 @@ const coordinate = (p: Coordinate) => `${p.latitude.toFixed(6)},${p.longitude.to
 // Three ordered points are supported by mobile browser fallback as well as
 // the Android Maps app. They guide routing, but do not lock a full polyline.
 export function handoffWaypoints(journey:LiveJourney,route?:Route):Coordinate[]{
-  if(route?.source!=='google'||route.geometryKind!=='provider'||route.path.length<2||route.path.some(p=>!validCoordinate(p)))return [];
+  if(!route||route.source==='sample'||route.geometryKind!=='provider'||route.path.length<2||route.path.some(p=>!validCoordinate(p)))return [];
   // Never transfer a stale route after the user changes the endpoints.
   if(distanceMeters(route.path[0],journey.origin)>250||distanceMeters(route.path.at(-1)!,journey.destination)>250)return [];
   const length=pathLength(route.path);

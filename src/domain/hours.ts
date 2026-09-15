@@ -18,13 +18,14 @@ export function evaluateObservation(place: PlaceObservation, at: string, arrival
     if (arrival < Date.parse(h.from) || arrival >= Date.parse(h.until)) return unknown();
     if(h.alwaysOpen){
       if(place.currentHours&&(!place.currentHours.openNow||Number.isFinite(Date.parse(place.currentHours.nextCloseTime??''))))return unknown('Current status conflicts with the listed 24-hour schedule.');
-      return {state:'open',closingSoon:false,minutesUntilClose:null,basis:'current',open24Hours:true};
+      return {state:'open',closingSoon:false,minutesUntilClose:null,basis:h.regular?'regular':'current',open24Hours:true};
     }
     const period = h.periods.find(p => Date.parse(p.from) <= arrival && arrival < Date.parse(p.until));
-    if (!period) return {state:'closed',closingSoon:false,minutesUntilClose:null,basis:'current'};
+    if (!period) return {state:'closed',closingSoon:false,minutesUntilClose:null,basis:h.regular?'regular':'current'};
     const remaining = (Date.parse(period.until)-arrival)/60000;
-    return {state:'open',closingSoon:remaining<=15,minutesUntilClose:remaining,basis:'current'};
+    return {state:'open',closingSoon:remaining<=15,minutesUntilClose:remaining,basis:h.regular?'regular':'current'};
   }
+  if(place.provider==='geoapify'&&place.schedule?.regularWeek.length)return unknown('The listed schedule could not be evaluated reliably.');
   const h = place.currentHours;
   if(h){
     if(!isFresh(h.observedAt,evidenceAt))return unknown('These opening hours need a fresh check.');
@@ -48,7 +49,7 @@ export function evaluateObservation(place: PlaceObservation, at: string, arrival
     if(typicalNow.state!=='unknown'&&(typicalNow.state==='open')!==h.openNow)return unknown('Current status differs from the regular weekly schedule.');
   }
   const typical=evaluateHours(place.hours,at,arrivalMinutes);
-  return place.hoursOrigin==='google-regular'&&typical.state!=='unknown'?{...typical,basis:'regular',reason:'Based on regular weekly hours; special-day changes are not confirmed.'}:typical.state==='unknown'?unknown('Google did not return usable opening and closing times.'):typical;
+  return place.hoursOrigin==='google-regular'&&typical.state!=='unknown'?{...typical,basis:'regular',reason:'Based on regular weekly hours; special-day changes are not confirmed.'}:typical.state==='unknown'?unknown(place.provider==='geoapify'?'Opening and closing times were not provided.':'Google did not return usable opening and closing times.'):typical;
 }
 export function evaluateHours(hours:OpeningHours|undefined,at:string,arrivalMinutes=0):HoursEvaluation {
   if(!hours||!Number.isFinite(Date.parse(at))||!Number.isFinite(arrivalMinutes)||arrivalMinutes<0)return unknown();

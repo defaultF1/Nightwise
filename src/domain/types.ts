@@ -8,7 +8,7 @@ export type Route = {
   durationSeconds: number;
   distanceMeters: number;
   path: Coordinate[];
-  source: 'sample' | 'google';
+  source: 'sample' | 'google' | 'geoapify';
   geometryKind: 'illustrative' | 'offline' | 'provider';
   turns?: number;
   steps?: { distanceMeters: number; staticDurationSeconds?:number; maneuver?: string; path?:Coordinate[] }[];
