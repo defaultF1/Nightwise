@@ -13,5 +13,5 @@ export function PointPicker({ value, onChoose, accessCode='', anchor, direction,
       <label>Latitude<input value={latitude} onChange={e => setLatitude(e.target.value)} inputMode="decimal" required /></label>
       <label>Longitude<input value={longitude} onChange={e => setLongitude(e.target.value)} inputMode="decimal" required /></label>
       {error && <p role="alert">{error}</p>}<button className="secondary-button" type="submit">Use this pin</button>
-    </form><p className="settings-helper">Check the public gate and road entrance in Google Maps before travel.</p></>;
+    </form><p className="settings-helper">Check the public gate and road entrance on the map before travelling.</p></>;
 }

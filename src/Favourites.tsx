@@ -17,6 +17,6 @@ export function Favourites({point,onChoose,accessCode}:{point:JourneyPoint;onCho
     {!items.length&&<p>No saved places yet. Give the selected pin a name such as Home or Office.</p>}
     <form className="save-place" onSubmit={e=>{e.preventDefault();try{if(items.length>=20)throw new Error('You can save up to 20 places.');const next=[...items,makeFavourite(label,point)];writeFavourites(next);setItems(next);setLabel('');setMessage('Place saved on this device.');}catch(e){setMessage(e instanceof Error?e.message:'Device storage is unavailable.');}}}>
       <label>Favourite label<input value={label} onChange={e=>setLabel(e.target.value)} placeholder="Home, Office…" maxLength={60}/></label><button className="secondary-button" disabled={!label.trim()} type="submit">Save selected pin</button>
-    </form><p className="settings-helper">Selected: {point.name}. Google places need a connection when reopened. Your labels and saved places stay on this device.</p>{message&&<p role="status">{message}</p>}
+    </form><p className="settings-helper">Selected: {point.name}. Places saved from search need a connection when reopened. Your saved-place labels stay on this device.</p>{message&&<p role="status">{message}</p>}
   </section>;
 }

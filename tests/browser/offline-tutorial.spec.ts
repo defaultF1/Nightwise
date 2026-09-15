@@ -21,6 +21,6 @@ test('offline tutorial has real streets in both directions and keeps its mode la
   await page.locator('.offline-map').screenshot({path:'talks/screenshots/offline-tutorial/02-reverse-light.png'});
   await page.getByText('Opening times and closed days',{exact:true}).click();await page.locator('.shop-hours-item summary').first().click();await expect(page.locator('.shop-hours-item').first()).toContainText('Wednesday:');
   expect(await page.locator('main').innerText()).not.toMatch(/sample|illustrative|fake|not live/i);
-  await page.getByRole('button',{name:'Continue with this route'}).click();const handoff=new URL((await page.getByRole('link',{name:'Open Google Maps'}).getAttribute('href'))!);expect(handoff.searchParams.get('origin')).toBe('13.047697,77.619939');expect(handoff.searchParams.get('destination')).toBe('13.062827,77.594089');
+  await page.getByRole('button',{name:'Continue with this route'}).click();const handoff=new URL((await page.getByRole('link',{name:'Start navigation'}).getAttribute('href'))!);expect(handoff.searchParams.get('origin')).toBe('13.047697,77.619939');expect(handoff.searchParams.get('destination')).toBe('13.062827,77.594089');
   expect(remote).toEqual([]);
 });

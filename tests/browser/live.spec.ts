@@ -9,20 +9,20 @@ test('after five minutes the next comparison bypasses both caches without a back
  const bodies:any[]=[];await page.route('**/api/compare',r=>{bodies.push(r.request().postDataJSON());return r.fulfill({json:fixture()});});
  await page.getByRole('button',{name:'Live routes',exact:true}).click();
  await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();
- await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeVisible();
+ await expect(page.getByRole('radio',{name:'Fastest route',exact:true})).toBeVisible();
  await page.clock.fastForward(5*60_000+1000);expect(bodies).toHaveLength(1);
  await page.getByRole('button',{name:'NightWise home'}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();
- await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeVisible();expect(bodies).toHaveLength(2);expect(bodies[1].refresh).toBe(true);
+ await expect(page.getByRole('radio',{name:'Fastest route',exact:true})).toBeVisible();expect(bodies).toHaveLength(2);expect(bodies[1].refresh).toBe(true);
 });
 test('repeating the journey uses the five-minute device cache while refresh and a swapped journey fetch again',async({page})=>{
  const bodies:any[]=[];await page.route('**/api/compare',r=>{bodies.push(r.request().postDataJSON());return r.fulfill({json:fixture()});});
  await page.getByRole('button',{name:'Live routes',exact:true}).click();
- const compare=async()=>{await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeVisible();};
+ const compare=async()=>{await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest route',exact:true})).toBeVisible();};
  await compare();expect(bodies).toHaveLength(1);
  await page.getByRole('button',{name:'NightWise home'}).click();await compare();
  await expect(page.locator('.freshness')).toContainText('Saved on this device');expect(bodies).toHaveLength(1);
  await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();expect(bodies).toHaveLength(1);
- await page.getByRole('button',{name:'Refresh live results'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeVisible();
+ await page.getByRole('button',{name:'Refresh live results'}).click();await expect(page.getByRole('radio',{name:'Fastest route',exact:true})).toBeVisible();
  expect(bodies).toHaveLength(2);expect(bodies[1].refresh).toBe(true);await expect(page.locator('.freshness')).not.toContainText('Saved on this device');
  await page.getByRole('button',{name:'NightWise home'}).click();await page.getByRole('button',{name:'Swap origin and destination'}).click();await compare();expect(bodies).toHaveLength(3);
 });
@@ -35,12 +35,12 @@ test('configuration checks do not compare; missing server configuration is expli
 });
 test('live routes have no invented activity and selected corridor handoff survives map failure',async({page})=>{
  let compares=0;await page.route('**/api/compare',r=>{compares++;return r.fulfill({json:fixture()});});
- await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeChecked();
+ await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest route',exact:true})).toBeChecked();
  await expect(page.locator('.activity-score')).toHaveCount(0);await expect(page.locator('.route-summary')).toHaveCount(0);await expect(page.locator('.score-unavailable')).toHaveCount(0);
- await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();await page.getByRole('button',{name:'Continue with this route'}).click();const url=new URL((await page.getByRole('link',{name:'Open Google Maps'}).getAttribute('href'))!);expect(url.searchParams.get('waypoints')?.split('|')).toHaveLength(3);expect(url.searchParams.get('destination')).toBe('13.047697,77.619939');await expect(page.getByRole('dialog')).toContainText('They may appear as stops');
+ await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();await page.getByRole('button',{name:'Continue with this route'}).click();const url=new URL((await page.getByRole('link',{name:'Start navigation'}).getAttribute('href'))!);expect(url.searchParams.get('waypoints')?.split('|')).toHaveLength(3);expect(url.searchParams.get('destination')).toBe('13.047697,77.619939');await expect(page.getByRole('dialog')).toContainText('They may appear as stops');
  await page.getByRole('dialog').screenshot({path:'talks/screenshots/M05/01-browser-handoff-mocked-provider.png'});
  await page.getByRole('button',{name:'Keep comparing'}).click();await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();expect(compares).toBe(1);
- await page.getByRole('radio',{name:'Fastest',exact:true}).check();await page.getByRole('button',{name:'Continue with this route'}).click();const fastestUrl=new URL((await page.getByRole('link',{name:'Open Google Maps'}).getAttribute('href'))!);expect(fastestUrl.searchParams.get('waypoints')).not.toBe(url.searchParams.get('waypoints'));expect(compares).toBe(1);
+ await page.getByRole('radio',{name:'Fastest route',exact:true}).check();await page.getByRole('button',{name:'Continue with this route'}).click();const fastestUrl=new URL((await page.getByRole('link',{name:'Start navigation'}).getAttribute('href'))!);expect(fastestUrl.searchParams.get('waypoints')).not.toBe(url.searchParams.get('waypoints'));expect(compares).toBe(1);
 });
 test('late live responses cannot replace a cancelled journey',async({page})=>{
  await page.route('**/api/compare',async r=>{await new Promise(resolve=>setTimeout(resolve,900));await r.fulfill({json:fixture()}).catch(()=>{});});
@@ -52,10 +52,10 @@ test('location denial leaves presets usable',async({page})=>{
 });
 test('one-time current location is sent only after explicit comparison',async({page,context})=>{
  await context.grantPermissions(['geolocation']);await context.setGeolocation({latitude:13.061,longitude:77.595,accuracy:15});let payload:any;await page.route('**/api/compare',r=>{payload=r.request().postDataJSON();return r.fulfill({json:fixture()});});
- await page.getByRole('button',{name:'Use my location'}).click();await page.getByRole('button',{name:'Get current location'}).click();await expect(page.getByRole('button',{name:/FROM Current location/})).toBeVisible();expect(payload).toBeUndefined();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeVisible();expect(payload.origin.latitude).toBe(13.061);
+ await page.getByRole('button',{name:'Use my location'}).click();await page.getByRole('button',{name:'Get current location'}).click();await expect(page.getByRole('button',{name:/FROM Current location/})).toBeVisible();expect(payload).toBeUndefined();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest route',exact:true})).toBeVisible();expect(payload.origin.latitude).toBe(13.061);
 });
 test('old results require explicit refresh without automatic rescanning',async({page})=>{
- let calls=0;await page.route('**/api/compare',r=>{calls++;return r.fulfill({json:{...fixture(),checkedAt:new Date(Date.now()-6*60_000).toISOString()}});});await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeVisible();await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));await expect(page.getByRole('button',{name:'Refresh live results'})).toBeVisible();expect(calls).toBe(1);
+ let calls=0;await page.route('**/api/compare',r=>{calls++;return r.fulfill({json:{...fixture(),checkedAt:new Date(Date.now()-6*60_000).toISOString()}});});await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();await expect(page.getByRole('radio',{name:'Fastest route',exact:true})).toBeVisible();await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));await expect(page.getByRole('button',{name:'Refresh live results'})).toBeVisible();expect(calls).toBe(1);
 });
 
 test('live response without shop analysis keeps evidence sections and details usable',async({page})=>{
@@ -69,7 +69,7 @@ test('live response without shop analysis keeps evidence sections and details us
  await expect(page.getByRole('button',{name:'Alternative 1 · 22 min',exact:true})).toHaveAttribute('aria-pressed','true');
  await expect(page.locator('.pin-legend')).toContainText('Start / current location');
  await expect(page.locator('.pin-legend')).toContainText('Petrol / CNG');
- await page.getByRole('radio',{name:'Fastest',exact:true}).check();await expect(page.getByRole('button',{name:'Fastest · 18 min',exact:true})).toHaveAttribute('aria-pressed','true');
+ await page.getByRole('radio',{name:'Fastest route',exact:true}).check();await expect(page.getByRole('button',{name:'Fastest · 18 min',exact:true})).toHaveAttribute('aria-pressed','true');
  await page.getByRole('button',{name:'View activity details'}).first().click();await expect(page.getByRole('dialog')).toContainText('travel times only');
  await page.getByRole('button',{name:'Back to routes',exact:true}).click();await expect(page.getByRole('dialog')).toHaveCount(0);
 });
