@@ -30,6 +30,6 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env) {
     nearbyLimit: integer('PILOT_NEARBY_LIMIT', 600, 20000),
     ledgerPath: env.BUDGET_LEDGER_PATH || '.local/pilot-budget.json',
     redisUrl, redisToken, redisKey: 'nightwise:pilot-budget:v1',
-    allowedOrigins: (env.ALLOWED_ORIGINS || 'http://localhost:4173,http://127.0.0.1:4173,http://localhost:5173,http://127.0.0.1:5173,https://localhost,http://localhost').split(',').map(s => s.trim()),
+    allowedOrigins: (env.ALLOWED_ORIGINS || 'http://localhost:4173,http://127.0.0.1:4173,http://localhost:5173,http://127.0.0.1:5173,https://localhost,http://localhost,https://app.nightwise-f5fu.onrender.com').split(',').map(s => s.trim()),
   };
 }
