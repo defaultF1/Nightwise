@@ -12,6 +12,10 @@ import './mappls-map.css';
 type Listener = { addListener?: (event: string, handler: (e?: unknown) => void) => void };
 type MapplsMap = Listener & {
   remove?: () => void; resize?: () => void; loaded?: () => boolean;
+  setCenter?: (center: { lat: number; lng: number }) => void; setZoom?: (zoom: number) => void;
+  // The vector SDK wraps a MapLibre/Mapbox GL map; its native fitBounds is the
+  // reliable way to frame coordinates when it is exposed.
+  fitBounds?: (bounds: [[number, number], [number, number]], options?: Record<string, unknown>) => void;
   dragPan?: { enable(): void; disable(): void }; scrollZoom?: { enable(): void; disable(): void };
   touchZoomRotate?: { enable(): void; disable(): void }; keyboard?: { enable(): void; disable(): void };
 };
@@ -48,33 +52,23 @@ function loadSdk(): Promise<MapplsSdk> {
 
 const position = (p: Coordinate) => ({ lat: p.latitude, lng: p.longitude });
 const escape = (text: string) => text.replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
-// Best effort only: style names are account-specific, so a missing night style
-// silently keeps the default map rather than failing the whole view.
-function applyTheme(sdk: MapplsSdk, theme: Theme) {
-  if (theme === 'light' || !sdk.getStyles || !sdk.setStyle) return;
-  try {
-    sdk.getStyles(styles => {
-      try {
-        const night = (Array.isArray(styles) ? styles : []).map(s => s?.name ?? '').find(name => /night|dark/i.test(name));
-        if (night) sdk.setStyle!(night);
-      } catch { /* keep the default style */ }
-    });
-  } catch { /* keep the default style */ }
-}
 
 export async function createMapplsMap(element: HTMLElement, theme: Theme, onSelect: (id: string) => void, center: Coordinate): Promise<MapHandle> {
   const sdk = await loadSdk();
   if (!element.id) element.id = `nightwise-map-${++instance}`;
   const map = new sdk.Map(element.id, { center: position(center), zoom: 13, zoomControl: true, location: false, fullscreenControl: false, clickableIcons: false, backgroundColor: theme === 'light' ? '#f5f5f5' : theme === 'blue' ? '#0d2435' : '#151515' });
-  // Wait for the first render, but never hang: some SDK builds fire 'load'
-  // before a listener can attach, so loaded() and a bounded delay also count.
-  await new Promise<void>(resolve => {
+  // Wait for the first real render. A map that never loads (missing tile
+  // entitlement, blocked style) must fail here so the caller can fall back to
+  // the bundled OpenStreetMap diagram instead of showing a blank canvas.
+  await new Promise<void>((resolve, reject) => {
     const done = () => { clearInterval(poll); clearTimeout(timeout); resolve(); };
-    const timeout = setTimeout(done, 9000);
+    const timeout = setTimeout(() => { clearInterval(poll); try { map.remove?.(); } catch { /* never rendered */ } element.replaceChildren(); reject(new Error('Mappls map never finished loading')); }, 12000);
     const poll = setInterval(() => { try { if (map.loaded?.()) done(); } catch { /* not ready */ } }, 250);
-    try { map.addListener?.('load', done); } catch { done(); }
+    try { map.addListener?.('load', done); } catch { /* rely on loaded() polling */ }
   });
-  applyTheme(sdk, theme);
+  // Re-assert the requested view after load: some SDK builds ignore the
+  // constructor center and come up over a default (blank) area.
+  try { map.setCenter?.(position(center)); map.setZoom?.(13); } catch { /* keep constructor view */ }
   const resize = new ResizeObserver(() => { try { map.resize?.(); } catch { /* view gone */ } });
   resize.observe(element);
   let layers: unknown[] = [];
@@ -103,7 +97,12 @@ export async function createMapplsMap(element: HTMLElement, theme: Theme, onSele
     },
     async fit(points) {
       if (!points.length) return;
-      try { new sdk.fitBounds({ map, cType: 0, bounds: points.map(p => [p.longitude, p.latitude]), options: { padding: 45, duration: 0 } }); } catch { /* keep current view */ }
+      const lng = points.map(p => p.longitude), lat = points.map(p => p.latitude);
+      try {
+        if (typeof map.fitBounds === 'function') { map.fitBounds([[Math.min(...lng), Math.min(...lat)], [Math.max(...lng), Math.max(...lat)]], { padding: 45, duration: 0, maxZoom: 16 }); return; }
+      } catch { /* fall through to the SDK helper */ }
+      try { new sdk.fitBounds({ map, cType: 0, bounds: points.map(p => [p.longitude, p.latitude]), options: { padding: 45, duration: 0 } }); }
+      catch { try { map.setCenter?.({ lat: (Math.min(...lat) + Math.max(...lat)) / 2, lng: (Math.min(...lng) + Math.max(...lng)) / 2 }); } catch { /* keep current view */ } }
     },
     async touch(enabled) {
       for (const handler of [map.dragPan, map.scrollZoom, map.touchZoomRotate, map.keyboard]) try { enabled ? handler?.enable() : handler?.disable(); } catch { /* optional */ }
