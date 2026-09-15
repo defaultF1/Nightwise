@@ -12,6 +12,8 @@ import type { Coordinate } from '../domain/types';
 import type { GapMarker } from '../domain/gap-markers';
 import { PIN_COLORS, type PlacePin } from './pins';
 const ll=(p:Coordinate):[number,number]=>[p.longitude,p.latitude];
+// Static inline glyph for camera pins; everything else keeps its letter.
+const CAMERA_GLYPH='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#101010" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>';
 export async function createMapLibre(element:HTMLElement,theme:Theme,onSelect:(id:string)=>void,center:Coordinate):Promise<MapHandle>{
  const style=theme==='light'?'positron':theme==='blue'?'dark-matter-brown':'dark-matter';
  // Retina tiles cover the same 256 CSS-pixel area with 512 physical pixels.
@@ -25,7 +27,7 @@ export async function createMapLibre(element:HTMLElement,theme:Theme,onSelect:(i
  catch(e){resize.disconnect();map.remove();throw e;}
  let markers:maplibregl.Marker[]=[],lineIds:string[]=[],pickable:MapLine[]=[];
  const mark=(p:Coordinate,name:string,kind:keyof typeof PIN_COLORS,text:string,status?:string,sourceUrl?:string)=>{
-  const el=document.createElement('button');el.type='button';el.className='nightwise-map-pin';el.style.backgroundColor=PIN_COLORS[kind];el.textContent=text;el.setAttribute('aria-label',`${name}${status?' · '+status:''}`);
+  const el=document.createElement('button');el.type='button';el.className=kind==='camera'?'nightwise-map-pin camera-pin':'nightwise-map-pin';el.style.backgroundColor=PIN_COLORS[kind];if(kind==='camera')el.innerHTML=CAMERA_GLYPH;else el.textContent=text;el.setAttribute('aria-label',`${name}${status?' · '+status:''}`);
   const card=document.createElement('div'),title=document.createElement('strong');title.textContent=name;card.append(title);
   if(status){const info=document.createElement('p');info.textContent=status;card.append(info);}
   if(sourceUrl?.startsWith('https://')){const link=document.createElement('a');link.href=sourceUrl;link.target='_blank';link.rel='noopener noreferrer';link.textContent='View source';card.append(link);}

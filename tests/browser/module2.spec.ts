@@ -7,12 +7,12 @@ test('AEOS to Manyata keeps supplied pins and synchronized sample choices',async
   await expect(page.getByRole('radiogroup',{name:'Select a route'}).getByRole('radio')).toHaveCount(2);
   await page.getByRole('radio',{name:'Fastest route',exact:true}).check();
   await expect(page.getByRole('button',{name:'Select Fastest route on diagram'})).toHaveAttribute('aria-pressed','true');
-  await page.getByRole('button',{name:'Select Most active route on diagram'}).focus(); await page.keyboard.press('Enter');
-  await expect(page.getByRole('radio',{name:'Most active route',exact:true})).toBeChecked();
+  await page.getByRole('button',{name:/Select .*safest route on diagram/i}).focus(); await page.keyboard.press('Enter');
+  await expect(page.getByRole('radio',{name:/safest route/i})).toBeChecked();
   await page.getByRole('button',{name:'Continue with this route'}).click();
   const url=new URL((await page.getByRole('link',{name:'Start navigation'}).getAttribute('href'))!);
   expect(url.searchParams.get('origin')).toBe('13.062827,77.594089'); expect(url.searchParams.get('destination')).toBe('13.047697,77.619939'); expect(url.searchParams.has('waypoints')).toBe(false);
-  await page.getByRole('button',{name:'Keep comparing'}).click(); await expect(page.getByRole('radio',{name:'Most active route',exact:true})).toBeChecked();
+  await page.getByRole('button',{name:'Keep comparing'}).click(); await expect(page.getByRole('radio',{name:/safest route/i})).toBeChecked();
 });
 test('destination rejects invalid coordinates without replacing the selected pin',async({page})=>{
   await page.getByRole('button',{name:'Live routes',exact:true}).click();

@@ -118,7 +118,9 @@ export class Geoapify {
    const data=await this.request('/v1/routing',{waypoints:`${journey.origin.latitude},${journey.origin.longitude}|${journey.destination.latitude},${journey.destination.longitude}`,mode:geoMode(journey.mode),type:variant,traffic:'approximated',details:'instruction_details',format:'geojson'},'route',signal,refresh);
    for(const route of geoRoutes(data,variant)){
     if(distanceMeters(route.path[0],journey.origin)>250||distanceMeters(route.path.at(-1)!,journey.destination)>250)continue;
-    if(!routes.some(r=>r.id===route.id))routes.push(route);
+    // Reject near-duplicates, not just identical geometry: a variant that shares
+    // more than 85% of its roads with an existing option is the same choice.
+    if(!routes.some(r=>r.id===route.id)&&routes.every(r=>distinctRoadShare(route.path,r.path)>=.15))routes.push(route);
    }
   }
   // A bounded additional road preference can supply a genuinely different third route.
@@ -129,7 +131,7 @@ export class Geoapify {
    }catch{signal.throwIfAborted();/* Retain successful primary options if the extra preference fails. */}
   }
   routes.sort((a,b)=>a.durationSeconds-b.durationSeconds);
-  return routes.slice(0,3).map((r,i)=>({...r,label:i?`Alternative ${i}`:'Fastest'}));
+  return routes.slice(0,4).map((r,i)=>({...r,label:i?`Alternative ${i}`:'Fastest'}));
  }
  async scans(plan:QueryPlan,signal:AbortSignal,refresh=false):Promise<NearbyScan[]>{
   // Group route samples in small grid boxes: one result set can serve shared road sections.
