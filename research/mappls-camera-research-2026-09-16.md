@@ -4,6 +4,8 @@ Update: the user has chosen camera evidence as a Safety Score component. See [th
 
 Checked in the user's Edge browser on 16 September 2026, following review of the account's actual allocations.
 
+See the [expanded traffic-camera research and credential mapping](mappls-traffic-cameras-deep-dive-2026-09-16.md) for the freemium access matrix, Report Category Master and integrated Directions Plugin example.
+
 ## Confirmed developer feature
 
 The official [Navigation SDK product page](https://about.mappls.com/api/navigation-sdk/) explicitly describes automated alerts for upcoming traffic cameras, potholes and traffic hazards. This establishes a developer-facing traffic-camera feature; the previous research should not be interpreted as saying Mappls has no camera capability.
@@ -29,7 +31,7 @@ The Android app has Mobile Maps SDK and Intouch SDK allocations; Navigation SDK 
 2. Prefer route-index-filtered reports for displayed routes. Fetch nearby reports only for the visible map area when a road-alert layer is enabled; avoid an indiscriminate city scan.
 3. Render separate Traffic cameras and Road hazards layers. Use CCTV only when the source explicitly labels a record as CCTV. Keep source timestamps and report expiry; never imply a camera is working based solely on a marker.
 4. Keep the current external-navigation flow. Obtain report data access independently if possible rather than adding full embedded navigation solely to obtain markers.
-5. Cache briefly only within agreed terms, deduplicate report IDs and discard expired records. Do not add camera presence to the Night Activity Score until evidence quality and scoring behavior have been reviewed.
+5. Cache briefly only within agreed terms, deduplicate report IDs and discard expired records. The user has approved camera evidence as a Safety Score component; connect only validated, route-associated records to the prepared calculation.
 
 ## Specific support request
 
