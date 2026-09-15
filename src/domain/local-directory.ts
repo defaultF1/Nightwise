@@ -14,5 +14,5 @@ export function directoryAlongRoute(directory:Directory,route?:Route){
 }
 export function directoryPins(rows:DirectoryPlace[],savedAt:string,live:PlacePin[]):PlacePin[]{
  const normal=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]/g,'');
- return rows.filter(p=>!live.some(l=>l.kind===p.kind&&normal(l.name)===normal(p.name)&&distanceMeters(l,p)<60)).map(p=>({latitude:p.latitude,longitude:p.longitude,name:p.name,kind:p.kind,sourceUrl:p.hoursSourceUrl??p.sourceUrl,status:`Local directory · ${p.hoursNote??(p.hours?`Recorded hours: ${directoryHours(p.hours)}`:'Opening hours unknown')} · Saved ${savedAt.slice(0,10)}.${p.sourceUpdatedAt?` Map record last edited ${p.sourceUpdatedAt.slice(0,10)}.`:''} Current opening is not confirmed.`}));
+ return rows.filter(p=>!live.some(l=>l.kind===p.kind&&normal(l.name)===normal(p.name)&&distanceMeters(l,p)<60)).map(p=>({latitude:p.latitude,longitude:p.longitude,name:p.name,kind:p.kind,sourceUrl:p.hoursSourceUrl??p.sourceUrl,status:`${p.hoursNote??(p.hours?`Recorded hours: ${directoryHours(p.hours)}`:'Opening hours unknown')} · Saved ${savedAt.slice(0,10)}.${p.sourceUpdatedAt?` Map record last edited ${p.sourceUpdatedAt.slice(0,10)}.`:''} Current opening is not confirmed.`}));
 }

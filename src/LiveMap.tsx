@@ -1,6 +1,5 @@
 import directoryData from './data/aeos-manyata-directory.json';
 import {directoryAlongRoute,directoryPins,type Directory} from './domain/local-directory';
-import {LocalDirectory} from './LocalDirectory';
 import { usesGeoapify } from './providers/selection';
 import { useEffect, useRef, useState, createElement } from 'react';
 import { Capacitor } from '@capacitor/core';
@@ -30,7 +29,6 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
   const selectedRoute=routes.find(r=>r.id===selectedId);
   const routeAnalysis=analysis?.routeId===selectedId?analysis:undefined;
   const placeMarkers=visiblePlacePins(routeAnalysis,60,false,usesGeoapify?selectedRoute?.path:undefined);
-  const [showDirectory,setShowDirectory]=useState(true);
   const directory=directoryData as Directory;
   const localRows=usesGeoapify?directoryAlongRoute(directory,selectedRoute):[];
   const localPins=selectedRoute?pinsNearRoute(directoryPins(localRows,directory.savedAt,placeMarkers),selectedRoute.path):[];
@@ -69,9 +67,9 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
           if (path.length > 1) lines.push({ id: selected.id, path, color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
         }
       }
-      await map.draw(lines, [journey.origin, journey.destination], selected&&routeAnalysis?.source==='live'?gapMarkers(selected,routeAnalysis):[], [...placeMarkers,...(showDirectory?localPins:[])]);
+      await map.draw(lines, [journey.origin, journey.destination], selected&&routeAnalysis?.source==='live'?gapMarkers(selected,routeAnalysis):[], [...placeMarkers,...localPins]);
     }).catch(() => setError(true));
-  }, [ready, routes, selectedId, journey, analysis, theme, showDirectory]);
+  }, [ready, routes, selectedId, journey, analysis, theme]);
   useEffect(() => {
     if (!ready) return;
     queue.current = queue.current.then(async () => { await handle.current?.fit(routes.length ? routes.flatMap(r => r.path) : [journey.origin, journey.destination]); }).catch(() => setError(true));
@@ -90,9 +88,8 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
     {routes.length>0&&<div className="map-place-controls">
       {analysis&&<ul aria-label="Places along this route">{PLACE_GROUPS.map(group=>{const count=groupCounts(analysis,group.categories);return count.total?<li key={group.id}><strong>{group.label}</strong> · {groupSummary(count)}</li>:null;})}</ul>}
       {usesGeoapify&&<p className="settings-helper">Pins show places within 50 m of the selected route, at their listed locations. Nearby counts include a wider area; entrances may require a detour.</p>}
-      {!placeMarkers.length&&<p>{activityStatus==='budget'?'Place scans could not run because the service search allowance is used up.':activityStatus==='disabled'?'Place scans are switched off.':usesGeoapify?'No open or estimated-open listings were returned close enough to this route to show as live pins. Check the nearby directory below.':'No returned places are open or estimated open when you pass. Missing listings do not mean this road is empty.'}</p>}
+      {!placeMarkers.length&&<p>{activityStatus==='budget'?'Place scans could not run because the service search allowance is used up.':activityStatus==='disabled'?'Place scans are switched off.':usesGeoapify?'No open or estimated-open listings were returned close enough to this route to show as live pins.':'No returned places are open or estimated open when you pass. Missing listings do not mean this road is empty.'}</p>}
 
-      {usesGeoapify&&<LocalDirectory directory={directory} rows={localRows} pinCount={localPins.length} show={showDirectory} onShow={setShowDirectory}/>}
     </div>}
   </section>;
 }
