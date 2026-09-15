@@ -1,0 +1,206 @@
+﻿name,kind,latitude,longitude,hours,hoursNote,sourceUrl,hoursSourceUrl,sourceUpdatedAt,sourceCheckedAt
+BP,fuel,13.0556846,77.6065451,06:00-22:00,,https://www.openstreetmap.org/way/1286715554,,2024-05-26T04:29:16Z,2026-09-15T13:10:45Z
+Essar Uni Gas,fuel,13.042173,77.5921122,,,https://www.openstreetmap.org/way/777618524,,2025-06-14T16:45:37Z,2026-09-15T13:10:45Z
+GAIL Gas,fuel,13.040566,77.6186125,,,https://www.openstreetmap.org/way/1284773488,,2026-01-21T14:25:49Z,2026-09-15T13:10:45Z
+Indian Oil,fuel,13.0414443,77.6205262,,,https://www.openstreetmap.org/way/772934851,,2024-06-29T15:40:03Z,2026-09-15T13:10:45Z
+Indian Oil,fuel,13.0417951,77.6137657,,,https://www.openstreetmap.org/way/1273000979,,2026-02-01T17:57:18Z,2026-09-15T13:10:45Z
+Indian Oil,fuel,13.0581868,77.593874,,,https://www.openstreetmap.org/way/1279046877,,2024-07-22T17:19:17Z,2026-09-15T13:10:45Z
+Care Health,hospital,13.0552027,77.6028234,,,https://www.openstreetmap.org/node/5520252375,,2020-06-01T09:04:41Z,2026-09-15T13:10:45Z
+Icon Hospital,hospital,13.0528211,77.6041042,,,https://www.openstreetmap.org/node/7577248224,,2024-07-08T12:17:32Z,2026-09-15T13:10:45Z
+Manipal Hospital,hospital,13.050953,77.5938654,24/7,Official facility hours: 24 hours. Individual departments and appointments vary.,https://www.openstreetmap.org/way/160906231,https://www.manipalhospitals.com/hebbal/contact-us/,2024-05-23T02:08:47Z,2026-09-15T13:10:45Z
+Manipal Hospital OPD,hospital,13.0624568,77.592227,,,https://www.openstreetmap.org/node/11949327621,,2024-06-01T04:43:10Z,2026-09-15T13:10:45Z
+Motherhood Children's Hospital,hospital,13.0620051,77.5930638,24/7,,https://www.openstreetmap.org/node/12117952601,,2024-08-18T04:48:55Z,2026-09-15T13:10:45Z
+Agastya Speciality Clinic,medical,13.0555615,77.6044933,,,https://www.openstreetmap.org/node/7577248216,,2020-06-01T09:04:41Z,2026-09-15T13:10:45Z
+Aster Pharmacy,medical,13.054318,77.6019187,"PH,Mo-Su 08:00-22:30",,https://www.openstreetmap.org/node/11331384652,,2024-05-28T12:30:59Z,2026-09-15T13:10:45Z
+Astha Diagnostic Centre,medical,13.0589421,77.5926431,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Ayushmitra clinic,medical,13.0554795,77.6023622,,,https://www.openstreetmap.org/node/5520250461,,2018-04-01T12:19:46Z,2026-09-15T13:10:45Z
+Brothers Chemist,medical,13.0514678,77.6041664,,,https://www.openstreetmap.org/node/10009663799,,2022-09-08T17:55:08Z,2026-09-15T13:10:45Z
+Dr Lal Path Labs,medical,13.0593942,77.5926274,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Dr. Archana's ENT Care Centre,medical,13.0555334,77.6044008,,,https://www.openstreetmap.org/node/7577248207,,2020-06-01T09:04:41Z,2026-09-15T13:10:45Z
+Dr. Uma Homeo Clinic,medical,13.0544322,77.6038273,,,https://www.openstreetmap.org/node/7577248204,,2020-06-01T09:04:41Z,2026-09-15T13:10:45Z
+Hebbal Medical Center,medical,13.0562451,77.6012716,"Mo-Sa 10:00-13:00,18:00-21:00; Su 10:00-12:00",,https://www.openstreetmap.org/node/5520247374,,2024-07-04T14:22:20Z,2026-09-15T13:10:45Z
+KMC Multispeciality Clinic,medical,13.040826,77.6189605,,,https://www.openstreetmap.org/node/7577248211,,2024-07-18T17:45:45Z,2026-09-15T13:10:45Z
+Krishna Clinic,medical,13.0558683,77.6001085,,,https://www.openstreetmap.org/node/5520248633,,2019-02-01T19:41:26Z,2026-09-15T13:10:45Z
+Manjunatha Medicals,medical,13.0551743,77.6007325,"PH,Mo-Su 09:00-23:30",,https://www.openstreetmap.org/node/4822629789,,2023-09-22T15:30:47Z,2026-09-15T13:10:45Z
+Medical Shop,medical,13.0552619,77.6020449,,,https://www.openstreetmap.org/node/1472761524,,2011-10-19T03:58:21Z,2026-09-15T13:10:45Z
+Merlins Trichology Clinic,medical,13.0543269,77.6038207,,,https://www.openstreetmap.org/node/7577248232,,2020-06-01T09:04:41Z,2026-09-15T13:10:45Z
+mom&me,medical,13.0586257,77.5924592,,,https://www.openstreetmap.org/node/11209916091,,2023-09-22T10:29:16Z,2026-09-15T13:10:45Z
+Mother And Heart Care,medical,13.0593748,77.5926249,,,https://www.openstreetmap.org/node/11949330259,,2024-06-01T04:40:22Z,2026-09-15T13:10:45Z
+Physiotherapy clinic,medical,13.0552316,77.6012225,,,https://www.openstreetmap.org/node/5520247470,,2019-02-19T20:46:24Z,2026-09-15T13:10:45Z
+Prarthana Home Health Care,medical,13.0552275,77.6024335,,,https://www.openstreetmap.org/node/7577248244,,2020-06-01T09:04:41Z,2026-09-15T13:10:45Z
+Rangalakshmi Netralaya,medical,13.0554599,77.6031448,,,https://www.openstreetmap.org/node/5520252462,,2019-12-25T18:12:12Z,2026-09-15T13:10:45Z
+Saaol Heart Centre,medical,13.0530655,77.6050627,,,https://www.openstreetmap.org/node/7577248263,,2020-06-01T09:04:41Z,2026-09-15T13:10:45Z
+Sandeep medicals,medical,13.0553658,77.6030345,,,https://www.openstreetmap.org/node/5520247493,,2018-04-01T12:16:33Z,2026-09-15T13:10:45Z
+Sanjeevini Dental,medical,13.0596498,77.5927922,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Santhosh medicals,medical,13.055247372155645,77.60188367848905,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Santosh medicals,medical,13.0553493,77.6018546,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Sham's Child and Adult Care,medical,13.055404,77.6027452,,,https://www.openstreetmap.org/node/5520252188,,2018-04-01T12:19:47Z,2026-09-15T13:10:45Z
+Sham's Child and Adult Care,medical,13.0556587,77.6026264,,,https://www.openstreetmap.org/node/7577248243,,2020-06-01T09:04:41Z,2026-09-15T13:10:45Z
+Sri Vinayaka Diagnostic Laboratory,medical,13.0554013,77.6032044,,,https://www.openstreetmap.org/node/5520252723,,2018-04-01T12:19:46Z,2026-09-15T13:10:45Z
+SVM Pharmacy,medical,13.0625167,77.5928357,,,https://www.openstreetmap.org/node/11219782001,,2023-09-26T11:48:31Z,2026-09-15T13:10:45Z
+We care clinic,medical,13.0553431,77.6018446,,,https://www.openstreetmap.org/node/5520248052,,2018-04-01T12:16:26Z,2026-09-15T13:10:45Z
+We care clinic,medical,13.0554023,77.6020789,,,https://www.openstreetmap.org/node/5520248783,,2018-04-01T12:16:26Z,2026-09-15T13:10:45Z
+1522,shop,13.0604757,77.5925547,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+8 Cloud 8,shop,13.0552429,77.6020012,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+A. M buy and save,shop,13.0551634,77.6003358,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Aesthetic Salon and Spa,shop,13.043384,77.5999701,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Aishwarya Bakery,shop,13.0551587,77.6002965,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Ajji Hotel,shop,13.0590516,77.5927236,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+All About Liquor,shop,13.0416427,77.5950772,Mo-Su 10:00-20:30,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+All Fun Chai,shop,13.0422691,77.5939505,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Amma's Pastries,shop,13.0624773,77.5928615,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Anmol garments,shop,13.0554001,77.6028356,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Anu Sri,shop,13.0551933,77.6016426,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Apsara Ice Cream,shop,13.0533486,77.6044178,"PH,Mo-Su 10:00-22:00",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+ARJ Car care,shop,13.0577123,77.5952894,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Baby Nest,shop,13.062485,77.5929199,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Balaji Andhra Mess,shop,13.0580013,77.5960278,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Balaji Rice Traders,shop,13.0540013,77.6019531,Mo-Su 07:30-22:30,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Balaji stores,shop,13.0553708,77.6029726,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Baohood,shop,13.0555416,77.6079033,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Barbeque Nation,shop,13.0552622,77.5941685,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Bata show room,shop,13.0630617,77.5929373,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Bellary Road,shop,13.0593643,77.5929013,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Bellary Road,shop,13.0580143,77.594705,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Bharath dry cleaners,shop,13.0552204,77.6022782,Mo-Sa 09:00-21:00,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Bhoomi Herbal Beauty Parlour,shop,13.0551939,77.6022105,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Bhubaneswari Hotel,shop,13.0590635,77.5928484,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Bhyaraveshwar rice traders,shop,13.0553748,77.6027984,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Biergarten Brewery & Kitchen,shop,13.0417334,77.6196407,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Big Guys: Wings & More,shop,13.0550698,77.6005716,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Bombay Brasserie,shop,13.0420326,77.6194409,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Bombay Curry House,shop,13.0418536,77.6196474,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Cake Rois,shop,13.0543625,77.6019076,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+California Burrito,shop,13.0492051,77.5932616,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Candles Brewhouse,shop,13.0553896,77.5943314,12:00-01:00,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Car Trade,shop,13.0423749,77.5949939,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Chamundeswari Electricals,shop,13.0553818,77.6030497,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Chianti,shop,13.0553339,77.5940306,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Chings,shop,13.0554077,77.6026614,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Choice mens salon,shop,13.0550867,77.6001726,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Chowdeshwari Traders,shop,13.0566666,77.6013169,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Cut & Looks,shop,13.0588662,77.592623,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Daily Sushi,shop,13.0418236,77.6194368,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Dasarahalli Main Road,shop,13.0552092,77.601991,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Dasarahalli Main Road,shop,13.0555779,77.6050535,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Dhobi Ghat,shop,13.047773,77.5933302,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Disha Hyderabad Irani Tea,shop,13.0590116,77.5929348,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+DJ Bar And Family Restaurant Pub,shop,13.0598763,77.5937633,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Dmart,shop,13.0542418,77.6019172,"PH,Mo-Su 08:00-22:30",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Dolly creations,shop,13.0553665,77.6030063,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Downsized,shop,13.0568105,77.6008798,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Esteem Mall,shop,13.0490746,77.5933966,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Fabindia,shop,13.0553554,77.5930022,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Fashion wear,shop,13.0551835,77.6014661,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Fazil home needs,shop,13.0553978,77.603267,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Flyover Drinkery,shop,13.0491451,77.593229,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Ford,shop,13.0416622,77.5948393,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Ghar Ka Dhaba,shop,13.0548524,77.6124503,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Girias,shop,13.0577416,77.5929648,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Go Naturals Fresh Cane Juice,shop,13.0593006,77.5931791,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Gopala platinum TMT,shop,13.055118,77.6010506,Mo-Sa 10:00-20:30,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Green Trends,shop,13.0531427,77.604269,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Happiness Dhaaba,shop,13.0544307,77.6018627,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Hebbal Social,shop,13.055451,77.5940239,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Hello Indore,shop,13.0595123,77.5929942,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Hotel Jagannath,shop,13.0593638,77.5928984,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Hotel Lasara,shop,13.0595771,77.5926555,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Hyundai,shop,13.0579787,77.5929997,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Jagdeesh stationary,shop,13.0551563,77.6014292,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Kadal Machili,shop,13.0593628,77.5927727,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Karnataka garage,shop,13.0551196,77.6009229,"PH,We,Th,Sa-Mo 08:00-22:30",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Kaveri Provision Store,shop,13.053932,77.6019154,"PH,Mo-Su 08:00-22:00",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Kia,shop,13.0416503,77.5970692,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Klassy Namkeen Mart,shop,13.0551718,77.6012008,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Kritunga Restaurant And Take Awa,shop,13.0593147,77.5931056,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Kyba,shop,13.0600654,77.592715,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Lakme,shop,13.0629571,77.592948,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Lakshmi Wines,shop,13.0598851,77.5931516,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Lucky Chan,shop,13.0519109,77.5942844,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Maa Binduvasini Chats corner,shop,13.0554214,77.6028101,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Magic touch Saloon,shop,13.0509726,77.608188,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Mahalakshmi electricals,shop,13.0554169,77.6032158,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Mahaveer fashion,shop,13.0553857,77.60315,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Mahima Kerala Store,shop,13.0538903,77.6020598,Mo-Fr 07:30-21:30,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Mahindra,shop,13.0416135,77.5942885,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Malwan Tadka,shop,13.0586149,77.5926095,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Mangalore Jewellery,shop,13.0538541,77.6020498,Mo-Sa 10:00-21:30,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Manjunatha Condiments,shop,13.0538127,77.6020437,Mo-Sa 06:00-22:55,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Maruti,shop,13.0416367,77.5954592,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Maruti Service Center,shop,13.0579806,77.5942266,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Maruti Suzuki Nexa,shop,13.0429694,77.6089333,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Master Mech,shop,13.0577032,77.5957551,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Mataji mobile and electronics,shop,13.0551777,77.6016728,"PH,Mo-Su 08:30-21:30",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Matsya,shop,13.0586141,77.5927775,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+McDonald's,shop,13.0493139,77.5929981,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Microtek computers,shop,13.0551061,77.6009609,Mo-Sa 09:00-21:00,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+MS Traders,shop,13.0551606,77.6004459,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+N.S mens parlour,shop,13.0554192,77.6032016,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Nagavara Social,shop,13.0419372,77.6196541,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Namma Bakery,shop,13.0422626,77.5944105,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Nandha Palace,shop,13.0596175,77.5926342,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Nandini,shop,13.0551732,77.6025151,"PH,Mo-Su 06:00-23:00",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Nandini Parlour,shop,13.0536141,77.6210208,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Nasi and Mee,shop,13.0420275,77.6196581,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Nature's Basket,shop,13.0596934,77.5930734,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Next Drive,shop,13.0419666,77.5974876,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Nice mart,shop,13.0552084,77.6008534,"PH,Mo-Su 07:30-22:30",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Nike,shop,13.0491797,77.5933878,10:30-21:00,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Niro - Taproom & Kitchen,shop,13.0419739,77.6133529,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Omega IX,shop,13.0600088,77.5926696,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Orientbell Tiles,shop,13.04165,77.5967025,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Page Unisex Hair Salon,shop,13.0507467,77.608711,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Paper & Pie,shop,13.0603315,77.5925318,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Pat-a-Cake,shop,13.0532734,77.6044159,"PH,Mo-Su 08:00-22:00",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Peepai Kitchen & Brewery,shop,13.0554338,77.5930008,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Pincode 24,shop,13.043986,77.6006984,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Pitambara Restaurant,shop,13.0590645,77.5925304,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Pollution Check,shop,13.0556585,77.6066025,Mo-Sa 09:00-17:30,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Pragathi Chicken Centre,shop,13.0551582,77.6004529,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Prequel,shop,13.0518169,77.5944722,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Radhakrishna fancy store,shop,13.0552036,77.6018338,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Raymond Shop,shop,13.0614104,77.5930766,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Reliance Fresh,shop,13.0553806,77.6026206,"PH,Mo-Su 07:29-12:00",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Rithu saree collection,shop,13.0543228,77.6014986,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+RRR Royal Gardenia,shop,13.0578649,77.5949142,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+RS color lab and studio,shop,13.0554228,77.602798,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Ruchi curry point,shop,13.055175,77.6003703,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+SAFA,shop,13.0627642,77.5929313,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Sanchez,shop,13.0416067,77.6196259,12:00-00:00,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Sanjay Food Junction,shop,13.0577696,77.5950588,"PH,Mo-Su 09:00-23:45",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Sanjay Punjabi Dhaba,shop,13.0577588,77.595066,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Santosh Jewellers,shop,13.0554196,77.6027913,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Santosh Jewellers,shop,13.0551752,77.6011293,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Shaambhavi,shop,13.0592673,77.5924667,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Shiva enterprises,shop,13.0554499,77.6002759,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Shree Lakshmi gifts and fancy store,shop,13.0554447,77.602758,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Simpli Namdhari's,shop,13.0628823,77.5940591,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Sri Annapoorneshwari Bakery,shop,13.0552254,77.6019284,"PH,Mo-Su 07:30-22:45",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Sri Lakshmi Temple,shop,13.0567164,77.6023658,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Sri Nandikeshwara Condiments and Juice Centre,shop,13.0540609,77.601974,"PH,Mo-Su 05:30-23:00",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Sri sai hot chips,shop,13.0551877,77.6015928,"PH,Mo-Su 08:00-22:00",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Star Bazaar,shop,13.0517758,77.5939389,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Sugreshwara provision store,shop,13.055217,77.6020252,"PH,Mo-Su 07:00-22:30",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Swathi garden,shop,13.0591093,77.5931284,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Tata Motors,shop,13.0427958,77.6092209,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Thalassery Restaurant,shop,13.0586132,77.5931287,Mo-Su 11:00-22:30,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+The Big Market,shop,13.0623962,77.5930084,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Theobroma,shop,13.0416197,77.6194652,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Third Wave Coffee Roasters,shop,13.0415009,77.6196219,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Toscano,shop,13.0415139,77.6194583,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Udupi Upachar,shop,13.0522981,77.6042904,"PH,Mo-Su 07:30-22:45",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Udupi Utsav,shop,13.0552098,77.6026488,"PH,Mo-Su 06:45-22:45",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Udupi Veg,shop,13.0588947,77.5929577,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Varnika herbal beauty parlour,shop,13.0551729,77.6012573,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Varun Maruthi,shop,13.0428831,77.5987798,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Venkatam Cafe,shop,13.0439675,77.6010563,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Vinayaka stores,shop,13.0554016,77.6028215,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Vishnu Electricals,shop,13.0541756,77.6019547,"PH,Mo-Su 08:00-22:00",,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Visiontech Opticals,shop,13.0553344,77.6002401,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Volkswagen,shop,13.0416642,77.5945134,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Warzone,shop,13.0554387,77.6027095,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Welcare,shop,13.0594237,77.5931288,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Western Cars,shop,13.0424448,77.5953776,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Westside,shop,13.0520991,77.5940081,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Zudio,shop,13.0516944,77.5939391,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z
+Zudio,shop,13.0404766,77.6191056,,,https://www.geoapify.com/places-api/,,,2026-09-15T13:22:32.222Z

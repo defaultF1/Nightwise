@@ -2,7 +2,7 @@ import type {ActivityAnalysis} from '../domain/activity-types';
 import type {Coordinate} from '../domain/types';
 import {assumedShopHours} from '../domain/assumed-hours';
 export const PIN_COLORS={start:'#3b82f6',destination:'#ef4444',shop:'#facc15',medical:'#ec4899',hospital:'#a78bfa',fuel:'#22c55e',gap:'#fb923c'} as const;
-export type PlacePin=Coordinate&{name:string;kind:'shop'|'medical'|'hospital'|'fuel';status?:string};
+export type PlacePin=Coordinate&{name:string;kind:'shop'|'medical'|'hospital'|'fuel';status?:string;sourceUrl?:string};
 export function placePinKind(categories:string[]):PlacePin['kind']|undefined{
  if(categories.includes('hospital'))return 'hospital';
  if(categories.some(c=>['pharmacy','drugstore','doctor','medical_lab'].includes(c)))return 'medical';

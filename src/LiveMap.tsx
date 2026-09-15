@@ -1,3 +1,6 @@
+import directoryData from './data/aeos-manyata-directory.json';
+import {directoryAlongRoute,directoryPins,type Directory} from './domain/local-directory';
+import {LocalDirectory} from './LocalDirectory';
 import { usesGeoapify } from './providers/selection';
 import { useEffect, useRef, useState, createElement } from 'react';
 import { Capacitor } from '@capacitor/core';
@@ -25,6 +28,10 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
   const select = useRef(onSelect); select.current = onSelect;
   const [ready, setReady] = useState(false), [error, setError] = useState(false);
   const placeMarkers=visiblePlacePins(analysis,60,false);
+  const [showDirectory,setShowDirectory]=useState(true);
+  const directory=directoryData as Directory;
+  const localRows=usesGeoapify?directoryAlongRoute(directory,routes.find(r=>r.id===selectedId)):[];
+  const localPins=showDirectory?directoryPins(localRows,directory.savedAt,placeMarkers):[];
   useEffect(() => {
     let disposed = false; let owned: MapHandle | undefined; let nativeOwner = false;
     setError(false);
@@ -60,9 +67,9 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
           if (path.length > 1) lines.push({ id: selected.id, path, color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
         }
       }
-      await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[], analysis?.source==='live'?visiblePlacePins(analysis,60,false):[]);
+      await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[], [...(analysis?.source==='live'?visiblePlacePins(analysis,60,false):[]),...localPins]);
     }).catch(() => setError(true));
-  }, [ready, routes, selectedId, journey, analysis, theme]);
+  }, [ready, routes, selectedId, journey, analysis, theme, showDirectory]);
   useEffect(() => {
     if (!ready) return;
     queue.current = queue.current.then(async () => { await handle.current?.fit(routes.length ? routes.flatMap(r => r.path) : [journey.origin, journey.destination]); }).catch(() => setError(true));
@@ -82,6 +89,7 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
       {analysis&&<ul aria-label="Places along this route">{PLACE_GROUPS.map(group=>{const count=groupCounts(analysis,group.categories);return count.total?<li key={group.id}><strong>{group.label}</strong> · {groupSummary(count)}</li>:null;})}</ul>}
       {!placeMarkers.length&&<p>{activityStatus==='budget'?'Place scans could not run because the service search allowance is used up.':activityStatus==='disabled'?'Place scans are switched off.':'No returned places are open or estimated open when you pass. Missing listings do not mean this road is empty.'}</p>}
 
+      {usesGeoapify&&<LocalDirectory directory={directory} rows={localRows} show={showDirectory} onShow={setShowDirectory}/>}
     </div>}
   </section>;
 }

@@ -19,10 +19,11 @@ export async function createMapLibre(element:HTMLElement,theme:Theme,onSelect:(i
  try{await new Promise<void>((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('Map timed out')),45000);map.once('load',()=>{clearTimeout(timer);resolve();});map.once('error',()=>{clearTimeout(timer);reject(new Error('Map tiles unavailable'));});});}
  catch(e){resize.disconnect();map.remove();throw e;}
  let markers:maplibregl.Marker[]=[],lineIds:string[]=[];
- const mark=(p:Coordinate,name:string,kind:keyof typeof PIN_COLORS,text:string,status?:string)=>{
+ const mark=(p:Coordinate,name:string,kind:keyof typeof PIN_COLORS,text:string,status?:string,sourceUrl?:string)=>{
   const el=document.createElement('button');el.type='button';el.className='nightwise-map-pin';el.style.backgroundColor=PIN_COLORS[kind];el.textContent=text;el.setAttribute('aria-label',`${name}${status?' · '+status:''}`);
   const card=document.createElement('div'),title=document.createElement('strong');title.textContent=name;card.append(title);
   if(status){const info=document.createElement('p');info.textContent=status;card.append(info);}
+  if(sourceUrl?.startsWith('https://')){const link=document.createElement('a');link.href=sourceUrl;link.target='_blank';link.rel='noopener noreferrer';link.textContent='View source';card.append(link);}
   const marker=new maplibregl.Marker({element:el,anchor:'center'}).setLngLat(ll(p)).setPopup(new maplibregl.Popup({offset:18,maxWidth:'240px'}).setDOMContent(card)).addTo(map);markers.push(marker);
  };
  map.on('click',e=>{const hit=map.queryRenderedFeatures(e.point,{layers:lineIds}).find(f=>f.properties?.clickable);if(hit)onSelect(String(hit.properties.routeId));});
@@ -31,7 +32,7 @@ export async function createMapLibre(element:HTMLElement,theme:Theme,onSelect:(i
    for(const id of lineIds){if(map.getLayer(id))map.removeLayer(id);if(map.getSource(id))map.removeSource(id);}lineIds=[];
    markers.forEach(m=>m.remove());markers=[];
    lines.forEach((line,i)=>{const id=`route-${i}`;map.addSource(id,{type:'geojson',data:{type:'Feature',properties:{routeId:line.id,clickable:line.clickable},geometry:{type:'LineString',coordinates:line.path.map(ll)}}});map.addLayer({id,type:'line',source:id,layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':line.color,'line-width':line.width}});lineIds.push(id);});
-   places.forEach(p=>mark(p,p.name,p.kind,p.kind==='hospital'?'H':p.kind==='medical'?'+':p.kind==='fuel'?'F':'S',p.status??'Listed open around arrival'));
+   places.forEach(p=>mark(p,p.name,p.kind,p.kind==='hospital'?'H':p.kind==='medical'?'+':p.kind==='fuel'?'F':'S',p.status??'Listed open around arrival',p.sourceUrl));
    gaps.forEach(p=>mark(p,`${p.label} · ${p.name}`,'gap','!'));
    pins.forEach((p,i)=>mark(p,p.name,i?'destination':'start',i?'B':'A'));
   },

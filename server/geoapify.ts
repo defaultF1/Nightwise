@@ -4,6 +4,7 @@ import OpeningHours from 'opening_hours';
 import type { Route, Coordinate, TravelMode } from '../src/domain/types';
 import type { LiveJourney } from '../src/domain/journey';
 import { AEOS_PIN } from '../src/domain/journey';
+import { distinctRoadShare } from '../src/domain/route-proximity';
 import { distanceMeters, validCoordinate } from '../src/domain/geometry';
 import type { PlaceObservation, QueryPlan, NearbyScan } from '../src/domain/activity-types';
 import { ServiceError } from './errors';
@@ -70,7 +71,7 @@ export class Geoapify {
   if(Object.values(this.ledger).some(v=>!Number.isSafeInteger(v)||v<0))throw new Error('Invalid local Geoapify usage ledger');
  }
  usage(){return {...this.ledger};}
- snapshot(){return {routeCalls:this.ledger.route,nearbyCalls:this.ledger.nearby,routeLimit:150,nearbyLimit:300,remainingComparisons:Math.max(0,Math.floor((150-this.ledger.route)/3))};}
+ snapshot(){return {routeCalls:this.ledger.route,nearbyCalls:this.ledger.nearby,routeLimit:150,nearbyLimit:300,remainingComparisons:Math.max(0,Math.floor((150-this.ledger.route)/4))};}
  async request(path:string,params:Record<string,string>,kind:keyof Geoapify['ledger'],signal:AbortSignal,refresh=false):Promise<any>{
   const cacheKey=path+JSON.stringify(params),cached=this.cache.get(cacheKey);
   if(!refresh&&cached&&Date.now()-cached.at<(kind==='tiles'?86400000:TTL))return structuredClone(cached.value);
@@ -102,6 +103,13 @@ export class Geoapify {
     if(!routes.some(r=>r.id===route.id))routes.push(route);
    }
   }
+  // A bounded additional road preference can supply a genuinely different third route.
+  if(!preview&&journey.mode==='DRIVE'&&routes.length>0&&routes.length<3){
+   try{
+    const data=await this.request('/v1/routing',{waypoints:`${journey.origin.latitude},${journey.origin.longitude}|${journey.destination.latitude},${journey.destination.longitude}`,mode:'drive',type:'balanced',traffic:'approximated',avoid:'highways',details:'instruction_details',format:'geojson'},'route',signal,refresh);
+    for(const r of geoRoutes(data,'Alternative'))if(distanceMeters(r.path[0],journey.origin)<=250&&distanceMeters(r.path.at(-1)!,journey.destination)<=250&&r.durationSeconds<=3*Math.min(...routes.map(p=>p.durationSeconds))&&routes.every(p=>p.id!==r.id&&distinctRoadShare(r.path,p.path)>=.15))routes.push(r);
+   }catch{signal.throwIfAborted();/* Retain successful primary options if the extra preference fails. */}
+  }
   routes.sort((a,b)=>a.durationSeconds-b.durationSeconds);
   return routes.slice(0,3).map((r,i)=>({...r,label:i?`Alternative ${i}`:'Fastest'}));
  }
@@ -114,7 +122,7 @@ export class Geoapify {
    const lat=queries.map(q=>q.coordinate.latitude),lon=queries.map(q=>q.coordinate.longitude);
    const rect=`rect:${Math.min(...lon)-.0015},${Math.min(...lat)-.0015},${Math.max(...lon)+.0015},${Math.max(...lat)+.0015}`;
    const places:PlaceObservation[]=[];let status:NearbyScan['status']='ok';
-   for(const categories of ['commercial,catering','healthcare,service.vehicle.fuel,accommodation,public_transport']){
+   for(const categories of ['commercial,catering','healthcare','service.vehicle.fuel','accommodation,public_transport']){
     try{
      for(let offset=0;offset<300;offset+=100){
       const data=await this.request('/v2/places',{categories,filter:rect,limit:'100',offset:String(offset)},'nearby',signal,refresh);

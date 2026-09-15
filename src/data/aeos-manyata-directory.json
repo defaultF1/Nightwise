@@ -1,0 +1,1926 @@
+{
+  "savedAt": "2026-09-15T13:23:30.347Z",
+  "attribution": "OpenStreetMap contributors (ODbL); Geoapify; linked official business pages. Saved directory, not a live attendance or opening feed.",
+  "scope": "Named listings within 200 metres of the checked AEOS–Manyata road options. Not an exhaustive business census.",
+  "places": [
+    {
+      "id": "osm:way/1286715554",
+      "name": "BP",
+      "kind": "fuel",
+      "latitude": 13.0556846,
+      "longitude": 77.6065451,
+      "sourceUrl": "https://www.openstreetmap.org/way/1286715554",
+      "sourceUpdatedAt": "2024-05-26T04:29:16Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z",
+      "hours": "06:00-22:00"
+    },
+    {
+      "id": "osm:way/777618524",
+      "name": "Essar Uni Gas",
+      "kind": "fuel",
+      "latitude": 13.042173,
+      "longitude": 77.5921122,
+      "sourceUrl": "https://www.openstreetmap.org/way/777618524",
+      "sourceUpdatedAt": "2025-06-14T16:45:37Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:way/1284773488",
+      "name": "GAIL Gas",
+      "kind": "fuel",
+      "latitude": 13.040566,
+      "longitude": 77.6186125,
+      "sourceUrl": "https://www.openstreetmap.org/way/1284773488",
+      "sourceUpdatedAt": "2026-01-21T14:25:49Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:way/772934851",
+      "name": "Indian Oil",
+      "kind": "fuel",
+      "latitude": 13.0414443,
+      "longitude": 77.6205262,
+      "sourceUrl": "https://www.openstreetmap.org/way/772934851",
+      "sourceUpdatedAt": "2024-06-29T15:40:03Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:way/1273000979",
+      "name": "Indian Oil",
+      "kind": "fuel",
+      "latitude": 13.0417951,
+      "longitude": 77.6137657,
+      "sourceUrl": "https://www.openstreetmap.org/way/1273000979",
+      "sourceUpdatedAt": "2026-02-01T17:57:18Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:way/1279046877",
+      "name": "Indian Oil",
+      "kind": "fuel",
+      "latitude": 13.0581868,
+      "longitude": 77.593874,
+      "sourceUrl": "https://www.openstreetmap.org/way/1279046877",
+      "sourceUpdatedAt": "2024-07-22T17:19:17Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/5520252375",
+      "name": "Care Health",
+      "kind": "hospital",
+      "latitude": 13.0552027,
+      "longitude": 77.6028234,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520252375",
+      "sourceUpdatedAt": "2020-06-01T09:04:41Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/7577248224",
+      "name": "Icon Hospital",
+      "kind": "hospital",
+      "latitude": 13.0528211,
+      "longitude": 77.6041042,
+      "sourceUrl": "https://www.openstreetmap.org/node/7577248224",
+      "sourceUpdatedAt": "2024-07-08T12:17:32Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:way/160906231",
+      "name": "Manipal Hospital",
+      "kind": "hospital",
+      "latitude": 13.050953,
+      "longitude": 77.5938654,
+      "sourceUrl": "https://www.openstreetmap.org/way/160906231",
+      "sourceUpdatedAt": "2024-05-23T02:08:47Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z",
+      "hours": "24/7",
+      "hoursSourceUrl": "https://www.manipalhospitals.com/hebbal/contact-us/",
+      "hoursNote": "Official facility hours: 24 hours. Individual departments and appointments vary."
+    },
+    {
+      "id": "osm:node/11949327621",
+      "name": "Manipal Hospital OPD",
+      "kind": "hospital",
+      "latitude": 13.0624568,
+      "longitude": 77.592227,
+      "sourceUrl": "https://www.openstreetmap.org/node/11949327621",
+      "sourceUpdatedAt": "2024-06-01T04:43:10Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/12117952601",
+      "name": "Motherhood Children's Hospital",
+      "kind": "hospital",
+      "latitude": 13.0620051,
+      "longitude": 77.5930638,
+      "sourceUrl": "https://www.openstreetmap.org/node/12117952601",
+      "sourceUpdatedAt": "2024-08-18T04:48:55Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z",
+      "hours": "24/7"
+    },
+    {
+      "id": "osm:node/7577248216",
+      "name": "Agastya Speciality Clinic",
+      "kind": "medical",
+      "latitude": 13.0555615,
+      "longitude": 77.6044933,
+      "sourceUrl": "https://www.openstreetmap.org/node/7577248216",
+      "sourceUpdatedAt": "2020-06-01T09:04:41Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/11331384652",
+      "name": "Aster Pharmacy",
+      "kind": "medical",
+      "latitude": 13.054318,
+      "longitude": 77.6019187,
+      "sourceUrl": "https://www.openstreetmap.org/node/11331384652",
+      "sourceUpdatedAt": "2024-05-28T12:30:59Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z",
+      "hours": "PH,Mo-Su 08:00-22:30"
+    },
+    {
+      "id": "geo_51ce2c53dded655340597103ada82d1e2a40f00103f901a6e63bc802000000920317417374686120446961676e6f737469632043656e747265",
+      "name": "Astha Diagnostic Centre",
+      "kind": "medical",
+      "latitude": 13.0589421,
+      "longitude": 77.5926431,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "osm:node/5520250461",
+      "name": "Ayushmitra clinic",
+      "kind": "medical",
+      "latitude": 13.0554795,
+      "longitude": 77.6023622,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520250461",
+      "sourceUpdatedAt": "2018-04-01T12:19:46Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/10009663799",
+      "name": "Brothers Chemist",
+      "kind": "medical",
+      "latitude": 13.0514678,
+      "longitude": 77.6041664,
+      "sourceUrl": "https://www.openstreetmap.org/node/10009663799",
+      "sourceUpdatedAt": "2022-09-08T17:55:08Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "geo_51aa6d799bed655340595f71a2ea681e2a40f00103f9015d693cc8020000009203104472204c616c2050617468204c616273",
+      "name": "Dr Lal Path Labs",
+      "kind": "medical",
+      "latitude": 13.0593942,
+      "longitude": 77.5926274,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "osm:node/7577248207",
+      "name": "Dr. Archana's ENT Care Centre",
+      "kind": "medical",
+      "latitude": 13.0555334,
+      "longitude": 77.6044008,
+      "sourceUrl": "https://www.openstreetmap.org/node/7577248207",
+      "sourceUpdatedAt": "2020-06-01T09:04:41Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/7577248204",
+      "name": "Dr. Uma Homeo Clinic",
+      "kind": "medical",
+      "latitude": 13.0544322,
+      "longitude": 77.6038273,
+      "sourceUrl": "https://www.openstreetmap.org/node/7577248204",
+      "sourceUpdatedAt": "2020-06-01T09:04:41Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/5520247374",
+      "name": "Hebbal Medical Center",
+      "kind": "medical",
+      "latitude": 13.0562451,
+      "longitude": 77.6012716,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520247374",
+      "sourceUpdatedAt": "2024-07-04T14:22:20Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z",
+      "hours": "Mo-Sa 10:00-13:00,18:00-21:00; Su 10:00-12:00"
+    },
+    {
+      "id": "osm:node/7577248211",
+      "name": "KMC Multispeciality Clinic",
+      "kind": "medical",
+      "latitude": 13.040826,
+      "longitude": 77.6189605,
+      "sourceUrl": "https://www.openstreetmap.org/node/7577248211",
+      "sourceUpdatedAt": "2024-07-18T17:45:45Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/5520248633",
+      "name": "Krishna Clinic",
+      "kind": "medical",
+      "latitude": 13.0558683,
+      "longitude": 77.6001085,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520248633",
+      "sourceUpdatedAt": "2019-02-01T19:41:26Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/4822629789",
+      "name": "Manjunatha Medicals",
+      "kind": "medical",
+      "latitude": 13.0551743,
+      "longitude": 77.6007325,
+      "sourceUrl": "https://www.openstreetmap.org/node/4822629789",
+      "sourceUpdatedAt": "2023-09-22T15:30:47Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z",
+      "hours": "PH,Mo-Su 09:00-23:30"
+    },
+    {
+      "id": "osm:node/1472761524",
+      "name": "Medical Shop",
+      "kind": "medical",
+      "latitude": 13.0552619,
+      "longitude": 77.6020449,
+      "sourceUrl": "https://www.openstreetmap.org/node/1472761524",
+      "sourceUpdatedAt": "2011-10-19T03:58:21Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/7577248232",
+      "name": "Merlins Trichology Clinic",
+      "kind": "medical",
+      "latitude": 13.0543269,
+      "longitude": 77.6038207,
+      "sourceUrl": "https://www.openstreetmap.org/node/7577248232",
+      "sourceUpdatedAt": "2020-06-01T09:04:41Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/11209916091",
+      "name": "mom&me",
+      "kind": "medical",
+      "latitude": 13.0586257,
+      "longitude": 77.5924592,
+      "sourceUrl": "https://www.openstreetmap.org/node/11209916091",
+      "sourceUpdatedAt": "2023-09-22T10:29:16Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/11949330259",
+      "name": "Mother And Heart Care",
+      "kind": "medical",
+      "latitude": 13.0593748,
+      "longitude": 77.5926249,
+      "sourceUrl": "https://www.openstreetmap.org/node/11949330259",
+      "sourceUpdatedAt": "2024-06-01T04:40:22Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/5520247470",
+      "name": "Physiotherapy clinic",
+      "kind": "medical",
+      "latitude": 13.0552316,
+      "longitude": 77.6012225,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520247470",
+      "sourceUpdatedAt": "2019-02-19T20:46:24Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/7577248244",
+      "name": "Prarthana Home Health Care",
+      "kind": "medical",
+      "latitude": 13.0552275,
+      "longitude": 77.6024335,
+      "sourceUrl": "https://www.openstreetmap.org/node/7577248244",
+      "sourceUpdatedAt": "2020-06-01T09:04:41Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/5520252462",
+      "name": "Rangalakshmi Netralaya",
+      "kind": "medical",
+      "latitude": 13.0554599,
+      "longitude": 77.6031448,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520252462",
+      "sourceUpdatedAt": "2019-12-25T18:12:12Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/7577248263",
+      "name": "Saaol Heart Centre",
+      "kind": "medical",
+      "latitude": 13.0530655,
+      "longitude": 77.6050627,
+      "sourceUrl": "https://www.openstreetmap.org/node/7577248263",
+      "sourceUpdatedAt": "2020-06-01T09:04:41Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/5520247493",
+      "name": "Sandeep medicals",
+      "kind": "medical",
+      "latitude": 13.0553658,
+      "longitude": 77.6030345,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520247493",
+      "sourceUpdatedAt": "2018-04-01T12:16:33Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "geo_51bb14b24ef0655340598db9256b8a1e2a40f00103f9015f693cc80200000092031153616e6a656576696e692044656e74616c",
+      "name": "Sanjeevini Dental",
+      "kind": "medical",
+      "latitude": 13.0596498,
+      "longitude": 77.5927922,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5175f3435b8466534059059db2824b1c2a40f00103f9011b5d08490100000092031153616e74686f7368206d65646963616c73",
+      "name": "Santhosh medicals",
+      "kind": "medical",
+      "latitude": 13.055247372155645,
+      "longitude": 77.60188367848905,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_519dfc27c984665340590e0250be561c2a40f00103f9013f4f08490100000092031053616e746f7368206d65646963616c73",
+      "name": "Santosh medicals",
+      "kind": "medical",
+      "latitude": 13.0553493,
+      "longitude": 77.6018546,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "osm:node/5520252188",
+      "name": "Sham's Child and Adult Care",
+      "kind": "medical",
+      "latitude": 13.055404,
+      "longitude": 77.6027452,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520252188",
+      "sourceUpdatedAt": "2018-04-01T12:19:47Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/7577248243",
+      "name": "Sham's Child and Adult Care",
+      "kind": "medical",
+      "latitude": 13.0556587,
+      "longitude": 77.6026264,
+      "sourceUrl": "https://www.openstreetmap.org/node/7577248243",
+      "sourceUpdatedAt": "2020-06-01T09:04:41Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/5520252723",
+      "name": "Sri Vinayaka Diagnostic Laboratory",
+      "kind": "medical",
+      "latitude": 13.0554013,
+      "longitude": 77.6032044,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520252723",
+      "sourceUpdatedAt": "2018-04-01T12:19:46Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/11219782001",
+      "name": "SVM Pharmacy",
+      "kind": "medical",
+      "latitude": 13.0625167,
+      "longitude": 77.5928357,
+      "sourceUrl": "https://www.openstreetmap.org/node/11219782001",
+      "sourceUpdatedAt": "2023-09-26T11:48:31Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/5520248052",
+      "name": "We care clinic",
+      "kind": "medical",
+      "latitude": 13.0553431,
+      "longitude": 77.6018446,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520248052",
+      "sourceUpdatedAt": "2018-04-01T12:16:26Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "osm:node/5520248783",
+      "name": "We care clinic",
+      "kind": "medical",
+      "latitude": 13.0554023,
+      "longitude": 77.6020789,
+      "sourceUrl": "https://www.openstreetmap.org/node/5520248783",
+      "sourceUpdatedAt": "2018-04-01T12:16:26Z",
+      "sourceCheckedAt": "2026-09-15T13:10:45Z"
+    },
+    {
+      "id": "geo_51d4658c6aec6553405981b4c0abf61e2a40f00103f901d90a67200300000092030431353232",
+      "name": "1522",
+      "kind": "shop",
+      "latitude": 13.0604757,
+      "longitude": 77.5925547,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51c7890a308766534059a1f71ecc481c2a40f00103f9013af266a3020000009203093820436c6f75642038",
+      "name": "8 Cloud 8",
+      "kind": "shop",
+      "latitude": 13.0552429,
+      "longitude": 77.6020012,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_518ce7d8e66b66534059cb2a8b603e1c2a40f00103f901695e084901000000920311412e204d2062757920616e642073617665",
+      "name": "A. M buy and save",
+      "kind": "shop",
+      "latitude": 13.0551634,
+      "longitude": 77.6003358,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51fa84fde86566534059999f776d36162a40f00103f901d7ce8cb0010000009203174165737468657469632053616c6f6e20616e6420537061",
+      "name": "Aesthetic Salon and Spa",
+      "kind": "shop",
+      "latitude": 13.043384,
+      "longitude": 77.5999701,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51ced902426b665340597d79d6c23d1c2a40f00103f901be4a0849010000009203104169736877617279612042616b657279",
+      "name": "Aishwarya Bakery",
+      "kind": "shop",
+      "latitude": 13.0551587,
+      "longitude": 77.6002965,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_515064f72eef65534059f4d9e2023c1e2a40f00103f9013dfd3bc80200000092030a416a6a6920486f74656c",
+      "name": "Ajji Hotel",
+      "kind": "shop",
+      "latitude": 13.0590516,
+      "longitude": 77.5927236,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_511926aebe15665340594c84223152152a40f00103f9013372203b01000000920310416c6c2041626f7574204c6971756f72",
+      "name": "All About Liquor",
+      "kind": "shop",
+      "latitude": 13.0416427,
+      "longitude": 77.5950772,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "Mo-Su 10:00-20:30"
+    },
+    {
+      "id": "geo_51583cf5480366534059b68ba14ba4152a40f00103f901e83fe9370200000092030c416c6c2046756e2043686169",
+      "name": "All Fun Chai",
+      "kind": "shop",
+      "latitude": 13.0422691,
+      "longitude": 77.5939505,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51ad635c71f1655340594ac94d06fd1f2a40f00103f90144c1383b0200000092030f416d6d612773205061737472696573",
+      "name": "Amma's Pastries",
+      "kind": "shop",
+      "latitude": 13.0624773,
+      "longitude": 77.5928615,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5155b7c4db946653405971afe0665d1c2a40f00103f901d95d08490100000092030e416e6d6f6c206761726d656e7473",
+      "name": "Anmol garments",
+      "kind": "shop",
+      "latitude": 13.0554001,
+      "longitude": 77.6028356,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5159b8f64f81665340592636d24b421c2a40f00103f901384f084901000000920307416e7520537269",
+      "name": "Anu Sri",
+      "kind": "shop",
+      "latitude": 13.0551933,
+      "longitude": 77.6016426,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51b307ffc7ae665340592fdef581501b2a40f00103f90141599f54020000009203104170736172612049636520437265616d",
+      "name": "Apsara Ice Cream",
+      "kind": "shop",
+      "latitude": 13.0533486,
+      "longitude": 77.6044178,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 10:00-22:00"
+    },
+    {
+      "id": "geo_51f229b638196653405978736f778c1d2a40f00103f9012aa761ce0200000092030c41524a204361722063617265",
+      "name": "ARJ Car care",
+      "kind": "shop",
+      "latitude": 13.0577123,
+      "longitude": 77.5952894,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5172e94e66f2655340595b48ac08fe1f2a40f00103f9017249c09c0200000092030942616279204e657374",
+      "name": "Baby Nest",
+      "kind": "shop",
+      "latitude": 13.062485,
+      "longitude": 77.5929199,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_517020c9512566534059678caa58b21d2a40f00103f901a99dfc5b0100000092031242616c616a6920416e64687261204d657373",
+      "name": "Balaji Andhra Mess",
+      "kind": "shop",
+      "latitude": 13.0580013,
+      "longitude": 77.5960278,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51738e4b668666534059442df00ea61b2a40f00103f901d17763a30200000092031342616c616a6920526963652054726164657273",
+      "name": "Balaji Rice Traders",
+      "kind": "shop",
+      "latitude": 13.0540013,
+      "longitude": 77.6019531,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "Mo-Su 07:30-22:30"
+    },
+    {
+      "id": "geo_519458631a97665340590a9abb8f591c2a40f00103f901424f08490100000092030d42616c616a692073746f726573",
+      "name": "Balaji stores",
+      "kind": "shop",
+      "latitude": 13.0553708,
+      "longitude": 77.6029726,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_515a283ee3e766534059216ed4f26f1c2a40f00103f90134f735f70100000092030742616f686f6f64",
+      "name": "Baohood",
+      "kind": "shop",
+      "latitude": 13.0555416,
+      "longitude": 77.6079033,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_510ff450db066653405979b4b8534b1c2a40f00103f9010ce2ea9b0200000092030f4261726265717565204e6174696f6e",
+      "name": "Barbeque Nation",
+      "kind": "shop",
+      "latitude": 13.0552622,
+      "longitude": 77.5941685,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5106054aaff265534059f88f839f49202a40f00103f9010688b9570000000092030e426174612073686f7720726f6f6d",
+      "name": "Bata show room",
+      "kind": "shop",
+      "latitude": 13.0630617,
+      "longitude": 77.5929373,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_511c0f6118f26553405930e50801651e2a40f00102f90148c4670b00000000",
+      "name": "Bellary Road",
+      "kind": "shop",
+      "latitude": 13.0593643,
+      "longitude": 77.5929013,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5123718fa50f66534059b9b2df0cb41d2a40f00103f9012da761ce02000000",
+      "name": "Bellary Road",
+      "kind": "shop",
+      "latitude": 13.0580143,
+      "longitude": 77.594705,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51ff05ddb98b66534059617025d9451c2a40f00103f901d14f084901000000920314426861726174682064727920636c65616e657273",
+      "name": "Bharath dry cleaners",
+      "kind": "shop",
+      "latitude": 13.0552204,
+      "longitude": 77.6022782,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "Mo-Sa 09:00-21:00"
+    },
+    {
+      "id": "geo_51b2b3e89d8a665340591a2cf45f421c2a40f00103f901a05d08490100000092031c42686f6f6d692048657262616c20426561757479205061726c6f7572",
+      "name": "Bhoomi Herbal Beauty Parlour",
+      "kind": "shop",
+      "latitude": 13.0551939,
+      "longitude": 77.6022105,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_511a5f6a3af165534059b1122f923d1e2a40f00103f90161df3ac80200000092031242687562616e65737761726920486f74656c",
+      "name": "Bhubaneswari Hotel",
+      "kind": "shop",
+      "latitude": 13.0590635,
+      "longitude": 77.5928484,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_513185bd3f94665340591257f3155a1c2a40f00103f901d24f08490100000092031a4268796172617665736877617220726963652074726164657273",
+      "name": "Bhyaraveshwar rice traders",
+      "kind": "shop",
+      "latitude": 13.0553748,
+      "longitude": 77.6027984,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5151717731a867534059999585145e152a40f00103f9011e38fbab0200000092031c4269657267617274656e20427265776572792026204b69746368656e",
+      "name": "Biergarten Brewery & Kitchen",
+      "kind": "shop",
+      "latitude": 13.0417334,
+      "longitude": 77.6196407,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51013addc36f665340590c4ad91b321c2a40f00103f901fa75affe0200000092031642696720477579733a2057696e67732026204d6f7265",
+      "name": "Big Guys: Wings & More",
+      "kind": "shop",
+      "latitude": 13.0550698,
+      "longitude": 77.6005716,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5181d371eba467534059bb03024c85152a40f00103f9019f73c9da02000000920310426f6d62617920427261737365726965",
+      "name": "Bombay Brasserie",
+      "kind": "shop",
+      "latitude": 13.0420326,
+      "longitude": 77.6194409,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_514a83914da867534059f1b8c3d56d152a40f00103f90163e6febf02000000920312426f6d62617920437572727920486f757365",
+      "name": "Bombay Curry House",
+      "kind": "shop",
+      "latitude": 13.0418536,
+      "longitude": 77.6196474,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51af4d74a78566534059408dcc66d51b2a40f00103f9019a7f66a30200000092030943616b6520526f6973",
+      "name": "Cake Rois",
+      "kind": "shop",
+      "latitude": 13.0543625,
+      "longitude": 77.6019076,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_513f7e80fff765534059d5e12b6931192a40f00103f901f58303b50200000092031243616c69666f726e6961204275727269746f",
+      "name": "California Burrito",
+      "kind": "shop",
+      "latitude": 13.0492051,
+      "longitude": 77.5932616,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51197f91860966534059485f8e065c1c2a40f00103f901b5ed7c7d0200000092031143616e646c65732042726577686f757365",
+      "name": "Candles Brewhouse",
+      "kind": "shop",
+      "latitude": 13.0553896,
+      "longitude": 77.5943314,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "12:00-01:00"
+    },
+    {
+      "id": "geo_5173744b6114665340592fa0b029b2152a40f00103f901f2e687ae01000000920309436172205472616465",
+      "name": "Car Trade",
+      "kind": "shop",
+      "latitude": 13.0423749,
+      "longitude": 77.5949939,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5135d7c45d9866534059dde1d4005b1c2a40f00103f901da5d0849010000009203194368616d756e6465737761726920456c656374726963616c73",
+      "name": "Chamundeswari Electricals",
+      "kind": "shop",
+      "latitude": 13.0553818,
+      "longitude": 77.6030497,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51b0f4eb980466534059eb0393b9541c2a40f00103f901b4ed7c7d02000000920307436869616e7469",
+      "name": "Chianti",
+      "kind": "shop",
+      "latitude": 13.0553339,
+      "longitude": 77.5940306,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51f0e31e0192665340593030e4655e1c2a40f00103f901c64a0849010000009203064368696e6773",
+      "name": "Chings",
+      "kind": "shop",
+      "latitude": 13.0554077,
+      "longitude": 77.6026614,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51233d563a6966534059142feb52341c2a40f00103f901c94f08490100000092031143686f696365206d656e732073616c6f6e",
+      "name": "Choice mens salon",
+      "kind": "shop",
+      "latitude": 13.0550867,
+      "longitude": 77.6001726,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_510e02e1f97b66534059e5d89067031d2a40f00103f9011a5d08490100000092031443686f7764657368776172692054726164657273",
+      "name": "Chowdeshwari Traders",
+      "kind": "shop",
+      "latitude": 13.0566666,
+      "longitude": 77.6013169,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51e1f60489ed6553405953fae4b5231e2a40f00103f9018af43bc80200000092030b4375742026204c6f6f6b73",
+      "name": "Cut & Looks",
+      "kind": "shop",
+      "latitude": 13.0588662,
+      "longitude": 77.592623,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51167c3fdaa46753405944af21e769152a40f00103f90162e6febf0200000092030b4461696c79205375736869",
+      "name": "Daily Sushi",
+      "kind": "shop",
+      "latitude": 13.0418236,
+      "longitude": 77.6194368,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51205f42058766534059ea2b5661441c2a40f00103f9012a5e084901000000",
+      "name": "Dasarahalli Main Road",
+      "kind": "shop",
+      "latitude": 13.0552092,
+      "longitude": 77.601991,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5124b55032b966534059530edbb4741c2a40f00103f901f1a1a3c301000000",
+      "name": "Dasarahalli Main Road",
+      "kind": "shop",
+      "latitude": 13.0555779,
+      "longitude": 77.6050535,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51fc3f2b1ff965534059408ddeb375182a40f00102f9012a9af34c0000000092030a44686f62692047686174",
+      "name": "Dhobi Ghat",
+      "kind": "shop",
+      "latitude": 13.047773,
+      "longitude": 77.5933302,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5142aacda4f265534059b877b5c4361e2a40f00103f90151313cc802000000920319446973686120487964657261626164204972616e6920546561",
+      "name": "Disha Hyderabad Irani Tea",
+      "kind": "shop",
+      "latitude": 13.0590116,
+      "longitude": 77.5929348,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_512ac4c837006653405900e9391ba81e2a40f00103f90103493cc802000000920320444a2042617220416e642046616d696c792052657374617572616e7420507562",
+      "name": "DJ Bar And Family Restaurant Pub",
+      "kind": "shop",
+      "latitude": 13.0598763,
+      "longitude": 77.5937633,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_519839b8cf85665340593f72c794c51b2a40f00103f901afa963a302000000920305446d617274",
+      "name": "Dmart",
+      "kind": "shop",
+      "latitude": 13.0542418,
+      "longitude": 77.6019172,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 08:00-22:30"
+    },
+    {
+      "id": "geo_510c72bca797665340590ce272ff581c2a40f00103f9012d5e08490100000092030f446f6c6c79206372656174696f6e73",
+      "name": "Dolly creations",
+      "kind": "shop",
+      "latitude": 13.0553665,
+      "longitude": 77.6030063,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51ee748cd07466534059656f0c44161d2a40f00103f901112763cd02000000920309446f776e73697a6564",
+      "name": "Downsized",
+      "kind": "shop",
+      "latitude": 13.0568105,
+      "longitude": 77.6008798,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51045bbe35fa65534059fc6a514e20192a40f00102f901074edf080000000092030b45737465656d204d616c6c",
+      "name": "Esteem Mall",
+      "kind": "shop",
+      "latitude": 13.0490746,
+      "longitude": 77.5933966,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5130dd7fbff365534059e89bfe8a571c2a40f00103f901deed196102000000920308466162696e646961",
+      "name": "Fabindia",
+      "kind": "shop",
+      "latitude": 13.0553554,
+      "longitude": 77.5930022,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51c449ab6b7e665340593bdafc02411c2a40f00103f901354f08490100000092030c46617368696f6e2077656172",
+      "name": "Fashion wear",
+      "kind": "shop",
+      "latitude": 13.0551835,
+      "longitude": 77.6014661,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5162f030ed9b66534059f3d5b3195d1c2a40f00103f9012f5e08490100000092031046617a696c20686f6d65206e65656473",
+      "name": "Fazil home needs",
+      "kind": "shop",
+      "latitude": 13.0553978,
+      "longitude": 77.603267,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_517a82c476f76553405982cee78b29192a40f00103f9014f6c858e02000000920310466c796f766572204472696e6b657279",
+      "name": "Flyover Drinkery",
+      "kind": "shop",
+      "latitude": 13.0491451,
+      "longitude": 77.593229,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5108f8dad81166534059c83d72bf54152a40f00103f9013472203b01000000920304466f7264",
+      "name": "Ford",
+      "kind": "shop",
+      "latitude": 13.0416622,
+      "longitude": 77.5948393,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51393bbe6232675340593e821d9d151c2a40f00103f90117d60be80100000092030d47686172204b61204468616261",
+      "name": "Ghar Ka Dhaba",
+      "kind": "shop",
+      "latitude": 13.0548524,
+      "longitude": 77.6124503,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5178eba122f365534059d788944e901d2a40f00103f9017d85373b02000000920306476972696173",
+      "name": "Girias",
+      "kind": "shop",
+      "latitude": 13.0577416,
+      "longitude": 77.5929648,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51edca78a5f665534059a790f0a55c1e2a40f00103f9016e4f3cc80200000092031c476f204e61747572616c732046726573682043616e65204a75696365",
+      "name": "Go Naturals Fresh Cane Juice",
+      "kind": "shop",
+      "latitude": 13.0593006,
+      "longitude": 77.5931791,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_516f8fef9c7766534059fb222c6d381c2a40f00103f901a911444901000000920313476f70616c6120706c6174696e756d20544d54",
+      "name": "Gopala platinum TMT",
+      "kind": "shop",
+      "latitude": 13.055118,
+      "longitude": 77.6010506,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "Mo-Sa 10:00-20:30"
+    },
+    {
+      "id": "geo_51243fe257ac66534059d5551a85351b2a40f00103f90147599f540200000092030c477265656e205472656e6473",
+      "name": "Green Trends",
+      "kind": "shop",
+      "latitude": 13.0531427,
+      "longitude": 77.604269,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51a94b21eb84665340594d173657de1b2a40f00103f901351c963e0300000092031048617070696e65737320446861616261",
+      "name": "Happiness Dhaaba",
+      "kind": "shop",
+      "latitude": 13.0544307,
+      "longitude": 77.6018627,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51b5e2d17c0466534059265bcc12641c2a40f00103f901b5cd568c0200000092030d48656262616c20536f6369616c",
+      "name": "Hebbal Social",
+      "kind": "shop",
+      "latitude": 13.055451,
+      "longitude": 77.5940239,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51efedf19df365534059e4b76965781e2a40f00103f901ce183cc80200000092030c48656c6c6f20496e646f7265",
+      "name": "Hello Indore",
+      "kind": "shop",
+      "latitude": 13.0595123,
+      "longitude": 77.5929942,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_517276210cf265534059696e94ee641e2a40f00103f90123d43bc80200000092030f486f74656c204a6167616e6e617468",
+      "name": "Hotel Jagannath",
+      "kind": "shop",
+      "latitude": 13.0593638,
+      "longitude": 77.5928984,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51da925511ee65534059de7abde3801e2a40f00103f9018ce03ac80200000092030c486f74656c204c6173617261",
+      "name": "Hotel Lasara",
+      "kind": "shop",
+      "latitude": 13.0595771,
+      "longitude": 77.5926555,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_516b8203b5f365534059d4065662af1d2a40f00103f901fdf27e9c020000009203074879756e646169",
+      "name": "Hyundai",
+      "kind": "shop",
+      "latitude": 13.0579787,
+      "longitude": 77.5929997,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_510137e6d07d66534059aea14e723d1c2a40f00103f901af4a0849010000009203134a616764656573682073746174696f6e617279",
+      "name": "Jagdeesh stationary",
+      "kind": "shop",
+      "latitude": 13.0551563,
+      "longitude": 77.6014292,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_518a1de8fcef65534059267f06cd641e2a40f00103f90124d43bc80200000092030d4b6164616c204d616368696c69",
+      "name": "Kadal Machili",
+      "kind": "shop",
+      "latitude": 13.0593628,
+      "longitude": 77.5927727,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51b8ba528575665340593308dca2381c2a40f00103f901aa114449010000009203104b61726e6174616b6120676172616765",
+      "name": "Karnataka garage",
+      "kind": "shop",
+      "latitude": 13.0551196,
+      "longitude": 77.6009229,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,We,Th,Sa-Mo 08:00-22:30"
+    },
+    {
+      "id": "geo_515b7d2bc88566534059a1b59df99c1b2a40f00103f9011da262a3020000009203164b61766572692050726f766973696f6e2053746f7265",
+      "name": "Kaveri Provision Store",
+      "kind": "shop",
+      "latitude": 13.053932,
+      "longitude": 77.6019154,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 08:00-22:00"
+    },
+    {
+      "id": "geo_51badcbb6136665340590b05263053152a40f00103f90151376e33030000009203034b6961",
+      "name": "Kia",
+      "kind": "shop",
+      "latitude": 13.0416503,
+      "longitude": 77.5970692,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_510f95eb127a66534059299e667a3f1c2a40f00103f901a7114449010000009203134b6c61737379204e616d6b65656e204d617274",
+      "name": "Klassy Namkeen Mart",
+      "kind": "shop",
+      "latitude": 13.0551718,
+      "longitude": 77.6012008,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51c4c43071f56553405989a40e7f5e1e2a40f00103f901f2933cc8020000009203204b726974756e67612052657374617572616e7420416e642054616b6520417761",
+      "name": "Kritunga Restaurant And Take Awa",
+      "kind": "shop",
+      "latitude": 13.0593147,
+      "longitude": 77.5931056,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_515136e50aef65534059ab8a5ee4c01e2a40f00103f9013df0ce98020000009203044b796261",
+      "name": "Kyba",
+      "kind": "shop",
+      "latitude": 13.0600654,
+      "longitude": 77.592715,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51a10e2bdcf2655340596e67b8e93b202a40f00103f9010488b957000000009203054c616b6d65",
+      "name": "Lakme",
+      "kind": "shop",
+      "latitude": 13.0629571,
+      "longitude": 77.592948,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_517be42032f665534059a7558142a91e2a40f00103f9014b613cc80200000092030d4c616b73686d692057696e6573",
+      "name": "Lakshmi Wines",
+      "kind": "shop",
+      "latitude": 13.0598851,
+      "longitude": 77.5931516,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5178a16fc108665340595ce7c010941a2a40f00103f901da717c7d0200000092030a4c75636b79204368616e",
+      "name": "Lucky Chan",
+      "kind": "shop",
+      "latitude": 13.0519109,
+      "longitude": 77.5942844,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51b34cd0709466534059c94a9631601c2a40f00103f901d85d08490100000092031c4d61612042696e6475766173696e6920436861747320636f726e6572",
+      "name": "Maa Binduvasini Chats corner",
+      "kind": "shop",
+      "latitude": 13.0554214,
+      "longitude": 77.6028101,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5175745c8dec665340597346a114191a2a40f00103f901355a2663020000009203124d6167696320746f7563682053616c6f6f6e",
+      "name": "Magic touch Saloon",
+      "kind": "shop",
+      "latitude": 13.0509726,
+      "longitude": 77.608188,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_518c5b71169b665340592796979a5f1c2a40f00103f901444f0849010000009203174d6168616c616b73686d6920656c656374726963616c73",
+      "name": "Mahalakshmi electricals",
+      "kind": "shop",
+      "latitude": 13.0554169,
+      "longitude": 77.6032158,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51462575029a6653405992a0b1835b1c2a40f00103f901d34f0849010000009203104d616861766565722066617368696f6e",
+      "name": "Mahaveer fashion",
+      "kind": "shop",
+      "latitude": 13.0553857,
+      "longitude": 77.60315,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5120cfd3258866534059db6f6582971b2a40f00103f901b93a63a3020000009203134d6168696d61204b6572616c612053746f7265",
+      "name": "Mahima Kerala Store",
+      "kind": "shop",
+      "latitude": 13.0538903,
+      "longitude": 77.6020598,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "Mo-Fr 07:30-21:30"
+    },
+    {
+      "id": "geo_51e3f8a1d208665340593e6d585d4e152a40f00103f90152376e33030000009203084d6168696e647261",
+      "name": "Mahindra",
+      "kind": "shop",
+      "latitude": 13.0416135,
+      "longitude": 77.5942885,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5121736550ed65534059226aaac5021e2a40f00103f901bcbe299c0200000092030c4d616c77616e205461646b61",
+      "name": "Malwan Tadka",
+      "kind": "shop",
+      "latitude": 13.0586149,
+      "longitude": 77.5926095,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_510e64e2fb876653405902ceb9c3921b2a40f00103f901413d63a3020000009203134d616e67616c6f7265204a6577656c6c657279",
+      "name": "Mangalore Jewellery",
+      "kind": "shop",
+      "latitude": 13.0538541,
+      "longitude": 77.6020498,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "Mo-Sa 10:00-21:30"
+    },
+    {
+      "id": "geo_51d2904ce28766534059338392568d1b2a40f00103f901bd2a63a3020000009203154d616e6a756e6174686120436f6e64696d656e7473",
+      "name": "Manjunatha Condiments",
+      "kind": "shop",
+      "latitude": 13.0538127,
+      "longitude": 77.6020437,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "Mo-Sa 06:00-22:55"
+    },
+    {
+      "id": "geo_518c86e7001c66534059c4e8ce6751152a40f00103f901f5e687ae010000009203064d6172757469",
+      "name": "Maruti",
+      "kind": "shop",
+      "latitude": 13.0416367,
+      "longitude": 77.5954592,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51735a01cf076653405902e716a2af1d2a40f00103f901beaebe57000000009203154d617275746920536572766963652043656e746572",
+      "name": "Maruti Service Center",
+      "kind": "shop",
+      "latitude": 13.0579806,
+      "longitude": 77.5942266,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51813c60c3f866534059bebdcc1500162a40f00103f901ab1926ae010000009203124d61727574692053757a756b69204e657861",
+      "name": "Maruti Suzuki Nexa",
+      "kind": "shop",
+      "latitude": 13.0429694,
+      "longitude": 77.6089333,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5137bbffd92066534059da0b17468b1d2a40f00103f90128a761ce0200000092030b4d6173746572204d656368",
+      "name": "Master Mech",
+      "kind": "shop",
+      "latitude": 13.0577032,
+      "longitude": 77.5957551,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5122b9a1ce81665340595f3b5f40401c2a40f00103f9013a4f08490100000092031d4d6174616a69206d6f62696c6520616e6420656c656374726f6e696373",
+      "name": "Mataji mobile and electronics",
+      "kind": "shop",
+      "latitude": 13.0551777,
+      "longitude": 77.6016728,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 08:30-21:30"
+    },
+    {
+      "id": "geo_517e130a11f0655340598a77d2aa021e2a40f00103f9010ab80f18030000009203064d6174737961",
+      "name": "Matsya",
+      "kind": "shop",
+      "latitude": 13.0586141,
+      "longitude": 77.5927775,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51c5854daef36553405912c4e4ab3f192a40f00103f901ba0482600000000092030a4d63446f6e616c642773",
+      "name": "McDonald's",
+      "kind": "shop",
+      "latitude": 13.0493139,
+      "longitude": 77.5929981,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_512febb42476665340593eeadfdd361c2a40f00103f9017f0d4449010000009203124d6963726f74656b20636f6d707574657273",
+      "name": "Microtek computers",
+      "kind": "shop",
+      "latitude": 13.0551061,
+      "longitude": 77.6009609,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "Mo-Sa 09:00-21:00"
+    },
+    {
+      "id": "geo_511be1a3b46d66534059ab5997023e1c2a40f00103f9013d4f08490100000092030a4d532054726164657273",
+      "name": "MS Traders",
+      "kind": "shop",
+      "latitude": 13.0551606,
+      "longitude": 77.6004459,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_514539e2da9a66534059a56fc4e75f1c2a40f00103f901d44f0849010000009203104e2e53206d656e73207061726c6f7572",
+      "name": "N.S mens parlour",
+      "kind": "shop",
+      "latitude": 13.0554192,
+      "longitude": 77.6032016,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_514595ab69a8675340592041eaca78152a40f00103f901344226b90200000092030f4e6167617661726120536f6369616c",
+      "name": "Nagavara Social",
+      "kind": "shop",
+      "latitude": 13.0419372,
+      "longitude": 77.6196541,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51897956d20a665340598cf88671a3152a40f00103f901e6e687ae0100000092030c4e616d6d612042616b657279",
+      "name": "Namma Bakery",
+      "kind": "shop",
+      "latitude": 13.0422626,
+      "longitude": 77.5944105,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_516fdffeb7ed6553405963d6562f861e2a40f00103f901d4c33ac80200000092030d4e616e6468612050616c616365",
+      "name": "Nandha Palace",
+      "kind": "shop",
+      "latitude": 13.0596175,
+      "longitude": 77.5926342,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5128767e9b8f66534059b68660a93f1c2a40f00103f901414f0849010000009203074e616e64696e69",
+      "name": "Nandini",
+      "kind": "shop",
+      "latitude": 13.0551732,
+      "longitude": 77.6025151,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 06:00-23:00"
+    },
+    {
+      "id": "geo_51b08806cebe675340599b80a94e731b2a40f00103f901a1ab616e0100000092030f4e616e64696e69205061726c6f7572",
+      "name": "Nandini Parlour",
+      "kind": "shop",
+      "latitude": 13.0536141,
+      "longitude": 77.6210208,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51e48c727aa8675340591e59e1a084152a40f00103f9018ac6bbe60200000092030c4e61736920616e64204d6565",
+      "name": "Nasi and Mee",
+      "kind": "shop",
+      "latitude": 13.0420275,
+      "longitude": 77.6196581,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51294822eaf46553405988df1e22901e2a40f00103f9017e85373b0200000092030f4e61747572652773204261736b6574",
+      "name": "Nature's Basket",
+      "kind": "shop",
+      "latitude": 13.0596934,
+      "longitude": 77.5930734,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51fd70a13c3d66534059d9546aa57c152a40f00103f90150376e330300000092030a4e657874204472697665",
+      "name": "Next Drive",
+      "kind": "shop",
+      "latitude": 13.0419666,
+      "longitude": 77.5974876,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5131acd161746653405952397e46441c2a40f00103f9019e7d731f010000009203094e696365206d617274",
+      "name": "Nice mart",
+      "kind": "shop",
+      "latitude": 13.0552084,
+      "longitude": 77.6008534,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 07:30-22:30"
+    },
+    {
+      "id": "geo_511ab6d210fa65534059238be3142e192a40f00103f901b46a820b010000009203044e696b65",
+      "name": "Nike",
+      "kind": "shop",
+      "latitude": 13.0491797,
+      "longitude": 77.5933878,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "10:30-21:00"
+    },
+    {
+      "id": "geo_51089a852c41675340599bda5c9a7d152a40f00103f901ce8c16ae020000009203184e69726f202d20546170726f6f6d2026204b69746368656e",
+      "name": "Niro - Taproom & Kitchen",
+      "kind": "shop",
+      "latitude": 13.0419739,
+      "longitude": 77.6133529,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_515655794cee65534059653e3079b91e2a40f00103f90171863cc8020000009203084f6d656761204958",
+      "name": "Omega IX",
+      "kind": "shop",
+      "latitude": 13.0600088,
+      "longitude": 77.5926696,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5140bcae5f3066534059140a152653152a40f00103f901ab5b9b3b010000009203104f7269656e7462656c6c2054696c6573",
+      "name": "Orientbell Tiles",
+      "kind": "shop",
+      "latitude": 13.04165,
+      "longitude": 77.5967025,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51c96dfb1ef566534059fb0caf78fb192a40f00103f901365a2663020000009203165061676520556e6973657820486169722053616c6f6e",
+      "name": "Page Unisex Hair Salon",
+      "kind": "shop",
+      "latitude": 13.0507467,
+      "longitude": 77.608711,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51c2b57f0aec65534059042334c5e31e2a40f00103f901d80a67200300000092030b5061706572202620506965",
+      "name": "Paper & Pie",
+      "kind": "shop",
+      "latitude": 13.0603315,
+      "longitude": 77.5925318,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51adeb06c0ae665340595ec9aaa6461b2a40f00103f90142599f540200000092030a5061742d612d43616b65",
+      "name": "Pat-a-Cake",
+      "kind": "shop",
+      "latitude": 13.0532734,
+      "longitude": 77.6044159,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 08:00-22:00"
+    },
+    {
+      "id": "geo_511ea0a0b9f365534059287ba9d1611c2a40f00103f901dfed196102000000920318506565706169204b69746368656e20262042726577657279",
+      "name": "Peepai Kitchen & Brewery",
+      "kind": "shop",
+      "latitude": 13.0554338,
+      "longitude": 77.5930008,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_519bb0b3d77166534059953f3c5585162a40f00103f9013acc1db70200000092030a50696e636f6465203234",
+      "name": "Pincode 24",
+      "kind": "shop",
+      "latitude": 13.043986,
+      "longitude": 77.6006984,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51b078a004ec65534059f501bdb33d1e2a40f00103f901cf563cc802000000920314506974616d626172612052657374617572616e74",
+      "name": "Pitambara Restaurant",
+      "kind": "shop",
+      "latitude": 13.0590645,
+      "longitude": 77.5925304,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51ffca4a93d266534059bfc857457f1c2a40f00103f901a445ee490200000092030f506f6c6c7574696f6e20436865636b",
+      "name": "Pollution Check",
+      "kind": "shop",
+      "latitude": 13.0556585,
+      "longitude": 77.6066025,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "Mo-Sa 09:00-17:30"
+    },
+    {
+      "id": "geo_51741200d26d66534059dc810fb23d1c2a40f00103f9019d5d084901000000920317507261676174686920436869636b656e2043656e747265",
+      "name": "Pragathi Chicken Centre",
+      "kind": "shop",
+      "latitude": 13.0551582,
+      "longitude": 77.6004529,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51645820d50b66534059550da3be871a2a40f00103f9019470d677020000009203075072657175656c",
+      "name": "Prequel",
+      "kind": "shop",
+      "latitude": 13.0518169,
+      "longitude": 77.5944722,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_512728ea718466534059b2896ea5431c2a40f00103f901d55d08490100000092031852616468616b726973686e612066616e63792073746f7265",
+      "name": "Radhakrishna fancy store",
+      "kind": "shop",
+      "latitude": 13.0552036,
+      "longitude": 77.6018338,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5177418ef7f465534059b291142f711f2a40f00103f901afefbb6c0000000092030c5261796d6f6e642053686f70",
+      "name": "Raymond Shop",
+      "kind": "shop",
+      "latitude": 13.0614104,
+      "longitude": 77.5930766,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_515639fe559166534059f5f590d85a1c2a40f00103f90136f2be570000000092030e52656c69616e6365204672657368",
+      "name": "Reliance Fresh",
+      "kind": "shop",
+      "latitude": 13.0553806,
+      "longitude": 77.6026206,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 07:29-12:00"
+    },
+    {
+      "id": "geo_51bee5fbf37e66534059fa25b032d01b2a40f00103f901364f084901000000920316526974687520736172656520636f6c6c656374696f6e",
+      "name": "Rithu saree collection",
+      "kind": "shop",
+      "latitude": 13.0543228,
+      "longitude": 77.6014986,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51443b021313665340594c78d777a01d2a40f00103f9012ca761ce0200000092031252525220526f79616c2047617264656e6961",
+      "name": "RRR Royal Gardenia",
+      "kind": "shop",
+      "latitude": 13.0578649,
+      "longitude": 77.5949142,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_510706103e94665340595d339060601c2a40f00103f901315f084901000000920317525320636f6c6f72206c616220616e642073747564696f",
+      "name": "RS color lab and studio",
+      "kind": "shop",
+      "latitude": 13.0554228,
+      "longitude": 77.602798,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5157ff8c776c665340599168c6e53f1c2a40f00103f901d35d084901000000920311527563686920637572727920706f696e74",
+      "name": "Ruchi curry point",
+      "kind": "shop",
+      "latitude": 13.055175,
+      "longitude": 77.6003703,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5195911f96f265534059600512a122202a40f00103f9010788b9570000000092030453414641",
+      "name": "SAFA",
+      "kind": "shop",
+      "latitude": 13.0627642,
+      "longitude": 77.5929313,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_514b1064f3a76753405917df2c794d152a40f00103f901de8179cc0200000092030753616e6368657a",
+      "name": "Sanchez",
+      "kind": "shop",
+      "latitude": 13.0416067,
+      "longitude": 77.6196259,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "12:00-00:00"
+    },
+    {
+      "id": "geo_519b4c817115665340590bb41afa931d2a40f00103f901abe1ce570000000092031453616e6a617920466f6f64204a756e6374696f6e",
+      "name": "Sanjay Food Junction",
+      "kind": "shop",
+      "latitude": 13.0577696,
+      "longitude": 77.5950588,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 09:00-23:45"
+    },
+    {
+      "id": "geo_51893db48f1566534059dd68b78f921d2a40f00103f9012ba761ce0200000092031453616e6a61792050756e6a616269204468616261",
+      "name": "Sanjay Punjabi Dhaba",
+      "kind": "shop",
+      "latitude": 13.0577588,
+      "longitude": 77.595066,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_510ef4f5219466534059ed6830f55f1c2a40f00103f901c44a08490100000092031153616e746f7368204a6577656c6c657273",
+      "name": "Santosh Jewellers",
+      "kind": "shop",
+      "latitude": 13.0554196,
+      "longitude": 77.6027913,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51b60a07e7786653405936657cec3f1c2a40f00103f901a81144490100000092031153616e746f7368204a6577656c6c657273",
+      "name": "Santosh Jewellers",
+      "kind": "shop",
+      "latitude": 13.0551752,
+      "longitude": 77.6011293,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51041e73f9ea6553405939be9348581e2a40f00103f901f8673cc80200000092030a536861616d6268617669",
+      "name": "Shaambhavi",
+      "kind": "shop",
+      "latitude": 13.0592673,
+      "longitude": 77.5924667,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51edc49beb6a66534059916de3ed631c2a40f00103f901f54f084901000000920311536869766120656e746572707269736573",
+      "name": "Shiva enterprises",
+      "kind": "shop",
+      "latitude": 13.0554499,
+      "longitude": 77.6002759,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51bf594a969366534059a9c4673f631c2a40f00103f9012c5e0849010000009203235368726565204c616b73686d6920676966747320616e642066616e63792073746f7265",
+      "name": "Shree Lakshmi gifts and fancy store",
+      "kind": "shop",
+      "latitude": 13.0554447,
+      "longitude": 77.602758,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51089975100566534059e64bd91b32202a40f00103f901dcc790650200000092031153696d706c69204e616d64686172692773",
+      "name": "Simpli Namdhari's",
+      "kind": "shop",
+      "latitude": 13.0628823,
+      "longitude": 77.5940591,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_512622b2fe8566534059ac1ceb80461c2a40f00103f901c14a08490100000092031b53726920416e6e61706f6f726e657368776172692042616b657279",
+      "name": "Sri Annapoorneshwari Bakery",
+      "kind": "shop",
+      "latitude": 13.0552254,
+      "longitude": 77.6019284,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 07:30-22:45"
+    },
+    {
+      "id": "geo_51a6ce48298d66534059059793ee091d2a40f00103f901bf4a084901000000920312537269204c616b73686d692054656d706c65",
+      "name": "Sri Lakshmi Temple",
+      "kind": "shop",
+      "latitude": 13.0567164,
+      "longitude": 77.6023658,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51b5c2f4bd86665340594e47c8dead1b2a40f00103f901776463a30200000092032d537269204e616e64696b6573687761726120436f6e64696d656e747320616e64204a756963652043656e747265",
+      "name": "Sri Nandikeshwara Condiments and Juice Centre",
+      "kind": "shop",
+      "latitude": 13.0540609,
+      "longitude": 77.601974,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 05:30-23:00"
+    },
+    {
+      "id": "geo_519560167f8066534059ee93ea8f411c2a40f00103f901374f0849010000009203115372692073616920686f74206368697073",
+      "name": "Sri sai hot chips",
+      "kind": "shop",
+      "latitude": 13.0551877,
+      "longitude": 77.6015928,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 08:00-22:00"
+    },
+    {
+      "id": "geo_519fd44d1803665340597cbd8c5b821a2a40f00103f9017f6fbd5d0200000092030b537461722042617a616172",
+      "name": "Star Bazaar",
+      "kind": "shop",
+      "latitude": 13.0517758,
+      "longitude": 77.5939389,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_518b57b49487665340594ea90f67451c2a40f00103f901d04f08490100000092031b53756772657368776172612070726f766973696f6e2073746f7265",
+      "name": "Sugreshwara provision store",
+      "kind": "shop",
+      "latitude": 13.055217,
+      "longitude": 77.6020252,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 07:00-22:30"
+    },
+    {
+      "id": "geo_510a15d2d0f565534059d013fa92431e2a40f00103f9010588b9570000000092030d5377617468692067617264656e",
+      "name": "Swathi garden",
+      "kind": "shop",
+      "latitude": 13.0591093,
+      "longitude": 77.5931284,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_518962a879fd665340598f18c054e9152a40f00103f901a95b9b3b0100000092030b54617461204d6f746f7273",
+      "name": "Tata Motors",
+      "kind": "shop",
+      "latitude": 13.0427958,
+      "longitude": 77.6092209,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_516a3414d2f565534059a0869f8c021e2a40f00103f901ab628f17020000009203155468616c6173736572792052657374617572616e74",
+      "name": "Thalassery Restaurant",
+      "kind": "shop",
+      "latitude": 13.0586132,
+      "longitude": 77.5931287,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "Mo-Su 11:00-22:30"
+    },
+    {
+      "id": "geo_51361081d9f36553405944170a65f21f2a40f00103f901901039fa0000000092030e54686520426967204d61726b6574",
+      "name": "The Big Market",
+      "kind": "shop",
+      "latitude": 13.0623962,
+      "longitude": 77.5930084,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51a4c05d51a5675340596a05622d4f152a40f00103f90189c6bbe6020000009203095468656f62726f6d61",
+      "name": "Theobroma",
+      "kind": "shop",
+      "latitude": 13.0416197,
+      "longitude": 77.6194652,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51a9189de2a7675340599eca1d9b3f152a40f00103f9019153589d0200000092031a5468697264205761766520436f6666656520526f617374657273",
+      "name": "Third Wave Coffee Roasters",
+      "kind": "shop",
+      "latitude": 13.0415009,
+      "longitude": 77.6196219,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5117ef6c34a567534059f1f0524f41152a40f00103f9019253589d02000000920307546f7363616e6f",
+      "name": "Toscano",
+      "kind": "shop",
+      "latitude": 13.0415139,
+      "longitude": 77.6194583,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_515a52a4b1ac66534059fd9307d1c61a2a40f00103f9013c599f540200000092030d55647570692055706163686172",
+      "name": "Udupi Upachar",
+      "kind": "shop",
+      "latitude": 13.0522981,
+      "longitude": 77.6042904,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 07:30-22:45"
+    },
+    {
+      "id": "geo_5150be45cc9166534059de217875441c2a40f00103f901fea8ec430100000092030b5564757069205574736176",
+      "name": "Udupi Utsav",
+      "kind": "shop",
+      "latitude": 13.0552098,
+      "longitude": 77.6026488,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 06:45-22:45"
+    },
+    {
+      "id": "geo_51545ada04f3655340591a1d3272271e2a40f00103f9017fe13bc802000000920309556475706920566567",
+      "name": "Udupi Veg",
+      "kind": "shop",
+      "latitude": 13.0588947,
+      "longitude": 77.5929577,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51ccfee5ff7a66534059b88b4f9f3f1c2a40f00103f901a61144490100000092031d5661726e696b612068657262616c20626561757479207061726c6f7572",
+      "name": "Varnika herbal beauty parlour",
+      "kind": "shop",
+      "latitude": 13.0551729,
+      "longitude": 77.6012573,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5159a082685266534059c8620dc6f4152a40f00103f901f6e324ae0100000092030d566172756e204d617275746869",
+      "name": "Varun Maruthi",
+      "kind": "shop",
+      "latitude": 13.0428831,
+      "longitude": 77.5987798,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5181e3d7b477665340595c757ae882162a40f00103f901d1fb72890200000092030d56656e6b6174616d2043616665",
+      "name": "Venkatam Cafe",
+      "kind": "shop",
+      "latitude": 13.0439675,
+      "longitude": 77.6010563,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51d8f4a0a09466534059579635995d1c2a40f00103f9016a5e08490100000092030f56696e6179616b612073746f726573",
+      "name": "Vinayaka stores",
+      "kind": "shop",
+      "latitude": 13.0554016,
+      "longitude": 77.6028215,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51198b016d8666534059c0c679e7bc1b2a40f00103f90148f662a302000000920312566973686e7520456c656374726963616c73",
+      "name": "Vishnu Electricals",
+      "kind": "shop",
+      "latitude": 13.0541756,
+      "longitude": 77.6019547,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z",
+      "hours": "PH,Mo-Su 08:00-22:00"
+    },
+    {
+      "id": "geo_51dbcf73556a6653405986fb59ca541c2a40f00103f901844e084901000000920313566973696f6e74656368204f70746963616c73",
+      "name": "Visiontech Opticals",
+      "kind": "shop",
+      "latitude": 13.0553344,
+      "longitude": 77.6002401,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_512982ee810c66534059481c8e0255152a40f00103f9013572203b0100000092030a566f6c6b73776167656e",
+      "name": "Volkswagen",
+      "kind": "shop",
+      "latitude": 13.0416642,
+      "longitude": 77.5945134,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5144dfddca92665340591a291476621c2a40f00103f901d54f0849010000009203075761727a6f6e65",
+      "name": "Warzone",
+      "kind": "shop",
+      "latitude": 13.0554387,
+      "longitude": 77.6027095,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_5134947fd2f56553405971837dc86c1e2a40f00103f9012c863cc80200000092030757656c63617265",
+      "name": "Welcare",
+      "kind": "shop",
+      "latitude": 13.0594237,
+      "longitude": 77.5931288,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51187887aa1a66534059ec8cd254bb152a40f00102f901731db7420000000092030c5765737465726e2043617273",
+      "name": "Western Cars",
+      "kind": "shop",
+      "latitude": 13.0424448,
+      "longitude": 77.5953776,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_51c8c38c3a04665340591598b2bbac1a2a40f00103f9017e6fbd5d020000009203085765737473696465",
+      "name": "Westside",
+      "kind": "shop",
+      "latitude": 13.0520991,
+      "longitude": 77.5940081,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_513494241903665340597f1038b0771a2a40f00103f90115e2ea9b020000009203055a7564696f",
+      "name": "Zudio",
+      "kind": "shop",
+      "latitude": 13.0516944,
+      "longitude": 77.5939391,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    },
+    {
+      "id": "geo_514f31186d9f67534059b6c94f59b9142a40f00103f90187b9e5cc020000009203055a7564696f",
+      "name": "Zudio",
+      "kind": "shop",
+      "latitude": 13.0404766,
+      "longitude": 77.6191056,
+      "sourceUrl": "https://www.geoapify.com/places-api/",
+      "sourceCheckedAt": "2026-09-15T13:22:32.222Z"
+    }
+  ]
+}

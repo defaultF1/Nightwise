@@ -62,3 +62,12 @@ test('identical returned paths are deduplicated while distinct preferences remai
  const routes=await provider.routes(DEFAULT_JOURNEY,new AbortController().signal);
  expect(routes).toHaveLength(2);expect(new Set(routes.map(r=>r.id)).size).toBe(2);
 });
+test('a bounded avoid-highways fallback adds a substantially different third road option',async()=>{
+ const provider=new Geoapify('test-only-unused');
+ const other=structuredClone(routeData);other.features[0].geometry.coordinates[1]=[77.605,13.04];
+ const fallback=structuredClone(routeData);fallback.features[0].geometry.coordinates[1]=[77.605,13.072];
+ const request=vi.spyOn(provider,'request').mockResolvedValueOnce(routeData).mockResolvedValueOnce(other).mockResolvedValueOnce(routeData).mockResolvedValueOnce(fallback);
+ const routes=await provider.routes(DEFAULT_JOURNEY,new AbortController().signal);
+ expect(routes).toHaveLength(3);expect(request).toHaveBeenCalledTimes(4);
+ expect(request.mock.calls[3][1].avoid).toBe('highways');
+});
