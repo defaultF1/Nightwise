@@ -1,9 +1,5 @@
 apply plugin: 'com.android.application'
 
-def privateMaps = new Properties()
-def privateMapsFile = rootProject.file('../.local/android-maps.properties')
-if (privateMapsFile.exists()) { privateMapsFile.withInputStream { privateMaps.load(it) } }
-
 android {
     namespace = "in.nightwise.demo"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -11,9 +7,8 @@ android {
         applicationId "in.nightwise.demo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 34
-        versionName "2.0.8"
-        manifestPlaceholders = [nightwiseMapsKey: privateMaps.getProperty('GOOGLE_MAPS_ANDROID_KEY', '')]
+        versionCode 35
+        versionName "2.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

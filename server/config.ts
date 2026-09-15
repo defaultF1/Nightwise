@@ -17,7 +17,9 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env) {
     if (!valid) throw new Error('Use the HTTPS Upstash REST endpoint without a command or query');
   }
   return {
-    host, port: integer('PORT', 8787, 65535), serverKey: env.GOOGLE_MAPS_SERVER_KEY || '', accessCode,
+    // Mappls is the default provider; Google code stays available only behind an explicit opt-in.
+    provider: env.API_PROVIDER === 'google' ? 'google' as const : 'mappls' as const,
+    host, port: integer('PORT', 8787, 65535), serverKey: (env.API_PROVIDER === 'google' ? env.GOOGLE_MAPS_SERVER_KEY : env.MAPPLS_SERVER_KEY) || '', accessCode,
     liveEnabled: env.ENABLE_LIVE_REQUESTS === 'true', searchEnabled: env.ENABLE_PLACE_SEARCH === 'true',
     // The maxima are typo guards against a runaway paid-request allowance, not usage targets.
     autocompleteLimit: integer('PILOT_AUTOCOMPLETE_LIMIT', 40, 500), detailsLimit: integer('PILOT_DETAILS_LIMIT', 20, 500),

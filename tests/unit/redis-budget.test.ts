@@ -61,7 +61,7 @@ describe('persistent hosted allowance', () => {
       const command=JSON.parse(String(init?.body));
       return result(command[0]==='GET'?null:['missing']);
     });
-    const config=readConfig({HOST:'0.0.0.0',PILOT_ACCESS_CODE:'test-code-at-least-16',GOOGLE_MAPS_SERVER_KEY:'test-google-key',ENABLE_LIVE_REQUESTS:'true',
+    const config=readConfig({API_PROVIDER:'google',HOST:'0.0.0.0',PILOT_ACCESS_CODE:'test-code-at-least-16',GOOGLE_MAPS_SERVER_KEY:'test-google-key',ENABLE_LIVE_REQUESTS:'true',
       UPSTASH_REDIS_REST_URL:endpoint,UPSTASH_REDIS_REST_TOKEN:'test-token',ROAD_DATA_PATH:'missing-fixture'});
     const app=await createServer(config,google,redis);
     try {

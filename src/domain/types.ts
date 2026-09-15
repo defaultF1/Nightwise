@@ -8,8 +8,9 @@ export type Route = {
   durationSeconds: number;
   distanceMeters: number;
   path: Coordinate[];
-  source: 'sample' | 'google';
+  source: 'sample' | 'google' | 'mappls';
   geometryKind: 'illustrative' | 'offline' | 'provider';
+  listedPlaces?: MapplsPlace[];
   turns?: number;
   steps?: { distanceMeters: number; staticDurationSeconds?:number; maneuver?: string; path?:Coordinate[] }[];
 };
@@ -22,3 +23,5 @@ export type Evidence = {
   source: 'sample' | 'live';
 };
 export type RouteWithEvidence = Route & { evidence: Evidence };
+
+export type MapplsPlace = { id:string; name:string; address:string; kind:'shop'|'medical'|'hospital'|'fuel'; category:string; alongRouteMeters?:number; openingHours?:string };

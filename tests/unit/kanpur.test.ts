@@ -23,7 +23,7 @@ it('retains Kanpur shop evidence and accepts provider road geometry',()=>{
 });
 it('restricts Kanpur autocomplete to its city and rejects cross-city comparisons before provider use',async()=>{
  const dir=mkdtempSync(join(tmpdir(),'nightwise-kanpur-'));const fetcher=vi.fn(async()=>new Response(JSON.stringify({suggestions:[]})));
- const app=await createServer(readConfig({ENABLE_LIVE_REQUESTS:'true',ENABLE_PLACE_SEARCH:'true',GOOGLE_MAPS_SERVER_KEY:'mock',ROAD_DATA_PATH:'missing',KANPUR_ROAD_DATA_PATH:'missing',BUDGET_LEDGER_PATH:join(dir,'budget.json')}),fetcher);
+ const app=await createServer(readConfig({API_PROVIDER:'google',ENABLE_LIVE_REQUESTS:'true',ENABLE_PLACE_SEARCH:'true',GOOGLE_MAPS_SERVER_KEY:'mock',ROAD_DATA_PATH:'missing',KANPUR_ROAD_DATA_PATH:'missing',BUDGET_LEDGER_PATH:join(dir,'budget.json')}),fetcher);
  try{
   const r=await app.inject({method:'POST',url:'/api/places/suggest',payload:{query:'Sharda Nagar school',anchor:center,sessionToken:'12345678-1234-4123-8123-123456789abc'}});expect(r.statusCode).toBe(200);
   const options=(fetcher.mock.calls[0] as unknown as [string,RequestInit])[1];expect(JSON.parse(String(options.body)).locationRestriction.circle).toEqual({center,radius:20000});

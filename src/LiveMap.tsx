@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, createElement } from 'react';
-import { Capacitor } from '@capacitor/core';
+import { useEffect, useRef, useState } from 'react';
 import { MapPin, Maximize2, Minimize2 } from 'lucide-react';
+import { RouteDiagram, coversArea } from './RouteDiagram';
 import { useExpandedMap } from './maps/use-expanded-map';
 import type { Route } from './domain/types';
 import type { ActivityAnalysis } from './domain/activity-types';
@@ -16,12 +16,10 @@ import {PLACE_GROUPS,groupCounts,groupSummary} from './domain/category-counts';
 import { cameraPins, CAMERA_COLOR } from './maps/camera-pins';
 import { summarizeCameras } from './domain/cameras';
 
-let nativeMapOwners = 0;
-
 export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked, analysis, cameraNow = Date.now(), activityStatus }: { routes: Route[]; selectedId?: string; onSelect: (id: string) => void; journey: LiveJourney; theme: Theme; blocked: boolean; analysis?: ActivityAnalysis; cameraNow?:number; activityStatus?:LiveResult['activityStatus'] }) {
   const city=regionForPoint(journey.origin)?.city??'Bengaluru';
   const {expanded,setExpanded,container,toggle}=useExpandedMap();
-  const element = useRef<HTMLElement>(null);
+  const element = useRef<HTMLDivElement>(null);
   const handle = useRef<MapHandle | null>(null);
   const queue = useRef(Promise.resolve());
   const select = useRef(onSelect); select.current = onSelect;
@@ -31,23 +29,21 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
   const selectedRoute=routes.find(r=>r.id===selectedId);
   const cameraSummary=selectedRoute?summarizeCameras(selectedRoute,analysis?.cameras,cameraNow):undefined;
   useEffect(() => {
-    let disposed = false; let owned: MapHandle | undefined; let nativeOwner = false;
+    let disposed = false; let owned: MapHandle | undefined;
     setError(false);
     const failed = () => setError(true);
     window.addEventListener('nightwise-map-auth-failed', failed);
-    // Queue creation/destruction so StrictMode or a quick Back cannot orphan a native view.
+    // Queue creation/destruction so StrictMode or a quick Back cannot orphan a map view.
     queue.current = queue.current.then(async () => {
       if (disposed || !element.current) return;
       try {
         owned = await createMap(element.current, theme, id => select.current(id),journey.origin);
         if (disposed) { await owned.destroy(); owned = undefined; return; }
         handle.current = owned; setReady(true);
-        if (Capacitor.isNativePlatform()) { nativeOwner = true; nativeMapOwners++; document.documentElement.dataset.nativeMap = 'true'; }
       } catch { if (!disposed) setError(true); }
     });
     return () => {
       disposed = true; handle.current = null; setReady(false);
-      if (nativeOwner) { nativeOwner = false; if (--nativeMapOwners === 0) delete document.documentElement.dataset.nativeMap; }
       window.removeEventListener('nightwise-map-auth-failed', failed);
       queue.current = queue.current.then(async () => { await owned?.destroy(); }).catch(() => {});
     };
@@ -73,11 +69,17 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
     queue.current = queue.current.then(async () => { await handle.current?.fit(routes.length ? routes.flatMap(r => r.path) : [journey.origin, journey.destination]); }).catch(() => setError(true));
   }, [ready, routes, journey]);
   useEffect(() => { if (ready) queue.current = queue.current.then(async () => { await handle.current?.touch(!blocked, expanded); }).catch(() => {}); }, [ready, blocked, expanded]);
-  return <section ref={container} className={`live-map${expanded?' map-expanded':''}`} role={expanded?'dialog':undefined} aria-modal={expanded?true:undefined} aria-label={`${city} Google map`}>
+  // When the Mappls map cannot load, fall back to the bundled OpenStreetMap
+  // diagram wherever its extract covers the whole journey.
+  if (error && routes.length > 0 && coversArea([...routes.flatMap(r => r.path), journey.origin, journey.destination])) return <>
+    <p className="preference-note" role="status">The live Mappls map could not load. Showing the built-in OpenStreetMap diagram; comparisons stay available.</p>
+    <RouteDiagram routes={routes} selectedId={selectedId} onSelect={onSelect} origin={journey.origin.name} destination={journey.destination.name} endpoints={[journey.origin, journey.destination]} />
+  </>;
+  return <section ref={container} className={`live-map${expanded?' map-expanded':''}`} role={expanded?'dialog':undefined} aria-modal={expanded?true:undefined} aria-label={`${city} map`}>
     <div className="diagram-heading"><span><MapPin size={14} /> {city}</span><button ref={toggle} className="map-size-button" type="button" aria-expanded={expanded} onClick={()=>setExpanded(!expanded)}>{expanded?<Minimize2 size={17}/>:<Maximize2 size={17}/>} {expanded?'Minimize map':'Full screen'}</button></div>
     {routes.length>0&&<div className="map-route-options" role="group" aria-label="Choose route on map">{routes.map(route=><button key={route.id} aria-pressed={route.id===selectedId} onClick={()=>onSelect(route.id)}>{route.label} · {Math.round(route.durationSeconds/60)} min</button>)}</div>}
-    <div className="map-slot">{createElement('capacitor-google-map', { ref: element, className: 'map-canvas' })}
-      {(!ready || error) && <div className="map-cover" role="status">{import.meta.env.VITE_ENABLE_LIVE_MAPS !== 'true' ? 'Live maps are paused to control usage. Tutorial mode remains available.' : error ? 'Map unavailable. Check connection, key restrictions and billing. Route details remain available.' : `Loading ${city} map…`}</div>}
+    <div className="map-slot"><div ref={element} className="map-canvas" />
+      {(!ready || error) && <div className="map-cover" role="status">{import.meta.env.VITE_ENABLE_LIVE_MAPS !== 'true' ? 'Live maps are paused to control usage. Tutorial mode remains available.' : error ? 'The Mappls map is unavailable. Check your connection and the map key. Route details remain available.' : `Loading ${city} map…`}</div>}
       {blocked && <div className="map-curtain" />}
     </div>
     <div className="diagram-endpoints"><span><b>A</b> {journey.origin.name}</span><span><b>B</b> {journey.destination.name}</span></div>

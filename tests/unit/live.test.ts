@@ -16,7 +16,7 @@ import { compareActivity } from '../../src/domain/comparison';
 const folders: string[] = [];
 afterEach(() => { for (const f of folders.splice(0)) rmSync(f, { recursive: true, force: true }); });
 function ledger() { const f = mkdtempSync(join(tmpdir(), 'nightwise-unit-')); folders.push(f); return join(f, 'counts.json'); }
-function config(extra: NodeJS.ProcessEnv = {}) { return readConfig({ ENABLE_LIVE_REQUESTS: 'true', ROAD_DATA_PATH:'missing-test-road-file', GOOGLE_MAPS_SERVER_KEY: 'test-key-not-real', BUDGET_LEDGER_PATH: ledger(), ...extra }); }
+function config(extra: NodeJS.ProcessEnv = {}) { return readConfig({ API_PROVIDER: 'google', ENABLE_LIVE_REQUESTS: 'true', ROAD_DATA_PATH:'missing-test-road-file', GOOGLE_MAPS_SERVER_KEY: 'test-key-not-real', BUDGET_LEDGER_PATH: ledger(), ...extra }); }
 function encode(path: Coordinate[]) {
   let lat = 0, lng = 0, out = '';
   function part(delta: number) { let value = delta < 0 ? ~(delta << 1) : delta << 1; while (value >= 32) { out += String.fromCharCode((32 | (value & 31)) + 63); value >>>= 5; } out += String.fromCharCode(value + 63); }
@@ -122,8 +122,8 @@ describe('live backend', () => {
   it('serializes comparisons so concurrent callers cannot reserve past the allowance', async () => { let release!:()=>void; let entered!:()=>void; const started=new Promise<void>(r=>entered=r); const paused=new Promise<void>(r=>release=r); const calls=vi.fn(async()=>{entered();await paused;return new Response(JSON.stringify(response));}); const app=await createServer(config(),calls); try { const first=app.inject(request); await started; const second=await app.inject(request); expect(second.statusCode).toBe(429); expect(second.json().code).toBe('busy'); release(); expect((await first).statusCode).toBe(200); expect(calls).toHaveBeenCalledTimes(1); } finally { release?.(); await app.close(); } });
 });
 describe('phone handoff and live score gate', () => {
-  it('uses exact supplied endpoints and never transfers illustrative geometry', () => { const url=new URL(mapsHandoff(DEFAULT_JOURNEY)); expect(url.searchParams.get('origin')).toBe('13.062827,77.594089'); expect(url.searchParams.get('destination')).toBe('13.047697,77.619939'); expect(url.searchParams.has('waypoints')).toBe(false); expect(url.searchParams.has('dir_action')).toBe(false); });
-  it('hands off endpoints when no selected live route is provided', () => { const url=new URL(mapsHandoff(DEFAULT_JOURNEY)); expect(url.searchParams.has('waypoints')).toBe(false); expect(url.searchParams.get('travelmode')).toBe('driving'); expect(url.toString().length).toBeLessThan(2048); });
+  it('uses exact supplied endpoints and never transfers illustrative geometry', () => { const points=new URL(mapsHandoff(DEFAULT_JOURNEY)).searchParams.get('places')!.split(';'); expect(points).toEqual(['13.062827,77.594089','13.047697,77.619939']); });
+  it('hands off endpoints when no selected live route is provided', () => { const url=new URL(mapsHandoff(DEFAULT_JOURNEY)); expect(url.origin+url.pathname).toBe('https://mappls.com/direction'); expect(url.searchParams.get('places')!.split(';')).toHaveLength(2); expect(url.toString().length).toBeLessThan(2048); });
   it('keeps live ranks off by default even with full scans', () => { const routes=[...parseRoutes(response),{...parseRoutes(response)[0],id:'second',durationSeconds:140}]; const plan=buildQueryPlan(routes); const now=new Date().toISOString(); const scans=plan.queries.map(q=>({queryId:q.id,observedAt:now,status:'ok' as const,places:[]})); const analyses=routes.map(r=>analyzeRoute(r,plan,scans,now)); expect(compareActivity(routes,analyses).scores).toEqual({}); expect(Object.keys(compareActivity(routes,analyses,{}, {allowLive:true}).scores)).toHaveLength(2); });
 });
 

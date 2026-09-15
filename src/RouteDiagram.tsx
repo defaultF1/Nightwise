@@ -3,8 +3,11 @@ import { MapPin, Check, Maximize2, Minimize2 } from 'lucide-react';
 import { useExpandedMap } from './maps/use-expanded-map';
 import map from './data/tutorial-map.json' with { type: 'json' };
 
-export type RouteMapProps = { routes: Route[]; selectedId?: string; onSelect: (id: string) => void; origin: string; destination?: string };
+export type RouteMapProps = { routes: Route[]; selectedId?: string; onSelect: (id: string) => void; origin: string; destination?: string; endpoints?: { latitude: number; longitude: number }[] };
 const [south,west,north,east]=map.bounds;
+// Whether every point sits inside the bundled OpenStreetMap extract, so the
+// offline diagram can stand in when the live Mappls map cannot load.
+export function coversArea(points:{latitude:number;longitude:number}[]){const margin=0.004;return points.length>0&&points.every(p=>p.latitude>=south-margin&&p.latitude<=north+margin&&p.longitude>=west-margin&&p.longitude<=east+margin);}
 const latitudeScale=Math.cos((north+south)*Math.PI/360);
 const scale=Math.min(504/((east-west)*latitudeScale),374/(north-south));
 const xy=(lat:number,lon:number)=>[280+(lon-(east+west)/2)*latitudeScale*scale,220-(lat-(north+south)/2)*scale];
@@ -19,11 +22,11 @@ for(const road of map.roads){
   if(x<halfWidth+10||x>550-halfWidth||y<45||y>390||labels.some(l=>Math.hypot(x-l.x,y-l.y)<90||(Math.abs(y-l.y)<20&&Math.abs(x-l.x)<halfWidth+l.name.length*2.5+10)))continue;
   labels.push({name:road.name,x,y});if(labels.length===7)break;
 }
-export function RouteDiagram({routes,selectedId,onSelect,origin,destination='AEOS'}:RouteMapProps){
+export function RouteDiagram({routes,selectedId,onSelect,origin,destination='AEOS',endpoints}:RouteMapProps){
   const {expanded,setExpanded,container,toggle}=useExpandedMap();
   const selected=routes.find(r=>r.id===selectedId);
   const ordered=[...routes.filter(r=>r.id!==selectedId),...routes.filter(r=>r.id===selectedId)];
-  const pins=origin==='AEOS'?[map.pins.aeos,map.pins.manyata]:[map.pins.manyata,map.pins.aeos];
+  const pins=endpoints?.length===2?endpoints.map(p=>[p.latitude,p.longitude]):origin==='AEOS'?[map.pins.aeos,map.pins.manyata]:[map.pins.manyata,map.pins.aeos];
   return <section ref={container} className={`route-diagram offline-map${expanded?' map-expanded':''}`} role={expanded?'dialog':undefined} aria-modal={expanded?true:undefined} aria-label="Bengaluru street map">
     <div className="diagram-heading"><span><MapPin size={14}/> North Bengaluru</span><button ref={toggle} className="map-size-button" type="button" aria-expanded={expanded} onClick={()=>setExpanded(!expanded)}>{expanded?<Minimize2 size={17}/>:<Maximize2 size={17}/>} {expanded?'Minimize map':'Full screen'}</button></div>
     {routes.length?<>

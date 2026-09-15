@@ -30,7 +30,7 @@ export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads
   const fastest=[...routes].sort((a,b)=>a.durationSeconds-b.durationSeconds||a.id.localeCompare(b.id))[0];
   const base:Comparison={version:SCORE_VERSION,fastestId:fastest?.id??null,selectedId:fastest?.id??null,recommendedId:null,outcome:routes.length?'single':'empty',message:routes.length?'Only one route was returned. There is no alternative to compare.':'No route options were returned.',commonComponents:[],scores:{},componentScores:{},rankedIds:[]};
   if(!routes.length)return base;
-  if(routes.every(r=>r.source==='google')&&options.allowLive!==true)return routes.length<2?base:{...base,outcome:'insufficient',message:'Live scoring is switched off by the service setting.'};
+  if(routes.some(r=>r.source!=='sample')&&options.allowLive!==true)return routes.length<2?base:{...base,outcome:'insufficient',message:'Live scoring is switched off by the service setting.'};
   const byId=new Map(analyses.map(a=>[a.routeId,a]));
   if(new Set(routes.map(r=>byId.get(r.id)?.checkedAt)).size!==1)return {...base,outcome:'insufficient',message:'These routes do not share one evidence check. Refresh the comparison.'};
   const useInternal=routes.every(r=>Number.isFinite(roads[r.id]?.internalTurnsPerKm)&&roads[r.id].internalTurnsPerKm!>=0);

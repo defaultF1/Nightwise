@@ -2,7 +2,7 @@
 
 When Google provides no usable shop hours, the schedule list shows a labelled 9 am–8 pm IST planning estimate. Assumed availability does not replace confirmed schedules, establish holiday closures or increase confirmed-open evidence.
 
-Android-first North Bengaluru route comparison preview for a small tutorial team. Version 0.9.0-live-preview. This is an experimental activity-information app; it does not measure personal safety, lighting or crime.
+Android-first North Bengaluru and Kanpur route comparison preview. Version 2.1.0 (Mappls build): live routes, place search and along-route listings come from Mappls (MapmyIndia); the interactive map renders with the Mappls Web SDK, with the bundled OpenStreetMap diagram as an offline fallback. Google services are no longer used; the legacy Google provider code remains only behind `API_PROVIDER=google`. This is an experimental activity-information app; it does not measure personal safety, lighting or crime.
 
 ## Implemented
 
@@ -24,27 +24,27 @@ Scans are balanced across alternatives within `MAX_NEARBY_QUERIES` and the persi
 
 ## Local setup
 
-Use Node.js 22 or newer. Run `npm ci`, copy `.env.example` to a private `.env`, then run `npm run build` and `npm run preview -- --port 4173`. Start the API separately with `npm run server`. Tutorial mode needs no provider calls.
+Use Node.js 22 or newer. Run `npm ci`, copy `.env.example` to a private `.env` (set `MAPPLS_SERVER_KEY`, and `VITE_MAPPLS_WEB_KEY` for the interactive map), then run `npm run build` and `npm run preview -- --port 4173`. Start the API separately with `npm run server`. Tutorial mode needs no provider calls.
 
-Live maps, routes, searches and activity scans each have explicit environment switches. Supply restricted credentials only in private configuration. Never put the server key in a `VITE_` variable. Request limits persist in the private budget ledger; do not reset the ledger to bypass a limit. Review cloud billing for actual charges.
+Live maps, routes, searches and activity scans each have explicit environment switches. Supply restricted credentials only in private configuration. Never put the server key in a `VITE_` variable; the Mappls web key is public and must be domain-restricted in the Mappls console. Request limits persist in the private budget ledger; do not reset the ledger to bypass a limit. Review cloud billing for actual charges.
 
-Google favourites retain only place IDs and user-entered labels; details are resolved again when selected. User-entered pins and preferences remain on the device. Route and shop responses stay in session memory. This app does not build a permanent Google opening-hours database.
+Favourites retain only Mappls place codes and user-entered labels; they are resolved again when selected. User-entered pins and preferences remain on the device. Route and shop responses stay in session memory. This app does not build a permanent provider opening-hours database.
 
 ## Android build
 
-Install a compatible JDK and Android SDK, configure `android/local.properties`, and run `npm run android:sync`. Add `GOOGLE_MAPS_ANDROID_KEY` to private `.local/android-maps.properties`, restricted to the package and signing certificate. Then run `android/gradlew.bat :app:assembleDebug` from the Android folder. The Windows helper `npm run android:build` expects the project-local toolchain under `.tools`.
+Install a compatible JDK and Android SDK, configure `android/local.properties`, and run `npm run android:sync`. The map renders inside the WebView with the Mappls Web SDK, so no native map key is needed. Then run `android/gradlew.bat :app:assembleDebug` from the Android folder. The Windows helper `npm run android:build` expects the project-local toolchain under `.tools`.
 
 For USB development, reverse API port 8787 with ADB. An installed app used away from the developer computer needs a reachable HTTPS backend and a build configured for that endpoint. This GitHub repository hosts source; it does not deploy that backend. Generated APKs, credentials, private notes and phone screenshots are excluded.
 
 ## Free Render with a persistent allowance
 
-Deploy the `codex/journey-updates` branch as a Node web service with build command `npm ci --include=dev && npm run build:server` and start command `node build-server/index.mjs`. Set `HOST=0.0.0.0`, `PORT=10000` and a private `PILOT_ACCESS_CODE` of at least 16 characters. Use `/api/status` as the health path. Keep the Google request switches off during setup.
+Deploy the `codex/mappls-migration` branch as a Node web service with build command `npm ci --include=dev && npm run build:server` and start command `node build-server/index.mjs`. Set `HOST=0.0.0.0`, `PORT=10000`, `API_PROVIDER=mappls` and the private `MAPPLS_SERVER_KEY`. Use `/api/status` as the health path. Keep the live request switches off during setup.
 
-Set `UPSTASH_REDIS_REST_URL` to the HTTPS REST endpoint and `UPSTASH_REDIS_REST_TOKEN` to the normal write-capable token, without surrounding quotes. Both values are required together. The counter is stored under `nightwise:pilot-budget:v1`; no disk is required in this mode. Health output includes `budgetStorage` and `budgetReady`, without credentials or usage counts. A healthy process does not mean Google access or budget migration is complete.
+Set `UPSTASH_REDIS_REST_URL` to the HTTPS REST endpoint and `UPSTASH_REDIS_REST_TOKEN` to the normal write-capable token, without surrounding quotes. Both values are required together. The counter is stored under `nightwise:pilot-budget:v1`; no disk is required in this mode. Health output includes `budgetStorage` and `budgetReady`, without credentials or usage counts. A healthy process does not mean Mappls access or budget migration is complete.
 
-Before activating the hosted service, stop local Google requests and migrate the latest four counters as one JSON string, with no expiry, using `SET nightwise:pilot-budget:v1 '<JSON copied from the stopped local ledger>' NX` in the private Redis console. This is a command template, not literal data: never initialize an existing pilot with zero counters or overwrite an existing Redis value. If the key already exists, inspect and reconcile it before continuing. The running app never creates or resets a missing counter. Preserve the approved cumulative limits; hosting is not a fresh allowance.
+Before activating the hosted service, stop local live requests and migrate the latest four counters as one JSON string, with no expiry, using `SET nightwise:pilot-budget:v1 '<JSON copied from the stopped local ledger>' NX` in the private Redis console. This is a command template, not literal data: never initialize an existing pilot with zero counters or overwrite an existing Redis value. If the key already exists, inspect and reconcile it before continuing. The running app never creates or resets a missing counter. Preserve the approved cumulative limits; hosting is not a fresh allowance.
 
-Reservations are atomic across instances. A database outage, invalid counter, expired key or uncertain reservation blocks the subsequent Google request. Writes are not automatically retried. Route and shop data are not stored in Redis. Free Render can take time to wake from inactivity; validate the cold-start experience before sharing the final HTTPS-configured APK.
+Reservations are atomic across instances. A database outage, invalid counter, expired key or uncertain reservation blocks the subsequent provider request. Writes are not automatically retried. Route and shop data are not stored in Redis. Free Render can take time to wake from inactivity; validate the cold-start experience before sharing the final HTTPS-configured APK.
 
 ## Verification and limitations
 

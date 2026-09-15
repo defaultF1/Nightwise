@@ -13,19 +13,21 @@ public class MapsHandoffPlugin extends Plugin {
     @PluginMethod public void open(PluginCall call) {
         String value = call.getString("url", "");
         Uri uri = Uri.parse(value);
-        if (!"https".equals(uri.getScheme()) || !"www.google.com".equals(uri.getHost()) || !"/maps/dir/".equals(uri.getPath())) {
-            call.reject("Only Google Maps direction previews can be opened."); return;
+        String host = uri.getHost() == null ? "" : uri.getHost();
+        if (!"https".equals(uri.getScheme()) || !("mappls.com".equals(host) || "www.mappls.com".equals(host)) || !"/direction".equals(uri.getPath())) {
+            call.reject("Only Mappls direction previews can be opened."); return;
         }
         getActivity().runOnUiThread(() -> {
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setPackage("com.google.android.apps.maps");
+                // Prefer the installed Mappls app; otherwise any browser shows the same preview.
+                intent.setPackage("com.mmi.maps");
                 try { getActivity().startActivity(intent); }
-                catch (ActivityNotFoundException missingMaps) {
+                catch (ActivityNotFoundException missingMappls) {
                     intent.setPackage(null); getActivity().startActivity(intent);
                 }
                 call.resolve();
-            } catch (Exception unavailable) { call.reject("No app could open the Maps preview."); }
+            } catch (Exception unavailable) { call.reject("No app could open the Mappls preview."); }
         });
     }
 }

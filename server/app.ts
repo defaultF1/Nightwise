@@ -6,6 +6,8 @@ import { dirname, join } from 'node:path';
 import { Budget, type BudgetStore } from './budget';
 import { RedisBudget, redisCommand } from './redis-budget';
 import { GoogleProvider } from './google';
+import { MapplsProvider } from './mappls';
+import { registerMapplsSearch } from './mappls-search';
 import { ServiceError } from './errors';
 import type { ServerConfig } from './config';
 import { inPilotArea, sameServiceRegion, regionForPoint, PILOT_RADIUS_METERS, SERVICE_REGIONS, type LiveJourney } from '../src/domain/journey';
@@ -25,6 +27,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     : new Budget(config.ledgerPath, config.routeLimit, config.nearbyLimit, config.autocompleteLimit, config.detailsLimit);
   const roadFiles = {'north-bengaluru':config.roadFile,kanpur:config.kanpurRoadFile};
   const provider = new GoogleProvider(config.serverKey, budget, fetcher);
+  const mappls = config.provider === 'mappls' ? new MapplsProvider(config.serverKey,budget,fetcher) : undefined;
   let busy = false;
   await app.register(cors, { origin: config.allowedOrigins, methods: ['GET', 'POST'], allowedHeaders: ['Content-Type', 'X-Nightwise-Code'] });
   await app.register(rateLimit, { max: 30, timeWindow: '1 minute' });
@@ -44,12 +47,12 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     let budgetReady = true, budgetIssue: 'connection'|'missing'|'expiring'|'invalid'|undefined;
     if (budget instanceof RedisBudget) ({ready:budgetReady,issue:budgetIssue}=await budget.health());
     else try { await budget.snapshot(); } catch { budgetReady = false; budgetIssue='invalid'; }
-    return { buildVersion:'0.11.0-live-preview',searchPreviewEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady,scanStrategy:'partition-and-spatial-v1',scoringVersion:SCORE_VERSION,serviceRadiusMeters:PILOT_RADIUS_METERS,serviceRegions:SERVICE_REGIONS.map(r=>({id:r.id,city:r.city,radiusMeters:r.radiusMeters})),ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
+    return { provider:config.provider, futureDepartureEnabled:!mappls, camerasEnabled:false, buildVersion:'0.11.0-live-preview',searchPreviewEnabled:!mappls&&config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady,scanStrategy:'partition-and-spatial-v1',scoringVersion:SCORE_VERSION,serviceRadiusMeters:PILOT_RADIUS_METERS,serviceRegions:SERVICE_REGIONS.map(r=>({id:r.id,city:r.city,radiusMeters:r.radiusMeters})),ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
       searchEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady, activityEnabled:config.enabled,
       scoringEnabled:config.scoring, accessCodeRequired:false, maxQueries:config.maxQueries,
       budgetStorage:config.redisUrl?'redis':'file', budgetReady, ...(budgetIssue?{budgetIssue}:{}) };
   });
-  registerSearch(app,config,budget,fetcher);
+  if(mappls)registerMapplsSearch(app,config,mappls);else registerSearch(app,config,budget,fetcher);
   // Anonymous pilot feedback: a rating plus coarse context, never coordinates.
   app.post<{ Body: { rating: 'up' | 'down'; routeLabel?: string; city?: string } }>('/api/feedback', { schema: { body: { type: 'object', additionalProperties: false, required: ['rating'], properties: { rating: { type: 'string', enum: ['up', 'down'] }, routeLabel: { type: 'string', maxLength: 40 }, city: { type: 'string', maxLength: 40 } } } } }, async request => {
     const entry = JSON.stringify({ ...request.body, at: new Date().toISOString() });
@@ -67,8 +70,8 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
   const pointSchema = { type: 'object', additionalProperties: false, required: ['name', 'latitude', 'longitude'], properties: { name: { type: 'string', minLength: 1, maxLength: 100 }, latitude: { type: 'number', minimum: -90, maximum: 90 }, longitude: { type: 'number', minimum: -180, maximum: 180 } } };
   app.post<{ Body: LiveJourney & {refresh?:boolean} }>('/api/compare', { schema: { body: { type: 'object', additionalProperties: false, required: ['origin', 'destination', 'mode'], properties: { refresh:{type:'boolean'}, departureTime:{type:'string',format:'date-time'}, origin: pointSchema, destination: pointSchema, mode: { type: 'string', enum: ['DRIVE','WALK','TWO_WHEELER'] } } } } }, async (request, reply) => {
 
-    if (!config.serverKey) throw new ServiceError('not-configured', 'Live routes need the server key and enabled Google services. Tutorial mode is ready.');
-    if (!config.liveEnabled) throw new ServiceError('live-paused', 'Live Google requests are paused to control usage. Tutorial mode is ready.');
+    if (!config.serverKey) throw new ServiceError('not-configured', 'Live routes need the server key and enabled mapping services. Tutorial mode is ready.');
+    if (!config.liveEnabled) throw new ServiceError('live-paused', 'Live requests are paused to control usage. Tutorial mode is ready.');
     const journey = request.body;
     if(journey.departureTime){const delay=Date.parse(journey.departureTime)-Date.now();if(!Number.isFinite(delay)||delay<0||delay>5*60*60_000)throw new ServiceError('invalid-departure','Choose a departure time from now to five hours ahead.',422);}
     if (!inPilotArea(journey.origin) || !inPilotArea(journey.destination) || !sameServiceRegion(journey.origin,journey.destination) || distanceMeters(journey.origin, journey.destination) < 100) throw new ServiceError('outside-area', 'Choose pins in the same supported city (North Bengaluru or Kanpur), at least 100 m apart.', 422);
@@ -80,13 +83,28 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     request.raw.on('aborted', closed); reply.raw.on('close', closed);
     try {
       const usageBefore=await budget.snapshot();
-      const routes = await provider.routes(journey, signal);
+      const routes = mappls ? await mappls.routes(journey,signal,request.body.refresh===true) : await provider.routes(journey, signal);
       let activityStatus: LiveResult['activityStatus'] = config.enabled ? 'complete' : 'disabled';
       const notices: string[] = [];
       const attributions: LiveResult['attributions'] = [];
       let plan: ReturnType<typeof buildQueryPlan> | null = null;
       const scans: NearbyScan[] = [];
-      if (routes.length) {
+      if (mappls && routes.length) {
+        try { plan = buildQueryPlan(routes,Math.max(200,Math.ceil(routes.reduce((n,r)=>n+r.distanceMeters,0)/90)),120); }
+        catch { plan = null; }
+        if(config.enabled){
+          const remaining=Math.max(0,usageBefore.nearbyLimit-usageBefore.nearbyCalls);
+          const perRoute=Math.min(12,Math.floor(remaining/routes.length));
+          let truncated=false;
+          if(!perRoute)activityStatus='budget';
+          else for(const route of routes){const result=await mappls.alongRoute(route,signal,request.body.refresh===true,perRoute);route.listedPlaces=result.places;if(!result.complete)truncated=true;}
+          if(activityStatus!=='budget')activityStatus='partial';
+          notices.push('Mappls listings are searched within 150 m of each displayed route and shown as a list with the distance from your start. This plan does not supply exact map positions or opening schedules for these listings, so they are not drawn as map pins and open/closed status stays unknown.');
+          if(truncated)notices.push('Some listing searches reached a page or call limit; more places may exist along these routes.');
+        }
+        attributions.push({name:'Mappls · MapmyIndia',uri:'https://www.mappls.com'});
+      }
+      if (!mappls && routes.length) {
         try {
           const remaining=Math.max(0,usageBefore.nearbyLimit-usageBefore.nearbyCalls);
           if(config.enabled&&!remaining){activityStatus='budget';notices.push('The nearby-search allowance is used up. Routes are available, but shop, hospital and fuel scans could not run. Increase the allowance, then refresh.');}
@@ -94,7 +112,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
         }
         catch { activityStatus = 'budget'; notices.push('These routes need more scans than the per-comparison limit. No partial route was ranked and no nearby requests were sent.'); }
       }
-      if (plan && config.enabled && activityStatus !== 'budget') {
+      if (!mappls && plan && config.enabled && activityStatus !== 'budget') {
         if (!await budget.canScan(plan.queries.length)) { activityStatus = 'budget'; notices.push('The remaining pilot allowance cannot cover all routes. No nearby requests were sent.'); }
         else {
           const collected=await collectScans(plan,{nearby:(q,s)=>provider.nearby(q,s,request.body.refresh===true)},signal,Math.min(config.maxQueries,Math.max(0,usageBefore.nearbyLimit-usageBefore.nearbyCalls)));
@@ -122,7 +140,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
       if (activityStatus === 'complete' && analyses.some(a => !a.coreComparable)) activityStatus = 'partial';
       if (!config.enabled) notices.push('Live activity scans are switched off. Travel times are live; activity is not assessed.');
       if (!config.scoring) notices.push('Experimental live scoring is disabled by the service setting.');
-      else notices.push('Safety Scores are experimental estimates from available evidence, not safety guarantees. Camera evidence is unavailable until the Mappls reports integration is connected.');
+      else notices.push('Safety Scores are experimental estimates from available evidence, not safety guarantees. Missing evidence is excluded from every route equally.');
       const analyzeRoads=loadRoadAnalyzer(roadFiles[regionForPoint(journey.origin)!.id],routes.map(r=>r.path));
       const roadAnalyses=Object.fromEntries(routes.map(r=>[r.id,analyzeRoads(r.path,r.steps)]));
       if(routes.length)attributions.push({name:'© OpenStreetMap contributors · ODbL',uri:'https://www.openstreetmap.org/copyright'});

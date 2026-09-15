@@ -12,7 +12,7 @@ import {DEFAULT_JOURNEY} from '../../src/domain/journey';
 const folders:string[]=[];
 afterEach(()=>{for(const f of folders.splice(0))rmSync(f,{recursive:true,force:true});});
 function file(){const f=mkdtempSync(join(tmpdir(),'nightwise-prebilling-'));folders.push(f);return join(f,'counts.json');}
-function config(extra:NodeJS.ProcessEnv={}){return readConfig({GOOGLE_MAPS_SERVER_KEY:'test-key-not-real',ROAD_DATA_PATH:'missing-test-road-file',BUDGET_LEDGER_PATH:file(),...extra});}
+function config(extra:NodeJS.ProcessEnv={}){return readConfig({API_PROVIDER:'google',GOOGLE_MAPS_SERVER_KEY:'test-key-not-real',ROAD_DATA_PATH:'missing-test-road-file',BUDGET_LEDGER_PATH:file(),...extra});}
 const path=[{latitude:13.05,longitude:77.6},{latitude:13.06,longitude:77.6}];
 const token='12345678-1234-4123-8123-123456789abc';
 const suggestion={method:'POST' as const,url:'/api/places/suggest',payload:{query:'Manyata',sessionToken:token}};

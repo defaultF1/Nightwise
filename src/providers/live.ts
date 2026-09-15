@@ -40,7 +40,7 @@ export async function liveComparison(journey: LiveJourney, signal: AbortSignal, 
   if (!response.ok) throw new JourneyError('unavailable', typeof data.message === 'string' ? data.message.slice(0, 300) : 'Live routes are unavailable.', response.status >= 500);
   if (!Array.isArray(data.routes) || !Array.isArray(data.analyses) || !data.comparison || !Array.isArray(data.notices) || !Array.isArray(data.attributions) || !Number.isFinite(Date.parse(data.checkedAt))) throw new JourneyError('invalid-response', 'The live response was incomplete.');
   validateRoutes(data.routes);
-  if (data.routes.some((r: any) => r.source !== 'google' || r.geometryKind !== 'provider')) throw new JourneyError('invalid-response', 'The live service did not return provider routes.');
+  if (data.routes.some((r: any) => r.source !== 'mappls' || r.geometryKind !== 'provider')) throw new JourneyError('invalid-response', 'The hosted backend is not running the Mappls build yet. Deploy the Mappls branch, then try again.');
   // Optional camera responses must never break otherwise usable route results.
   for (const analysis of data.analyses) if (analysis?.cameras) {
     const route = data.routes.find((r: {id:string}) => r.id === analysis.routeId);
