@@ -1,17 +1,10 @@
 import { usesGeoapify } from './selection';
-import { Capacitor } from '@capacitor/core';
 import { inServiceMapArea, type JourneyPoint } from '../domain/journey';
 import type { PlaceSuggestion, PlaceTravelEstimate, SearchDirection } from '../domain/search';
 import type { Coordinate } from '../domain/types';
-// A phone off the developer's WiFi has no localhost backend to fall back to.
-// Bake the hosted URL in so the app works on any mobile network, not just
-// the network it happened to be built on.
-const ANDROID_FALLBACK_API_BASE = 'https://nightwise-f5fu.onrender.com';
-const base = usesGeoapify ? '' : Capacitor.isNativePlatform()
-  ? import.meta.env.VITE_ANDROID_API_BASE_URL || import.meta.env.VITE_API_BASE_URL || ANDROID_FALLBACK_API_BASE
-  : import.meta.env.VITE_API_BASE_URL || (['localhost', '127.0.0.1'].includes(window.location.hostname) ? 'http://127.0.0.1:8787' : '');
+import {apiBase} from './api-base';
 async function post(path:string,body:unknown,signal:AbortSignal,accessCode:string){
-  const response=await fetch(base+path,{method:'POST',headers:{'Content-Type':'application/json',...(accessCode?{'X-Nightwise-Code':accessCode}:{})},body:JSON.stringify(body),signal:AbortSignal.any([signal,AbortSignal.timeout(usesGeoapify&&path==='/api/places/preview'?60000:15000)]),cache:'no-store'});
+  const response=await fetch(apiBase()+path,{method:'POST',headers:{'Content-Type':'application/json',...(accessCode?{'X-Nightwise-Code':accessCode}:{})},body:JSON.stringify(body),signal:AbortSignal.any([signal,AbortSignal.timeout(usesGeoapify&&path==='/api/places/preview'?60000:15000)]),cache:'no-store'});
   const data=await response.json();
   if(!response.ok)throw new Error(typeof data.message==='string'?data.message.slice(0,250):'Search unavailable. Use a supplied pin.');
   return data;

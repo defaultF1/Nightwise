@@ -1,3 +1,5 @@
+import {apiBase} from './providers/api-base';
+import {teamAccessHeaders} from './team-access';
 import { usesGeoapify } from './providers/selection';
 import { Capacitor, registerPlugin } from '@capacitor/core';
 import { Geolocation } from '@capacitor/geolocation';
@@ -21,7 +23,7 @@ export async function currentLocation(): Promise<JourneyPoint> {
   const validated=validateLocation(point);
   if(usesGeoapify){
     try{
-      const response=await fetch('/api/location/address',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({latitude:validated.latitude,longitude:validated.longitude}),signal:AbortSignal.timeout(15000)});
+      const response=await fetch(apiBase()+'/api/location/address',{method:'POST',headers:{'Content-Type':'application/json',...teamAccessHeaders()},body:JSON.stringify({latitude:validated.latitude,longitude:validated.longitude}),signal:AbortSignal.timeout(15000)});
       if(response.ok){const result=await response.json();if(typeof result.address==='string'&&result.address.trim())return {...validated,address:`Approximate address: ${result.address.trim().slice(0,250)}`};}
     }catch{/* Retain the GPS coordinate when the approximate address is unavailable. */}
     return validated;

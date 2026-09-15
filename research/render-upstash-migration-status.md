@@ -1,5 +1,7 @@
 # Render and Upstash: map replacement checkpoint
 
+This is the historical pre-hosting assessment. For the implemented production setup, use [Render hosted setup](render-hosted-setup.md).
+
 Checked against the repository on 15 September 2026. Dashboard settings have not been inspected or changed. This branch is a GitHub checkpoint of the local Geoapify preview, not a completed production migration.
 
 ## What to keep now

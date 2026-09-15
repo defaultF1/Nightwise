@@ -1,3 +1,4 @@
+import {TeamAccessGate} from './TeamAccessGate';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Capacitor } from '@capacitor/core';
@@ -12,5 +13,6 @@ document.documentElement.dataset.platform = Capacitor.getPlatform();
 // Restore native preferences before rendering the intro or app screens.
 void Promise.all([loadTheme(),loadTeamAccess()]).then(([theme,accessCode]) => {
   applyTheme(theme);
-  ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><App initialTheme={theme} initialAccessCode={accessCode} /></React.StrictMode>);
+  const app=<App initialTheme={theme} initialAccessCode={accessCode} />;
+  ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode>{import.meta.env.VITE_HOSTED_TEAM==='true'?<TeamAccessGate initialCode={accessCode}>{code=><App initialTheme={theme} initialAccessCode={code}/>}</TeamAccessGate>:app}</React.StrictMode>);
 });

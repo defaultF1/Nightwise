@@ -44,7 +44,7 @@ export function App({ initialTheme, initialAccessCode = '' }: { initialTheme: Th
   const [theme, setTheme] = useState<Theme>(initialTheme);
   const [journey, setJourney] = useState<LiveJourney>(DEFAULT_JOURNEY);
   const origin = journey.origin.name, destination = journey.destination.name;
-  const [dataMode, setDataMode] = useState<'sample'|'live'>('sample');
+  const [dataMode, setDataMode] = useState<'sample'|'live'>(import.meta.env.VITE_HOSTED_TEAM==='true'?'live':'sample');
   const city=dataMode==='sample'?'Bengaluru':regionForPoint(journey.origin)?.city??'Bengaluru';
   const needsDestination=dataMode==='live'&&!sameServiceRegion(journey.origin,journey.destination);
   const [liveResult, setLiveResult] = useState<LiveResult|null>(null);

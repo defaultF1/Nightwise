@@ -2,6 +2,9 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import { appendFileSync } from 'node:fs';
+import {timingSafeEqual} from 'node:crypto';
+import {readGeoConfig,type GeoConfig} from './geoapify-config';
+import type {GeoBudget} from './geoapify-budget';
 import { Geoapify, geoArea } from './geoapify';
 import { ServiceError } from './errors';
 import { AEOS_PIN, type LiveJourney } from '../src/domain/journey';
@@ -11,20 +14,33 @@ import { compareActivity } from '../src/domain/comparison';
 import { loadRoadAnalyzer } from './roads';
 import type { LiveResult } from '../src/domain/live-contract';
 
-export async function createGeoapifyServer(key:string){
- const app=Fastify({logger:false,bodyLimit:8192});
- const provider=new Geoapify(key);
- const origins=['http://127.0.0.1:4176','http://localhost:4176'];
+export async function createGeoapifyServer(key:string,config:GeoConfig=readGeoConfig({}),budget?:GeoBudget){
+ const app=Fastify({logger:false,bodyLimit:8192,trustProxy:config.hosted?(_address:string,hop:number)=>hop<1:false});
+ const provider=new Geoapify(key,budget,config.limits);
+ const origins=config.origins;
  await app.register(cors,{origin:origins});
- await app.register(rateLimit,{max:300,timeWindow:'1 minute'});
- app.addHook('onRequest',async(req,reply)=>{if(req.headers.origin&&!origins.includes(req.headers.origin))return reply.code(403).send({message:'This local preview origin is not enabled.'});});
+ await app.register(rateLimit,{max:600,timeWindow:'1 minute'});
+ app.addHook('onRequest',async(req,reply)=>{
+  const path=req.routeOptions.url??req.url.split('?')[0];
+  if(!path.startsWith('/api/'))return;
+  if(req.headers.origin&&!origins.includes(req.headers.origin))return reply.code(403).send({message:'This app origin is not enabled.'});
+  reply.header('Cache-Control','no-store');
+  if(path==='/api/status'||path==='/api/health'||req.method==='OPTIONS')return;
+  if(config.accessCode){
+   const supplied=req.headers['x-nightwise-code'];
+   const a=Buffer.from(typeof supplied==='string'?supplied:''),b=Buffer.from(config.accessCode);
+   if(a.length!==b.length||!timingSafeEqual(a,b))return reply.code(401).send({message:'Enter your team access code in Settings to use the live service.'});
+  }
+ });
+ app.get('/api/health',async()=>({ok:true,provider:'geoapify'}));
+ app.post('/api/access',async()=>({ok:true}));
  app.setErrorHandler((e,_req,reply)=>{const known=e instanceof ServiceError;reply.code(known?e.status:400).send({message:known?e.message:'Check the journey and try again.'});});
  const sessions=new Map<string,{at:number;points:Map<string,any>}>();
- const point=(p:any)=>{if(!p||!geoArea(p))throw new ServiceError('outside-area','This local preview supports the 20 km area around AEOS and Manyata. Choose a starting pin here.',422);};
+ const point=(p:any)=>{if(!p||!geoArea(p))throw new ServiceError('outside-area','This service supports the 20 km area around AEOS and Manyata. Choose a starting pin here.',422);};
  const mode=(m:any)=>{if(!['DRIVE','WALK','TWO_WHEELER'].includes(m))throw new ServiceError('invalid-input','Choose car, motorbike or walking.',422);};
  const departure=(d:any)=>{if(d!==undefined&&(typeof d!=='string'||!Number.isFinite(Date.parse(d))||Date.parse(d)<Date.now()||Date.parse(d)>Date.now()+5*3600000))throw new ServiceError('invalid-input','Choose a time from now to five hours ahead.',422);};
  const placeId=(id:any)=>{if(typeof id!=='string'||!/^geo_[a-f0-9]{1,600}$/.test(id))throw new ServiceError('invalid-input','This saved place belongs to a different provider. Please search again.',422);return id.slice(4);};
- app.get('/api/status',async()=>({ready:!!key,configured:!!key,paused:false,provider:'geoapify',searchEnabled:!!key,searchPreviewEnabled:true,activityEnabled:true,scoringEnabled:true,accessCodeRequired:false,maxQueries:120,serviceRadiusMeters:20000,serviceRegions:[{id:'north-bengaluru',city:'Bengaluru',radiusMeters:20000}],budgetStorage:'local Geoapify ledger',budgetReady:true,providerCalls:provider.usage()}));
+ app.get('/api/status',async()=>{let budgetReady=true;try{await provider.syncUsage();}catch{budgetReady=false;}return ({ready:!!key&&budgetReady,configured:!!key,paused:false,provider:'geoapify',searchEnabled:!!key,searchPreviewEnabled:true,activityEnabled:true,scoringEnabled:true,accessCodeRequired:!!config.accessCode,maxQueries:120,serviceRadiusMeters:20000,serviceRegions:[{id:'north-bengaluru',city:'Bengaluru',radiusMeters:20000}],budgetStorage:budget?'upstash':'local',budgetReady,providerCalls:config.accessCode?undefined:provider.usage()});});
  app.get<{Params:{style:string;z:string;x:string;y:string};Querystring:{scale?:string}}>('/api/tiles/:style/:z/:x/:y',async(req,reply)=>{
   const {style,z,x,y}=req.params;
   const scale=req.query.scale??'1';
@@ -33,7 +49,7 @@ export async function createGeoapifyServer(key:string){
   reply.raw.on('close',closed);
   try{
    const bytes=await provider.request(`/v1/tile/${style}/${z}/${x}/${y}${scale==='2'?'@2x':''}.png`,{},'tiles',AbortSignal.any([abort.signal,AbortSignal.timeout(60000)]));
-   return reply.header('Cache-Control','private, max-age=86400').type('image/png').send(Buffer.from(bytes));
+   return reply.header('Vary','X-Nightwise-Code').header('Cache-Control','private, max-age=86400').type('image/png').send(Buffer.from(bytes));
   }finally{reply.raw.off('close',closed);}
  });
  app.post<{Body:Record<string,any>}>('/api/places/suggest',async req=>{
@@ -78,10 +94,10 @@ export async function createGeoapifyServer(key:string){
   busy=true;const abort=new AbortController(),closed=()=>{if(!reply.raw.writableEnded)abort.abort();};reply.raw.on('close',closed);
   const signal=AbortSignal.any([abort.signal,AbortSignal.timeout(120000)]);
   try{
-   const before=provider.usage(),routes=await provider.routes(j,signal,j.refresh===true);
+   const before=await provider.syncUsage(),routes=await provider.routes(j,signal,j.refresh===true);
    const plan=buildQueryPlan(routes,200,2000),scans=routes.length?await provider.scans(plan,signal,j.refresh===true):[],checkedAt=new Date().toISOString();
    const analyses=routes.map(r=>analyzeRoute(r,plan,scans,j.departureTime??checkedAt,checkedAt));
-   const analyzeRoads=loadRoadAnalyzer('data/roads/north-bengaluru-22km.json',routes.map(r=>r.path));
+   const analyzeRoads=loadRoadAnalyzer(config.roadFile,routes.map(r=>r.path));
    const roadAnalyses=Object.fromEntries(routes.map(r=>[r.id,analyzeRoads(r.path,r.steps)]));
    const roads=Object.fromEntries(routes.map(r=>[r.id,{...roadAnalyses[r.id],maneuversPerKm:(r.turns??0)/(r.distanceMeters/1000)}]));
    const comparison=compareActivity(routes,analyses,j.mode==='WALK'?{}:roads,{allowLive:true,allowEstimates:true});
@@ -91,8 +107,8 @@ export async function createGeoapifyServer(key:string){
     'Distinct routes are requested using balanced, shortest and fewer-turn preferences, with one avoid-highways fallback when needed; duplicate or substantially overlapping fallback geometry is removed. Three alternatives are not guaranteed.',
     'Departure time is used to evaluate listed shop hours. This provider does not supply a verified traffic forecast for your departure.',
     'Listings are incomplete. No mapped businesses does not prove a road is empty; unknown opening hours are not confirmed open. CCTV and signal layers are planned separately.',
-    'Request totals are local API calls, not exact billable credits. View Geoapify statistics for credit usage.'
-   ],attributions:[{name:'Powered by Geoapify',uri:'https://www.geoapify.com/'},{name:'© OpenStreetMap contributors',uri:'https://www.openstreetmap.org/copyright'}],usage:provider.snapshot(),requestUsage:{routeCalls:now.route-before.route,nearbyCalls:now.nearby-before.nearby,detailsCalls:now.details-before.details,scope:'Local Geoapify requests; shared road areas are reused.'}} satisfies LiveResult;
+    'Request totals are provider API calls, not exact billable credits. View Geoapify statistics for credit usage.'
+   ],attributions:[{name:'Powered by Geoapify',uri:'https://www.geoapify.com/'},{name:'© OpenStreetMap contributors',uri:'https://www.openstreetmap.org/copyright'}],usage:provider.snapshot(),requestUsage:{routeCalls:now.route-before.route,nearbyCalls:now.nearby-before.nearby,detailsCalls:now.details-before.details,scope:'Geoapify requests; shared road areas are reused.'}} satisfies LiveResult;
   }finally{busy=false;reply.raw.off('close',closed);}
  });
  app.post<{Body:Record<string,any>}>('/api/feedback',async req=>{if(!['up','down'].includes(req.body?.rating))throw new ServiceError('invalid-input','Invalid feedback.',400);appendFileSync('.local/geoapify-feedback.jsonl',JSON.stringify({rating:req.body.rating,at:new Date().toISOString()})+'\n');return {ok:true};});

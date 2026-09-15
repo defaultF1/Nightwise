@@ -8,6 +8,8 @@ import { distinctRoadShare } from '../src/domain/route-proximity';
 import { distanceMeters, validCoordinate } from '../src/domain/geometry';
 import type { PlaceObservation, QueryPlan, NearbyScan } from '../src/domain/activity-types';
 import { ServiceError } from './errors';
+import {localGeoLimits,type GeoCounts} from './geoapify-config';
+import type {GeoBudget} from './geoapify-budget';
 
 type Feature = { properties: Record<string, any>; geometry?: {type:string;coordinates:any} };
 const TTL=5*60_000;
@@ -66,22 +68,25 @@ export class Geoapify {
  private activeRequests=new Set<Promise<void>>();
  private ledgerPath='.local/geoapify-usage.json';
  private ledger:{route:number;nearby:number;details:number;autocomplete:number;tiles:number};
- constructor(private key:string){
+ constructor(private key:string,private budget?:GeoBudget,private limits:GeoCounts=localGeoLimits){
   mkdirSync('.local',{recursive:true});
-  this.ledger=existsSync(this.ledgerPath)?JSON.parse(readFileSync(this.ledgerPath,'utf8')):{route:0,nearby:0,details:0,autocomplete:0,tiles:0};
+  this.ledger=!budget&&existsSync(this.ledgerPath)?JSON.parse(readFileSync(this.ledgerPath,'utf8')):{route:0,nearby:0,details:0,autocomplete:0,tiles:0};
   if(Object.values(this.ledger).some(v=>!Number.isSafeInteger(v)||v<0))throw new Error('Invalid local Geoapify usage ledger');
  }
+ async syncUsage(){if(this.budget)this.ledger=await this.budget.read();return this.usage();}
  usage(){return {...this.ledger};}
- snapshot(){return {routeCalls:this.ledger.route,nearbyCalls:this.ledger.nearby,routeLimit:150,nearbyLimit:300,remainingComparisons:Math.max(0,Math.floor((150-this.ledger.route)/4))};}
+ snapshot(){return {routeCalls:this.ledger.route,nearbyCalls:this.ledger.nearby,routeLimit:this.limits.route,nearbyLimit:this.limits.nearby,remainingComparisons:Math.max(0,Math.floor((this.limits.route-this.ledger.route)/4))};}
  async request(path:string,params:Record<string,string>,kind:keyof Geoapify['ledger'],signal:AbortSignal,refresh=false):Promise<any>{
   const cacheKey=path+JSON.stringify(params),cached=this.cache.get(cacheKey);
   if(!refresh&&cached&&Date.now()-cached.at<(kind==='tiles'?86400000:TTL))return structuredClone(cached.value);
   const run=async()=>{
    signal.throwIfAborted();
    const again=this.cache.get(cacheKey);if(!refresh&&again&&Date.now()-again.at<(kind==='tiles'?86400000:TTL))return structuredClone(again.value);
-   const caps={route:150,nearby:300,details:100,autocomplete:150,tiles:1500};
-   if(this.ledger[kind]>=caps[kind])throw new ServiceError('budget-exhausted','The local provider allowance is used up. Existing results remain available.',429);
-   this.ledger[kind]++;writeFileSync(this.ledgerPath,JSON.stringify(this.ledger));
+   const caps=this.limits;
+   if(!this.budget&&this.ledger[kind]>=caps[kind])throw new ServiceError('budget-exhausted','The local provider allowance is used up. Existing results remain available.',429);
+   if(this.budget)this.ledger=await this.budget.reserve(kind,caps[kind]);
+   else {this.ledger[kind]++;writeFileSync(this.ledgerPath,JSON.stringify(this.ledger));}
+   signal.throwIfAborted();
    const host=kind==='tiles'?'https://maps.geoapify.com':'https://api.geoapify.com';
    let response:Response;
    try{response=await fetch(`${host}${path}?${new URLSearchParams({...params,apiKey:this.key})}`,{signal:AbortSignal.any([signal,AbortSignal.timeout(20000)])});}
@@ -89,7 +94,7 @@ export class Geoapify {
    if(!response.ok)throw new ServiceError('provider-error',response.status===401||response.status===403?'The local provider key was rejected.':'The map provider could not complete this request.');
    const value=kind==='tiles'?new Uint8Array(await response.arrayBuffer()):await response.json();
    if(kind!=='tiles')value._nightwiseFetchedAt=new Date().toISOString();
-   if(this.cache.size>=2000)this.cache.delete(this.cache.keys().next().value!);
+   if(this.cache.size>=400)this.cache.delete(this.cache.keys().next().value!);
    this.cache.set(cacheKey,{at:Date.now(),value});return structuredClone(value);
   };
   // Space starts below 5 requests/second, but allow up to four responses in flight.
