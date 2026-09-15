@@ -78,7 +78,7 @@ describe('persistent request allowance', () => {
     b.reserve('route'); expect(() => b.reserve('route')).toThrow(/allowance/); expect(() => b.reserve('nearby', 2)).toThrow(/allowance/); expect(JSON.parse(readFileSync(file,'utf8'))).toEqual({routeCalls:2,nearbyCalls:2,autocompleteCalls:0,detailsCalls:0}); b.close();
   });
   it('does not allow two processes to own the same allowance', () => { const file=ledger(); const b=new Budget(file,10,600); expect(()=>new Budget(file,10,600)).toThrow(/locked/); b.close(); });
-  it('requires an access code before binding a hosted service', () => { expect(()=>readConfig({HOST:'0.0.0.0'})).toThrow(/access/i); expect(readConfig({HOST:'0.0.0.0',PILOT_ACCESS_CODE:'private-team-code-123'}).host).toBe('0.0.0.0'); });
+  it('allows hosted public access and ignores a legacy team code', () => { expect(readConfig({HOST:'0.0.0.0'}).host).toBe('0.0.0.0'); expect(readConfig({HOST:'0.0.0.0',PILOT_ACCESS_CODE:'private-team-code-123'}).accessCode).toBe(''); });
 });
 describe('Google response boundary', () => {
   it('decodes route geometry and includes actual turn evidence', () => { expect(decodePolyline(encode(path))).toEqual(path); const routes=parseRoutes(response); expect(routes[0]).toMatchObject({source:'google',geometryKind:'provider',turns:1,label:'Fastest'}); });
@@ -89,10 +89,10 @@ describe('Google response boundary', () => {
 });
 describe('live backend', () => {
   it('configuration checks cost nothing and never return secrets', async () => { const calls=vi.fn(); const app=await createServer(config(),calls); try { const res=await app.inject('/api/status'); expect(res.statusCode).toBe(200); expect(res.body).not.toContain('test-key'); expect(calls).not.toHaveBeenCalled(); } finally { await app.close(); } },15000);
-  it('refuses missing credentials, invalid inputs, disallowed origins and missing access code before provider calls', async () => {
+  it('refuses missing provider credentials, invalid inputs and disallowed origins before provider calls', async () => {
     const calls=vi.fn(); const app=await createServer(config({GOOGLE_MAPS_SERVER_KEY:''}),calls);
     try { expect((await app.inject(request)).statusCode).toBe(503); expect((await app.inject({...request,payload:{...DEFAULT_JOURNEY,mode:'FLY'}})).statusCode).toBe(400); expect((await app.inject({...request,headers:{origin:'https://untrusted.example'}})).statusCode).toBe(403); expect(calls).not.toHaveBeenCalled(); } finally { await app.close(); }
-    const secured=await createServer(config({PILOT_ACCESS_CODE:'secret-pilot-code'}),calls); try { expect((await secured.inject(request)).statusCode).toBe(401); expect(calls).not.toHaveBeenCalled(); } finally { await secured.close(); }
+    const secured=await createServer(config({PILOT_ACCESS_CODE:'secret-pilot-code',GOOGLE_MAPS_SERVER_KEY:''}),calls); try { expect((await secured.inject('/api/status')).json().accessCodeRequired).toBe(false); expect((await secured.inject(request)).statusCode).toBe(503); expect(calls).not.toHaveBeenCalled(); } finally { await secured.close(); }
   });
   it('returns real-provider routes without inventing activity when scans are off', async () => { const calls=vi.fn(async()=>new Response(JSON.stringify(response))); const app=await createServer(config(),calls); try { const res=await app.inject(request); expect(res.statusCode).toBe(200); const body=res.json(); expect(body.activityStatus).toBe('disabled'); expect(body.analyses[0].openPlaces).toBeNull(); expect(body.comparison.scores).toEqual({}); expect(body.usage.routeCalls).toBe(1); expect(calls).toHaveBeenCalledTimes(1); const options=calls.mock.calls[0] as unknown as [string,RequestInit]; expect(String(options[0])).toContain('routes.googleapis.com'); } finally { await app.close(); } });
   it('counts a failed provider call and never retries or leaks the error body', async () => { const calls=vi.fn(async()=>new Response('private-provider-message',{status:403})); const app=await createServer(config({PILOT_ROUTE_LIMIT:'1'}),calls); try { const first=await app.inject(request); expect(first.json().code).toBe('provider-access'); expect(first.body).not.toContain('private-provider'); expect((await app.inject(request)).statusCode).toBe(429); expect(calls).toHaveBeenCalledTimes(1); } finally { await app.close(); } });

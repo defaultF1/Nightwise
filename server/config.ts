@@ -6,8 +6,8 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env) {
     return n;
   };
   const host = env.HOST || '127.0.0.1';
-  const accessCode = env.PILOT_ACCESS_CODE || '';
-  if (!['127.0.0.1', 'localhost', '::1'].includes(host) && accessCode.length < 16) throw new Error('A hosted pilot requires a PILOT_ACCESS_CODE of at least 16 characters');
+  // Public app: legacy PILOT_ACCESS_CODE must not re-enable a hidden code gate.
+  const accessCode = '';
   const redisUrl = env.UPSTASH_REDIS_REST_URL || '';
   const redisToken = env.UPSTASH_REDIS_REST_TOKEN || '';
   if (!!redisUrl !== !!redisToken) throw new Error('Both Upstash REST settings are required');

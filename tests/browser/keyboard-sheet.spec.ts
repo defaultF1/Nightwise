@@ -25,20 +25,13 @@ for(const theme of ['dark','light']) test(`search remains usable after keyboard-
   await expect(page.getByText('Place saved on this device.',{exact:true})).toBeVisible();
 });
 
-test('team code Done and coordinate Enter work in a reduced viewport',async({page})=>{
+test('settings have no team-code field and coordinate Enter works',async({page})=>{
   await page.route('https://**/*',r=>r.abort());
   await page.goto('/');
   await page.getByRole('button',{name:'Open settings'}).click();
   await page.getByText('Live service',{exact:true}).click();
-  const code=page.getByLabel('Team access code if required');
-  await code.fill('test-only');
+  await expect(page.getByLabel('Team access code if required')).toHaveCount(0);
   await page.setViewportSize({width:360,height:440});
-  await code.scrollIntoViewIfNeeded();
-  await expect(code).toBeInViewport();
-  await expect(page.getByRole('heading',{name:'Make it yours'})).toBeInViewport();
-  await code.press('Enter');
-  await expect(code).not.toBeFocused();
-  await expect(code).toHaveValue('test-only');
   await page.getByRole('button',{name:'Close',exact:true}).click();
   await page.getByRole('button',{name:'Live routes',exact:true}).click();
   await page.locator('.place-field.destination').click();

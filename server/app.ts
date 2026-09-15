@@ -1,7 +1,6 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
-import { timingSafeEqual } from 'node:crypto';
 import { appendFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { Budget, type BudgetStore } from './budget';
@@ -34,10 +33,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     reply.header('Cache-Control', 'no-store');
     const origin = request.headers.origin;
     if (origin && !config.allowedOrigins.includes(origin)) return reply.code(403).send({ code: 'origin-denied', message: 'This app origin is not enabled.' });
-    if(config.accessCode&&request.url.startsWith('/api/places/')){
-      const supplied=Buffer.from(String(request.headers['x-nightwise-code']||'')), expected=Buffer.from(config.accessCode);
-      if(supplied.length!==expected.length||!timingSafeEqual(supplied,expected))return reply.code(401).send({code:'access-required',message:'Enter the team access code in Settings to search places.'});
-    }
+
   });
   app.setErrorHandler((error, _request, reply) => {
     const e = error as { statusCode?: number };
@@ -50,7 +46,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     else try { await budget.snapshot(); } catch { budgetReady = false; budgetIssue='invalid'; }
     return { buildVersion:'0.11.0-live-preview',searchPreviewEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady,scanStrategy:'partition-and-spatial-v1',scoringVersion:'night-activity-v5-observed',serviceRadiusMeters:PILOT_RADIUS_METERS,serviceRegions:SERVICE_REGIONS.map(r=>({id:r.id,city:r.city,radiusMeters:r.radiusMeters})),ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
       searchEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady, activityEnabled:config.enabled,
-      scoringEnabled:config.scoring, accessCodeRequired:!!config.accessCode, maxQueries:config.maxQueries,
+      scoringEnabled:config.scoring, accessCodeRequired:false, maxQueries:config.maxQueries,
       budgetStorage:config.redisUrl?'redis':'file', budgetReady, ...(budgetIssue?{budgetIssue}:{}) };
   });
   registerSearch(app,config,budget,fetcher);
@@ -70,11 +66,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
   });
   const pointSchema = { type: 'object', additionalProperties: false, required: ['name', 'latitude', 'longitude'], properties: { name: { type: 'string', minLength: 1, maxLength: 100 }, latitude: { type: 'number', minimum: -90, maximum: 90 }, longitude: { type: 'number', minimum: -180, maximum: 180 } } };
   app.post<{ Body: LiveJourney & {refresh?:boolean} }>('/api/compare', { schema: { body: { type: 'object', additionalProperties: false, required: ['origin', 'destination', 'mode'], properties: { refresh:{type:'boolean'}, departureTime:{type:'string',format:'date-time'}, origin: pointSchema, destination: pointSchema, mode: { type: 'string', enum: ['DRIVE','WALK','TWO_WHEELER'] } } } } }, async (request, reply) => {
-    if (config.accessCode) {
-      const supplied = Buffer.from(String(request.headers['x-nightwise-code'] || ''));
-      const expected = Buffer.from(config.accessCode);
-      if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) throw new ServiceError('access-required', 'Enter the team access code in Settings to use live comparisons.', 401);
-    }
+
     if (!config.serverKey) throw new ServiceError('not-configured', 'Live routes need the server key and enabled Google services. Tutorial mode is ready.');
     if (!config.liveEnabled) throw new ServiceError('live-paused', 'Live Google requests are paused to control usage. Tutorial mode is ready.');
     const journey = request.body;
