@@ -7,7 +7,8 @@ export function readGeoConfig(env:NodeJS.ProcessEnv=process.env){
  const publicHost=!['127.0.0.1','localhost','::1'].includes(host);
  const integer=(key:string,fallback:number,max:number)=>{const n=Number(env[key]??fallback);if(!Number.isSafeInteger(n)||n<1||n>max)throw new Error(`Invalid ${key}: use a whole number between 1 and ${max}`);return n;};
  const accessCode=env.PILOT_ACCESS_CODE||'';
- if((hosted||publicHost)&&(accessCode.length<16||accessCode.length>120))throw new Error('Hosted Geoapify requires PILOT_ACCESS_CODE (16–120 characters).');
+ // A team code is optional for this public pilot; when set it must stay hard to guess.
+ if(accessCode&&(accessCode.length<16||accessCode.length>120))throw new Error('PILOT_ACCESS_CODE must be 16–120 characters when set.');
  const redisUrl=env.UPSTASH_REDIS_REST_URL||'',redisToken=env.UPSTASH_REDIS_REST_TOKEN||'';
  if(!!redisUrl!==!!redisToken)throw new Error('Both Upstash REST settings are required.');
  if(redisUrl){let valid=false;try{const u=new URL(redisUrl);valid=u.protocol==='https:'&&u.hostname.endsWith('.upstash.io')&&!u.username&&!u.password&&!u.search&&!u.hash&&u.pathname==='/';}catch{}if(!valid)throw new Error('Use the HTTPS Upstash REST endpoint without a command or query.');}

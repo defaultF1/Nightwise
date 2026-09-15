@@ -14,7 +14,8 @@ const counts={route:11,nearby:20,details:2,autocomplete:5,tiles:40};
 test('production requires secrets and persistent counters; keeps provider namespace separate',()=>{
  const c=readGeoConfig(env);expect(c.host).toBe('0.0.0.0');expect(c.origins).toContain('https://team.onrender.com');expect(c.redisKey).not.toBe('nightwise:pilot-budget:v1');expect(c.serveWeb).toBe(true);
  expect(readGeoConfig({...env,PORT:'10000'}).port).toBe(10000);
- expect(()=>readGeoConfig({...env,PILOT_ACCESS_CODE:''})).toThrow(/PILOT_ACCESS_CODE/);
+ expect(readGeoConfig({...env,PILOT_ACCESS_CODE:''}).accessCode).toBe('');
+ expect(()=>readGeoConfig({...env,PILOT_ACCESS_CODE:'short'})).toThrow(/PILOT_ACCESS_CODE/);
  expect(()=>readGeoConfig({...env,UPSTASH_REDIS_REST_URL:'',UPSTASH_REDIS_REST_TOKEN:''})).toThrow(/Upstash/);
  expect(()=>readGeoConfig({...env,GEOAPIFY_TILE_LIMIT:'-1',GEOAPIFY_TILES_LIMIT:'-1'})).toThrow(/GEOAPIFY_TILES_LIMIT/);
 });

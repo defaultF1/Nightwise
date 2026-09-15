@@ -56,7 +56,6 @@ export function LaunchScreen({ onDone }: { onDone: () => void }) {
       src="/assets/launch/nightwise-launch-navy-concept.mp4" />
     <div className="launch-brand"><MoonMark size={62} /><strong>NightWise</strong><span>Compare night routes</span><small><MapPin size={13} /> Bengaluru</small></div>
     <div className="launch-actions">
-      {playback === 'loading' && <span role="status">Loading intro…</span>}
       {playback === 'blocked' && <button className="launch-play" autoFocus onClick={play}><Play size={18} /> Play intro</button>}
       {playback === 'unavailable' && <span role="status">Opening NightWise…</span>}
     </div>
