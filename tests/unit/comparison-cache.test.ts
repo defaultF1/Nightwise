@@ -32,6 +32,14 @@ it('expires earlier when a listed place closes during the five-minute window',()
  cache.set('closing',{...result(),analyses:[{places:[{hours:{state:'open',minutesUntilClose:2},categories:[],conflict:false}]}]} as unknown as LiveResult);
  now+=119999;expect(cache.get('closing')).toBeDefined();now++;expect(cache.get('closing')).toBeUndefined();
 });
+it('does not renew older camera evidence and expires at a camera report boundary',()=>{
+ let now=start;const cache=new ComparisonCache(()=>now);
+ const cameras={status:'complete',checkedAt:new Date(start-120000).toISOString(),reports:[{expiresAt:new Date(start+60000).toISOString()}]};
+ cache.set('cameras',{...result(),analyses:[{places:[],cameras}]} as unknown as LiveResult);
+ now=start+59999;expect(cache.get('cameras')).toBeDefined();now++;expect(cache.get('cameras')).toBeUndefined();
+ now=start;cache.set('older',{...result(),analyses:[{places:[],cameras:{...cameras,reports:[]}}]} as unknown as LiveResult);
+ now=start+180000;expect(cache.get('older')).toBeUndefined();
+});
 it('does not retain budget failures, expired checks or unlimited journey history',()=>{
  const cache=new ComparisonCache(()=>start);cache.set('budget',{...result(),activityStatus:'budget'});expect(cache.get('budget')).toBeUndefined();
  cache.set('old',{...result(),checkedAt:new Date(start-COMPARISON_CACHE_MS).toISOString()});expect(cache.get('old')).toBeUndefined();

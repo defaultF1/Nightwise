@@ -1,5 +1,7 @@
 # Mappls camera and road-alert research
 
+Update: the user has chosen camera evidence as a Safety Score component. See [the current implementation and hosting status](safety-score-and-hosting-2026-09-16.md). Live camera access remains unconfirmed.
+
 Checked in the user's Edge browser on 16 September 2026, following review of the account's actual allocations.
 
 ## Confirmed developer feature

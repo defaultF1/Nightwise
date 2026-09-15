@@ -31,3 +31,9 @@ html[data-native-map=true],html[data-native-map=true] body,html[data-native-map=
 .launch-screen:focus{outline:none}
 
 .score-breakdown{margin:24px 0;padding-top:20px;border-top:1px solid var(--line)}.score-breakdown h3{font-size:16px;margin:0 0 8px}.score-coverage{font-size:13px;color:var(--muted);line-height:1.5}.score-breakdown .evidence-rows dd{white-space:normal;min-width:90px;text-align:right}
+
+.camera-layer { margin-block: 16px; padding-block: 12px; border-block: 1px solid currentColor; }
+.camera-layer label { display: flex; align-items: center; gap: 8px; min-height: 44px; }
+.camera-layer i { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
+.camera-layer p { margin-block: 8px; }
+.camera-layer small { display: block; line-height: 1.5; }

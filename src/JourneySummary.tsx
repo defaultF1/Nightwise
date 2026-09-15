@@ -7,7 +7,7 @@ export function JourneySummary({routes,comparison,analyses,onSelect}:{routes:Rou
   const choice=routes.find(r=>r.id===(comparison.recommendedId??comparison.fastestId))??routes[0];
   const a=analyses.find(a=>a.routeId===choice.id);
   return <section className="journey-answer evidence-notice" data-outcome={comparison.outcome} aria-label="Journey recommendation">
-    <span className="small-label">{comparison.recommendedId?'RECOMMENDED FOR LISTED ACTIVITY':'QUICKEST OPTION'}</span>
+    <span className="small-label">{comparison.recommendedId?'RECOMMENDED BY SAFETY SCORE':'QUICKEST OPTION'}</span>
     <h2>{choice.label} · {Math.round(choice.durationSeconds/60)} min <span>· {(choice.distanceMeters/1000).toFixed(1)} km</span></h2>
     <p>{comparison.message}</p>
     {!!a?.openPlaces&&<ul><li>{`${a.openPlaces} places listed as open around your passing time`}</li>{!!a.potentialHelpPoints&&<li>{`${a.potentialHelpPoints} listed open help points${a.longestObservedHelpGapMeters>0?` · longest gap ${formatMeters(a.longestObservedHelpGapMeters)}`:''}`}</li>}</ul>}

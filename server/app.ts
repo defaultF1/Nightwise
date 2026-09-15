@@ -11,7 +11,7 @@ import type { ServerConfig } from './config';
 import { inPilotArea, sameServiceRegion, regionForPoint, PILOT_RADIUS_METERS, SERVICE_REGIONS, type LiveJourney } from '../src/domain/journey';
 import { distanceMeters } from '../src/domain/geometry';
 import { buildQueryPlan, analyzeRoute } from '../src/domain/activity';
-import { compareActivity } from '../src/domain/comparison';
+import { compareActivity, SCORE_VERSION } from '../src/domain/comparison';
 import type { NearbyScan } from '../src/domain/activity-types';
 import type { LiveResult } from '../src/domain/live-contract';
 import { registerSearch } from './search';
@@ -44,7 +44,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
     let budgetReady = true, budgetIssue: 'connection'|'missing'|'expiring'|'invalid'|undefined;
     if (budget instanceof RedisBudget) ({ready:budgetReady,issue:budgetIssue}=await budget.health());
     else try { await budget.snapshot(); } catch { budgetReady = false; budgetIssue='invalid'; }
-    return { buildVersion:'0.11.0-live-preview',searchPreviewEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady,scanStrategy:'partition-and-spatial-v1',scoringVersion:'night-activity-v5-observed',serviceRadiusMeters:PILOT_RADIUS_METERS,serviceRegions:SERVICE_REGIONS.map(r=>({id:r.id,city:r.city,radiusMeters:r.radiusMeters})),ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
+    return { buildVersion:'0.11.0-live-preview',searchPreviewEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady,scanStrategy:'partition-and-spatial-v1',scoringVersion:SCORE_VERSION,serviceRadiusMeters:PILOT_RADIUS_METERS,serviceRegions:SERVICE_REGIONS.map(r=>({id:r.id,city:r.city,radiusMeters:r.radiusMeters})),ready: !!config.serverKey&&config.liveEnabled&&budgetReady, configured:!!config.serverKey, paused:!config.liveEnabled,
       searchEnabled:config.liveEnabled&&config.searchEnabled&&!!config.serverKey&&budgetReady, activityEnabled:config.enabled,
       scoringEnabled:config.scoring, accessCodeRequired:false, maxQueries:config.maxQueries,
       budgetStorage:config.redisUrl?'redis':'file', budgetReady, ...(budgetIssue?{budgetIssue}:{}) };
@@ -122,7 +122,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
       if (activityStatus === 'complete' && analyses.some(a => !a.coreComparable)) activityStatus = 'partial';
       if (!config.enabled) notices.push('Live activity scans are switched off. Travel times are live; activity is not assessed.');
       if (!config.scoring) notices.push('Experimental live scoring is disabled by the service setting.');
-      else notices.push('Live scores are experimental estimates from listed data, not safety ratings.');
+      else notices.push('Safety Scores are experimental estimates from available evidence, not safety guarantees. Camera evidence is unavailable until the Mappls reports integration is connected.');
       const analyzeRoads=loadRoadAnalyzer(roadFiles[regionForPoint(journey.origin)!.id],routes.map(r=>r.path));
       const roadAnalyses=Object.fromEntries(routes.map(r=>[r.id,analyzeRoads(r.path,r.steps)]));
       if(routes.length)attributions.push({name:'© OpenStreetMap contributors · ODbL',uri:'https://www.openstreetmap.org/copyright'});

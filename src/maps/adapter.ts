@@ -7,9 +7,10 @@ import type { Coordinate } from '../domain/types';
 import type { GapMarker } from '../domain/gap-markers';
 import { syncNestedMapScroll } from './scroll-sync';
 import { PIN_COLORS, pinTint, type PlacePin } from './pins';
+import { CAMERA_COLOR, type CameraPin } from './camera-pins';
 
 export type MapLine = { id: string; path: Coordinate[]; color: string; width: number; clickable: boolean };
-export type MapHandle = { draw(lines: MapLine[], pins: { name: string; latitude: number; longitude: number }[], gaps?:GapMarker[], places?: PlacePin[]): Promise<void>; fit(points: Coordinate[]): Promise<void>; touch(enabled: boolean, expanded?: boolean): Promise<void>; destroy(): Promise<void> };
+export type MapHandle = { draw(lines: MapLine[], pins: { name: string; latitude: number; longitude: number }[], gaps?:GapMarker[], places?: PlacePin[], cameras?:CameraPin[]): Promise<void>; fit(points: Coordinate[]): Promise<void>; touch(enabled: boolean, expanded?: boolean): Promise<void>; destroy(): Promise<void> };
 const latLng = (p: Coordinate) => ({ lat: p.latitude, lng: p.longitude });
 let script: Promise<void> | undefined;
 let instance = 0;
@@ -49,12 +50,13 @@ export async function createMap(element: HTMLElement, theme: Theme, onSelect: (i
     const stopScrollSync = syncNestedMapScroll(element);
     const stopViewport=syncMapViewport(element,rect=>MapViewport.clip({...rect,id:mapId}));
     return {
-      async draw(next, pins, gaps=[], help=[]) {
+      async draw(next, pins, gaps=[], help=[], cameras=[]) {
         if (lines.length) await map.removePolylines(lines);
         if (markers.length) await map.removeMarkers(markers);
         lines = next.length ? await map.addPolylines(next.map((l): Polyline => ({ path: l.path.map(latLng), strokeColor: l.color, strokeWeight: l.width, clickable: l.clickable, tag: l.id }))) : [];
         ids = new Map(lines.map((id, i) => [id, next[i].id]));
         markers = await map.addMarkers([...pins.map((p,i) => ({ coordinate: latLng(p), title: `${i?'Destination':'Start'} · ${p.name}`, tintColor:pinTint(i?'destination':'start'),zIndex:100 })),...gaps.map(p=>({coordinate:latLng(p),title:p.label,snippet:p.name,tintColor:pinTint('gap'),zIndex:20})),...help.map(p=>({coordinate:latLng(p),title:p.name,snippet:p.status??'Listed open around arrival',iconUrl:`markers/${p.kind}.png`,iconSize:{width:26,height:26},iconAnchor:{x:0.5,y:0.5},zIndex:10}))]);
+        if (cameras.length) markers.push(...await map.addMarkers(cameras.map(p => ({ coordinate:latLng(p), title:p.name, snippet:p.status, tintColor:{r:34,g:211,b:238,a:1}, zIndex:30 }))));
       },
       async fit(points) {
         if (!points.length) return;
@@ -68,13 +70,14 @@ export async function createMap(element: HTMLElement, theme: Theme, onSelect: (i
   const map = new google.maps.Map(element, { center: { lat: initialCenter.latitude, lng: initialCenter.longitude }, zoom: 13, styles: styles(theme), mapTypeControl: false, streetViewControl: false, fullscreenControl: false, gestureHandling: 'cooperative', clickableIcons: false });
   let lines: google.maps.Polyline[] = [], pins: google.maps.Marker[] = [];
   return {
-    async draw(next, nextPins, gaps=[], help=[]) {
+    async draw(next, nextPins, gaps=[], help=[], cameras=[]) {
       lines.forEach(l => { google.maps.event.clearInstanceListeners(l); l.setMap(null); }); pins.forEach(p => p.setMap(null));
       lines = next.map(l => { const line = new google.maps.Polyline({ map, path: l.path.map(latLng), strokeColor: l.color, strokeWeight: l.width, clickable: l.clickable, zIndex: l.clickable ? 1 : 2 }); if (l.clickable) line.addListener('click', () => onSelect(l.id)); return line; });
       const icon=(kind:keyof typeof PIN_COLORS):google.maps.Symbol=>({path:'M 0,0 C -3,-5 -10,-12 -10,-20 A 10,10 0 1,1 10,-20 C 10,-12 3,-5 0,0 Z',fillColor:PIN_COLORS[kind],fillOpacity:1,strokeColor:'#ffffff',strokeWeight:1.5,scale:1,labelOrigin:new google.maps.Point(0,-20)});
       pins = nextPins.map((p, i) => new google.maps.Marker({ map, position: latLng(p), title: `${i?'Destination':'Start'} · ${p.name}`, label:{text:i?'B':'A',color:'#111111',fontWeight:'700'},icon:icon(i?'destination':'start'),zIndex:100 }));
       pins.push(...help.map(p=>new google.maps.Marker({map,position:latLng(p),title:p.name+' · '+(p.status??'Listed open around arrival'),label:{text:p.kind==='hospital'?'H':p.kind==='medical'?'+':p.kind==='fuel'?'F':'S',color:'#111111',fontWeight:'700',fontSize:'10px'},icon:{path:google.maps.SymbolPath.CIRCLE,scale:8,fillColor:PIN_COLORS[p.kind],fillOpacity:1,strokeColor:'#ffffff',strokeWeight:2,labelOrigin:new google.maps.Point(0,0)},zIndex:10})));
       pins.push(...gaps.map(p=>new google.maps.Marker({map,position:latLng(p),title:p.name,label:{text:p.label,color:'#171717',fontSize:'12px',fontWeight:'600'},icon:{path:google.maps.SymbolPath.CIRCLE,scale:8,fillColor:'#f4b86a',fillOpacity:1,strokeWeight:1,labelOrigin:new google.maps.Point(0,-2.5)}})));
+      pins.push(...cameras.map(p => new google.maps.Marker({ map, position:latLng(p), title:`${p.name} · ${p.status}`, label:{text:'C',color:'#111111',fontWeight:'700'}, icon:{path:google.maps.SymbolPath.CIRCLE,scale:10,fillColor:CAMERA_COLOR,fillOpacity:1,strokeColor:'#ffffff',strokeWeight:2}, zIndex:30 })));
     },
     async fit(points) { if (points.length) { const bounds = new google.maps.LatLngBounds(); points.forEach(p => bounds.extend(latLng(p))); map.fitBounds(bounds, 45); } },
     async touch(enabled, expanded = false) { map.setOptions({ gestureHandling: enabled ? expanded ? 'greedy' : 'cooperative' : 'none', keyboardShortcuts: enabled }); },

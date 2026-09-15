@@ -1,6 +1,7 @@
 import type {LiveJourney} from '../domain/journey';
 import type {LiveResult} from '../domain/live-contract';
 import {assumedShopHours} from '../domain/assumed-hours';
+import {CAMERA_FRESHNESS_MS} from '../domain/cameras';
 
 export const COMPARISON_CACHE_MS=5*60_000;
 // Session memory only: no credentials or journey history are written to disk.
@@ -20,6 +21,18 @@ export class ComparisonCache {
   set(key:string,result:LiveResult){
     if(result.activityStatus==='budget'||!result.routes.length)return;
     const checked=Date.parse(result.checkedAt);let expiresAt=checked+COMPARISON_CACHE_MS;
+    for (const analysis of result.analyses) {
+      const cameras = analysis.cameras;
+      if (!cameras || cameras.status !== 'complete') continue;
+      const cameraChecked = Date.parse(cameras.checkedAt);
+      if (!Number.isFinite(cameraChecked)) return;
+      expiresAt = Math.min(expiresAt, cameraChecked + CAMERA_FRESHNESS_MS);
+      for (const report of cameras.reports) if (report.expiresAt) {
+        const expiry = Date.parse(report.expiresAt);
+        if (!Number.isFinite(expiry)) return;
+        if (expiry > checked) expiresAt = Math.min(expiresAt, expiry);
+      }
+    }
     // A known opening/closing boundary can invalidate sooner than five minutes.
     for(const a of result.analyses.filter(a=>!(Date.parse(a.checkedAt)>checked)))for(const p of a.places){
       if(p.hours.state==='open'&&p.hours.minutesUntilClose!==null&&Number.isFinite(p.hours.minutesUntilClose))expiresAt=Math.min(expiresAt,checked+p.hours.minutesUntilClose*60000);

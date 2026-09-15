@@ -3,6 +3,7 @@ import type { LiveJourney } from '../domain/journey';
 import type { LiveResult, ServiceStatus } from '../domain/live-contract';
 import { JourneyError, validateRoutes } from './routes';
 import {ComparisonCache} from './comparison-cache';
+import {summarizeCameras} from '../domain/cameras';
 const comparisonCache=new ComparisonCache();
 // A phone off the developer's WiFi has no localhost backend to fall back to.
 // Bake the hosted URL in so the app works on any mobile network, not just
@@ -40,6 +41,11 @@ export async function liveComparison(journey: LiveJourney, signal: AbortSignal, 
   if (!Array.isArray(data.routes) || !Array.isArray(data.analyses) || !data.comparison || !Array.isArray(data.notices) || !Array.isArray(data.attributions) || !Number.isFinite(Date.parse(data.checkedAt))) throw new JourneyError('invalid-response', 'The live response was incomplete.');
   validateRoutes(data.routes);
   if (data.routes.some((r: any) => r.source !== 'google' || r.geometryKind !== 'provider')) throw new JourneyError('invalid-response', 'The live service did not return provider routes.');
+  // Optional camera responses must never break otherwise usable route results.
+  for (const analysis of data.analyses) if (analysis?.cameras) {
+    const route = data.routes.find((r: {id:string}) => r.id === analysis.routeId);
+    if (!route || !summarizeCameras(route, analysis.cameras)) delete analysis.cameras;
+  }
   signal.throwIfAborted();
   comparisonCache.set(cacheKey,data as LiveResult);
   return data as LiveResult;

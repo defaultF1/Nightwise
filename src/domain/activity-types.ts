@@ -1,4 +1,5 @@
 import type { Coordinate, HoursState } from './types';
+import type { RouteCameraEvidence } from './cameras';
 
 export type WeeklyPeriod = { openDay: number; openMinute: number; closeDay: number; closeMinute: number };
 export type OpeningHours = { timeZone: string; alwaysOpen?: boolean; alwaysClosed?: boolean; periods?: WeeklyPeriod[] };
@@ -12,6 +13,7 @@ export type HoursEvaluation = { open24Hours?: boolean; state: HoursState; closin
 export type ActivitySegment = { fromMeters: number; toMeters: number; state: 'active' | 'low' | 'unknown' };
 export type DeduplicatedPlace = { id: string; name?: string; coordinate?: Coordinate; arrivalMinutes?: number; hours: HoursEvaluation; schedule?: PlaceSchedule; categories: string[]; sampleIndexes: number[]; conflict: boolean };
 export type ActivityAnalysis = {
+  cameras?: RouteCameraEvidence;
   lowActivityGapBounds?: [number, number]; helpGapBounds?: [number, number];
   routeId: string; source: 'sample' | 'live'; checkedAt: string; distanceMeters: number;
   openPlaces: number | null; closedPlaces: number | null; unknownHours: number | null;
@@ -25,7 +27,7 @@ export type ActivityAnalysis = {
   segments: ActivitySegment[]; places: DeduplicatedPlace[]; limitations: string[];
   coreComparable: boolean;
 };
-export type Component = 'openDensity' | 'mainRoad' | 'helpDensity' | 'gapContinuity' | 'simplicity' | 'transport';
+export type Component = 'openDensity' | 'mainRoad' | 'helpDensity' | 'gapContinuity' | 'simplicity' | 'transport' | 'cameraCoverage';
 export type RoadEvidence = { mainRoadFraction?: number; internalRoadFraction?: number; maneuversPerKm?: number; internalTurnsPerKm?:number; mainMeters?:number; internalMeters?:number; unknownMeters?:number };
 export type Comparison = {
   version: string; fastestId: string | null; selectedId: string | null; recommendedId: string | null;
