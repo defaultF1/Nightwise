@@ -9,6 +9,20 @@ test('Google Maps preserves car, motorbike and walking choices',()=>{
  }
 });
 const route:Route={id:'one',label:'Route one',durationSeconds:600,distanceMeters:5000,source:'google',geometryKind:'provider',path:[journey.origin,{latitude:13.07,longitude:77.61},journey.destination]};
+test('Mappls gets the chosen origin, ordered route guides and destination rather than only current GPS',()=>{
+ const geo={...route,source:'geoapify' as const};
+ const fastest=new URL(mapsHandoff(journey,geo,geo.id,'mappls'));
+ expect(fastest.origin+fastest.pathname).toBe('https://mappls.com/direction');
+ expect(fastest.searchParams.get('places')).toBe('13.062827,77.594089;13.047697,77.619939');
+ const alternative=new URL(mapsHandoff(journey,geo,'other','mappls'));
+ const points=alternative.searchParams.get('places')!.split(';');
+ expect(points).toHaveLength(5);expect(points[0]).toBe('13.062827,77.594089');expect(points.at(-1)).toBe('13.047697,77.619939');
+ expect(points.slice(1,-1)).toEqual(handoffWaypoints(journey,geo).map(p=>`${p.latitude.toFixed(6)},${p.longitude.toFixed(6)}`));
+ // /direction does not document mode; the UI asks users to choose it in Mappls.
+ expect(alternative.searchParams.has('mode')).toBe(false);
+ expect(alternative.searchParams.has('isNav')).toBe(false);
+ expect(new URL(mapsHandoff(journey,{...geo,path:[...geo.path].reverse()},'other','mappls')).searchParams.get('places')!.split(';')).toHaveLength(2);
+});
 test('fastest route opens without stops even when its displayed label changes',()=>{
  expect(new URL(mapsHandoff(journey,{...route,label:'Most active route'},route.id)).searchParams.has('waypoints')).toBe(false);
  expect(new URL(mapsHandoff(journey,route,'another-fastest-id')).searchParams.get('waypoints')?.split('|')).toHaveLength(3);

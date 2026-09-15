@@ -13,13 +13,15 @@ public class MapsHandoffPlugin extends Plugin {
     @PluginMethod public void open(PluginCall call) {
         String value = call.getString("url", "");
         Uri uri = Uri.parse(value);
-        if (!"https".equals(uri.getScheme()) || !"www.google.com".equals(uri.getHost()) || !"/maps/dir/".equals(uri.getPath())) {
-            call.reject("Only Google Maps direction previews can be opened."); return;
+        boolean google = "www.google.com".equals(uri.getHost()) && "/maps/dir/".equals(uri.getPath());
+        boolean mappls = "mappls.com".equals(uri.getHost()) && "/direction".equals(uri.getPath());
+        if (!"https".equals(uri.getScheme()) || uri.getUserInfo() != null || uri.getPort() != -1 || !(google || mappls)) {
+            call.reject("Only supported navigation previews can be opened."); return;
         }
         getActivity().runOnUiThread(() -> {
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setPackage("com.google.android.apps.maps");
+                intent.setPackage(mappls ? "com.mmi.maps" : "com.google.android.apps.maps");
                 try { getActivity().startActivity(intent); }
                 catch (ActivityNotFoundException missingMaps) {
                     intent.setPackage(null); getActivity().startActivity(intent);
