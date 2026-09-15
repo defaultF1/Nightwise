@@ -25,11 +25,16 @@ export async function createGeoapifyServer(key:string){
  const departure=(d:any)=>{if(d!==undefined&&(typeof d!=='string'||!Number.isFinite(Date.parse(d))||Date.parse(d)<Date.now()||Date.parse(d)>Date.now()+5*3600000))throw new ServiceError('invalid-input','Choose a time from now to five hours ahead.',422);};
  const placeId=(id:any)=>{if(typeof id!=='string'||!/^geo_[a-f0-9]{1,600}$/.test(id))throw new ServiceError('invalid-input','This saved place belongs to a different provider. Please search again.',422);return id.slice(4);};
  app.get('/api/status',async()=>({ready:!!key,configured:!!key,paused:false,provider:'geoapify',searchEnabled:!!key,searchPreviewEnabled:true,activityEnabled:true,scoringEnabled:true,accessCodeRequired:false,maxQueries:120,serviceRadiusMeters:20000,serviceRegions:[{id:'north-bengaluru',city:'Bengaluru',radiusMeters:20000}],budgetStorage:'local Geoapify ledger',budgetReady:true,providerCalls:provider.usage()}));
- app.get<{Params:{style:string;z:string;x:string;y:string}}>('/api/tiles/:style/:z/:x/:y',async(req,reply)=>{
+ app.get<{Params:{style:string;z:string;x:string;y:string};Querystring:{scale?:string}}>('/api/tiles/:style/:z/:x/:y',async(req,reply)=>{
   const {style,z,x,y}=req.params;
-  if(!['positron','dark-matter','dark-matter-brown'].includes(style)||![z,x,y].every(v=>/^\d+$/.test(v))||+z>19||+x>=2**+z||+y>=2**+z)throw new ServiceError('invalid-input','Invalid map tile.',400);
-  const bytes=await provider.request(`/v1/tile/${style}/${z}/${x}/${y}.png`,{},'tiles',AbortSignal.timeout(60000));
-  return reply.header('Cache-Control','private, max-age=86400').type('image/png').send(Buffer.from(bytes));
+  const scale=req.query.scale??'1';
+  if(!['1','2'].includes(scale)||!['positron','dark-matter','dark-matter-brown'].includes(style)||![z,x,y].every(v=>/^\d+$/.test(v))||+z>20||+x>=2**+z||+y>=2**+z)throw new ServiceError('invalid-input','Invalid map tile.',400);
+  const abort=new AbortController(),closed=()=>{if(!reply.raw.writableEnded)abort.abort();};
+  reply.raw.on('close',closed);
+  try{
+   const bytes=await provider.request(`/v1/tile/${style}/${z}/${x}/${y}${scale==='2'?'@2x':''}.png`,{},'tiles',AbortSignal.any([abort.signal,AbortSignal.timeout(60000)]));
+   return reply.header('Cache-Control','private, max-age=86400').type('image/png').send(Buffer.from(bytes));
+  }finally{reply.raw.off('close',closed);}
  });
  app.post<{Body:Record<string,any>}>('/api/places/suggest',async req=>{
   const b=req.body;point(b?.anchor??AEOS_PIN);

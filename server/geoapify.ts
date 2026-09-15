@@ -63,6 +63,7 @@ export function geoRoutes(data:any,variant:string):Route[]{
 export class Geoapify {
  private cache=new Map<string,{at:number;value:any}>();
  private tail:Promise<unknown>=Promise.resolve();
+ private activeRequests=new Set<Promise<void>>();
  private ledgerPath='.local/geoapify-usage.json';
  private ledger:{route:number;nearby:number;details:number;autocomplete:number;tiles:number};
  constructor(private key:string){
@@ -91,8 +92,20 @@ export class Geoapify {
    if(this.cache.size>=2000)this.cache.delete(this.cache.keys().next().value!);
    this.cache.set(cacheKey,{at:Date.now(),value});return structuredClone(value);
   };
-  // Serial requests + spacing keep us below the free service's 5 requests/second.
-  const result=this.tail.then(run);this.tail=result.catch(()=>{}).then(()=>new Promise(r=>setTimeout(r,220)));return result;
+  // Space starts below 5 requests/second, but allow up to four responses in flight.
+  // Waiting for every tile response serially left stretched parent tiles on screen
+  // during zoom. Abandoned viewport requests are skipped before spending allowance.
+  let result:Promise<any>;
+  const started=this.tail.then(async()=>{
+   while(this.activeRequests.size>=4)await Promise.race(this.activeRequests);
+   signal.throwIfAborted();
+   result=run();
+   const settled=result.then(()=>{},()=>{});
+   this.activeRequests.add(settled);
+   void settled.then(()=>this.activeRequests.delete(settled));
+  });
+  this.tail=started.catch(()=>{}).then(()=>new Promise(r=>setTimeout(r,220)));
+  return started.then(()=>result);
  }
  async routes(journey:LiveJourney,signal:AbortSignal,refresh=false,preview=false){
   const routes:Route[]=[];

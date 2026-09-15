@@ -12,9 +12,11 @@ import { PIN_COLORS, type PlacePin } from './pins';
 const ll=(p:Coordinate):[number,number]=>[p.longitude,p.latitude];
 export async function createMapLibre(element:HTMLElement,theme:Theme,onSelect:(id:string)=>void,center:Coordinate):Promise<MapHandle>{
  const style=theme==='light'?'positron':theme==='blue'?'dark-matter-brown':'dark-matter';
- const map=new maplibregl.Map({container:element,center:ll(center),zoom:13,maxZoom:19,minZoom:9,attributionControl:false,cooperativeGestures:true,
-  style:{version:8,sources:{streets:{type:'raster',tiles:[`${location.origin}/api/tiles/${style}/{z}/{x}/{y}`],tileSize:256,bounds:[77.39,12.86,77.81,13.27],maxzoom:19}},layers:[{id:'streets',type:'raster',source:'streets'}]}});
- map.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:['<a href="https://www.geoapify.com/" target="_blank" rel="noopener">Geoapify</a>','<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>']}));
+ // Retina tiles cover the same 256 CSS-pixel area with 512 physical pixels.
+ // Use a new URL so old low-resolution browser cache entries cannot be reused.
+ const map=new maplibregl.Map({container:element,center:ll(center),zoom:13,maxZoom:20,minZoom:9,attributionControl:false,cooperativeGestures:true,
+  style:{version:8,sources:{streets:{type:'raster',tiles:[`${location.origin}/api/tiles/${style}/{z}/{x}/{y}?scale=2`],tileSize:256,bounds:[77.39,12.86,77.81,13.27],maxzoom:20}},layers:[{id:'streets',type:'raster',source:'streets'}]}});
+ map.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:['<a href="https://www.geoapify.com/" target="_blank" rel="noopener">Geoapify</a>','<a href="https://openmaptiles.org/" target="_blank" rel="noopener">OpenMapTiles</a>','<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>']}));
  const resize=new ResizeObserver(()=>map.resize());resize.observe(element);
  try{await new Promise<void>((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('Map timed out')),45000);map.once('load',()=>{clearTimeout(timer);resolve();});map.once('error',()=>{clearTimeout(timer);reject(new Error('Map tiles unavailable'));});});}
  catch(e){resize.disconnect();map.remove();throw e;}

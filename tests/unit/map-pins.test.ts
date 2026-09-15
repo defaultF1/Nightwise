@@ -1,6 +1,25 @@
 import {expect,test} from 'vitest';
-import {placePinKind,placePins,pinTint,visiblePlacePins} from '../../src/maps/pins';
+import {placePinKind,placePins,pinTint,visiblePlacePins,pinsNearRoute,type PlacePin} from '../../src/maps/pins';
 import type {ActivityAnalysis} from '../../src/domain/activity-types';
+
+test('route switching removes parallel-street pins without snapping their factual positions',()=>{
+ const a=[{latitude:13.05,longitude:77.60},{latitude:13.06,longitude:77.60}];
+ const b=a.map(p=>({...p,longitude:77.6015}));
+ const pins:PlacePin[]=[{name:'On A',kind:'shop',latitude:13.055,longitude:77.6002},{name:'On B',kind:'fuel',latitude:13.055,longitude:77.6016}];
+ expect(pinsNearRoute(pins,a)).toEqual([pins[0]]);
+ expect(pinsNearRoute(pins,b)).toEqual([pins[1]]);
+ expect(pinsNearRoute(pins,[])).toEqual([]);
+ expect(pinsNearRoute(pins,[...a].reverse())[0]).toBe(pins[0]);
+});
+
+test('off-route listings cannot consume the visible pin allowance',()=>{
+ const path=[{latitude:13.05,longitude:77.60},{latitude:13.06,longitude:77.60}];
+ const places=Array.from({length:70},(_,i)=>({id:String(i),name:String(i),categories:['store'],coordinate:{latitude:13.055,longitude:i<60?77.601:77.6001},hours:{state:'open'},conflict:false}));
+ const analysis={places} as unknown as ActivityAnalysis;
+ expect(visiblePlacePins(analysis,10,false,path)).toHaveLength(10);
+ expect(visiblePlacePins(analysis,10,false,path).every(p=>p.longitude===77.6001)).toBe(true);
+ expect(analysis.places).toHaveLength(70);
+});
 test('medical and fuel categories take precedence over a generic store',()=>{
  expect(placePinKind(['store','pharmacy'])).toBe('medical');
  expect(placePinKind(['store','pharmacy','hospital'])).toBe('hospital');

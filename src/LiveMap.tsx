@@ -13,7 +13,7 @@ import type { Theme } from './theme';
 import { createMap, type MapHandle, type MapLine } from './maps/adapter';
 import { slicePolyline } from './domain/geometry';
 import { gapMarkers } from './domain/gap-markers';
-import { visiblePlacePins, PIN_COLORS } from './maps/pins';
+import { visiblePlacePins, pinsNearRoute, PIN_COLORS } from './maps/pins';
 import type { LiveResult } from './domain/live-contract';
 import {PLACE_GROUPS,groupCounts,groupSummary} from './domain/category-counts';
 
@@ -27,11 +27,13 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
   const queue = useRef(Promise.resolve());
   const select = useRef(onSelect); select.current = onSelect;
   const [ready, setReady] = useState(false), [error, setError] = useState(false);
-  const placeMarkers=visiblePlacePins(analysis,60,false);
+  const selectedRoute=routes.find(r=>r.id===selectedId);
+  const routeAnalysis=analysis?.routeId===selectedId?analysis:undefined;
+  const placeMarkers=visiblePlacePins(routeAnalysis,60,false,usesGeoapify?selectedRoute?.path:undefined);
   const [showDirectory,setShowDirectory]=useState(true);
   const directory=directoryData as Directory;
-  const localRows=usesGeoapify?directoryAlongRoute(directory,routes.find(r=>r.id===selectedId)):[];
-  const localPins=showDirectory?directoryPins(localRows,directory.savedAt,placeMarkers):[];
+  const localRows=usesGeoapify?directoryAlongRoute(directory,selectedRoute):[];
+  const localPins=selectedRoute?pinsNearRoute(directoryPins(localRows,directory.savedAt,placeMarkers),selectedRoute.path):[];
   useEffect(() => {
     let disposed = false; let owned: MapHandle | undefined; let nativeOwner = false;
     setError(false);
@@ -61,13 +63,13 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
       const map = handle.current; if (!map) return;
       const selected = routes.find(r => r.id === selectedId);
       const lines: MapLine[] = [...routes.filter(r => r.id !== selectedId), ...routes.filter(r => r.id === selectedId)].map(r => ({ id: r.id, path: r.path, color: r.id === selectedId ? theme === 'blue' ? '#30dcc6' : theme === 'light' ? '#131313' : '#eeeeee' : '#8293a0', width: r.id === selectedId ? 6 : 4, clickable: true }));
-      if (selected && analysis?.source === 'live') {
-        for (const segment of analysis.segments) if (segment.state !== 'active') {
+      if (selected && routeAnalysis?.source === 'live') {
+        for (const segment of routeAnalysis.segments) if (segment.state !== 'active') {
           const path = slicePolyline(selected.path, segment.fromMeters, segment.toMeters);
           if (path.length > 1) lines.push({ id: selected.id, path, color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
         }
       }
-      await map.draw(lines, [journey.origin, journey.destination], selected&&analysis?.source==='live'?gapMarkers(selected,analysis):[], [...(analysis?.source==='live'?visiblePlacePins(analysis,60,false):[]),...localPins]);
+      await map.draw(lines, [journey.origin, journey.destination], selected&&routeAnalysis?.source==='live'?gapMarkers(selected,routeAnalysis):[], [...placeMarkers,...(showDirectory?localPins:[])]);
     }).catch(() => setError(true));
   }, [ready, routes, selectedId, journey, analysis, theme, showDirectory]);
   useEffect(() => {
@@ -87,9 +89,10 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
     <div className="pin-legend" aria-label="Map pin colours">{([['start','Start / current location'],['destination','Destination'],['shop','Shops'],['medical','Pharmacies / clinics'],['hospital','Hospitals'],['fuel','Petrol / CNG']] as const).map(([kind,label])=><span key={kind}><i style={{backgroundColor:PIN_COLORS[kind]}}/>{label}</span>)}</div>
     {routes.length>0&&<div className="map-place-controls">
       {analysis&&<ul aria-label="Places along this route">{PLACE_GROUPS.map(group=>{const count=groupCounts(analysis,group.categories);return count.total?<li key={group.id}><strong>{group.label}</strong> · {groupSummary(count)}</li>:null;})}</ul>}
-      {!placeMarkers.length&&<p>{activityStatus==='budget'?'Place scans could not run because the service search allowance is used up.':activityStatus==='disabled'?'Place scans are switched off.':'No returned places are open or estimated open when you pass. Missing listings do not mean this road is empty.'}</p>}
+      {usesGeoapify&&<p className="settings-helper">Pins show places within 50 m of the selected route, at their listed locations. Nearby counts include a wider area; entrances may require a detour.</p>}
+      {!placeMarkers.length&&<p>{activityStatus==='budget'?'Place scans could not run because the service search allowance is used up.':activityStatus==='disabled'?'Place scans are switched off.':usesGeoapify?'No open or estimated-open listings were returned close enough to this route to show as live pins. Check the nearby directory below.':'No returned places are open or estimated open when you pass. Missing listings do not mean this road is empty.'}</p>}
 
-      {usesGeoapify&&<LocalDirectory directory={directory} rows={localRows} show={showDirectory} onShow={setShowDirectory}/>}
+      {usesGeoapify&&<LocalDirectory directory={directory} rows={localRows} pinCount={localPins.length} show={showDirectory} onShow={setShowDirectory}/>}
     </div>}
   </section>;
 }

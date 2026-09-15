@@ -1,6 +1,12 @@
 import type {ActivityAnalysis} from '../domain/activity-types';
 import type {Coordinate} from '../domain/types';
 import {assumedShopHours} from '../domain/assumed-hours';
+import {distanceToRoute} from '../domain/route-proximity';
+// Keep marker positions factual. Wider nearby evidence can belong to another street.
+export const MAP_PLACE_DISTANCE_METERS=50;
+export function pinsNearRoute(pins:PlacePin[],path:Coordinate[]):PlacePin[]{
+ return pins.filter(pin=>distanceToRoute(pin,path)<=MAP_PLACE_DISTANCE_METERS);
+}
 export const PIN_COLORS={start:'#3b82f6',destination:'#ef4444',shop:'#facc15',medical:'#ec4899',hospital:'#a78bfa',fuel:'#22c55e',gap:'#fb923c'} as const;
 export type PlacePin=Coordinate&{name:string;kind:'shop'|'medical'|'hospital'|'fuel';status?:string;sourceUrl?:string};
 export function placePinKind(categories:string[]):PlacePin['kind']|undefined{
@@ -20,9 +26,10 @@ function evenlySpaced<T>(items:T[],limit:number){
  if(items.length<=limit)return items;
  return Array.from({length:limit},(_,index)=>items[Math.floor(index*items.length/limit)]);
 }
-export function visiblePlacePins(analysis?:ActivityAnalysis,limit=24,includeAll=false):PlacePin[]{
+export function visiblePlacePins(analysis?:ActivityAnalysis,limit=24,includeAll=false,path?:Coordinate[]):PlacePin[]{
  limit=Math.max(0,Math.floor(limit));
- const pins=placePins(analysis,includeAll);
+ const all=placePins(analysis,includeAll);
+ const pins=path?pinsNearRoute(all,path):all;
  if(pins.length<=limit)return pins;
  const hospitals=pins.filter(pin=>pin.kind==='hospital');
  const hospitalLimit=Math.min(hospitals.length,Math.ceil(limit/4));
