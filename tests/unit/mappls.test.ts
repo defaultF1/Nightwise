@@ -109,7 +109,7 @@ describe('mappls live server', () => {
   it('suggests and resolves places through Mappls sessions, labelling road access points', async () => {
     const app = await createServer(config({ ENABLE_PLACE_SEARCH: 'true' }), fetcher as unknown as typeof fetch);
     try {
-      const token = '0f10b2c6-9d55-4c84-9d55-0f10b2c60000';
+      const token = '00000000-0000-4000-8000-000000000000';
       const suggest = await app.inject({ method: 'POST', url: '/api/places/suggest', payload: { query: 'maruthi', sessionToken: token } });
       expect(suggest.statusCode).toBe(200);
       expect(suggest.json().suggestions[0]).toMatchObject({ id: '8C8J9C', title: 'Maruthi Medicals' });
