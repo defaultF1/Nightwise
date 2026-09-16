@@ -2,7 +2,9 @@
 .app-select-trigger{display:flex;align-items:center;gap:8px;min-height:64px;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--raised);color:var(--text);text-align:left;box-shadow:none}
 .app-select .app-select-value{display:flex;flex:1;min-width:0;flex-direction:column;align-items:flex-start;gap:4px}
 .app-select small{display:block;font-size:11px;line-height:1.4;color:var(--muted)}
-.app-select strong{display:block;max-width:100%;font-size:13px;line-height:1.4;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app-select strong{display:block;max-width:100%;font-size:13px;line-height:1.4;font-weight:600}
+.app-select-trigger strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app-select-option strong{white-space:normal}
 .app-select svg{flex-shrink:0}.app-select-trigger>.is-open{transform:rotate(180deg)}
 .app-select-options{position:relative;margin-top:8px;padding:5px;border:1px solid var(--line);border-radius:12px;background:var(--surface);max-height:280px;overflow-y:auto;overscroll-behavior:contain;outline:none;scroll-padding:6px}
 .app-select-option{display:flex;align-items:center;gap:9px;min-height:48px;padding:10px;border-radius:8px;cursor:pointer}
