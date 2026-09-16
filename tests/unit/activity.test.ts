@@ -68,8 +68,8 @@ describe('comparison invariants',()=>{
  it('uses all six weighted signals when comparable inputs exist',()=>{
   const a=route(1000,'a'),b={...route(1000,'b'),durationSeconds:660};
   const result=compareActivity([a,b],[evidence(a,{openTransportPoints:0}),evidence(b,{openPlaces:8,potentialHelpPoints:2,staffedPlaceProxy:8,longestObservedLowActivityMeters:0,openTransportPoints:3})],{a:{mainRoadFraction:.5,maneuversPerKm:5},b:{mainRoadFraction:1,maneuversPerKm:0}});
-  expect(result.commonComponents).toHaveLength(6);expect(result.scores.b).toBeCloseTo(79.375);
-  expect(result.scores.a).toBeCloseTo(25/3+10+15*(.75*.5+.25/3)+13+7.5,5);
+  expect(result.commonComponents).toHaveLength(6);expect(result.scores.b).toBeCloseTo(69.375);
+  expect(result.scores.a).toBeCloseTo(25/3+7.5+15*(.75*.5+.25/3)+13+5,5);
   expect(result.selectedId).toBe('b');expect(result.componentScores.b.transport).toBe(.75);
   expect(result.message).toContain('transport locations');
  });

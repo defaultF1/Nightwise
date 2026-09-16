@@ -19,7 +19,10 @@ test('busy walking routes have distinct bounded scores without missing-data labe
  await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
  const breakdown=page.getByRole('region',{name:'Score breakdown'});
  await expect(breakdown).not.toContainText(/missing|unknown|of 6 signals/i);
- await expect(breakdown).toContainText('/ 30 pts');
+ await expect(breakdown).toContainText('/ 25 pts');
+ const cameras=breakdown.locator('.evidence-rows > div').filter({has:page.locator('dt',{hasText:'Mapped cameras along the route'})});
+ await expect(cameras.locator('dd')).toHaveText(/\d+\.\d \/ 10 pts/);
+ await expect(cameras).toContainText('eligible mapped camera sites');
  await breakdown.getByText('How the score works',{exact:true}).click();await expect(breakdown).toContainText('35% credit');
  await breakdown.screenshot({path:'test-results/walking-score-breakdown-v6.png'});
 });

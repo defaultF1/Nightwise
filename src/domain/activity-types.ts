@@ -25,11 +25,13 @@ export type ActivityAnalysis = {
   segments: ActivitySegment[]; places: DeduplicatedPlace[]; limitations: string[];
   coreComparable: boolean;
 };
-export type Component = 'openDensity' | 'mainRoad' | 'helpDensity' | 'gapContinuity' | 'simplicity' | 'transport';
+export type Component = 'openDensity' | 'mainRoad' | 'helpDensity' | 'gapContinuity' | 'simplicity' | 'transport' | 'cameras';
+export type CameraEvidence = { count:number; density:number; spread:number; value:number; dataTimestamp:string };
 export type RoadEvidence = { mainRoadFraction?: number; internalRoadFraction?: number; maneuversPerKm?: number; internalTurnsPerKm?:number; mainMeters?:number; internalMeters?:number; unknownMeters?:number };
 export type Comparison = {
   estimated?: boolean;
   weights?: Record<Component,number>;
+  cameraEvidence?: Record<string,CameraEvidence>;
   version: string; fastestId: string | null; selectedId: string | null; recommendedId: string | null;
   outcome: 'empty' | 'single' | 'insufficient' | 'similar' | 'detour' | 'more-activity';
   message: string; commonComponents: Component[]; scores: Record<string,number>;

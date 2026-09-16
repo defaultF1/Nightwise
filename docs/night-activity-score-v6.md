@@ -1,5 +1,7 @@
 # Night Activity Score v6: supported activity points
 
+Historical version. Superseded by [v7 with numerical camera points](night-activity-score-v7.md).
+
 The v5 score saturated shop density at eight places/km and expanded whatever signals remained to 100. Walking excluded road signals, and sparse-hours estimates removed most remaining factors. One shop-density factor could therefore produce 100/100 on several unrelated routes.
 
 Version `night-activity-v6-supported` uses fixed contributions. Missing signals remain absent internally and do not expand the other allocations. A low supported score is not a declaration that the route is unsafe. This is an original, deterministic product formula for activity evidence, not an empirically calibrated personal-safety prediction.

@@ -11,6 +11,7 @@ import { AEOS_PIN, type LiveJourney } from '../src/domain/journey';
 import { distanceMeters } from '../src/domain/geometry';
 import { buildQueryPlan, analyzeRoute } from '../src/domain/activity';
 import { compareActivity } from '../src/domain/comparison';
+import { cameraEvidenceForRoutes } from '../src/domain/camera-score';
 import { loadRoadAnalyzer } from './roads';
 import type { LiveResult } from '../src/domain/live-contract';
 
@@ -100,13 +101,13 @@ export async function createGeoapifyServer(key:string,config:GeoConfig=readGeoCo
    const analyzeRoads=loadRoadAnalyzer(config.roadFile,routes.map(r=>r.path));
    const roadAnalyses=Object.fromEntries(routes.map(r=>[r.id,analyzeRoads(r.path,r.steps)]));
    const roads=Object.fromEntries(routes.map(r=>[r.id,{...roadAnalyses[r.id],...(r.turns!==undefined?{maneuversPerKm:r.turns/(r.distanceMeters/1000)}:{})}]));
-   const comparison=compareActivity(routes,analyses,roads,{allowLive:true,allowEstimates:true,mode:j.mode});
+   const comparison=compareActivity(routes,analyses,roads,{allowLive:true,allowEstimates:true,mode:j.mode,cameraEvidence:cameraEvidenceForRoutes(routes)});
    const now=provider.usage();
    return {provider:'geoapify',routes,analyses,roadAnalyses,comparison,checkedAt,activityStatus:analyses.every(a=>a.coreComparable)?'complete':'partial',notices:[
     'Routes, places and opening hours: Geoapify / OpenStreetMap. Travel times use approximated traffic, not live traffic measurements.',
     'Distinct routes are requested using balanced, shortest and fewer-turn preferences, with one avoid-highways fallback when needed; duplicate or substantially overlapping fallback geometry is removed. Three alternatives are not guaranteed.',
     'Departure time is used to evaluate listed shop hours. This provider does not supply a verified traffic forecast for your departure.',
-    'Listings are incomplete. No mapped businesses does not prove a road is empty; unknown opening hours are not confirmed open. CCTV and signal layers are planned separately.',
+    'Listings are incomplete. No mapped businesses does not prove a road is empty; unknown opening hours are not confirmed open. Camera points use a bundled OpenStreetMap extract; operation and monitoring are not confirmed.',
     'Request totals are provider API calls, not exact billable credits. View Geoapify statistics for credit usage.'
    ],attributions:[{name:'Powered by Geoapify',uri:'https://www.geoapify.com/'},{name:'© OpenStreetMap contributors',uri:'https://www.openstreetmap.org/copyright'}],usage:provider.snapshot(),requestUsage:{routeCalls:now.route-before.route,nearbyCalls:now.nearby-before.nearby,detailsCalls:now.details-before.details,scope:'Geoapify requests; shared road areas are reused.'}} satisfies LiveResult;
   }finally{busy=false;reply.raw.off('close',closed);}

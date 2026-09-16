@@ -1,12 +1,12 @@
 import type { Route } from './types';
-import type { ActivityAnalysis, Comparison, Component, RoadEvidence } from './activity-types';
+import type { ActivityAnalysis, Comparison, Component, RoadEvidence, CameraEvidence } from './activity-types';
 import { assumedShopHours } from './assumed-hours';
 import type { LiveJourney } from './journey';
 import { HELP_CATEGORIES, STAFFED_PROXY_CATEGORIES } from './activity';
 
-export const SCORE_VERSION='night-activity-v6-supported';
-export const WEIGHTS:Record<Component,number>={openDensity:25,mainRoad:20,helpDensity:15,gapContinuity:15,simplicity:15,transport:10};
-export const WALK_WEIGHTS:Record<Component,number>={openDensity:30,mainRoad:0,helpDensity:25,gapContinuity:30,simplicity:5,transport:10};
+export const SCORE_VERSION='night-activity-v7-cameras';
+export const WEIGHTS:Record<Component,number>={openDensity:25,mainRoad:15,helpDensity:15,gapContinuity:15,simplicity:10,transport:10,cameras:10};
+export const WALK_WEIGHTS:Record<Component,number>={openDensity:25,mainRoad:0,helpDensity:25,gapContinuity:25,simplicity:5,transport:10,cameras:10};
 export const ESTIMATED_OPEN_CREDIT=.35;
 export const scoreWeights=(mode:LiveJourney['mode']='DRIVE')=>mode==='WALK'?WALK_WEIGHTS:WEIGHTS;
 const clamp=(x:number)=>Math.max(0,Math.min(1,x));
@@ -67,7 +67,7 @@ function estimatedValues(a:ActivityAnalysis,road:RoadEvidence):Partial<Record<Co
   }
   return values;
 }
-export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads:Record<string,RoadEvidence>={}, options: { allowLive?: boolean; allowEstimates?: boolean; maxExtraMinutes?: number; mode?:LiveJourney['mode'] } = {}):Comparison{
+export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads:Record<string,RoadEvidence>={}, options: { allowLive?: boolean; allowEstimates?: boolean; maxExtraMinutes?: number; mode?:LiveJourney['mode']; cameraEvidence?:Record<string,CameraEvidence> } = {}):Comparison{
   const weights=scoreWeights(options.mode);
   const fastest=[...routes].sort((a,b)=>a.durationSeconds-b.durationSeconds||a.id.localeCompare(b.id))[0];
   const base:Comparison={version:SCORE_VERSION,weights,fastestId:fastest?.id??null,selectedId:fastest?.id??null,recommendedId:null,outcome:routes.length?'single':'empty',message:routes.length?'Only one route was returned. There is no alternative to compare.':'No route options were returned.',commonComponents:[],scores:{},componentScores:{},rankedIds:[]};
@@ -79,7 +79,13 @@ export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads
   const byId=new Map(analyses.map(a=>[a.routeId,a]));
   if(new Set(routes.map(r=>byId.get(r.id)?.checkedAt)).size!==1)return {...base,outcome:'insufficient',message:'These routes do not share one evidence check. Refresh the comparison.'};
   const useInternal=routes.every(r=>Number.isFinite(roads[r.id]?.internalTurnsPerKm)&&roads[r.id].internalTurnsPerKm!>=0);
-  const values=routes.map(r=>{const a=byId.get(r.id);return a?(estimated?estimatedValues:componentValues)(a,{...roads[r.id],internalTurnsPerKm:useInternal&&options.mode!=='WALK'?roads[r.id]?.internalTurnsPerKm:undefined}):{};});
+  const values=routes.map(r=>{
+    const a=byId.get(r.id);
+    const value:Partial<Record<Component,number>>=a?(estimated?estimatedValues:componentValues)(a,{...roads[r.id],internalTurnsPerKm:useInternal&&options.mode!=='WALK'?roads[r.id]?.internalTurnsPerKm:undefined}):{};
+    const camera=options.cameraEvidence?.[r.id];
+    if(a&&camera&&nonnegative(camera.value)&&camera.value<=1)value.cameras=camera.value;
+    return value;
+  });
   const common=(Object.keys(weights) as Component[]).filter(key=>weights[key]>0&&values.every(v=>v[key]!==undefined&&Number.isFinite(v[key])));
   if(!common.length)return routes.length<2?base:{...base,outcome:'insufficient',message:'Not enough shared evidence to score these routes yet. Travel times remain comparable.'};
   const scores=Object.fromEntries(routes.map((route,i)=>[route.id,common.reduce((sum,key)=>sum+weights[key]*clamp(values[i][key]!),0)]));
@@ -87,7 +93,7 @@ export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads
   const maxExtra = options.maxExtraMinutes === undefined ? 10 : Math.max(0, Math.min(30, options.maxExtraMinutes));
   const best=ranked.find(r=>r.durationSeconds-fastest.durationSeconds<=maxExtra*60) ?? fastest;
   const componentScores=Object.fromEntries(routes.map((r,i)=>[r.id,values[i]]));
-  const scored={...base,commonComponents:common,scores,componentScores,rankedIds:ranked.map(r=>r.id)};
+  const scored={...base,commonComponents:common,scores,componentScores,cameraEvidence:options.cameraEvidence,rankedIds:ranked.map(r=>r.id)};
   if(estimated)return {...scored,estimated:true,outcome:'insufficient',message:'The fastest route is selected. Estimated scores combine available road information with listed hours and typical shop schedules. They do not confirm which route is safer.'};
   if(routes.length<2)return scored;
   if(!common.includes('openDensity'))return {...scored,outcome:'insufficient',recommendedId:null,message:'The fastest route is selected. We could compare road information, but there is not enough shop-opening data to say which route has more activity.'};
@@ -100,7 +106,7 @@ export function compareActivity(routes:Route[],analyses:ActivityAnalysis[],roads
   if(advantage<10)return {...scored,outcome:'similar',message:'The fastest option has similar activity to the strongest candidate. It is selected.'};
   const extra=best.durationSeconds-fastest.durationSeconds;
   if(options.maxExtraMinutes===undefined&&(extra>600||extra>fastest.durationSeconds*.35))return {...scored,outcome:'detour',message:'More listed activity comes with a substantial detour. The fastest option is selected so you can weigh the tradeoff.'};
-  const descriptions:Record<Component,string>={openDensity:'more places listed as open per kilometre',mainRoad:'a higher main-road share',helpDensity:'stronger open help and staffed-place category evidence',gapContinuity:'a shorter observed low-activity stretch',simplicity:'a lower turn burden after accounting for available road evidence',transport:'more transport locations listed as open per kilometre'};
+  const descriptions:Record<Component,string>={openDensity:'more places listed as open per kilometre',mainRoad:'a higher main-road share',helpDensity:'stronger open help and staffed-place category evidence',gapContinuity:'a shorter observed low-activity stretch',simplicity:'a lower turn burden after accounting for available road evidence',transport:'more transport locations listed as open per kilometre',cameras:'more mapped camera evidence along the route'};
   const gain=(key:Component)=>weights[key]*(componentScores[best.id][key]!-componentScores[fastest.id][key]!);
   const facts=common.filter(key=>gain(key)>0).sort((a,b)=>gain(b)-gain(a)).slice(0,3).map(key=>descriptions[key]);
   if(!facts.length)facts.push('stronger comparable listing evidence');

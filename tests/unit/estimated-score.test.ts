@@ -14,7 +14,7 @@ test('explicit opt-in uses fixed allocations and reduced credit for default hour
  const c=compareActivity([route],[analysis],roads,{allowLive:true,allowEstimates:true});
  expect(c.estimated).toBe(true);expect(c.commonComponents).toEqual(['openDensity','mainRoad','simplicity']);
  expect(c.componentScores.a.openDensity).toBeCloseTo(.07);
- expect(c.scores.a).toBeCloseTo(25*.07+20*.6+15*.8);
+ expect(c.scores.a).toBeCloseTo(25*.07+15*.6+10*.8);
  expect(c.recommendedId).toBeNull();expect(c.selectedId).toBe('a');
  expect(analysis).toEqual(before);
  expect(compareActivity([route],[analysis],roads,{allowLive:true}).scores).toEqual({});

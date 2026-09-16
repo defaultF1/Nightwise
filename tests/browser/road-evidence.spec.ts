@@ -15,7 +15,7 @@ test('road evidence feeds the score without exposing road jargon in the UI',asyn
  await page.getByRole('button',{name:'View activity details'}).click();
  const breakdown=page.getByRole('region',{name:'Score breakdown'});
  await expect(breakdown).toContainText('Distance on main roads');
- await expect(breakdown).toContainText('10.9 / 20 pts');
+ await expect(breakdown).toContainText('8.2 / 15 pts');
  await expect(page.getByRole('dialog')).not.toContainText('Unclassified distance');
  await expect(page.getByRole('dialog')).not.toContainText('Parallel roads');
  await breakdown.scrollIntoViewIfNeeded();await breakdown.screenshot({path:'test-results/road-score-v6.png'});

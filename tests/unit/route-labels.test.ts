@@ -12,11 +12,11 @@ test('names the fastest, the top-scored safest, and numbers the rest', () => {
   expect(labels).toEqual(['Fastest route', 'Safest route', 'Alternative 1']);
 });
 
-test('one route can be both fastest and safest, and near-ties prefer more mapped cameras', () => {
+test('one route can be fastest and safest; labels follow the combined numerical score', () => {
   const routes = [route('a', 600), route('b', 900)];
   expect(labelRoutes(routes, comparison('a', { a: 70, b: 50 })).map(r => r.label)).toEqual(['Fastest & safest route', 'Alternative 1']);
-  const tied = labelRoutes(routes, comparison('a', { a: 60, b: 61 }), { a: 9, b: 2 }).map(r => r.label);
-  expect(tied).toEqual(['Fastest & safest route', 'Alternative 1']);
+  const tied = labelRoutes(routes, comparison('a', { a: 60, b: 61 })).map(r => r.label);
+  expect(tied).toEqual(['Fastest route', 'Safest route']);
 });
 
 test('never claims safest without scores and leaves single routes alone', () => {
@@ -33,11 +33,10 @@ test('estimated or insufficient comparisons retain neutral alternatives',()=>{
   expect(labelRoutes(routes,{...comparison('a',{a:10,b:50}),...extra}).map(r=>r.label)).toEqual(['Fastest route','Alternative 1']);
  }
 });
-test('camera tie-break uses a fixed highest-score band regardless of input order',()=>{
+test('equal combined scores use time then ID consistently regardless of input order',()=>{
  const routes=[route('a',600),route('b',900),route('c',1200)];
- const c=comparison('a',{a:100,b:98,c:96});
- const cameras={a:0,b:1,c:2};
+ const c=comparison('a',{a:90,b:98,c:98});
  for(const order of [routes,[...routes].reverse(),[routes[1],routes[2],routes[0]]]){
-  expect(labelRoutes(order,c,cameras).find(r=>r.label==='Safest route')?.id).toBe('b');
+  expect(labelRoutes(order,c).find(r=>r.label==='Safest route')?.id).toBe('b');
  }
 });
