@@ -26,7 +26,7 @@ test('Google favourites keep IDs and refresh details without retaining provider 
  await page.getByRole('button',{name:'Compare night routes'}).click();await expect(page.getByRole('dialog')).toContainText('Updated entrance');
 });
 test('time preference persists and evidence and freshness are visible',async({page})=>{
- await page.getByLabel('Extra travel time',{exact:true}).selectOption('0');await page.reload();await expect(page.getByLabel('Extra travel time',{exact:true})).toHaveValue('0');
+ await page.getByRole('button',{name:/^Extra travel time:/}).click();await page.getByRole('option',{name:'Fastest only',exact:true}).click();await page.reload();await expect(page.getByRole('button',{name:'Extra travel time: Fastest only'})).toBeVisible();
  await page.getByRole('button',{name:'Compare night routes'}).click();await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeChecked();
  await expect(page.getByRole('button',{name:'Restart journey'})).toBeVisible();
  await page.getByText('Help points on selected route',{exact:true}).click();await expect(page.getByText('Longest gap without a listed open help point:',{exact:false})).toBeVisible();

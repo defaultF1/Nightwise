@@ -71,3 +71,27 @@ test('a bounded avoid-highways fallback adds a substantially different third roa
  expect(routes).toHaveLength(3);expect(request).toHaveBeenCalledTimes(4);
  expect(request.mock.calls[3][1].avoid).toBe('highways');
 });
+
+for(const mode of ['DRIVE','TWO_WHEELER','WALK'] as const)test(`${mode} tries interior-road avoidance for a distinct second route`,async()=>{
+ const provider=new Geoapify('test-only-unused'),other=structuredClone(routeData);
+ other.features[0].geometry.coordinates[1]=[77.605,13.045];
+ const request=vi.spyOn(provider,'request').mockImplementation(async(_path,params)=>params.avoid?.startsWith('location:')?other:routeData);
+ const routes=await provider.routes({...DEFAULT_JOURNEY,mode},new AbortController().signal);
+ expect(routes).toHaveLength(2);expect(routes[0].path[0]).toEqual(routes[1].path[0]);expect(routes[0].path.at(-1)).toEqual(routes[1].path.at(-1));
+ expect(request.mock.calls.at(-1)![1].avoid).toMatch(/^location:/);
+ expect(request.mock.calls.every(c=>c[1].mode===geoMode(mode))).toBe(true);
+ if(mode!=='DRIVE')expect(request.mock.calls.some(c=>c[1].type==='less_maneuvers')).toBe(false);
+ expect(request.mock.calls).toHaveLength(mode==='DRIVE'?5:3);
+});
+test('a second route is never fabricated, and preview searches stay cheap',async()=>{
+ const provider=new Geoapify('test-only-unused'),request=vi.spyOn(provider,'request').mockResolvedValue(routeData);
+ expect(await provider.routes(DEFAULT_JOURNEY,new AbortController().signal)).toHaveLength(1);expect(request).toHaveBeenCalledTimes(9);
+ request.mockClear();expect(await provider.routes(DEFAULT_JOURNEY,new AbortController().signal,false,true)).toHaveLength(1);expect(request).toHaveBeenCalledTimes(1);
+});
+test('failed or excessive-detour fallbacks retain the usable first route',async()=>{
+ for(const fail of [false,true]){
+  const provider=new Geoapify('test-only-unused'),other=structuredClone(routeData);other.features[0].geometry.coordinates[1]=[77.605,13.045];other.features[0].properties.time=10000;
+  vi.spyOn(provider,'request').mockImplementation(async(_path,params)=>{if(params.avoid?.startsWith('location:')){if(fail)throw new Error('Unavailable');return other;}return routeData;});
+  expect(await provider.routes({...DEFAULT_JOURNEY,mode:'WALK'},new AbortController().signal)).toHaveLength(1);
+ }
+});

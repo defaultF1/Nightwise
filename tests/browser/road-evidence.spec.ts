@@ -10,7 +10,7 @@ test('road evidence feeds the score without exposing road jargon in the UI',asyn
  const plan=buildQueryPlan([route]);const analysis=analyzeRoute(route,plan,fixtureScans(plan,'normal'),checkedAt);
  await page.route('**/api/compare',r=>r.fulfill({json:{routes:[route],analyses:[analysis],roadAnalyses:{'geoapify:0':{source:'openstreetmap',status:'insufficient',mainMeters:1800,internalMeters:300,unknownMeters:1200,coverage:2100/3300,snapshotDate:'2026-09-09T00:00:00Z'}},comparison:{version:'test',selectedId:route.id,fastestId:route.id,recommendedId:null,outcome:'single',message:'Only one route was returned.',commonComponents:[],scores:{}},checkedAt,activityStatus:'complete',notices:[],attributions:[],usage:{routeCalls:1,nearbyCalls:0,routeLimit:10,nearbyLimit:600,remainingComparisons:9}}}));
  await page.goto('/');await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();
- await expect(page.locator('.score-display')).toContainText('Route activity estimate');
+ await expect(page.locator('.score-display')).toContainText('Activity points · not a safety rating');
  await expect(page.locator('.score-display')).not.toContainText(/missing|unknown|of 6 signals/i);
  await page.getByRole('button',{name:'View activity details'}).click();
  const breakdown=page.getByRole('region',{name:'Score breakdown'});

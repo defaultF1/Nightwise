@@ -8,7 +8,7 @@ test('mode and departure controls send the selected journey without live Google 
  await page.getByRole('button',{name:'Live routes',exact:true}).click();
  await page.getByRole('button',{name:'Travel mode: Car'}).click();
  await page.getByRole('option',{name:'Walk Walking routes'}).click();
- await page.getByLabel('Departure time').selectOption('300');
+ await page.getByRole('button',{name:'Departure time: Leave now'}).click();await page.getByRole('option',{name:'In 5 hours',exact:true}).click();
  await page.getByRole('button',{name:'Compare night routes'}).click();
  await page.getByRole('button',{name:'Confirm and compare'}).click();
  await expect.poll(()=>payload?.mode).toBe('WALK');

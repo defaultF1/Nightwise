@@ -5,7 +5,8 @@ import type { Route, Coordinate, TravelMode } from '../src/domain/types';
 import type { LiveJourney } from '../src/domain/journey';
 import { AEOS_PIN } from '../src/domain/journey';
 import { distinctRoadShare } from '../src/domain/route-proximity';
-import { distanceMeters, validCoordinate } from '../src/domain/geometry';
+import {alternativeProbes,substantialBacktracking} from '../src/domain/route-alternatives';
+import { distanceMeters, validCoordinate, pathLength, slicePolyline } from '../src/domain/geometry';
 import type { PlaceObservation, QueryPlan, NearbyScan } from '../src/domain/activity-types';
 import { ServiceError } from './errors';
 import {localGeoLimits,type GeoCounts} from './geoapify-config';
@@ -75,7 +76,7 @@ export class Geoapify {
  }
  async syncUsage(){if(this.budget)this.ledger=await this.budget.read();return this.usage();}
  usage(){return {...this.ledger};}
- snapshot(){return {routeCalls:this.ledger.route,nearbyCalls:this.ledger.nearby,routeLimit:this.limits.route,nearbyLimit:this.limits.nearby,remainingComparisons:Math.max(0,Math.floor((this.limits.route-this.ledger.route)/4))};}
+ snapshot(){return {routeCalls:this.ledger.route,nearbyCalls:this.ledger.nearby,routeLimit:this.limits.route,nearbyLimit:this.limits.nearby,remainingComparisons:Math.max(0,Math.floor((this.limits.route-this.ledger.route)/9))};}
  async request(path:string,params:Record<string,string>,kind:keyof Geoapify['ledger'],signal:AbortSignal,refresh=false):Promise<any>{
   const cacheKey=path+JSON.stringify(params),cached=this.cache.get(cacheKey);
   if(!refresh&&cached&&Date.now()-cached.at<(kind==='tiles'?86400000:TTL))return structuredClone(cached.value);
@@ -114,7 +115,7 @@ export class Geoapify {
  }
  async routes(journey:LiveJourney,signal:AbortSignal,refresh=false,preview=false){
   const routes:Route[]=[];
-  for(const variant of preview?['balanced']:journey.mode==='WALK'?['balanced','short']:['balanced','short','less_maneuvers']){
+  for(const variant of preview?['balanced']:journey.mode==='DRIVE'?['balanced','short','less_maneuvers']:['balanced','short']){
    const data=await this.request('/v1/routing',{waypoints:`${journey.origin.latitude},${journey.origin.longitude}|${journey.destination.latitude},${journey.destination.longitude}`,mode:geoMode(journey.mode),type:variant,traffic:'approximated',details:'instruction_details',format:'geojson'},'route',signal,refresh);
    for(const route of geoRoutes(data,variant)){
     if(distanceMeters(route.path[0],journey.origin)>250||distanceMeters(route.path.at(-1)!,journey.destination)>250)continue;
@@ -129,6 +130,33 @@ export class Geoapify {
     const data=await this.request('/v1/routing',{waypoints:`${journey.origin.latitude},${journey.origin.longitude}|${journey.destination.latitude},${journey.destination.longitude}`,mode:'drive',type:'balanced',traffic:'approximated',avoid:'highways',details:'instruction_details',format:'geojson'},'route',signal,refresh);
     for(const r of geoRoutes(data,'Alternative'))if(distanceMeters(r.path[0],journey.origin)<=250&&distanceMeters(r.path.at(-1)!,journey.destination)<=250&&r.durationSeconds<=3*Math.min(...routes.map(p=>p.durationSeconds))&&routes.every(p=>p.id!==r.id&&distinctRoadShare(r.path,p.path)>=.15))routes.push(r);
    }catch{signal.throwIfAborted();/* Retain successful primary options if the extra preference fails. */}
+  }
+  // When normal preferences collapse to one road, try avoiding three interior
+  // points in turn. Provider routing still supplies the entire legal geometry;
+  // these are search constraints, not added user stops or hand-drawn routes.
+  if(!preview&&routes.length===1){
+   const base=routes[0],length=pathLength(base.path);
+   for(const fraction of [.5,.35,.65]){
+    if(routes.length>=2)break;
+    const at=length*fraction;
+    if(at<150||length-at<150)continue;
+    const location=slicePolyline(base.path,at,at)[0];
+    try{
+     const data=await this.request('/v1/routing',{waypoints:`${journey.origin.latitude},${journey.origin.longitude}|${journey.destination.latitude},${journey.destination.longitude}`,mode:geoMode(journey.mode),type:'balanced',traffic:'approximated',avoid:`location:${location.latitude.toFixed(6)},${location.longitude.toFixed(6)}`,details:'instruction_details',format:'geojson'},'route',signal,refresh);
+     for(const r of geoRoutes(data,'Alternative'))if(distanceMeters(r.path[0],journey.origin)<=250&&distanceMeters(r.path.at(-1)!,journey.destination)<=250&&r.durationSeconds<=Math.min(base.durationSeconds*3,base.durationSeconds+1800)&&r.distanceMeters<=base.distanceMeters*3&&routes.every(p=>p.id!==r.id&&distinctRoadShare(r.path,p.path)>=.15))routes.push(r);
+    }catch{signal.throwIfAborted();/* Keep the usable route if another search fails. */}
+   }
+  }
+  if(!preview&&routes.length===1){
+   const base=routes[0];
+   for(const probe of alternativeProbes(base)){
+    if(routes.length>=2)break;
+    if(!geoArea(probe))continue;
+    try{
+     const data=await this.request('/v1/routing',{waypoints:`${journey.origin.latitude},${journey.origin.longitude}|${probe.latitude},${probe.longitude}|${journey.destination.latitude},${journey.destination.longitude}`,intermediate_waypoint_mode:'pass_through',mode:geoMode(journey.mode),type:'balanced',traffic:'approximated',details:'instruction_details',format:'geojson'},'route',signal,refresh);
+     for(const r of geoRoutes(data,'Alternative'))if(distanceMeters(r.path[0],journey.origin)<=250&&distanceMeters(r.path.at(-1)!,journey.destination)<=250&&r.durationSeconds<=Math.min(base.durationSeconds*3,base.durationSeconds+1800)&&r.distanceMeters<=base.distanceMeters*3&&!substantialBacktracking(r)&&routes.every(p=>p.id!==r.id&&distinctRoadShare(r.path,p.path)>=.15))routes.push(r);
+    }catch{signal.throwIfAborted();/* A bounded search may still find no second road. */}
+   }
   }
   routes.sort((a,b)=>a.durationSeconds-b.durationSeconds);
   return routes.slice(0,4).map((r,i)=>({...r,label:i?`Alternative ${i}`:'Fastest'}));

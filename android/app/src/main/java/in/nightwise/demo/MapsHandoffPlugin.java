@@ -2,7 +2,10 @@ package in.nightwise.demo;
 
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import com.getcapacitor.JSArray;
+import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
@@ -10,6 +13,16 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 
 @CapacitorPlugin(name = "MapsHandoff")
 public class MapsHandoffPlugin extends Plugin {
+    private boolean installed(String packageName) {
+        try { return getContext().getPackageManager().getApplicationInfo(packageName, 0).enabled; }
+        catch (PackageManager.NameNotFoundException missing) { return false; }
+    }
+    @PluginMethod public void available(PluginCall call) {
+        JSArray apps = new JSArray();
+        if (installed("com.google.android.apps.maps")) apps.put("google");
+        if (installed("com.mmi.maps")) apps.put("mappls");
+        JSObject result = new JSObject(); result.put("apps", apps); call.resolve(result);
+    }
     @PluginMethod public void open(PluginCall call) {
         String value = call.getString("url", "");
         Uri uri = Uri.parse(value);
@@ -20,6 +33,13 @@ public class MapsHandoffPlugin extends Plugin {
         }
         getActivity().runOnUiThread(() -> {
             try {
+                if (Boolean.TRUE.equals(call.getBoolean("browserOnly", false))) {
+                    getActivity().startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    call.resolve(); return;
+                }
+                if (!installed(mappls ? "com.mmi.maps" : "com.google.android.apps.maps")) {
+                    call.reject("This navigation app is no longer installed. Choose another app."); return;
+                }
                 if (mappls) {
                     // Mappls' own website uses this native route link, including
                     // origin, ordered via points, destination and mode. Do not
@@ -35,10 +55,7 @@ public class MapsHandoffPlugin extends Plugin {
                 }
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 intent.setPackage(mappls ? "com.mmi.maps" : "com.google.android.apps.maps");
-                try { getActivity().startActivity(intent); }
-                catch (ActivityNotFoundException missingMaps) {
-                    intent.setPackage(null); getActivity().startActivity(intent);
-                }
+                getActivity().startActivity(intent);
                 call.resolve();
             } catch (Exception unavailable) { call.reject("No app could open the Maps preview."); }
         });

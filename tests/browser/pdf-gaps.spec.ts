@@ -6,7 +6,7 @@ test('PDF evidence fields and complete ranking are visible without provider requ
  await page.goto('/');
  await page.getByRole('button',{name:'Open settings'}).click();
  await page.getByText('Tutorial scenarios',{exact:true}).click();
- await page.getByLabel('Preview scenario').selectOption('three');
+ await page.getByRole('button',{name:/^Preview scenario:/}).click();await page.getByRole('option',{name:({"none":"No routes returned","one":"One available route","three":"Three route options","error":"Connection problem","normal":"Two route options","limited":"Incomplete activity data","unknown":"All evidence unavailable","capped":"Search result limit","closing":"Places closing soon","detour":"Substantial detour","similar":"Similar activity"} as Record<string,string>)['three'],exact:true}).click();
  await page.getByRole('button',{name:'Done',exact:true}).click();
  await page.getByRole('button',{name:'Compare night routes'}).click();
  await expect(page.locator('.route-card')).toHaveCount(3);

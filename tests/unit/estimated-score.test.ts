@@ -13,8 +13,8 @@ test('explicit opt-in uses fixed allocations and reduced credit for default hour
  const before=structuredClone(analysis);
  const c=compareActivity([route],[analysis],roads,{allowLive:true,allowEstimates:true});
  expect(c.estimated).toBe(true);expect(c.commonComponents).toEqual(['openDensity','mainRoad','simplicity']);
- expect(c.componentScores.a.openDensity).toBeCloseTo(.07);
- expect(c.scores.a).toBeCloseTo(25*.07+15*.6+10*.8);
+ expect(c.componentScores.a.openDensity).toBeCloseTo(.7/8.7);
+ expect(c.scores.a).toBeCloseTo(25*(.7/8.7)+15*.6+10*.8);
  expect(c.recommendedId).toBeNull();expect(c.selectedId).toBe('a');
  expect(analysis).toEqual(before);
  expect(compareActivity([route],[analysis],roads,{allowLive:true}).scores).toEqual({});
@@ -22,9 +22,9 @@ test('explicit opt-in uses fixed allocations and reduced credit for default hour
 
 test('returned closure overrides default hours and future passing time changes the estimate',()=>{
  const closed={...analysis,places:[{...p('s'),hours:{...p('s').hours,state:'closed' as const}},p('f','gas_station')]};
- expect(compareActivity([route],[closed],roads,{allowLive:true,allowEstimates:true}).componentScores.a.openDensity).toBeCloseTo(.35/9);
+ expect(compareActivity([route],[closed],roads,{allowLive:true,allowEstimates:true}).componentScores.a.openDensity).toBeCloseTo(.35/8.35);
  const late={...analysis,checkedAt:'2026-09-15T19:59:00+05:30',places:[{...p('s'),arrivalMinutes:2},p('f','gas_station')]};
- expect(compareActivity([route],[late],roads,{allowLive:true,allowEstimates:true}).componentScores.a.openDensity).toBeCloseTo(.35/9);
+ expect(compareActivity([route],[late],roads,{allowLive:true,allowEstimates:true}).componentScores.a.openDensity).toBeCloseTo(.35/8.35);
 });
 
 test('failed scans, absent listings and switched-off scoring cannot produce an estimated score',()=>{

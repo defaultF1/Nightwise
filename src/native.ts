@@ -4,11 +4,19 @@ import { usesGeoapify } from './providers/selection';
 import { Capacitor, registerPlugin } from '@capacitor/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { type JourneyPoint } from './domain/journey';
+import type { NavigationApp } from './domain/handoff';
 import { validateLocation, locationError } from './domain/location';
 const DeviceSettings=registerPlugin<{openLocation():Promise<void>;openApp():Promise<void>;address(options:{latitude:number;longitude:number}):Promise<{address?:string}>}>('DeviceSettings');
 export async function openLocationSettings(){if(Capacitor.isNativePlatform())await DeviceSettings.openLocation();}
 export async function openAppSettings(){if(Capacitor.isNativePlatform())await DeviceSettings.openApp();}
-const MapsHandoff = registerPlugin<{ open(options: { url: string }): Promise<void> }>('MapsHandoff');
+const MapsHandoff = registerPlugin<{ open(options: { url: string; browserOnly?:boolean }): Promise<void>; available():Promise<{apps:string[]}> }>('MapsHandoff');
+export const navigationChoices=[{value:'google',label:'Google Maps'},{value:'mappls',label:'Mappls'}] as const;
+export async function availableNavigationApps():Promise<{native:boolean;apps:{value:NavigationApp;label:string}[]}>{
+  if(!Capacitor.isNativePlatform())return {native:false,apps:[...navigationChoices]};
+  const result=await MapsHandoff.available();
+  if(!Array.isArray(result.apps))throw new Error('Navigation app check failed.');
+  return {native:true,apps:navigationChoices.filter(app=>result.apps.includes(app.value))};
+}
 const MapViewport = registerPlugin<{ background(options: { color: string }): Promise<void> }>('MapViewport');
 export async function setNativeBackground(color: string) { if (Capacitor.isNativePlatform()) await MapViewport.background({ color }); }
 export async function currentLocation(): Promise<JourneyPoint> {
@@ -37,4 +45,4 @@ export async function currentLocation(): Promise<JourneyPoint> {
   }
   return validated;
 }
-export async function openMaps(url: string) { if (Capacitor.isNativePlatform()) await MapsHandoff.open({ url }); else window.open(url, '_blank', 'noopener,noreferrer'); }
+export async function openMaps(url: string,browserOnly=false) { if (Capacitor.isNativePlatform()) await MapsHandoff.open({ url,...(browserOnly?{browserOnly:true}:{}) }); else window.open(url, '_blank', 'noopener,noreferrer'); }

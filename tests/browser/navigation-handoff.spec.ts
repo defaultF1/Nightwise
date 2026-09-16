@@ -26,7 +26,7 @@ test('walking journey hands both endpoints and the selected route to each naviga
  expect(fast.hostname).toBe('www.google.com');expect(fast.searchParams.get('travelmode')).toBe('walking');
  expect(fast.searchParams.get('origin')).toBe('13.062827,77.594089');expect(fast.searchParams.get('destination')).toBe('13.047697,77.619939');
  expect(fast.searchParams.has('waypoints')).toBe(false);
- await page.getByRole('radio',{name:'Mappls',exact:true}).check();
+ await page.getByRole('button',{name:'Navigate with: Google Maps'}).click();await page.getByRole('option',{name:'Mappls',exact:true}).click();
  const mapplsFast=await outgoing();expect(mapplsFast.searchParams.get('mode')).toBe('walking');expect(mapplsFast.searchParams.get('places')!.split(';')).toHaveLength(5);
  await expect(page.getByRole('dialog')).toContainText('They may appear as stops');
  await page.getByRole('button',{name:'Keep comparing'}).click();
@@ -34,9 +34,11 @@ test('walking journey hands both endpoints and the selected route to each naviga
  await page.getByRole('button',{name:'Continue with this route'}).click();
  const mapplsAlt=await outgoing();expect(mapplsAlt.searchParams.get('places')).not.toBe(mapplsFast.searchParams.get('places'));
  const points=mapplsAlt.searchParams.get('places')!.split(';');expect(points[0]).toBe('13.062827,77.594089');expect(points.at(-1)).toBe('13.047697,77.619939');
- await page.getByRole('radio',{name:'Google Maps',exact:true}).check();
+ await page.getByRole('button',{name:'Navigate with: Mappls'}).click();await page.getByRole('option',{name:'Google Maps',exact:true}).click();
  const googleAlt=await outgoing();expect(googleAlt.searchParams.get('waypoints')!.split('|')).toEqual(points.slice(1,-1));expect(googleAlt.searchParams.get('travelmode')).toBe('walking');
  expect(calls).toBe(1);
+ await page.locator('.sheet-body').evaluate(el=>el.scrollTop=0);
+ await expect(page.getByRole('dialog').locator('.evidence-lead')).toBeInViewport();
  await page.getByRole('dialog').screenshot({path:'test-results/navigation-handoff.png'});
 });
 

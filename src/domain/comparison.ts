@@ -4,7 +4,7 @@ import { assumedShopHours } from './assumed-hours';
 import type { LiveJourney } from './journey';
 import { HELP_CATEGORIES, STAFFED_PROXY_CATEGORIES } from './activity';
 
-export const SCORE_VERSION='night-activity-v7-cameras';
+export const SCORE_VERSION='night-activity-v8-weighted-listings';
 export const WEIGHTS:Record<Component,number>={openDensity:25,mainRoad:15,helpDensity:15,gapContinuity:15,simplicity:10,transport:10,cameras:10};
 export const WALK_WEIGHTS:Record<Component,number>={openDensity:25,mainRoad:0,helpDensity:25,gapContinuity:25,simplicity:5,transport:10,cameras:10};
 export const ESTIMATED_OPEN_CREDIT=.35;
@@ -32,7 +32,10 @@ export function componentValues(a:ActivityAnalysis,road:RoadEvidence={}):Partial
   if(nonnegative(a.openPlaces)&&nonnegative(a.longestObservedLowActivityMeters)&&nonnegative(a.activityCoverage))values.gapContinuity=a.openPlaces>0?(1-clamp(a.longestObservedLowActivityMeters/1500))*clamp(a.activityCoverage)*scan:0;
   const roadTotal=(road.mainMeters??0)+(road.internalMeters??0)+(road.unknownMeters??0);
   if(Number.isFinite(road.mainRoadFraction)&&road.mainRoadFraction!>=0&&road.mainRoadFraction!<=1)values.mainRoad=road.mainRoadFraction;
-  else if(roadTotal>0)values.mainRoad=clamp((road.mainMeters??0)/roadTotal);
+  // Matched main-road metres provide a lower bound even in a partial scan.
+  // Zero needs near-complete classification: unmatched length alone must not
+  // manufacture a 0% main-road observation. The UI describes this lower bound.
+  else if(roadTotal>0&&nonnegative(road.mainMeters)&&nonnegative(road.internalMeters)&&nonnegative(road.unknownMeters)&&(road.mainMeters>0||road.unknownMeters/roadTotal<=.05))values.mainRoad=clamp(road.mainMeters/roadTotal);
   if(Number.isFinite(road.maneuversPerKm)&&road.maneuversPerKm!>=0){
     const internal=Number.isFinite(road.internalTurnsPerKm)&&road.internalTurnsPerKm!>=0?road.internalTurnsPerKm!:0;
     // An estimated turn onto an internal road carries one additional turn penalty.
@@ -48,9 +51,10 @@ function estimatedValues(a:ActivityAnalysis,road:RoadEvidence):Partial<Record<Co
   const places=[...new Map(a.places.filter(p=>!p.conflict&&p.coordinate).map(p=>[p.id,p])).values()];
   const credit:number[]=places.map(p=>p.hours.closingSoon?0:p.hours.state==='open'?1:p.hours.state==='closed'?0:assumedShopHours(p,a.checkedAt)?.open===true?ESTIMATED_OPEN_CREDIT:0);
   if(a.distanceMeters>0&&places.length){
-    const count=credit.filter(n=>n>0).length;
-    const quality=count?credit.reduce((s,n)=>s+n,0)/count:0;
-    values.openDensity=densityValue(count/Math.max(.5,a.distanceMeters/1000))*quality*clamp(a.scanCoverage);
+    // Discount each assumed opening once, before the density curve. Applying
+    // the discount after saturation put an artificial ceiling on busy roads.
+    const supportedCount=credit.reduce((sum,n)=>sum+n,0);
+    values.openDensity=densityValue(supportedCount/Math.max(.5,a.distanceMeters/1000))*clamp(a.scanCoverage);
   }
   // Positive support along the actual sampled intervals. A hundred listings
   // at one checkpoint cannot represent activity across the whole journey.
@@ -59,7 +63,9 @@ function estimatedValues(a:ActivityAnalysis,road:RoadEvidence):Partial<Record<Co
     for(const [i,segment] of a.segments.entries()){
       const meters=Math.max(0,segment.toMeters-segment.fromMeters);
       const nearby=credit.filter((c,k)=>c>0&&(places[k].sampleIndexes.includes(i)||places[k].sampleIndexes.includes(i+1)));
-      const share=nearby.length?clamp(nearby.length/2)*(nearby.reduce((sum,c)=>sum+c,0)/nearby.length):0;
+      // Two weighted listings support an interval. Several estimated listings
+      // can provide support, without asserting any specific business is open.
+      const share=clamp(nearby.reduce((sum,c)=>sum+c,0)/2);
       supported+=meters*share;total+=meters;
       gap=share<.5?gap+meters:0;longest=Math.max(longest,gap);
     }

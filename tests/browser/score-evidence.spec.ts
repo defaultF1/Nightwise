@@ -17,13 +17,13 @@ test('a partial score shows contributing factors without missing-data badges or 
   await page.goto('/');
   await page.getByRole('button',{name:'Live routes',exact:true}).click();
   await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();
-  await expect(page.locator('.route-card.selected .score-display')).toContainText('Route activity estimate');
+  await expect(page.locator('.route-card.selected .score-display')).toContainText('Activity points · not a safety rating');
   await expect(page.locator('.route-card.selected .score-display')).not.toContainText(/missing|unknown|of 6 signals/i);
   await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
   const breakdown=page.getByRole('region',{name:'Score breakdown'});
   await expect(breakdown).not.toContainText(/missing|unknown|of 6 signals/i);
   await expect(breakdown.getByText('Not included',{exact:true})).toHaveCount(0);
   await expect(breakdown.getByText('Distance on main roads',{exact:true})).toHaveCount(0);
-  await expect(breakdown).toContainText('Each factor has a fixed point limit');
+  await expect(breakdown).toContainText('A lower score does not mean the road is unsafe');
   await expect(breakdown.getByText('Transport locations listed open',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+\.\d \/ 10 pts/);
 });

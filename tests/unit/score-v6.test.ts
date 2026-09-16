@@ -18,10 +18,10 @@ test('busy routes continue to differ beyond the old eight-per-kilometre ceiling'
  expect(densityValue(40)).toBeGreaterThan(densityValue(16));expect(densityValue(16)).toBeGreaterThan(densityValue(8));
  expect(densityValue(8)).toBe(.5);expect(densityValue(1000)).toBeLessThan(1);
 });
-test('even many assumed-open listings cannot earn full density or continuity credit',()=>{
+test('busy estimated listings can support activity without producing a perfect total or recommendation',()=>{
  const a=analysis(Array.from({length:120},(_,i)=>listing(String(i),i%6)));
- const c=score(a);expect(c.componentScores.a.openDensity).toBeLessThanOrEqual(.35);expect(c.componentScores.a.gapContinuity).toBeLessThanOrEqual(.35);
- expect(c.scores.a).toBeLessThan(30);expect(c.estimated).toBe(true);expect(c.recommendedId).toBeNull();
+ const c=score(a);expect(c.componentScores.a.openDensity).toBeGreaterThan(.35);expect(c.componentScores.a.openDensity).toBeLessThan(1);expect(c.componentScores.a.gapContinuity).toBe(1);
+ expect(c.scores.a).toBeLessThan(50);expect(c.estimated).toBe(true);expect(c.recommendedId).toBeNull();
 });
 test('places spread along the route beat the same count clustered at one end',()=>{
  const cluster=analysis(Array.from({length:12},(_,i)=>listing(String(i),0)));
@@ -55,4 +55,28 @@ test('short routes have a 500-metre density floor and invalid lengths never scor
  const a=analysis([listing('s',0,true)]);
  expect(componentValues({...a,distanceMeters:50}).openDensity).toBe(componentValues({...a,distanceMeters:500}).openDensity);
  for(const distanceMeters of [0,NaN,Infinity,-1])expect(componentValues({...a,distanceMeters})).toEqual({});
+});
+
+test('estimated credit is applied to listings once before saturation',()=>{
+ const a=analysis(Array.from({length:8},(_,i)=>listing(String(i),i%6)));
+ const c=score(a);
+ expect(c.componentScores.a.openDensity).toBeCloseTo(2.8/(2.8+8));
+ const supplied=analysis(a.places.map(p=>({...p,hours:{...p.hours,state:'open' as const}})));
+ expect(score(supplied).componentScores.a.openDensity).toBeGreaterThan(c.componentScores.a.openDensity!);
+});
+
+test('well-distributed estimated shops are not all treated as a continuous empty stretch',()=>{
+ // Three listings per checkpoint supply 2.1 weighted listings per interval.
+ const a=analysis(Array.from({length:18},(_,i)=>listing(String(i),i%6)));
+ expect(score(a).componentScores.a.gapContinuity).toBe(1);
+ const clustered={...a,places:a.places.map(p=>({...p,sampleIndexes:[0]}))};
+ expect(score(clustered).componentScores.a.gapContinuity).toBeLessThan(.25);
+});
+
+test('unmapped roads do not manufacture a zero main-road observation',()=>{
+ const a=analysis([listing('s',0,true)]);
+ expect(componentValues(a,{mainMeters:0,internalMeters:0,unknownMeters:1000}).mainRoad).toBeUndefined();
+ expect(componentValues(a,{mainMeters:0,internalMeters:100,unknownMeters:900}).mainRoad).toBeUndefined();
+ expect(componentValues(a,{mainMeters:0,internalMeters:1000,unknownMeters:0}).mainRoad).toBe(0);
+ expect(componentValues(a,{mainMeters:600,internalMeters:0,unknownMeters:400}).mainRoad).toBe(.6);
 });

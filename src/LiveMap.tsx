@@ -66,7 +66,7 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
       if (selected && routeAnalysis?.source === 'live') {
         for (const segment of routeAnalysis.segments) if (segment.state !== 'active') {
           const path = slicePolyline(selected.path, segment.fromMeters, segment.toMeters);
-          if (path.length > 1) lines.push({ id: selected.id, path, color: segment.state === 'low' ? '#f4b86a' : '#bbc3ca', width: 7, clickable: false });
+          if (path.length > 1) lines.push({ id: selected.id, path, color: segment.state === 'low' ? theme==='light'?'#a8600a':'#f4b86a' : theme==='light'?'#72828d':'#bbc3ca', width: 4, clickable: false });
         }
       }
       await map.draw(lines, [journey.origin, journey.destination], selected&&routeAnalysis?.source==='live'?gapMarkers(selected,routeAnalysis):[], [...placeMarkers,...localPins,...mappedCameraPins(mappedCameras)]);
@@ -74,7 +74,7 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
   }, [ready, routes, selectedId, journey, analysis, theme, mappedCameras]);
   useEffect(() => {
     if (!ready) return;
-    queue.current = queue.current.then(async () => { await handle.current?.fit(routes.length ? routes.flatMap(r => r.path) : [journey.origin, journey.destination]); }).catch(() => setError(true));
+    queue.current = queue.current.then(async () => { await handle.current?.fit([...routes.flatMap(r => r.path),journey.origin,journey.destination]); }).catch(() => setError(true));
   }, [ready, routes, journey]);
   useEffect(() => { if (ready) queue.current = queue.current.then(async () => { await handle.current?.touch(!blocked, expanded); }).catch(() => {}); }, [ready, blocked, expanded]);
   return <section ref={container} className={`live-map${expanded?' map-expanded':''}`} role={expanded?'dialog':undefined} aria-modal={expanded?true:undefined} aria-label={`${city} ${usesGeoapify?'street':'Google'} map`}>
@@ -88,7 +88,7 @@ export function LiveMap({ routes, selectedId, onSelect, journey, theme, blocked,
     {!routes.length&&<p className="diagram-caption">Endpoint preview. Confirm your journey to load routes along roads.</p>}
     <div className="pin-legend" aria-label="Map pin colours">{((routes.length?[['start','Start / current location'],['destination','Destination'],['shop','Shops'],['medical','Pharmacies / clinics'],['hospital','Hospitals'],['fuel','Petrol / CNG'],['camera','Mapped cameras (OSM)']]:[['start','Start / current location'],['destination','Destination']]) as readonly (readonly [keyof typeof PIN_COLORS,string])[]).map(([kind,label])=><span key={kind}><i style={{backgroundColor:PIN_COLORS[kind]}}/>{label}</span>)}</div>
     {routes.length>0&&<div className="map-place-controls">
-      {usesGeoapify&&selectedRoute&&<div className="camera-layer"><label><i style={{backgroundColor:PIN_COLORS.camera}}/> Mapped cameras</label><p>{mappedCameras.length?`${mappedCameras.length} OpenStreetMap-mapped camera${mappedCameras.length===1?'':'s'} within ${MAPPED_CAMERA_DISTANCE_METERS} m of this route`:'No OpenStreetMap-mapped cameras within 60 m of this route. Unmapped cameras may still exist.'}</p><small>Community-mapped locations (data {CAMERA_DATA_TIMESTAMP.slice(0,10)}). A marker does not confirm the camera is installed, working or monitored.</small></div>}
+      {usesGeoapify&&selectedRoute&&<div className="camera-layer"><h3><i style={{backgroundColor:PIN_COLORS.camera}}/> Mapped cameras <span>{mappedCameras.length}</span></h3><p>{mappedCameras.length?`Listed within ${MAPPED_CAMERA_DISTANCE_METERS} m of this route.`:'None listed within 60 m of this route.'}</p><small>OpenStreetMap · {CAMERA_DATA_TIMESTAMP.slice(0,10)}. Locations are mapped; operation is not verified.</small></div>}
       {analysis&&<ul aria-label="Places along this route">{PLACE_GROUPS.map(group=>{const count=groupCounts(analysis,group.categories);return count.total?<li key={group.id}><strong>{group.label}</strong> · {groupSummary(count)}</li>:null;})}</ul>}
       {usesGeoapify&&<p className="settings-helper">Pins show places within 50 m of the selected route, at their listed locations. Nearby counts include a wider area; entrances may require a detour.</p>}
       {!placeMarkers.length&&<p>{activityStatus==='budget'?'Place scans could not run because the service search allowance is used up.':activityStatus==='disabled'?'Place scans are switched off.':usesGeoapify?'No open or estimated-open listings were returned close enough to this route to show as live pins.':'No returned places are open or estimated open when you pass. Missing listings do not mean this road is empty.'}</p>}

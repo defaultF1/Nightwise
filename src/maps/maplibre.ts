@@ -69,7 +69,7 @@ export async function createMapLibre(element:HTMLElement,theme:Theme,onSelect:(i
    gaps.forEach(p=>mark(p,`${p.label} · ${p.name}`,'gap','!'));
    pins.forEach((p,i)=>mark(p,p.name,i?'destination':'start',i?'B':'A'));
   },
-  async fit(points){if(points.length){const bounds=new maplibregl.LngLatBounds();points.forEach(p=>bounds.extend(ll(p)));map.fitBounds(bounds,{padding:45,duration:0,maxZoom:16});}},
+  async fit(points){if(points.length){const bounds=new maplibregl.LngLatBounds();points.forEach(p=>bounds.extend(ll(p)));map.fitBounds(bounds,{padding:{top:55,right:45,bottom:65,left:45},duration:0,maxZoom:16});}},
   async touch(enabled,expanded=false){if(enabled){map.dragPan.enable();map.scrollZoom.enable();map.touchZoomRotate.enable();map.keyboard.enable();}else{map.dragPan.disable();map.scrollZoom.disable();map.touchZoomRotate.disable();map.keyboard.disable();}if(expanded)map.cooperativeGestures.disable();else map.cooperativeGestures.enable();map.resize();},
   async destroy(){resize.disconnect();markers.forEach(m=>m.remove());map.remove();}
  };

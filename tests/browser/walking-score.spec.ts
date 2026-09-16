@@ -13,7 +13,7 @@ test('busy walking routes have distinct bounded scores without missing-data labe
  await page.getByRole('button',{name:'Travel mode: Car'}).click();await page.getByRole('option',{name:'Walk Walking routes'}).click();
  await page.getByRole('button',{name:'Compare night routes'}).click();await page.getByRole('button',{name:'Confirm and compare'}).click();
  const scores=page.locator('.route-card .score-ring b');await expect(scores).toHaveCount(2);
- const values=(await scores.allTextContents()).map(Number);expect(values.every(v=>v>0&&v<30)).toBe(true);expect(new Set(values).size).toBe(2);
+ const values=(await scores.allTextContents()).map(Number);expect(values.every(v=>v>0&&v<60)).toBe(true);expect(new Set(values).size).toBe(2);
  for(const card of await page.locator('.route-card .score-display').all())await expect(card).not.toContainText(/missing|unknown|of 6 signals/i);
  await page.locator('.route-card.selected').screenshot({path:'test-results/walking-score-v6.png'});
  await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();

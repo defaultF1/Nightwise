@@ -1,5 +1,7 @@
 # Navigation handoff repair - 16 September 2026
 
+Latest local UI revision: Android now filters the navigation dropdown to installed supported apps and offers a browser fallback when none are available. See [the control and route revision](local-ui-route-review-2026-09-16.md). The destination/mode/waypoint rules below remain in effect.
+
 The destination-only Android `geo:` chooser dropped the selected origin, mode and route guides. The navigation sheet now selects Google Maps or Mappls, then passes the complete provider-specific directions link through `MapsHandoff.open`.
 
 - Google Maps: origin, destination and driving/walking/two-wheeler mode. The fastest route (identified by ID, regardless of its display label) has no extra stops. Alternatives have up to three ordered route points.

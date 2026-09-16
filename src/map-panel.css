@@ -1,0 +1,29 @@
+/* One surface and spacing system around the map; keep controls inside borders. */
+.live-map{background:var(--surface);isolation:isolate}
+.live-map .diagram-heading{padding:14px 16px;min-height:68px;background:var(--surface)}
+.live-map .map-route-options{padding:4px 16px 16px;background:var(--surface);gap:8px}
+.live-map .map-route-options button{border-radius:12px;min-height:44px;line-height:1.4;white-space:normal;max-width:100%}
+.live-map .map-size-button:focus-visible,.live-map .map-route-options button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.live-map .map-slot{border-block:1px solid var(--line);height:340px;overflow:hidden}
+.live-map .diagram-endpoints{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:16px;padding:16px 16px 10px;background:var(--surface);font-size:11px;line-height:1.5}
+.live-map .diagram-endpoints>span{display:flex;gap:7px;min-width:0;overflow-wrap:anywhere}
+.live-map .diagram-endpoints>span:last-child{justify-content:flex-end;text-align:right}
+.live-map .diagram-endpoints b{flex-shrink:0}
+.live-map .pin-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;padding:4px 16px 16px;background:var(--surface);font-size:11px;line-height:1.5}
+.live-map .pin-legend>span{min-width:0;align-items:flex-start;gap:6px}.live-map .pin-legend i{flex-shrink:0;margin-top:4px}
+.live-map .map-place-controls{padding:16px;background:var(--surface);border-top:1px solid var(--line)}
+.live-map .camera-layer{padding:14px;margin:0 0 16px;border-radius:14px;background:var(--raised);border:1px solid var(--line)}
+.live-map .camera-layer h3{display:flex;align-items:center;gap:8px;margin:0;font-size:12px;line-height:1.5;color:var(--text)}
+.live-map .camera-layer h3 i{width:10px;height:10px;border-radius:50%;flex-shrink:0}.live-map .camera-layer h3 span{margin-left:auto;font-size:17px}
+.live-map .camera-layer p{margin:8px 0 4px;font-size:12px}.live-map .camera-layer small{font-size:11px;line-height:1.6}
+.live-map .map-place-controls ul{margin:0;padding:0;list-style:none;max-height:none;overflow:visible;display:grid;gap:0}
+.live-map .map-place-controls li{padding:10px 0;margin:0;border-bottom:1px solid var(--line);line-height:1.65;font-size:12px}
+.live-map .map-place-controls .settings-helper{margin:14px 0 0;font-size:11px;line-height:1.7}
+.live-map.map-expanded .map-slot{height:auto;min-height:0;flex:1}
+:root[data-theme=light]{--line:#cececa;--muted:#555652}
+@media(max-width:360px){.live-map .diagram-heading,.live-map .map-place-controls{padding:12px}.live-map .pin-legend{font-size:10px;padding-inline:12px}.live-map .map-route-options{padding-inline:12px}}
+/* A scrollable handoff body must have a bounded height even when content grows. */
+.sheet-overlay .sheet:has(.selected-handoff){height:min(760px,100%)}
+.sheet-overlay .sheet:has(.selected-handoff) .sheet-inner{height:100%}
+.sheet:has(.selected-handoff) .sheet-body{padding-bottom:24px}
+.sheet .selected-handoff{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--raised);font-size:13px;font-weight:600;overflow-wrap:anywhere}

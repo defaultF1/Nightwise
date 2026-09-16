@@ -105,7 +105,7 @@ export async function createGeoapifyServer(key:string,config:GeoConfig=readGeoCo
    const now=provider.usage();
    return {provider:'geoapify',routes,analyses,roadAnalyses,comparison,checkedAt,activityStatus:analyses.every(a=>a.coreComparable)?'complete':'partial',notices:[
     'Routes, places and opening hours: Geoapify / OpenStreetMap. Travel times use approximated traffic, not live traffic measurements.',
-    'Distinct routes are requested using balanced, shortest and fewer-turn preferences, with one avoid-highways fallback when needed; duplicate or substantially overlapping fallback geometry is removed. Three alternatives are not guaranteed.',
+    'Distinct routes use mode-supported preferences. If only one remains, up to three additional searches try avoiding interior road points. Duplicate, heavily overlapping and excessive-detour fallbacks are removed. A second usable route is not always available.',
     'Departure time is used to evaluate listed shop hours. This provider does not supply a verified traffic forecast for your departure.',
     'Listings are incomplete. No mapped businesses does not prove a road is empty; unknown opening hours are not confirmed open. Camera points use a bundled OpenStreetMap extract; operation and monitoring are not confirmed.',
     'Request totals are provider API calls, not exact billable credits. View Geoapify statistics for credit usage.'

@@ -1,5 +1,7 @@
 # Night Activity Score v7: numerical camera evidence
 
+Historical version. The local development formula is now [v8](night-activity-score-v8.md); the previously delivered 2.3.2 APK still contains v7.
+
 Version `night-activity-v7-cameras` replaces v6. The user requested a numerical camera contribution. This is a product-defined comparison of activity, roads and mapped camera evidence; weights are not calibrated crime probabilities.
 
 | Factor | Car / motorbike | Walking |
