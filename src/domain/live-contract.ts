@@ -1,7 +1,7 @@
 import type { Route } from './types';
 import type { ActivityAnalysis, Comparison } from './activity-types';
 import type { RoadAnalysis } from './roads';
-export type LiveResult = {
+export type LiveResult = { routeEngine?:'mappls'|'geoapify';
   provider?: 'geoapify' | 'google';
   cacheSource?:'device';
   requestUsage?: {routeCalls:number;nearbyCalls:number;detailsCalls:number;scope:string};
