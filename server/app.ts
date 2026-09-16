@@ -136,7 +136,7 @@ export async function createServer(config: ServerConfig, fetcher?: typeof fetch,
       if(routes.length)attributions.push({name:'© OpenStreetMap contributors · ODbL',uri:'https://www.openstreetmap.org/copyright'});
       notices.push('Road type is estimated from a local OpenStreetMap extract for the selected city. Unmatched, ambiguous and grade-separated sections remain unknown. Actual staffing, lighting and crime are not measured.');
       const roads = Object.fromEntries(routes.map(r => [r.id, { ...roadAnalyses[r.id], ...(r.turns!==undefined?{maneuversPerKm:r.turns/(r.distanceMeters/1000)}:{}) }]));
-      const comparison = compareActivity(routes, analyses, journey.mode==='WALK'?{}:roads, { allowLive: config.scoring });
+      const comparison = compareActivity(routes, analyses, roads, { allowLive: config.scoring, mode: journey.mode });
       const usage=await budget.snapshot();
       return { routes, analyses, roadAnalyses, comparison, checkedAt, activityStatus, notices, attributions: [...new Map(attributions.map(a => [a.name + (a.uri || ''), a])).values()], usage,
         requestUsage:{routeCalls:usage.routeCalls-usageBefore.routeCalls,nearbyCalls:usage.nearbyCalls-usageBefore.nearbyCalls,detailsCalls:usage.detailsCalls-usageBefore.detailsCalls,scope:'Shared counter delta during this comparison; concurrent search requests may contribute.'} } satisfies LiveResult;

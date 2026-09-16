@@ -13,15 +13,38 @@ test('Mappls gets the chosen origin, ordered route guides and destination rather
  const geo={...route,source:'geoapify' as const};
  const fastest=new URL(mapsHandoff(journey,geo,geo.id,'mappls'));
  expect(fastest.origin+fastest.pathname).toBe('https://mappls.com/direction');
- expect(fastest.searchParams.get('places')).toBe('13.062827,77.594089;13.047697,77.619939');
+ expect(fastest.searchParams.get('places')!.split(';')).toHaveLength(5);
  const alternative=new URL(mapsHandoff(journey,geo,'other','mappls'));
  const points=alternative.searchParams.get('places')!.split(';');
  expect(points).toHaveLength(5);expect(points[0]).toBe('13.062827,77.594089');expect(points.at(-1)).toBe('13.047697,77.619939');
  expect(points.slice(1,-1)).toEqual(handoffWaypoints(journey,geo).map(p=>`${p.latitude.toFixed(6)},${p.longitude.toFixed(6)}`));
- // /direction does not document mode; the UI asks users to choose it in Mappls.
- expect(alternative.searchParams.has('mode')).toBe(false);
+ expect(alternative.searchParams.get('mode')).toBe('driving');
+ expect(alternative.searchParams.get('region')).toBe('ind');
  expect(alternative.searchParams.has('isNav')).toBe(false);
  expect(new URL(mapsHandoff(journey,{...geo,path:[...geo.path].reverse()},'other','mappls')).searchParams.get('places')!.split(';')).toHaveLength(2);
+});
+
+test('Mappls route sharing carries walking and motorbike modes with all ordered points',()=>{
+ for(const [mode,expected] of [['DRIVE','driving'],['TWO_WHEELER','biking'],['WALK','walking']] as const){
+  for(const fastestId of [route.id,'other']){
+   const url=new URL(mapsHandoff({...journey,mode},{...route,source:'geoapify'},fastestId,'mappls'));
+   expect(url.searchParams.get('mode')).toBe(expected);
+   const points=url.searchParams.get('places')!.split(';');
+   expect(points).toHaveLength(5);
+   expect(points[0]).toBe('13.062827,77.594089');expect(points.at(-1)).toBe('13.047697,77.619939');
+  }
+ }
+});
+
+test('walking Google handoff keeps exact endpoints and uses stops only for alternatives',()=>{
+ const walk={...journey,mode:'WALK' as const};
+ for(const fastestId of [route.id,'other']){
+  const url=new URL(mapsHandoff(walk,{...route,source:'geoapify'},fastestId));
+  expect(url.searchParams.get('travelmode')).toBe('walking');
+  expect(url.searchParams.get('origin')).toBe('13.062827,77.594089');
+  expect(url.searchParams.get('destination')).toBe('13.047697,77.619939');
+  expect(url.searchParams.has('waypoints')).toBe(fastestId!==route.id);
+ }
 });
 test('fastest route opens without stops even when its displayed label changes',()=>{
  expect(new URL(mapsHandoff(journey,{...route,label:'Most active route'},route.id)).searchParams.has('waypoints')).toBe(false);

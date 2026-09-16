@@ -9,12 +9,12 @@ export function labelRoutes<T extends Route>(routes: T[], comparison?: Compariso
   if (!comparison || routes.length < 2) return routes;
   const scored = routes.filter(r => comparison.scores[r.id] !== undefined);
   let safest: string | undefined;
-  if (scored.length >= 2) {
-    safest = [...scored].sort((a, b) => {
-      const gap = comparison.scores[b.id] - comparison.scores[a.id];
-      if (Math.abs(gap) > 3) return gap;
-      return (cameraCounts[b.id] ?? 0) - (cameraCounts[a.id] ?? 0) || gap || a.durationSeconds - b.durationSeconds;
-    })[0].id;
+  if (scored.length >= 2 && !comparison.estimated && comparison.outcome !== 'insufficient') {
+    // Pick one fixed top-score band before the camera tie-break. Pairwise
+    // "within three" comparisons are not transitive for three or more routes.
+    const highest=Math.max(...scored.map(r=>comparison.scores[r.id]));
+    safest = scored.filter(r=>highest-comparison.scores[r.id]<=3).sort((a,b)=>
+      (cameraCounts[b.id]??0)-(cameraCounts[a.id]??0)||comparison.scores[b.id]-comparison.scores[a.id]||a.durationSeconds-b.durationSeconds||a.id.localeCompare(b.id))[0].id;
   }
   let alternative = 0;
   return routes.map(r => {

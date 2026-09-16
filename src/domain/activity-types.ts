@@ -29,6 +29,7 @@ export type Component = 'openDensity' | 'mainRoad' | 'helpDensity' | 'gapContinu
 export type RoadEvidence = { mainRoadFraction?: number; internalRoadFraction?: number; maneuversPerKm?: number; internalTurnsPerKm?:number; mainMeters?:number; internalMeters?:number; unknownMeters?:number };
 export type Comparison = {
   estimated?: boolean;
+  weights?: Record<Component,number>;
   version: string; fastestId: string | null; selectedId: string | null; recommendedId: string | null;
   outcome: 'empty' | 'single' | 'insufficient' | 'similar' | 'detour' | 'more-activity';
   message: string; commonComponents: Component[]; scores: Record<string,number>;

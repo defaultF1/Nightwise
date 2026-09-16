@@ -16,17 +16,21 @@ export function handoffWaypoints(journey:LiveJourney,route?:Route):Coordinate[]{
   return samples.flatMap(p=>{const key=coordinate(p.coordinate);if(seen.has(key))return [];seen.add(key);return [p.coordinate];});
 }
 export function mapsHandoff(journey: LiveJourney,route?:Route,fastestRouteId?:string,app:NavigationApp='google') {
-  const via=route?.id===fastestRouteId?[]:handoffWaypoints(journey,route);
+  const via=navigationWaypoints(journey,route,fastestRouteId,app);
   if(app==='mappls'){
-    // Mappls documents ordered origin/via/destination points for /direction.
-    // Its /navigation link supports mode but only a destination; using that
-    // would silently discard a remote origin and the selected alternative.
+    // Matches Mappls' own route-share link: ordered places, mode and region.
+    // https://www.mappls.com/js/?392.js (shareLink / deepMode, checked 2026-09-16).
     const url=new URL('https://mappls.com/direction');
     url.searchParams.set('places',[journey.origin,...via,journey.destination].map(coordinate).join(';'));
+    url.searchParams.set('mode',journey.mode==='WALK'?'walking':journey.mode==='TWO_WHEELER'?'biking':'driving');
+    url.searchParams.set('region','ind');
     return url.toString();
   }
   const url = new URL('https://www.google.com/maps/dir/');
   url.search = new URLSearchParams({ api: '1', origin: coordinate(journey.origin), destination: coordinate(journey.destination), travelmode: journey.mode==='WALK'?'walking':journey.mode==='TWO_WHEELER'?'two-wheeler':'driving' }).toString();
   if(via.length)url.searchParams.set('waypoints',via.map(coordinate).join('|'));
   return url.toString();
+}
+export function navigationWaypoints(journey:LiveJourney,route?:Route,fastestRouteId?:string,app:NavigationApp='google'):Coordinate[]{
+  return app==='google'&&route?.id===fastestRouteId?[]:handoffWaypoints(journey,route);
 }

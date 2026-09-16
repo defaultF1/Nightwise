@@ -6,7 +6,8 @@ test('mode and departure controls send the selected journey without live Google 
  await page.route('**/api/compare',r=>{payload=r.request().postDataJSON();return r.fulfill({status:503,json:{message:'Offline test completed'}});});
  await page.goto('/');
  await page.getByRole('button',{name:'Live routes',exact:true}).click();
- await page.getByLabel('Travel mode').selectOption('WALK');
+ await page.getByRole('button',{name:'Travel mode: Car'}).click();
+ await page.getByRole('option',{name:'Walk Walking routes'}).click();
  await page.getByLabel('Departure time').selectOption('300');
  await page.getByRole('button',{name:'Compare night routes'}).click();
  await page.getByRole('button',{name:'Confirm and compare'}).click();

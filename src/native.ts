@@ -8,7 +8,7 @@ import { validateLocation, locationError } from './domain/location';
 const DeviceSettings=registerPlugin<{openLocation():Promise<void>;openApp():Promise<void>;address(options:{latitude:number;longitude:number}):Promise<{address?:string}>}>('DeviceSettings');
 export async function openLocationSettings(){if(Capacitor.isNativePlatform())await DeviceSettings.openLocation();}
 export async function openAppSettings(){if(Capacitor.isNativePlatform())await DeviceSettings.openApp();}
-const MapsHandoff = registerPlugin<{ open(options: { url: string }): Promise<void>; chooser(options: { latitude: number; longitude: number; name: string }): Promise<void> }>('MapsHandoff');
+const MapsHandoff = registerPlugin<{ open(options: { url: string }): Promise<void> }>('MapsHandoff');
 const MapViewport = registerPlugin<{ background(options: { color: string }): Promise<void> }>('MapViewport');
 export async function setNativeBackground(color: string) { if (Capacitor.isNativePlatform()) await MapViewport.background({ color }); }
 export async function currentLocation(): Promise<JourneyPoint> {
@@ -38,5 +38,3 @@ export async function currentLocation(): Promise<JourneyPoint> {
   return validated;
 }
 export async function openMaps(url: string) { if (Capacitor.isNativePlatform()) await MapsHandoff.open({ url }); else window.open(url, '_blank', 'noopener,noreferrer'); }
-// Android shows its own chooser of installed maps apps for a geo: destination.
-export async function chooseNavigation(point: { latitude: number; longitude: number; name: string }, fallbackUrl: string) { if (Capacitor.isNativePlatform()) await MapsHandoff.chooser(point); else window.open(fallbackUrl, '_blank', 'noopener,noreferrer'); }

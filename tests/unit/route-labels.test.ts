@@ -26,3 +26,18 @@ test('never claims safest without scores and leaves single routes alone', () => 
   expect(labels[0]).toBe('Fastest route');
   expect(labelRoutes([route('a', 600)], comparison('a', { a: 50 }))[0].label).toBe('a');
 });
+
+test('estimated or insufficient comparisons retain neutral alternatives',()=>{
+ const routes=[route('a',600),route('b',900)];
+ for(const extra of [{estimated:true},{outcome:'insufficient' as const}]){
+  expect(labelRoutes(routes,{...comparison('a',{a:10,b:50}),...extra}).map(r=>r.label)).toEqual(['Fastest route','Alternative 1']);
+ }
+});
+test('camera tie-break uses a fixed highest-score band regardless of input order',()=>{
+ const routes=[route('a',600),route('b',900),route('c',1200)];
+ const c=comparison('a',{a:100,b:98,c:96});
+ const cameras={a:0,b:1,c:2};
+ for(const order of [routes,[...routes].reverse(),[routes[1],routes[2],routes[0]]]){
+  expect(labelRoutes(order,c,cameras).find(r=>r.label==='Safest route')?.id).toBe('b');
+ }
+});

@@ -43,7 +43,7 @@ describe('observations and distance-weighted coverage',()=>{
   scans[0].places=[station];scans[1].places=[structuredClone(station)];
   const a=analyzeRoute(r,plan,scans,now);
   expect(a.openTransportPoints).toBe(1);expect(a.potentialHelpPoints).toBe(0);
-  expect(componentValues(a).transport).toBeCloseTo(1/.4/3,5);
+  expect(componentValues(a).transport).toBeCloseTo(2/3,5);
   for(const scan of scans)scan.status='failed';
   expect(analyzeRoute(r,plan,scans,now).openTransportPoints).toBeNull();
  });
@@ -68,9 +68,9 @@ describe('comparison invariants',()=>{
  it('uses all six weighted signals when comparable inputs exist',()=>{
   const a=route(1000,'a'),b={...route(1000,'b'),durationSeconds:660};
   const result=compareActivity([a,b],[evidence(a,{openTransportPoints:0}),evidence(b,{openPlaces:8,potentialHelpPoints:2,staffedPlaceProxy:8,longestObservedLowActivityMeters:0,openTransportPoints:3})],{a:{mainRoadFraction:.5,maneuversPerKm:5},b:{mainRoadFraction:1,maneuversPerKm:0}});
-  expect(result.commonComponents).toHaveLength(6);expect(result.scores.b).toBe(100);
-  expect(result.scores.a).toBeCloseTo(12.5+10+7.5+13+7.5,5);
-  expect(result.selectedId).toBe('b');expect(result.componentScores.b.transport).toBe(1);
+  expect(result.commonComponents).toHaveLength(6);expect(result.scores.b).toBeCloseTo(79.375);
+  expect(result.scores.a).toBeCloseTo(25/3+10+15*(.75*.5+.25/3)+13+7.5,5);
+  expect(result.selectedId).toBe('b');expect(result.componentScores.b.transport).toBe(.75);
   expect(result.message).toContain('transport locations');
  });
  it('makes an unavailable signal absent from every score without substituting zero',()=>{
@@ -78,7 +78,7 @@ describe('comparison invariants',()=>{
   const result=compareActivity([a,b],[evidence(a,{openTransportPoints:3}),evidence(b,{openTransportPoints:null})],{a:{mainRoadFraction:1}});
   expect(result.commonComponents).toEqual(['openDensity','helpDensity','gapContinuity']);
   expect(result.scores.a).toBe(result.scores.b);expect(result.componentScores.b.transport).toBeUndefined();
-  expect(result.componentScores.a.transport).toBe(1);
+  expect(result.componentScores.a.transport).toBe(.75);
  });
  it('scores every tutorial scenario from observed signals while preserving the detour gate',()=>{
   for(const [scenario,outcome,componentCount] of [['normal','more-activity',6],['similar','similar',6],['detour','detour',6],['unknown','insufficient',2],['capped','more-activity',6],['closing','more-activity',6]] as const){
