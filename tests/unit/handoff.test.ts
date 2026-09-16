@@ -1,8 +1,23 @@
 import {expect,test} from 'vitest';
 import {mapsHandoff,handoffWaypoints} from '../../src/domain/handoff';
 import {DEFAULT_JOURNEY} from '../../src/domain/journey';
+import {distanceToRoute} from '../../src/domain/route-proximity';
 import type {Route} from '../../src/domain/types';
 const journey=DEFAULT_JOURNEY;
+
+test('via points sit where the chosen route leaves the other roads, so navigation cannot slide back to its own fastest',()=>{
+ const shared={latitude:13.0560,longitude:77.6060};
+ const chosen:Route={id:'alt',label:'Alternative 1',durationSeconds:900,distanceMeters:6000,source:'geoapify',geometryKind:'provider',path:[journey.origin,shared,{latitude:13.0700,longitude:77.6150},journey.destination]};
+ const fastestPath=[journey.origin,shared,journey.destination];
+ const steered=handoffWaypoints(journey,chosen,[fastestPath]);
+ expect(steered.length).toBeGreaterThan(0);
+ for(const p of steered)expect(distanceToRoute(p,fastestPath)).toBeGreaterThan(50);
+ expect(steered).not.toEqual(handoffWaypoints(journey,chosen));
+ const url=new URL(mapsHandoff(journey,chosen,'fastest-id','mappls',[fastestPath]));
+ expect(url.searchParams.get('places')!.split(';').slice(1,-1)).toEqual(steered.map(p=>`${p.latitude.toFixed(6)},${p.longitude.toFixed(6)}`));
+ // Identical geometry offers nowhere distinct to point at: fall back to the plain spread.
+ expect(handoffWaypoints(journey,chosen,[chosen.path])).toEqual(handoffWaypoints(journey,chosen));
+});
 test('Google Maps preserves car, motorbike and walking choices',()=>{
  for(const [mode,expected] of [['DRIVE','driving'],['TWO_WHEELER','two-wheeler'],['WALK','walking']] as const){
   expect(new URL(mapsHandoff({...journey,mode})).searchParams.get('travelmode')).toBe(expected);

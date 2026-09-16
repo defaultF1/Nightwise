@@ -182,8 +182,9 @@ export function App({ initialTheme, initialAccessCode = '' }: { initialTheme: Th
     try { await sendRouteFeedback(rating, selectedRoute?.label ?? '', city); setRouteFeedback('Thanks — noted for this pilot.'); }
     catch { setRouteFeedback('Could not save feedback right now.'); }
   }
-  const handoffUrl = mapsHandoff(journey,selectedRoute,comparison?.fastestId??undefined,resolvedNavigationApp);
-  const hasHandoffPoints=navigationWaypoints(journey,selectedRoute,comparison?.fastestId??undefined,resolvedNavigationApp).length>0;
+  const otherRoutePaths=routes.filter(r=>r.id!==selectedRoute?.id).map(r=>r.path);
+  const handoffUrl = mapsHandoff(journey,selectedRoute,comparison?.fastestId??undefined,resolvedNavigationApp,otherRoutePaths);
+  const hasHandoffPoints=navigationWaypoints(journey,selectedRoute,comparison?.fastestId??undefined,resolvedNavigationApp,otherRoutePaths).length>0;
   async function locate() {
     const id=++locationId.current; setLocating(true); setLocationMessage('Finding your location…');
     try { const point=await currentLocation(); if(id!==locationId.current)return; setJourney(j=>({...j,origin:point}));setDataMode('live');setLocationMessage('');cancel();setModal(null); }
