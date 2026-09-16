@@ -97,18 +97,5 @@ test('a saved choice is restored before app code loads and after closing the pag
   await expect(reopened.locator('html')).toHaveAttribute('data-theme', 'blue');
 });
 
-test('changing appearance while a map is open respects the billing pause', async ({ page }) => {
-  const providerRequests: string[] = [];
-  page.on('request', request => { if (new URL(request.url()).hostname.endsWith('googleapis.com')) providerRequests.push(request.url()); });
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
-  await page.getByRole('button', { name: 'Live routes', exact: true }).click();
-  await page.getByRole('button', { name: 'Show Bengaluru map' }).click();
-  for (const name of ['Mono Light', 'NightWise Blue', 'Mono Dark']) {
-    await page.getByRole('button', { name: 'Open settings' }).click();
-    await page.getByText(name, { exact: true }).click();
-    await page.getByRole('button', { name: 'Done', exact: true }).click();
-    await expect(page.getByText('Live maps are paused to control usage. Tutorial mode remains available.')).toBeVisible();
-  }
-  expect(providerRequests).toEqual([]);
-});
+// The Google billing-pause map flow was removed with the Geoapify build:
+// live maps render from proxied tiles with no "Show Bengaluru map" gate.

@@ -5,7 +5,7 @@ import {sampleRouteOptions} from '../../src/providers/routes';
 test('hospital colour, 24-hour status and opening-hours details fit a narrow phone screen',async({page})=>{
  const samples=sampleRouteOptions('AEOS','normal');
  const result=analyzeComparison(samples,p=>fixtureScans(p,'normal'),TUTORIAL_CHECKED_AT,fixtureRoadEvidence(samples,'normal'));
- const data={routes:samples.map(r=>({...r,source:'google',geometryKind:'provider'})),analyses:result.analyses.map(a=>({...a,source:'live',places:[{...a.places[0],id:'hospital-24',name:'Test 24-hour hospital',categories:['hospital'],schedule:{currentWeek:['Monday: Open 24 hours'],regularWeek:['Monday: Open 24 hours'],specialDates:[]},hours:{state:'open',closingSoon:false,minutesUntilClose:null,basis:'current',open24Hours:true}}]})),comparison:result.comparison,checkedAt:TUTORIAL_CHECKED_AT,activityStatus:'complete',notices:[],attributions:[],usage:{remainingComparisons:1}};
+ const data={routes:samples.map(r=>({...r,source:'geoapify',geometryKind:'provider'})),analyses:result.analyses.map(a=>({...a,source:'live',places:[{...a.places[0],id:'hospital-24',name:'Test 24-hour hospital',categories:['hospital'],schedule:{currentWeek:['Monday: Open 24 hours'],regularWeek:['Monday: Open 24 hours'],specialDates:[]},hours:{state:'open',closingSoon:false,minutesUntilClose:null,basis:'current',open24Hours:true}}]})),comparison:result.comparison,checkedAt:TUTORIAL_CHECKED_AT,activityStatus:'complete',notices:[],attributions:[],usage:{remainingComparisons:1}};
  await page.setViewportSize({width:320,height:720});
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.route('https://**/*',r=>r.abort());

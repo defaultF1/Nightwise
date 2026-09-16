@@ -4,7 +4,7 @@ for(const theme of ['light','dark','blue'])test(`all journey dropdowns align and
  await page.addInitScript(theme=>localStorage.setItem('nightwise.appearance.v1',theme),theme);
  await page.route('https://**/*',r=>r.abort());await page.goto('/');
  await page.getByRole('button',{name:'Live routes',exact:true}).click();
- const travel=page.getByRole('button',{name:'Travel mode: Car'}),departure=page.getByRole('button',{name:'Departure time: Leave now'});
+ const travel=page.getByRole('group',{name:'Travel mode'}),departure=page.getByRole('button',{name:'Departure time: Leave now'});
  const a=await travel.boundingBox(),b=await departure.boundingBox();expect(a&&b).toBeTruthy();expect(a!.y).toBeCloseTo(b!.y,0);expect(a!.height).toBe(b!.height);expect(a!.width).toBeCloseTo(b!.width,0);
  await departure.click();const list=page.getByRole('listbox',{name:'Departure time'});await expect(list).toBeVisible();await list.press('End');await list.press('Enter');
  await expect(page.getByRole('button',{name:/^Departure time: \d/})).toBeFocused();

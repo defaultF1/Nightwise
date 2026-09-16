@@ -10,9 +10,9 @@ test('PDF evidence fields and complete ranking are visible without provider requ
  await page.getByRole('button',{name:'Done',exact:true}).click();
  await page.getByRole('button',{name:'Compare night routes'}).click();
  await expect(page.locator('.route-card')).toHaveCount(3);
- await expect(page.locator('.route-card-top').nth(0)).toContainText('Activity rank 1');
- await expect(page.locator('.route-card-top').nth(1)).toContainText('Activity rank 2');
- await expect(page.locator('.route-card-top').nth(2)).toContainText('Activity rank 3');
+ await expect(page.locator('.route-card-top').nth(0)).toContainText('Comparison rank 1');
+ await expect(page.locator('.route-card-top').nth(1)).toContainText('Comparison rank 2');
+ await expect(page.locator('.route-card-top').nth(2)).toContainText('Comparison rank 3');
  await page.screenshot({path:'talks/screenshots/PDF-offline/routes.png',fullPage:true});
  await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
  await expect(page.getByText('Shops & food',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+ open/);

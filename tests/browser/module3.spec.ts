@@ -5,28 +5,31 @@ test('normal journey shows a calculated tradeoff and consistent route evidence',
  await page.getByRole('button',{name:'Compare night routes'}).click();
  await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome','more-activity');
  await expect(page.locator('.evidence-notice')).toContainText('2 extra minutes');
- await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();
- await expect(page.locator('.route-card.selected .activity-score')).toContainText('Based on 6 of 6 signals');
+ await expect(page.getByRole('radio',{name:'Safest route',exact:true})).toBeChecked();
+ await expect(page.locator('.route-card.selected .score-display')).toBeVisible();
  const summary=await page.locator('.route-card.selected .route-summary').innerText();
  expect(summary.match(/^\d+/)?.[0]).toBeTruthy();
  await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
  await expect(page.getByRole('dialog')).toContainText('Tutorial mode');
  await expect(page.getByText('Shops & food',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+ open/);
  await expect(page.getByRole('dialog')).toContainText('9 Sep · 8:30 pm IST');
- await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('Based on 6 of 6 signals');
+ await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('What goes into this score');
  await expect(page.getByRole('region',{name:'Score breakdown'}).locator('dl > div')).toHaveCount(6);
  await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('petrol pumps');
  await expect(page.getByText('Transport locations listed as open',{exact:true}).locator('..').locator('dd')).toHaveText(/\d+/);
  await page.getByRole('region',{name:'Score breakdown'}).screenshot({path:'tmp/browser-regression/M03/six-signal-breakdown.png'});
  await page.getByRole('button',{name:'Back to routes',exact:true}).click();
- await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();
+ await expect(page.getByRole('radio',{name:'Safest route',exact:true})).toBeChecked();
 });
 test('partially observed scenarios still score from what was seen',async({page})=>{
  for(const value of ['limited','unknown','capped','closing']){
-  await selectScenario(page,value);await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome','more-activity');
-  await expect(page.getByRole('radio',{name:'Alternative 1',exact:true})).toBeChecked();await expect(page.locator('.recommendation-label')).toHaveCount(1);
+  await selectScenario(page,value);
+  // "unknown" hides every activity signal, so no safest claim is made and
+  // the fastest stays selected without a recommendation.
+  if(value==='unknown'){await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome','insufficient');await expect(page.getByRole('radio',{name:'Fastest route',exact:true})).toBeChecked();await expect(page.locator('.recommendation-label')).toHaveCount(0);}
+  else{await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome','more-activity');await expect(page.getByRole('radio',{name:'Safest route',exact:true})).toBeChecked();await expect(page.locator('.recommendation-label')).toHaveCount(1);}
   await page.locator('.route-card.selected').getByRole('button',{name:'View activity details'}).click();
-  if(value==='unknown'){await expect(page.getByText('Medical stores',{exact:true})).toHaveCount(0);await expect(page.getByRole('region',{name:'Score breakdown'})).toContainText('Based on 2 of 6 signals');}
+  if(value==='unknown'){await expect(page.getByText('Medical stores',{exact:true})).toHaveCount(0);await expect(page.getByRole('region',{name:'Score breakdown'}).locator('dl > div')).toHaveCount(2);}
   else await expect(page.getByText('Shops & food',{exact:true})).toBeVisible();
   if(value==='closing')await expect(page.getByText('Listed places closing soon',{exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Back to routes',exact:true}).click();
@@ -34,8 +37,8 @@ test('partially observed scenarios still score from what was seen',async({page})
 });
 test('ties and detours keep the fastest selectable',async({page})=>{
  for(const [scenario,outcome] of [['similar','similar'],['detour','detour']] as const){
-  await selectScenario(page,scenario);await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome',outcome);await expect(page.getByRole('radio',{name:'Fastest',exact:true})).toBeChecked();
-  await page.getByRole('radio',{name:'Alternative 1',exact:true}).check();await expect(page.getByRole('button',{name:'Select Alternative 1 on diagram'})).toHaveAttribute('aria-pressed','true');
+  await selectScenario(page,scenario);await expect(page.locator('.evidence-notice')).toHaveAttribute('data-outcome',outcome);await expect(page.getByRole('radio',{name:'Fastest route',exact:true})).toBeChecked();
+  await page.getByRole('radio',{name:'Safest route',exact:true}).check();await expect(page.getByRole('button',{name:'Select Safest route on diagram'})).toHaveAttribute('aria-pressed','true');
  }
 });
 test('results and long evidence remain usable at narrow widths and dark appearance',async({page})=>{

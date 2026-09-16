@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 const paths=[[
  {latitude:13.0628268,longitude:77.5940888},{latitude:13.064,longitude:77.608},{latitude:13.047697,longitude:77.619939}
 ],[{latitude:13.0628268,longitude:77.5940888},{latitude:13.047,longitude:77.601},{latitude:13.047697,longitude:77.619939}]];
-function fixture(){return {routes:paths.map((path,i)=>({id:`google:${i}`,label:i?'Alternative 1':'Fastest',path,durationSeconds:i?1320:1080,distanceMeters:i?4400:3800,source:'google',geometryKind:'provider'})),analyses:[],comparison:{version:'sample-activity-v1',fastestId:'google:0',selectedId:'google:0',recommendedId:null,outcome:'insufficient',message:'Not enough information to recommend a route.',commonComponents:[],scores:{}},checkedAt:new Date().toISOString(),activityStatus:'disabled',notices:['Live activity scans are switched off.'],attributions:[],usage:{routeCalls:1,nearbyCalls:0,routeLimit:10,nearbyLimit:600,remainingComparisons:9}};}
+function fixture(){return {routes:paths.map((path,i)=>({id:`geoapify:${i}`,label:i?'Alternative 1':'Fastest',path,durationSeconds:i?1320:1080,distanceMeters:i?4400:3800,source:'geoapify',geometryKind:'provider'})),analyses:[],comparison:{version:'sample-activity-v1',fastestId:'geoapify:0',selectedId:'geoapify:0',recommendedId:null,outcome:'insufficient',message:'Not enough information to recommend a route.',commonComponents:[],scores:{}},checkedAt:new Date().toISOString(),activityStatus:'disabled',notices:['Live activity scans are switched off.'],attributions:[],usage:{routeCalls:1,nearbyCalls:0,routeLimit:10,nearbyLimit:600,remainingComparisons:9}};}
 test.beforeEach(async({page})=>{await page.emulateMedia({reducedMotion:'reduce'});await page.route('https://maps.googleapis.com/**',r=>r.abort());await page.goto('/');});
 test('after five minutes the next comparison bypasses both caches without a background call',async({page})=>{
  await page.clock.install();
@@ -69,7 +69,7 @@ test('live response without shop analysis keeps evidence sections and details us
  await expect(page.getByRole('button',{name:'Alternative 1 · 22 min',exact:true})).toHaveAttribute('aria-pressed','true');
  await expect(page.locator('.pin-legend')).toContainText('Start / current location');
  await expect(page.locator('.pin-legend')).toContainText('Petrol / CNG');
- await page.getByRole('radio',{name:'Fastest route',exact:true}).check();await expect(page.getByRole('button',{name:'Fastest · 18 min',exact:true})).toHaveAttribute('aria-pressed','true');
+ await page.getByRole('radio',{name:'Fastest route',exact:true}).check();await expect(page.getByRole('button',{name:'Fastest route · 18 min',exact:true})).toHaveAttribute('aria-pressed','true');
  await page.getByRole('button',{name:'View activity details'}).first().click();await expect(page.getByRole('dialog')).toContainText('travel times only');
  await page.getByRole('button',{name:'Back to routes',exact:true}).click();await expect(page.getByRole('dialog')).toHaveCount(0);
 });

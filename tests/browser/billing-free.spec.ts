@@ -20,7 +20,7 @@ test('editing search ignores late suggestions',async({page})=>{
  await page.route('**/api/status',r=>r.fulfill({json:{ready:true,searchEnabled:true,activityEnabled:false}}));await page.route('**/api/places/suggest',async r=>{await new Promise(resolve=>setTimeout(resolve,600));await r.fulfill({json:{suggestions:[{id:'old',title:'Old result',address:'Fixture'}]}}).catch(()=>{});});
  await page.locator('.place-field.destination').click();await page.getByLabel('Search places').fill('Old query');await page.getByRole('button',{name:'Search Bengaluru'}).click();await page.getByLabel('Search places').fill('AEOS');await page.waitForTimeout(800);await expect(page.getByRole('button',{name:/Old result/})).toHaveCount(0);await expect(page.getByRole('button',{name:/AEOS.*available offline/})).toBeVisible();
 });
-test('opening a paused map never creates a Google script',async({page})=>{
- let google=0;page.on('request',r=>{if(r.url().includes('googleapis.com'))google++;});await page.getByRole('button',{name:'Live routes',exact:true}).click();await page.getByRole('button',{name:'Show Bengaluru map'}).click();await expect(page.getByRole('status')).toContainText('Live maps are paused');expect(google).toBe(0);await expect(page.locator('script[src*="maps.googleapis.com"]')).toHaveCount(0);
+test('opening the live map never creates a Google script',async({page})=>{
+ let google=0;page.on('request',r=>{if(r.url().includes('googleapis.com'))google++;});await page.getByRole('button',{name:'Compare night routes'}).click();await expect(page.getByRole('dialog')).toContainText('Step 1 of 2');await expect(page.locator('.map-canvas')).toBeVisible();expect(google).toBe(0);await expect(page.locator('script[src*="maps.googleapis.com"]')).toHaveCount(0);
  await page.screenshot({path:'talks/screenshots/prebilling/02-map-paused.png',fullPage:true});
 });

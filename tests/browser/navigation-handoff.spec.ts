@@ -14,8 +14,7 @@ test('walking journey hands both endpoints and the selected route to each naviga
  await page.route('**/api/compare',r=>{mode=r.request().postDataJSON().mode;calls++;return r.fulfill({json:{routes,analyses:[],comparison:{version:'sample-activity-v1',fastestId:routes[0].id,selectedId:routes[0].id,recommendedId:null,outcome:'insufficient',message:'Travel times only',commonComponents:[],scores:{}},checkedAt:new Date().toISOString(),activityStatus:'disabled',notices:[],attributions:[],usage:{routeCalls:1,nearbyCalls:0,routeLimit:50,nearbyLimit:500,remainingComparisons:49}}});});
  await page.goto('/');
  await page.getByRole('button',{name:'Live routes',exact:true}).click();
- await page.getByRole('button',{name:'Travel mode: Car'}).click();
- await page.getByRole('option',{name:'Walk Walking routes'}).click();
+ await page.getByRole('group',{name:'Travel mode'}).getByRole('button',{name:'Walk',exact:true}).click();
  await page.getByRole('button',{name:'Compare night routes'}).click();
  await page.getByRole('button',{name:'Confirm and compare'}).click();
  await page.getByRole('radio',{name:'Fastest route',exact:true}).check();
@@ -42,20 +41,20 @@ test('walking journey hands both endpoints and the selected route to each naviga
  await page.getByRole('dialog').screenshot({path:'test-results/navigation-handoff.png'});
 });
 
-for(const theme of ['dark','light','blue']) test(`travel dropdown fits a narrow phone in ${theme} and supports keyboard selection`,async({page})=>{
+for(const theme of ['dark','light','blue']) test(`travel mode icons fit a narrow phone in ${theme} and support keyboard selection`,async({page})=>{
  await page.setViewportSize({width:360,height:800});await page.emulateMedia({reducedMotion:'reduce'});
  await page.addInitScript(t=>localStorage.setItem('nightwise.appearance.v1',t),theme);
  await page.route('https://**/*',r=>r.abort());await page.goto('/');
  await page.getByRole('button',{name:'Live routes',exact:true}).click();
- const trigger=page.getByRole('button',{name:'Travel mode: Car'});
- await trigger.click();
- const list=page.getByRole('listbox',{name:'Travel mode'});await expect(list).toBeVisible();await list.scrollIntoViewIfNeeded();
- await expect(page.getByRole('option',{name:'Car Driving routes'})).toHaveAttribute('aria-selected','true');
+ const group=page.getByRole('group',{name:'Travel mode'});await expect(group).toBeVisible();
+ const car=group.getByRole('button',{name:'Car',exact:true}),bike=group.getByRole('button',{name:'Bike',exact:true}),walk=group.getByRole('button',{name:'Walk',exact:true});
+ await expect(car).toHaveAttribute('aria-pressed','true');
+ // Icon-only choices: the caption is the only visible text in the group.
+ expect((await group.innerText()).trim()).toBe('Travel by');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
- await page.screenshot({path:`test-results/travel-dropdown-${theme}.png`});
- await list.press('ArrowDown');await list.press('Enter');await expect(page.getByRole('button',{name:'Travel mode: Bike'})).toBeFocused();
- await page.getByRole('button',{name:'Travel mode: Bike'}).press('ArrowDown');await list.press('End');await list.press('Enter');
- await expect(page.getByRole('button',{name:'Travel mode: Walk'})).toBeFocused();
- await page.getByRole('button',{name:'Travel mode: Walk'}).click();await list.press('Escape');await expect(list).toHaveCount(0);
- await page.getByRole('button',{name:'Travel mode: Walk'}).click();await page.getByRole('heading').first().click();await expect(list).toHaveCount(0);
+ await page.screenshot({path:`test-results/travel-mode-${theme}.png`});
+ await bike.focus();await bike.press('Enter');
+ await expect(bike).toHaveAttribute('aria-pressed','true');await expect(car).toHaveAttribute('aria-pressed','false');
+ await walk.click();
+ await expect(walk).toHaveAttribute('aria-pressed','true');await expect(bike).toHaveAttribute('aria-pressed','false');
 });
