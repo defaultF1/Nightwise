@@ -5,7 +5,7 @@ const points = [{ latitude: 13.0628, longitude: 77.5941 }, { latitude: 13.055, l
 const ok = (duration: number) => new Response(JSON.stringify({ code: 'Ok', routes: [{ duration }] }));
 
 test('returns live seconds for a guided route and caches repeats', async () => {
-  const fetcher = vi.fn(async () => ok(963.4));
+  const fetcher = vi.fn(async (_url: string | URL | Request) => ok(963.4));
   const signal = new AbortController().signal;
   expect(await mapplsLiveSeconds('key', 'DRIVE', points, signal, fetcher as unknown as typeof fetch)).toBe(963);
   expect(await mapplsLiveSeconds('key', 'DRIVE', points, signal, fetcher as unknown as typeof fetch)).toBe(963);
@@ -26,7 +26,7 @@ test('never breaks the comparison: bad responses, errors and bad inputs all yiel
 });
 
 test('walking uses the advanced pedestrian resource', async () => {
-  const fetcher = vi.fn(async () => ok(4800));
+  const fetcher = vi.fn(async (_url: string | URL | Request) => ok(4800));
   expect(await mapplsLiveSeconds('key', 'WALK', [points[0], { latitude: 13.0551, longitude: 77.6072 }], new AbortController().signal, fetcher as unknown as typeof fetch)).toBe(4800);
   expect(String(fetcher.mock.calls[0][0])).toContain('route_adv/walking/');
 });
