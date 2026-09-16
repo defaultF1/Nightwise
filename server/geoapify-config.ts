@@ -17,7 +17,7 @@ export function readGeoConfig(env:NodeJS.ProcessEnv=process.env){
  const limits=Object.fromEntries(Object.entries(defaults).map(([kind,n])=>[kind,integer(`GEOAPIFY_${kind.toUpperCase()}_LIMIT`,n,kind==='tiles'?100000:20000)])) as GeoCounts;
  const origins=new Set(['http://127.0.0.1:4176','http://localhost:4176','https://localhost','http://localhost','capacitor://localhost',...(env.ALLOWED_ORIGINS||'').split(',').map(s=>s.trim()).filter(Boolean)]);
  if(env.RENDER_EXTERNAL_URL)origins.add(new URL(env.RENDER_EXTERNAL_URL).origin);
- return {host,hosted,port:integer('PORT',8788,65535),key:env.GEOAPIFY_API_KEY||'',accessCode,redisUrl,redisToken,
+ return {host,hosted,port:integer('PORT',8788,65535),key:env.GEOAPIFY_API_KEY||'',mapplsKey:env.MAPPLS_SERVER_KEY||'',accessCode,redisUrl,redisToken,
   redisKey:'nightwise:geoapify:usage:v1',limits,origins:[...origins],serveWeb:env.SERVE_WEB==='true'||hosted,
   roadFile:env.ROAD_DATA_PATH||'data/roads/north-bengaluru-22km.json'};
 }

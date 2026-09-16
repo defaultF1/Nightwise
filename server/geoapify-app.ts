@@ -10,6 +10,8 @@ import { ServiceError } from './errors';
 import { AEOS_PIN, type LiveJourney } from '../src/domain/journey';
 import { distanceMeters } from '../src/domain/geometry';
 import { buildQueryPlan, analyzeRoute } from '../src/domain/activity';
+import { handoffWaypoints } from '../src/domain/handoff';
+import { mapplsLiveSeconds } from './mappls-eta';
 import { compareActivity } from '../src/domain/comparison';
 import { cameraEvidenceForRoutes } from '../src/domain/camera-score';
 import { loadRoadAnalyzer } from './roads';
@@ -96,6 +98,14 @@ export async function createGeoapifyServer(key:string,config:GeoConfig=readGeoCo
   const signal=AbortSignal.any([abort.signal,AbortSignal.timeout(120000)]);
   try{
    const before=await provider.syncUsage(),routes=await provider.routes(j,signal,j.refresh===true);
+   // Correct each displayed route's time with live Mappls traffic along that
+   // route's own road points; on any failure the approximated time stands.
+   let liveTimed=0;
+   if(config.mapplsKey&&routes.length){
+    const seconds=await Promise.all(routes.map(r=>mapplsLiveSeconds(config.mapplsKey,j.mode,[j.origin,...handoffWaypoints(j,r),j.destination],signal)));
+    seconds.forEach((s,i)=>{if(s!=null){routes[i].durationSeconds=s;liveTimed++;}});
+    routes.sort((a,b)=>a.durationSeconds-b.durationSeconds);
+   }
    const plan=buildQueryPlan(routes,200,2000),scans=routes.length?await provider.scans(plan,signal,j.refresh===true):[],checkedAt=new Date().toISOString();
    const analyses=routes.map(r=>analyzeRoute(r,plan,scans,j.departureTime??checkedAt,checkedAt));
    const analyzeRoads=loadRoadAnalyzer(config.roadFile,routes.map(r=>r.path));
@@ -104,12 +114,12 @@ export async function createGeoapifyServer(key:string,config:GeoConfig=readGeoCo
    const comparison=compareActivity(routes,analyses,roads,{allowLive:true,allowEstimates:true,mode:j.mode,cameraEvidence:cameraEvidenceForRoutes(routes)});
    const now=provider.usage();
    return {provider:'geoapify',routes,analyses,roadAnalyses,comparison,checkedAt,activityStatus:analyses.every(a=>a.coreComparable)?'complete':'partial',notices:[
-    'Routes, places and opening hours: Geoapify / OpenStreetMap. Travel times use approximated traffic, not live traffic measurements.',
+    liveTimed===routes.length&&routes.length?'Routes, places and opening hours: Geoapify / OpenStreetMap. Travel times use live Mappls traffic along each displayed route.':liveTimed?'Routes, places and opening hours: Geoapify / OpenStreetMap. Some travel times use live Mappls traffic; the rest use approximated traffic.':'Routes, places and opening hours: Geoapify / OpenStreetMap. Travel times use approximated traffic, not live traffic measurements.',
     'Distinct routes use mode-supported preferences. If only one remains, up to three additional searches try avoiding interior road points. Duplicate, heavily overlapping and excessive-detour fallbacks are removed. A second usable route is not always available.',
     'Departure time is used to evaluate listed shop hours. This provider does not supply a verified traffic forecast for your departure.',
     'Listings are incomplete. No mapped businesses does not prove a road is empty; unknown opening hours are not confirmed open. Camera points use a bundled OpenStreetMap extract; operation and monitoring are not confirmed.',
     'Request totals are provider API calls, not exact billable credits. View Geoapify statistics for credit usage.'
-   ],attributions:[{name:'Powered by Geoapify',uri:'https://www.geoapify.com/'},{name:'© OpenStreetMap contributors',uri:'https://www.openstreetmap.org/copyright'}],usage:provider.snapshot(),requestUsage:{routeCalls:now.route-before.route,nearbyCalls:now.nearby-before.nearby,detailsCalls:now.details-before.details,scope:'Geoapify requests; shared road areas are reused.'}} satisfies LiveResult;
+   ],attributions:[{name:'Powered by Geoapify',uri:'https://www.geoapify.com/'},{name:'© OpenStreetMap contributors',uri:'https://www.openstreetmap.org/copyright'},...(liveTimed?[{name:'Live travel times: Mappls · MapmyIndia',uri:'https://www.mappls.com'}]:[])],usage:provider.snapshot(),requestUsage:{routeCalls:now.route-before.route,nearbyCalls:now.nearby-before.nearby,detailsCalls:now.details-before.details,scope:'Geoapify requests; shared road areas are reused.'}} satisfies LiveResult;
   }finally{busy=false;reply.raw.off('close',closed);}
  });
  app.post<{Body:Record<string,any>}>('/api/feedback',async req=>{if(!['up','down'].includes(req.body?.rating))throw new ServiceError('invalid-input','Invalid feedback.',400);appendFileSync('.local/geoapify-feedback.jsonl',JSON.stringify({rating:req.body.rating,at:new Date().toISOString()})+'\n');return {ok:true};});
